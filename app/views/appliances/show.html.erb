@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-12">
+
+      <h1><%= @appliance.name %></h1>
+      <p><%= @appliance.description %></p>
+      <%= cl_image_tag @appliance.photo, height: 300, width: 400, crop: :fill %>
+
+      <p><%= link_to "Back to catalogue", appliances_path %></p>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<%= simple_form_for(appliance) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
+  <%= f.input :description, placeholder: "High energy efficiency with A++ rating ...", input_html: { rows: "5" } %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :current_type, as: :select, collection: Appliance.current_types, value_method: :first %>
+    </div>
+    <div class="col">
+      <%= f.input :voltage, label: "Voltage (V)", placeholder: "220" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :power, label: "Power (W)", placeholder: "42" %>
+    </div>
+    <div class="col">
+      <%= f.input :power_factor, label: "cos φ", placeholder: "0,85" %>
+    </div>
+    <div class="col">
+      <%= f.input :starting_coefficient, label: "Start. coeff.", placeholder: "3" %>
+    </div>
+  </div>
+  <%= f.input :photo %>
+  <%= f.input :photo_cache, as: :hidden %>
+  <%= f.submit "Add appliance", class: "btn btn-primary" %>
+<% end %>

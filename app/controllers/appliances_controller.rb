@@ -45,6 +45,6 @@ class AppliancesController < ApplicationController
   end
 
   def appliance_params
-    params.require(:appliance).permit(:name, :description, :voltage, :power, :power_factor, :starting_coefficient)
+    params.require(:appliance).permit(:name, :description, :current_type, :voltage, :power, :power_factor, :starting_coefficient, :photo)
   end
 end
