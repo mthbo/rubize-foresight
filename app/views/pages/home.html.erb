@@ -1,12 +1,46 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-xs-12">
+    <div class="col-12">
       <h1>Benoo Energies Design tool</h1>
       <p>Work is ongoing...</p>
-      <div class="pt-4">
-        <%= link_to "New project", new_project_path, class: "btn btn-primary btn-lg" %>
-        <%= link_to "Saved projects", projects_path, class: "btn btn-secondary btn-lg" %>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+
+    <div class="col-lg-6 mb-2">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-4">
+            <%= image_tag "appliances.png", alt: "Appliances", class: "card-img-top" %>
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">Appliances</h5>
+              <p class="card-text">A catalogue of appliances.</p>
+              <%= link_to "See the catalogue", appliances_path, class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="col-lg-6 mb-2">
+      <div class="card">
+        <div class="row no-gutters">
+          <div class="col-4">
+            <%= image_tag "projects.png", alt: "Projects", class: "card-img-top" %>
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h5 class="card-title">Projects</h5>
+              <p class="card-text">Setups of appliances for energy design.</p>
+              <%= link_to "See all projects", projects_path, class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
