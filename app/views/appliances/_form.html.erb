@@ -1,10 +1,11 @@
 <%= simple_form_for(appliance) do |f| %>
   <%= f.error_notification %>
+  <%= f.association :use, as: :select %>
   <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
   <%= f.input :description, placeholder: "High energy efficiency with A++ rating ...", input_html: { rows: "5" } %>
   <div class="row">
     <div class="col">
-      <%= f.input :current_type, as: :select, collection: Appliance.current_types, value_method: :first %>
+      <%= f.input :current_type, as: :select, collection: Appliance::TYPES %>
     </div>
     <div class="col">
       <%= f.input :voltage, label: "Voltage (V)", placeholder: "220" %>
@@ -21,33 +22,37 @@
       <%= f.input :starting_coefficient, label: "Start. coeff.", placeholder: "3" %>
     </div>
   </div>
+  <p>Hourly use rates</p>
   <div class="row px-3">
     <div class="col p-0">
-      <%= f.input :hourly_rate_0, as: :select, collection: Appliance::RATES, label: "0", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_0, as: :select, collection: Appliance::RATES, label: "00", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_1, as: :select, collection: Appliance::RATES, label: "1", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_1, as: :select, collection: Appliance::RATES, label: "01", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_2, as: :select, collection: Appliance::RATES, label: "2", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_2, as: :select, collection: Appliance::RATES, label: "02", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_4, as: :select, collection: Appliance::RATES, label: "4", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_3, as: :select, collection: Appliance::RATES, label: "03", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_5, as: :select, collection: Appliance::RATES, label: "5", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_4, as: :select, collection: Appliance::RATES, label: "04", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_6, as: :select, collection: Appliance::RATES, label: "6", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_5, as: :select, collection: Appliance::RATES, label: "05", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_7, as: :select, collection: Appliance::RATES, label: "7", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_6, as: :select, collection: Appliance::RATES, label: "06", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_8, as: :select, collection: Appliance::RATES, label: "8", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_7, as: :select, collection: Appliance::RATES, label: "07", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
-      <%= f.input :hourly_rate_9, as: :select, collection: Appliance::RATES, label: "9", input_html: { class: :barrating } %>
+      <%= f.input :hourly_rate_8, as: :select, collection: Appliance::RATES, label: "08", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_9, as: :select, collection: Appliance::RATES, label: "09", input_html: { class: :barrating } %>
     </div>
     <div class="col p-0">
       <%= f.input :hourly_rate_10, as: :select, collection: Appliance::RATES, label: "10", input_html: { class: :barrating } %>
@@ -94,5 +99,5 @@
   </div>
   <%= f.input :photo %>
   <%= f.input :photo_cache, as: :hidden %>
-  <%= f.submit "Add appliance", class: "btn btn-primary" %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>

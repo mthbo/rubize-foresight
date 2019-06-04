@@ -46,6 +46,7 @@ class AppliancesController < ApplicationController
 
   def appliance_params
     params.require(:appliance).permit(
+      :use_id,
       :name,
       :description,
       :current_type,

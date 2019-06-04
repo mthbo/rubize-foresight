@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_104206) do
+ActiveRecord::Schema.define(version: 2019_06_04_150725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,32 +26,32 @@ ActiveRecord::Schema.define(version: 2019_06_04_104206) do
     t.datetime "updated_at", null: false
     t.string "photo"
     t.bigint "user_id"
-    t.integer "current_type"
+    t.string "current_type"
     t.bigint "use_id"
-    t.float "hourly_rate_0", default: 0.0
-    t.float "hourly_rate_1", default: 0.0
-    t.float "hourly_rate_2", default: 0.0
-    t.float "hourly_rate_3", default: 0.0
-    t.float "hourly_rate_4", default: 0.0
-    t.float "hourly_rate_5", default: 0.0
-    t.float "hourly_rate_6", default: 0.0
-    t.float "hourly_rate_7", default: 0.0
-    t.float "hourly_rate_8", default: 0.0
-    t.float "hourly_rate_9", default: 0.0
-    t.float "hourly_rate_10", default: 0.0
-    t.float "hourly_rate_11", default: 0.0
-    t.float "hourly_rate_12", default: 0.0
-    t.float "hourly_rate_13", default: 0.0
-    t.float "hourly_rate_14", default: 0.0
-    t.float "hourly_rate_15", default: 0.0
-    t.float "hourly_rate_16", default: 0.0
-    t.float "hourly_rate_17", default: 0.0
-    t.float "hourly_rate_18", default: 0.0
-    t.float "hourly_rate_19", default: 0.0
-    t.float "hourly_rate_20", default: 0.0
-    t.float "hourly_rate_21", default: 0.0
-    t.float "hourly_rate_22", default: 0.0
-    t.float "hourly_rate_23", default: 0.0
+    t.string "hourly_rate_0"
+    t.string "hourly_rate_1"
+    t.string "hourly_rate_2"
+    t.string "hourly_rate_3"
+    t.string "hourly_rate_4"
+    t.string "hourly_rate_5"
+    t.string "hourly_rate_6"
+    t.string "hourly_rate_7"
+    t.string "hourly_rate_8"
+    t.string "hourly_rate_9"
+    t.string "hourly_rate_10"
+    t.string "hourly_rate_11"
+    t.string "hourly_rate_12"
+    t.string "hourly_rate_13"
+    t.string "hourly_rate_14"
+    t.string "hourly_rate_15"
+    t.string "hourly_rate_16"
+    t.string "hourly_rate_17"
+    t.string "hourly_rate_18"
+    t.string "hourly_rate_19"
+    t.string "hourly_rate_20"
+    t.string "hourly_rate_21"
+    t.string "hourly_rate_22"
+    t.string "hourly_rate_23"
     t.index ["use_id"], name: "index_appliances_on_use_id"
     t.index ["user_id"], name: "index_appliances_on_user_id"
   end

@@ -6,7 +6,10 @@
       <p><%= @appliance.description %></p>
       <%= cl_image_tag @appliance.photo, height: 400, width: 400, crop: :fill %> %>
 
-      <p><%= link_to "Back to catalogue", appliances_path %></p>
+      <div>
+        <%= link_to "Edit appliance", edit_appliance_path(@appliance), class: "btn btn-primary" %>
+        <%= link_to "Back to catalogue", appliances_path, class: "btn btn-link" %>
+      </div>
 
     </div>
   </div>
