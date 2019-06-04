@@ -4,7 +4,7 @@
 
       <h1><%= @appliance.name %></h1>
       <p><%= @appliance.description %></p>
-      <%= cl_image_tag @appliance.photo, height: 300, width: 400, crop: :fill %>
+      <%= cl_image_tag @appliance.photo %>
 
       <p><%= link_to "Back to catalogue", appliances_path %></p>
 
