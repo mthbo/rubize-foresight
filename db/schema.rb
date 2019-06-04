@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_153855) do
+ActiveRecord::Schema.define(version: 2019_06_04_104206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,32 @@ ActiveRecord::Schema.define(version: 2019_06_03_153855) do
     t.string "photo"
     t.bigint "user_id"
     t.integer "current_type"
+    t.bigint "use_id"
+    t.float "hourly_rate_0", default: 0.0
+    t.float "hourly_rate_1", default: 0.0
+    t.float "hourly_rate_2", default: 0.0
+    t.float "hourly_rate_3", default: 0.0
+    t.float "hourly_rate_4", default: 0.0
+    t.float "hourly_rate_5", default: 0.0
+    t.float "hourly_rate_6", default: 0.0
+    t.float "hourly_rate_7", default: 0.0
+    t.float "hourly_rate_8", default: 0.0
+    t.float "hourly_rate_9", default: 0.0
+    t.float "hourly_rate_10", default: 0.0
+    t.float "hourly_rate_11", default: 0.0
+    t.float "hourly_rate_12", default: 0.0
+    t.float "hourly_rate_13", default: 0.0
+    t.float "hourly_rate_14", default: 0.0
+    t.float "hourly_rate_15", default: 0.0
+    t.float "hourly_rate_16", default: 0.0
+    t.float "hourly_rate_17", default: 0.0
+    t.float "hourly_rate_18", default: 0.0
+    t.float "hourly_rate_19", default: 0.0
+    t.float "hourly_rate_20", default: 0.0
+    t.float "hourly_rate_21", default: 0.0
+    t.float "hourly_rate_22", default: 0.0
+    t.float "hourly_rate_23", default: 0.0
+    t.index ["use_id"], name: "index_appliances_on_use_id"
     t.index ["user_id"], name: "index_appliances_on_user_id"
   end
 
@@ -54,6 +80,13 @@ ActiveRecord::Schema.define(version: 2019_06_03_153855) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "uses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "appliances", "users"
+  add_foreign_key "appliances", "uses"
   add_foreign_key "projects", "users"
 end

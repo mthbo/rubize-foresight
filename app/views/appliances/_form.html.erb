@@ -21,6 +21,77 @@
       <%= f.input :starting_coefficient, label: "Start. coeff.", placeholder: "3" %>
     </div>
   </div>
+  <div class="row px-3">
+    <div class="col p-0">
+      <%= f.input :hourly_rate_0, as: :select, collection: Appliance::RATES, label: "0", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_1, as: :select, collection: Appliance::RATES, label: "1", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_2, as: :select, collection: Appliance::RATES, label: "2", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_4, as: :select, collection: Appliance::RATES, label: "4", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_5, as: :select, collection: Appliance::RATES, label: "5", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_6, as: :select, collection: Appliance::RATES, label: "6", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_7, as: :select, collection: Appliance::RATES, label: "7", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_8, as: :select, collection: Appliance::RATES, label: "8", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_9, as: :select, collection: Appliance::RATES, label: "9", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_10, as: :select, collection: Appliance::RATES, label: "10", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_11, as: :select, collection: Appliance::RATES, label: "11", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_12, as: :select, collection: Appliance::RATES, label: "12", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_13, as: :select, collection: Appliance::RATES, label: "13", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_14, as: :select, collection: Appliance::RATES, label: "14", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_15, as: :select, collection: Appliance::RATES, label: "15", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_16, as: :select, collection: Appliance::RATES, label: "16", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_17, as: :select, collection: Appliance::RATES, label: "17", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_18, as: :select, collection: Appliance::RATES, label: "18", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_19, as: :select, collection: Appliance::RATES, label: "19", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_20, as: :select, collection: Appliance::RATES, label: "20", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_21, as: :select, collection: Appliance::RATES, label: "21", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_22, as: :select, collection: Appliance::RATES, label: "22", input_html: { class: :barrating } %>
+    </div>
+    <div class="col p-0">
+      <%= f.input :hourly_rate_23, as: :select, collection: Appliance::RATES, label: "23", input_html: { class: :barrating } %>
+    </div>
+  </div>
   <%= f.input :photo %>
   <%= f.input :photo_cache, as: :hidden %>
   <%= f.submit "Add appliance", class: "btn btn-primary" %>
