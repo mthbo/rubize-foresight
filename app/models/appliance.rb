@@ -13,7 +13,6 @@ class Appliance < ApplicationRecord
   validates :current_type, presence: true
 
   TYPES = ["AC", "DC"]
-  # RATES = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1]
   RATES = {
     "1" => "10",
     "0.9" => "9",
@@ -26,5 +25,26 @@ class Appliance < ApplicationRecord
     "0.2" => "2",
     "0.1" => "1"
   }
-  # RATES = ["1", "0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1"]
+
+def apparent_power
+  (power / power_factor).round(1)
+end
+
+def max_power
+  (apparent_power * starting_coefficient).round(1)
+end
+
+(0..23).each do |i|
+  define_method("hourly_consumption_#{i}") do
+    (method("hourly_rate_#{i}").call.to_f / 10 * apparent_power).round
+  end
+end
+
+
+def daily_consumption
+  result = 0
+  (0..23).each { |i| result += method("hourly_consumption_#{i}").call }
+  result
+end
+
 end
