@@ -3,6 +3,8 @@
   <%= f.association :use, as: :select %>
   <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
   <%= f.input :description, placeholder: "High energy efficiency with A++ rating ...", input_html: { rows: "5" } %>
+  <%= f.input :photo %>
+  <%= f.input :photo_cache, as: :hidden %>
   <div class="row">
     <div class="col">
       <%= f.input :current_type, as: :select, collection: Appliance::TYPES %>
@@ -97,7 +99,8 @@
       <%= f.input :hourly_rate_23, as: :select, collection: Appliance::RATES, label: "23", input_html: { class: :barrating } %>
     </div>
   </div>
-  <%= f.input :photo %>
-  <%= f.input :photo_cache, as: :hidden %>
-  <%= f.submit class: "btn btn-primary" %>
+  <div class="d-flex justify-content-end">
+    <%= link_to "Cancel", :back, class: "btn btn-outline-secondary mr-2" %>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
 <% end %>

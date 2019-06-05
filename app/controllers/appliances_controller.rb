@@ -2,7 +2,7 @@ class AppliancesController < ApplicationController
   before_action :find_appliance, only: [:show, :edit, :update, :destroy]
 
   def index
-    @appliances = Appliance.all
+    @uses = Use.all
   end
 
   def show

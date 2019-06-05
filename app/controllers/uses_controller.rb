@@ -1,4 +1,5 @@
 class UsesController < ApplicationController
+  before_action :find_use, only: [:edit, :update]
 
   def new
     @use = Use.new
@@ -14,7 +15,23 @@ class UsesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @use.update(use_params)
+      flash[:notice] = "#{@use.name} has been updated"
+      redirect_to appliances_path
+    else
+      render :edit
+    end
+  end
+
   private
+
+  def find_use
+    @use = Use.find(params[:id])
+  end
 
   def use_params
     params.require(:use).permit(:name)

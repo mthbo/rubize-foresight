@@ -1,11 +1,47 @@
 <div class="container">
-  <div class="row mt-5">
-    <div class="col-12">
+  <div class="row justify-content-lg-center my-5">
+    <div class="col-lg-10">
 
-      <h1>Appliance catalogue</h1>
+      <div class="d-lg-flex justify-content-between">
+        <h1>Appliance catalogue</h1>
+        <div>
+          <%= link_to "New appliance", new_appliance_path, class: "btn btn-primary mr-2" %>
+          <%= link_to "New use", new_use_path, class: "btn btn-outline-secondary" %>
+        </div>
+      </div>
 
-      <%= link_to "Add new appliance", new_appliance_path, class: "btn btn-primary" %>
-      <%= link_to "Add new use", new_use_path, class: "btn btn-link" %>
+      <% @uses.each do |use| %>
+        <% if use.appliances.present? %>
+          <div class="mt-4 mb-3 d-flex">
+            <h5><%= use.name %> </h5>
+            <%= link_to edit_use_path(use) do %>
+              <i class="fas fa-edit ml-2"></i>
+            <% end %>
+          </div>
+          <div class="list-group">
+            <% use.appliances.each do |appliance| %>
+              <div class="list-group-item d-flex">
+                <div>
+                  <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :fill %>
+                </div>
+                <div class="flex-grow-1 d-flex justify-content-between ml-4">
+                  <div>
+                    <h6><%= appliance.name %></h6>
+                    <div>
+                      <div class="badge badge-secondary px-2 mr-2"><%= appliance.current_type %></div>
+                      <div class="badge badge-light px-2 mr-2"><%= "#{appliance.apparent_power.round} - #{appliance.max_power.round} VA" %></div>
+                      <div class="badge badge-light px-2"><%= "#{appliance.daily_consumption} kWh/day" %></div>
+                    </div>
+                  </div>
+                  <div>
+                    <%= link_to "Details", appliance_path(appliance) %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
 
     </div>
   </div>

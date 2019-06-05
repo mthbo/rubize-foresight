@@ -1,5 +1,8 @@
 <%= simple_form_for(use) do |f| %>
   <%= f.error_notification %>
   <%= f.input :name, placeholder: "Freezing" %>
-  <%= f.submit "Add use", class: "btn btn-primary" %>
+  <div class="mt-4 d-flex justify-content-end">
+    <%= link_to "Cancel", :back, class: "btn btn-outline-secondary mr-2" %>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
 <% end %>
