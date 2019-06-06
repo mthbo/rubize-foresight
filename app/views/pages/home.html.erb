@@ -1,46 +1,48 @@
 <div class="container">
-  <div class="row mt-5">
-    <div class="col-12">
+  <div class="row justify-content-lg-center my-5">
+    <div class="col col-lg-10">
+
       <h1>Benoo Energies Design tool</h1>
       <p>Work is ongoing...</p>
-    </div>
-  </div>
 
-  <div class="row mt-5">
+      <div class="row mt-5">
 
-    <div class="col-lg-6 mb-2">
-      <div class="card">
-        <div class="row no-gutters">
-          <div class="col-4">
-            <%= image_tag "appliances.png", alt: "Appliances", class: "card-img-top" %>
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h5 class="card-title">Appliance catalogue</h5>
-              <p class="card-text">A catalogue of appliances.</p>
-              <%= link_to "See the catalogue", appliances_path, class: "btn btn-primary" %>
+        <div class="col-xs-12 col-lg-6 mb-2">
+          <div class="card h-100">
+            <div class="row no-gutters">
+              <div class="col-4">
+                <%= image_tag "appliances.png", alt: "Appliances", class: "card-img-top" %>
+              </div>
+              <div class="col-8">
+                <div class="card-body">
+                  <h4 class="card-title">Appliances</h4>
+                  <p class="card-text">A catalogue of appliances with performances and costs.</p>
+                  <%= link_to "See the catalogue", appliances_path, class: "btn btn-primary" %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <div class="col-lg-6 mb-2">
-      <div class="card">
-        <div class="row no-gutters">
-          <div class="col-4">
-            <%= image_tag "projects.png", alt: "Projects", class: "card-img-top" %>
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h5 class="card-title">Project design</h5>
-              <p class="card-text">Setups of appliances for energy design.</p>
-              <%= link_to "See all projects", projects_path, class: "btn btn-primary" %>
+        <div class="col-xs-12 col-lg-6 mb-2">
+          <div class="card h-100">
+            <div class="row no-gutters">
+              <div class="col-4">
+                <%= image_tag "projects.png", alt: "Projects", class: "card-img-top" %>
+              </div>
+              <div class="col-8">
+                <div class="card-body">
+                  <h4 class="card-title">Projects</h4>
+                  <p class="card-text">A tool to design projects based on appliance setups.</p>
+                  <%= link_to "See all projects", projects_path, class: "btn btn-primary" %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
+      </div>
+
+    </div>
   </div>
 </div>

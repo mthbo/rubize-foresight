@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row justify-content-lg-center my-5">
-    <div class="col-lg-10">
+    <div class="col col-lg-10">
 
       <div class="d-lg-flex justify-content-between">
         <h1>Appliance catalogue</h1>
@@ -28,7 +28,7 @@
                   <div>
                     <h6><%= appliance.name %></h6>
                     <div>
-                      <div class="badge badge-secondary px-2 mr-2"><%= appliance.current_type %></div>
+                      <div class="badge <%= appliance.current_type == 'AC' ? 'badge-secondary' : 'badge-warning' %> px-2 mr-2"><%= appliance.current_type %></div>
                       <div class="badge badge-light px-2 mr-2"><%= "#{appliance.apparent_power.round} - #{appliance.max_power.round} VA" %></div>
                       <div class="badge badge-light px-2"><%= "#{appliance.daily_consumption} kWh/day" %></div>
                     </div>

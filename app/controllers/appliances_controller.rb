@@ -9,11 +9,11 @@ class AppliancesController < ApplicationController
   end
 
   def new
-    @appliance = current_user.appliances.new
+    @appliance = Appliance.new
   end
 
   def create
-    @appliance = current_user.appliances.new(appliance_params)
+    @appliance = Appliance.new(appliance_params)
     if @appliance.save
       flash[:notice] = "#{@appliance.name} has been created"
       redirect_to appliance_path(@appliance)

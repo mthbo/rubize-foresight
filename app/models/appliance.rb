@@ -5,11 +5,10 @@ class Appliance < ApplicationRecord
   mount_uploader :photo, PhotoUploader
 
   validates :name, presence: true, uniqueness: true
-  validates :description, presence: true
   validates :voltage, presence: true
   validates :power, presence: true
-  validates :power_factor, presence: true
-  validates :starting_coefficient, presence: true
+  validates :power_factor, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+  validates :starting_coefficient, presence: true, numericality: {greater_than_or_equal_to: 1}
   validates :current_type, presence: true
 
   TYPES = ["AC", "DC"]
