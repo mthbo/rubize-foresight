@@ -1,14 +1,13 @@
 class Appliance < ApplicationRecord
-  belongs_to :user
   belongs_to :use
+  has_many :appliance_voltages, dependent: :destroy
+  has_many :voltages, through: :appliance_voltages
 
   mount_uploader :photo, PhotoUploader
 
   validates :name, presence: true, uniqueness: true
-  validates :voltage, presence: true
-  validates :power, presence: true
-  validates :power_factor, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
-  validates :starting_coefficient, presence: true, numericality: {greater_than_or_equal_to: 1}
+  validates :power_factor, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}
+  validates :starting_coefficient, numericality: {greater_than_or_equal_to: 1}
   validates :current_type, presence: true
 
   TYPES = ["AC", "DC"]
@@ -25,25 +24,26 @@ class Appliance < ApplicationRecord
     "0.1" => "1"
   }
 
-def apparent_power
-  (power / power_factor).round(1)
-end
+  VOLTAGES = [5, 12, 24, 48, 120, 230, 400]
 
-def max_power
-  (apparent_power * starting_coefficient).round(1)
-end
-
-(0..23).each do |i|
-  define_method("hourly_consumption_#{i}") do
-    (method("hourly_rate_#{i}").call.to_f / 10 * apparent_power).round
+  def apparent_power
+    (power / power_factor).round(1)
   end
-end
 
+  def max_power
+    (apparent_power * starting_coefficient).round(1)
+  end
 
-def daily_consumption
-  result = 0
-  (0..23).each { |i| result += method("hourly_consumption_#{i}").call }
-  result
-end
+  (0..23).each do |i|
+    define_method("hourly_consumption_#{i}") do
+      (method("hourly_rate_#{i}").call.to_f / 10 * apparent_power).round
+    end
+  end
+
+  def daily_consumption
+    result = 0
+    (0..23).each { |i| result += method("hourly_consumption_#{i}").call }
+    result
+  end
 
 end
