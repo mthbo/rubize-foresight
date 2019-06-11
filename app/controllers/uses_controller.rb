@@ -1,5 +1,6 @@
 class UsesController < ApplicationController
   before_action :find_use, only: [:edit, :update]
+  before_action :all_uses, only: [:new, :edit]
 
   def new
     @use = Use.new
@@ -28,6 +29,10 @@ class UsesController < ApplicationController
   end
 
   private
+
+  def all_uses
+    @uses = Use.all
+  end
 
   def find_use
     @use = Use.find(params[:id])

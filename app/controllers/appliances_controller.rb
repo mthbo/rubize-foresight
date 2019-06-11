@@ -13,7 +13,6 @@ class AppliancesController < ApplicationController
   end
 
   def create
-    byebug
     @appliance = Appliance.new(appliance_params)
     if @appliance.save
       flash[:notice] = "#{@appliance.name} has been created"
@@ -51,6 +50,11 @@ class AppliancesController < ApplicationController
       :name,
       :description,
       :current_type,
+      :energy_grade,
+      :voltage_min,
+      :voltage_max,
+      :frequency_fifty_hz,
+      :frequency_sixty_hz,
       :power,
       :power_factor,
       :starting_coefficient,
@@ -78,8 +82,7 @@ class AppliancesController < ApplicationController
       :hourly_rate_20,
       :hourly_rate_21,
       :hourly_rate_22,
-      :hourly_rate_23,
-      voltage_ids: []
+      :hourly_rate_23
     )
   end
 end

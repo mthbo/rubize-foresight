@@ -1,98 +1,142 @@
 <%= simple_form_for(appliance) do |f| %>
   <%= f.error_notification %>
-  <%= f.association :use, as: :select %>
-  <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
-  <%= f.input :description, placeholder: "High energy efficiency with A++ rating ...", input_html: { rows: "5" } %>
-  <%= f.input :photo %>
-  <%= f.input :photo_cache, as: :hidden %>
-  <%= f.input :current_type, as: :radio_buttons, collection: Appliance::TYPES, wrapper: :horizontal_collection_inline %>
-  <%= f.association :voltages, as: :check_boxes, label: "Voltages (V)", include_hidden: false, label_method: :level, wrapper: :horizontal_collection_inline %>
-  <div class="row">
-    <div class="col">
-      <%= f.input :power, label: "Power (W)", placeholder: "42" %>
+
+  <div class="border-bottom border-secondary pb-2 mb-4" >
+    <h5 class="mb-3">General information</h5>
+    <div class="row">
+      <div class="col col-12 col-sm-8">
+        <%= f.association :use, as: :select %>
+      </div>
+      <div class="col col-12 col-sm-4">
+        <%= f.input :energy_grade, as: :select, collection: Appliance::GRADES, label: "EU Energy grade" %>
+      </div>
     </div>
-    <div class="col">
-      <%= f.input :power_factor, label: "cos φ", placeholder: "0,85" %>
+    <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
+    <%= f.input :description, placeholder: "High energy efficiency freezer with 400L net capacity,  EU Energy rating 280kWh/year, wall thickness 7cm, climatic class T ...", input_html: { rows: "5" } %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
+  </div>
+
+  <div class="border-bottom border-secondary pb-2 mb-4" >
+    <h5 class="mb-3">Factory features</h5>
+    <div class="row">
+      <div class="col-12 col-sm-6">
+        <h6>Current type</h6>
+        <%= f.input :current_type, as: :radio_buttons, collection: Appliance::TYPES, wrapper: :horizontal_collection_inline, label: false %>
+      </div>
+      <div class="col-12 col-sm-6">
+        <h6>Frequency (Hz) <small class="pl-2">if AC current</small></h6>
+        <div class="d-flex">
+          <div>
+            <%= f.input :frequency_fifty_hz, label: "50 Hz", label_html: {class: "mr-3"} %>
+          </div>
+          <div>
+            <%= f.input :frequency_sixty_hz, label: "60 Hz", label_html: {class: "mr-3"} %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <%= f.input :starting_coefficient, label: "Start. coeff.", placeholder: "3" %>
+    <h6>Voltage range (V)</h6>
+    <div class="row">
+      <div class="col">
+        <%= f.input :voltage_min, wrapper: :horizontal_form, label: "min", placeholder: "200" %>
+      </div>
+      <div class="col">
+        <%= f.input :voltage_max, wrapper: :horizontal_form, label: "max", placeholder: "230" %>
+      </div>
     </div>
   </div>
-  <p>Hourly use rates</p>
-  <div class="row px-3">
-    <div class="col p-0">
-      <%= f.input :hourly_rate_0, as: :select, collection: Appliance::RATES, label: "00", input_html: { class: :barrating }, label_html: { class: "small"} %>
+
+  <div>
+    <h5 class="mb-3">Working features</h5>
+    <div class="row">
+      <div class="col col-12 col-sm-4">
+        <%= f.input :power, label: "Active power (W)", placeholder: "42" %>
+      </div>
+      <div class="col col-12 col-sm-4">
+        <%= f.input :power_factor, label: "Power factor (cos φ)", placeholder: "0,85" %>
+      </div>
+      <div class="col col-12 col-sm-4">
+        <%= f.input :starting_coefficient, label: "Starting coefficient", placeholder: "3" %>
+      </div>
     </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_1, as: :select, collection: Appliance::RATES, label: "01", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_2, as: :select, collection: Appliance::RATES, label: "02", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_3, as: :select, collection: Appliance::RATES, label: "03", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_4, as: :select, collection: Appliance::RATES, label: "04", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_5, as: :select, collection: Appliance::RATES, label: "05", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_6, as: :select, collection: Appliance::RATES, label: "06", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_7, as: :select, collection: Appliance::RATES, label: "07", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_8, as: :select, collection: Appliance::RATES, label: "08", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_9, as: :select, collection: Appliance::RATES, label: "09", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_10, as: :select, collection: Appliance::RATES, label: "10", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_11, as: :select, collection: Appliance::RATES, label: "11", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_12, as: :select, collection: Appliance::RATES, label: "12", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_13, as: :select, collection: Appliance::RATES, label: "13", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_14, as: :select, collection: Appliance::RATES, label: "14", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_15, as: :select, collection: Appliance::RATES, label: "15", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_16, as: :select, collection: Appliance::RATES, label: "16", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_17, as: :select, collection: Appliance::RATES, label: "17", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_18, as: :select, collection: Appliance::RATES, label: "18", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_19, as: :select, collection: Appliance::RATES, label: "19", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_20, as: :select, collection: Appliance::RATES, label: "20", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_21, as: :select, collection: Appliance::RATES, label: "21", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_22, as: :select, collection: Appliance::RATES, label: "22", input_html: { class: :barrating }, label_html: { class: "small"} %>
-    </div>
-    <div class="col p-0">
-      <%= f.input :hourly_rate_23, as: :select, collection: Appliance::RATES, label: "23", input_html: { class: :barrating }, label_html: { class: "small"} %>
+    <h6>Hourly use rates</h6>
+    <div class="row px-3">
+      <div class="col p-0">
+        <%= f.input :hourly_rate_0, as: :select, collection: Appliance::RATES, label: "00", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_1, as: :select, collection: Appliance::RATES, label: "01", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_2, as: :select, collection: Appliance::RATES, label: "02", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_3, as: :select, collection: Appliance::RATES, label: "03", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_4, as: :select, collection: Appliance::RATES, label: "04", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_5, as: :select, collection: Appliance::RATES, label: "05", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_6, as: :select, collection: Appliance::RATES, label: "06", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_7, as: :select, collection: Appliance::RATES, label: "07", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_8, as: :select, collection: Appliance::RATES, label: "08", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_9, as: :select, collection: Appliance::RATES, label: "09", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_10, as: :select, collection: Appliance::RATES, label: "10", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_11, as: :select, collection: Appliance::RATES, label: "11", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_12, as: :select, collection: Appliance::RATES, label: "12", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_13, as: :select, collection: Appliance::RATES, label: "13", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_14, as: :select, collection: Appliance::RATES, label: "14", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_15, as: :select, collection: Appliance::RATES, label: "15", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_16, as: :select, collection: Appliance::RATES, label: "16", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_17, as: :select, collection: Appliance::RATES, label: "17", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_18, as: :select, collection: Appliance::RATES, label: "18", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_19, as: :select, collection: Appliance::RATES, label: "19", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_20, as: :select, collection: Appliance::RATES, label: "20", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_21, as: :select, collection: Appliance::RATES, label: "21", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_22, as: :select, collection: Appliance::RATES, label: "22", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
+      <div class="col p-0">
+        <%= f.input :hourly_rate_23, as: :select, collection: Appliance::RATES, label: "23", input_html: { class: :barrating }, label_html: { class: "small"} %>
+      </div>
     </div>
   </div>
+
   <div class="d-flex justify-content-end">
     <%= link_to "Cancel", :back, class: "btn btn-outline-secondary mr-2" %>
     <%= f.submit class: "btn btn-primary" %>

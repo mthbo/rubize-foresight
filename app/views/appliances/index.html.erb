@@ -25,25 +25,8 @@
             <% end %>
           </div>
           <div class="list-group">
-            <% use.appliances.each do |appliance| %>
-              <div class="list-group-item d-flex">
-                <div>
-                  <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :fill %>
-                </div>
-                <div class="flex-grow-1 d-flex justify-content-between ml-4">
-                  <div>
-                    <h6><%= appliance.name %></h6>
-                    <div>
-                      <div class="badge <%= appliance.current_type == 'AC' ? 'badge-secondary' : 'badge-warning' %> px-2 mr-2"><%= appliance.current_type %></div>
-                      <div class="badge badge-light px-2 mr-2"><%= "#{appliance.apparent_power.round} - #{appliance.max_power.round} VA" %></div>
-                      <div class="badge badge-light px-2"><%= "#{appliance.daily_consumption} kWh/day" %></div>
-                    </div>
-                  </div>
-                  <div>
-                    <%= link_to "Details", appliance_path(appliance) %>
-                  </div>
-                </div>
-              </div>
+            <% use.appliances_ordered.each do |appliance| %>
+              <%= render 'list_item', appliance: appliance %>
             <% end %>
           </div>
         <% end %>

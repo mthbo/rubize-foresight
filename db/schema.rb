@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_06_140149) do
+ActiveRecord::Schema.define(version: 2019_06_11_142732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,11 @@ ActiveRecord::Schema.define(version: 2019_06_06_140149) do
     t.string "hourly_rate_21", default: "0.0"
     t.string "hourly_rate_22", default: "0.0"
     t.string "hourly_rate_23", default: "0.0"
+    t.string "energy_grade"
+    t.integer "voltage_min"
+    t.integer "voltage_max"
+    t.boolean "frequency_fifty_hz"
+    t.boolean "frequency_sixty_hz"
     t.index ["use_id"], name: "index_appliances_on_use_id"
   end
 

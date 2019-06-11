@@ -1,0 +1,37 @@
+<div class="list-group-item d-flex">
+  <div>
+    <% if appliance.photo.present? %>
+      <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :fill %>
+    <% else %>
+      <%= image_tag "appliances.png", alt: "Appliance", height: 50, width: 50 %>
+    <% end %>
+  </div>
+
+  <div class="flex-grow-1 d-flex justify-content-between ml-4">
+    <div>
+      <h6><%= appliance.name %></h6>
+      <div>
+        <div class="badge badge-secondary px-2 mr-2">
+          <%= appliance.current_type %>
+        </div>
+        <% if appliance.energy_grade.present? %>
+          <div class="badge px-2 mr-2 <%= Appliance::GRADE_CLASSES[appliance.energy_grade] %>">
+            <%= appliance.energy_grade %>
+          </div>
+        <% end %>
+        <% if appliance.apparent_power.present? %>
+          <div class="badge badge-light px-2 mr-2">
+            <%= "#{appliance.apparent_power.round} - #{appliance.max_power.round if appliance.max_power.present?} VA" %>
+          </div>
+          <div class="badge badge-light px-2">
+            <%= "#{appliance.daily_consumption} kWh/day" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <%= link_to "Details", appliance_path(appliance) %>
+    </div>
+  </div>
+
+</div>
