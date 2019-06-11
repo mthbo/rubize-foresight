@@ -10,19 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_142732) do
+ActiveRecord::Schema.define(version: 2019_06_11_174336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "appliance_voltages", force: :cascade do |t|
-    t.bigint "voltage_id"
-    t.bigint "appliance_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["appliance_id"], name: "index_appliance_voltages_on_appliance_id"
-    t.index ["voltage_id"], name: "index_appliance_voltages_on_voltage_id"
-  end
 
   create_table "appliances", force: :cascade do |t|
     t.string "name"
@@ -99,14 +90,6 @@ ActiveRecord::Schema.define(version: 2019_06_11_142732) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "voltages", force: :cascade do |t|
-    t.string "level"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "appliance_voltages", "appliances"
-  add_foreign_key "appliance_voltages", "voltages"
   add_foreign_key "appliances", "uses"
   add_foreign_key "projects", "users"
 end
