@@ -36,6 +36,8 @@ class AppliancesController < ApplicationController
 
   def destroy
     @appliance.destroy
+    flash[:notice] = "#{@appliance.name} has been deleted"
+    redirect_to appliances_path
   end
 
   private

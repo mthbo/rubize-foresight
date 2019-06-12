@@ -25,7 +25,7 @@
         <%= f.input :current_type, as: :radio_buttons, collection: Appliance::TYPES, wrapper: :horizontal_collection_inline, label: false %>
       </div>
       <div class="col-12 col-sm-6">
-        <h6>Frequency (Hz) <small class="pl-2">if AC current</small></h6>
+        <h6>Frequency <small class="pl-2">(if AC current)</small></h6>
         <div class="d-flex">
           <div>
             <%= f.input :frequency_fifty_hz, label: "50 Hz", label_html: {class: "mr-3"} %>

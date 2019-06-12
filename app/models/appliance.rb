@@ -1,7 +1,5 @@
 class Appliance < ApplicationRecord
   belongs_to :use
-  has_many :appliance_voltages, dependent: :destroy
-  has_many :voltages, through: :appliance_voltages
 
   mount_uploader :photo, PhotoUploader
 
@@ -57,6 +55,26 @@ class Appliance < ApplicationRecord
     result = 0
     (0..23).each { |i| result += method("hourly_consumption_#{i}").call }
     result
+  end
+
+  def frequencies
+    if frequency_fifty_hz and current_type == "AC"
+      frequency_sixty_hz ? "50 Hz or 60 Hz" : "50 Hz"
+    elsif frequency_sixty_hz and current_type == "AC"
+      "60 Hz"
+    else
+      "n/a"
+    end
+  end
+
+  def voltage_range
+    if voltage_min
+      voltage_max ? "#{voltage_min} V - #{voltage_max} V" : "#{voltage_min} V"
+    elsif voltage_max
+      "#{voltage_max} V"
+    else
+      "n/a"
+    end
   end
 
 end

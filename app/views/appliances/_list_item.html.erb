@@ -1,9 +1,9 @@
 <div class="list-group-item d-flex">
   <div>
     <% if appliance.photo.present? %>
-      <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :fill %>
+      <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :fill, gravity: :auto %>
     <% else %>
-      <%= image_tag "appliances.png", alt: "Appliance", height: 50, width: 50 %>
+      <%= image_tag "appliances.png", alt: "Appliance", width: 50 %>
     <% end %>
   </div>
 
