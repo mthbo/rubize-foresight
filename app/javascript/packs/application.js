@@ -7,3 +7,4 @@ import { setHourlyRate } from '../plugins/set_hourly_rate';
 
 initMapbox();
 setHourlyRate();
+$('[data-toggle="tooltip"]').tooltip();

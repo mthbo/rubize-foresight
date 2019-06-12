@@ -21,7 +21,7 @@
         <% end %>
         <% if appliance.apparent_power.present? %>
           <div class="badge badge-light px-2 mr-2">
-            <%= "#{appliance.apparent_power.round} - #{appliance.max_power.round if appliance.max_power.present?} VA" %>
+            <%= "#{appliance.apparent_power.round} VA" %>
           </div>
           <div class="badge badge-light px-2">
             <%= "#{appliance.daily_consumption} kWh/day" %>

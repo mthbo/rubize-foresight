@@ -1,0 +1,19 @@
+.chart-container {
+  max-width: 600px;
+}
+
+.chart-plot {
+  height: 250px;
+}
+
+.chart-bar-empty {
+  border-left: 1px solid $light-gray;
+  border-right: 1px solid $light-gray;
+  background-color: white;
+}
+
+.chart-bar-full {
+  border-left: 1px solid $light-gray;
+  border-right: 1px solid $light-gray;
+  background-color: $orange;
+}

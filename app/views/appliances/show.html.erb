@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="row justify-content-lg-center my-5">
-    <div class="col col-lg-10">
+  <div class="row justify-content-center my-5">
+    <div class="col col-xl-10">
 
       <div class="mb-3">
         <%= link_to appliances_path do %>
@@ -9,12 +9,12 @@
         <% end %>
       </div>
 
-      <div class="d-lg-flex justify-content-between mb-3">
-        <div class="mr-3">
+      <div class="d-lg-flex justify-content-between mb-4">
+        <div class="mr-lg-5">
           <h2 class="mb-3"><%= @appliance.name %></h2>
           <p><%= @appliance.description %></p>
         </div>
-        <div class="flex-shrink-0 mb-4">
+        <div class="flex-shrink-0">
           <div>
             <%= link_to edit_appliance_path(@appliance), class: "btn btn-primary mr-3" do %>
               <i class="fas fa-edit mr-1"></i>
@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <div class="d-lg-flex">
+      <div class="d-lg-flex mb-4">
         <div class="flex-shrink-0 mr-5 mb-4">
           <% if @appliance.photo.present? %>
             <%= cl_image_tag @appliance.photo, width: 330, height: 330, crop: :fill, gravity: :auto %>
@@ -36,54 +36,13 @@
             <%= image_tag "appliances.png", alt: "Appliance", width: 330 %>
           <% end %>
         </div>
-        <div class="">
-          <table class="table">
-            <tbody>
-              <tr>
-                <th scope="row">EU Energy grade</th>
-                <td>
-                  <% if @appliance.energy_grade.present? %>
-                    <span class="badge px-2 <%= Appliance::GRADE_CLASSES[@appliance.energy_grade] %>">
-                      <%= @appliance.energy_grade %>
-                    </span>
-                  <% else %>
-                    n/a
-                  <% end %>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Current type</th>
-                <td><%= @appliance.current_type %></td>
-              </tr>
-              <tr>
-                <th scope="row">Working frequency</th>
-                <td><%= @appliance.frequencies %></td>
-              </tr>
-              <tr>
-                <th scope="row">Voltage range</th>
-                <td><%= @appliance.voltage_range %></td>
-              </tr>
-              <tr>
-                <th scope="row">Active power</th>
-                <td><%= @appliance.power ? "#{@appliance.power} W" : 'n/a' %></td>
-              </tr>
-              <tr>
-                <th scope="row">Apparent power</th>
-                <td>
-                  <%= @appliance.apparent_power ? "#{@appliance.apparent_power} VA" : "n/a" %>
-                  <small class="ml-3">Power factor (cos φ) : <%= @appliance.power_factor ? "#{@appliance.power_factor}" : "n/a" %></small>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Max power</th>
-                <td>
-                  <%= @appliance.max_power ? "#{@appliance.max_power} VA" : "n/a" %>
-                  <small class="ml-3">Starting coefficient : <%= @appliance.starting_coefficient ? "#{@appliance.starting_coefficient}" : "n/a" %></small>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="w-100">
+          <%= render 'features', appliance: @appliance %>
         </div>
+      </div>
+
+      <div class="d-flex mb-4 justify-content-center">
+        <%= render 'load_chart', appliance: @appliance %>
       </div>
 
     </div>

@@ -53,7 +53,7 @@ class Appliance < ApplicationRecord
 
   def daily_consumption
     result = 0
-    (0..23).each { |i| result += method("hourly_consumption_#{i}").call }
+    (0..23).each { |i| result += method("hourly_consumption_#{i}").call if apparent_power }
     result
   end
 

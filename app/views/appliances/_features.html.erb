@@ -1,0 +1,54 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="row">EU Energy grade</th>
+      <td>
+        <% if appliance.energy_grade.present? %>
+          <span class="badge px-2 <%= Appliance::GRADE_CLASSES[appliance.energy_grade] %>">
+            <%= appliance.energy_grade %>
+          </span>
+        <% else %>
+          n/a
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Current type</th>
+      <td><%= appliance.current_type %></td>
+    </tr>
+    <tr>
+      <th scope="row">Working frequency</th>
+      <td><%= appliance.frequencies %></td>
+    </tr>
+    <tr>
+      <th scope="row">Voltage range</th>
+      <td><%= appliance.voltage_range %></td>
+    </tr>
+    <tr>
+      <th scope="row">Active power</th>
+      <td><%= appliance.power ? "#{appliance.power} W" : 'n/a' %></td>
+    </tr>
+    <tr>
+      <th scope="row">Apparent power</th>
+      <td>
+        <span class="mr-3 text-nowrap">
+          <%= appliance.apparent_power ? "#{appliance.apparent_power} VA" : "n/a" %>
+        </span>
+        <small class="text-nowrap">
+          Power factor (cos φ) : <%= appliance.power_factor ? "#{appliance.power_factor}" : "n/a" %>
+        </small>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">Max power</th>
+      <td>
+        <span class="mr-3 text-nowrap">
+          <%= appliance.max_power ? "#{appliance.max_power} VA" : "n/a" %>
+        </span>
+        <small class="text-nowrap">
+          Starting coefficient : <%= appliance.starting_coefficient ? "#{appliance.starting_coefficient}" : "n/a" %>
+        </small>
+      </td>
+    </tr>
+  </tbody>
+</table>
