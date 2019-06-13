@@ -6,12 +6,12 @@
   display: block;
   width: 15px;
   height: 10px;
-  background-color: $medium-gray;
+  background-color: white;
   margin: 1px;
 }
 .br-theme-bars-horizontal .br-widget a.br-active,
 .br-theme-bars-horizontal .br-widget a.br-selected {
-  background-color: $orange;
+  background-color: $blue;
 }
 .br-theme-bars-horizontal .br-widget .br-current-rating {
   width: 15px;
@@ -20,14 +20,14 @@
   font-weight: 600;
   line-height: 2;
   text-align: center;
-  color: $orange;
+  color: $blue;
 }
 .br-theme-bars-horizontal .br-readonly a {
   cursor: default;
 }
 .br-theme-bars-horizontal .br-readonly a.br-active,
 .br-theme-bars-horizontal .br-readonly a.br-selected {
-  background-color: $medium-gray;
+  background-color: white;
 }
 .br-theme-bars-horizontal .br-readonly .br-current-rating {
   color: $medium-gray;

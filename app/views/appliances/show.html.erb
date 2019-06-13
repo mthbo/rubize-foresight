@@ -28,7 +28,7 @@
         </div>
       </div>
 
-      <div class="d-lg-flex mb-4">
+      <div class="d-lg-flex mb-3">
         <div class="flex-shrink-0 mr-5 mb-4">
           <% if @appliance.photo.present? %>
             <%= cl_image_tag @appliance.photo, width: 330, height: 330, crop: :fill, gravity: :auto %>
@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="d-flex mb-4 justify-content-center">
+      <div class="d-flex py-4 mb-4 justify-content-center border-top border-bottom border-tertiary">
         <%= render 'load_chart', appliance: @appliance %>
       </div>
 

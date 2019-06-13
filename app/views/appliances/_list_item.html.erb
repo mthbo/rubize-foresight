@@ -11,20 +11,20 @@
     <div>
       <h6><%= appliance.name %></h6>
       <div>
-        <div class="badge badge-secondary px-2 mr-2">
+        <div class="badge badge-light px-2 mr-2">
           <%= appliance.current_type %>
         </div>
-        <% if appliance.energy_grade.present? %>
-          <div class="badge px-2 mr-2 <%= Appliance::GRADE_CLASSES[appliance.energy_grade] %>">
-            <%= appliance.energy_grade %>
-          </div>
-        <% end %>
         <% if appliance.apparent_power.present? %>
           <div class="badge badge-light px-2 mr-2">
             <%= "#{appliance.apparent_power.round} VA" %>
           </div>
-          <div class="badge badge-light px-2">
-            <%= "#{appliance.daily_consumption} kWh/day" %>
+          <div class="badge badge-secondary px-2 mr-2">
+            <%= "#{appliance.daily_consumption} kWh/d" %>
+          </div>
+        <% end %>
+        <% if appliance.energy_grade.present? %>
+          <div class="badge px-2 mr-2 <%= Appliance::GRADE_CLASSES[appliance.energy_grade] %>">
+            <%= appliance.energy_grade %>
           </div>
         <% end %>
       </div>

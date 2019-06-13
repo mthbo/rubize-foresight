@@ -2,8 +2,15 @@
   <div class="row justify-content-center my-5">
     <div class="col col-xl-10">
 
+      <div class="mb-3">
+        <%= link_to root_path do %>
+          <i class="fas fa-arrow-left mr-1"></i>
+          Back to home
+        <% end %>
+      </div>
+
       <div class="d-lg-flex justify-content-between">
-        <h1>Appliance catalogue</h1>
+        <h2>Catalog of appliances</h2>
         <div>
           <%= link_to new_appliance_path, class: "btn btn-primary mr-2" do %>
             <i class="fas fa-plus mr-1"></i>

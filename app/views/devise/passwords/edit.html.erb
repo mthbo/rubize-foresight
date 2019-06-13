@@ -16,13 +16,9 @@
     <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
   </div>
 
-  <div class="form-actions d-flex justify-content-end mt-4">
-    <%= f.button :submit, "Change my password", class: "btn btn-primary" %>
+  <div class="form-actions">
+    <%= f.button :submit, "Change my password", class: "btn btn-primary btn-block mb-3 mt-4" %>
   </div>
 <% end %>
 
-<div class="d-flex justify-content-end mt-2">
-  <div class="text-right">
-    <%= render "devise/shared/links" %>
-  </div>
-</div>
+<%= render "devise/shared/links" %>
