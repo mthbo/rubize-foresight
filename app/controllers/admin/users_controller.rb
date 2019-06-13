@@ -20,7 +20,6 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    puts params
     params.require(:user).permit(:approved, :admin)
   end
 
