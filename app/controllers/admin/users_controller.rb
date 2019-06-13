@@ -1,10 +1,9 @@
 class Admin::UsersController < ApplicationController
-
   before_action :find_user, only: [:update]
 
   def index
-    @users_approved = User.where(approved: true)
-    @users_not_approved = User.where(approved: false)
+    @users_approved = User.all.where(approved: true)
+    @users_not_approved = User.all.where(approved: false)
   end
 
   def update
