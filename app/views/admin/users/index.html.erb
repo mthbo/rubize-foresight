@@ -2,6 +2,13 @@
   <div class="row justify-content-center my-5">
     <div class="col col-xl-10">
 
+    <div class="mb-3">
+      <%= link_to root_path do %>
+        <i class="fas fa-arrow-left mr-1"></i>
+        Back to home
+      <% end %>
+    </div>
+
     <h2 class="mb-4">My team</h2>
 
     <% if @users_not_approved.present? %>
@@ -45,10 +52,10 @@
             </div>
             <div>
               <% if user.admin %>
-                <%= link_to "Revoke admin", admin_user_path(user, user: {admin: false}), class: "btn btn-outline-danger my-2", method: :put %>
+                <%= link_to "Revoke admin", admin_user_path(user, user: {admin: false}), class: "btn btn-outline-danger my-2", method: :put, data: {confirm: 'Are you certain you want to revoke admin rights to this user?'} %>
               <% else %>
-                <%= link_to "Make admin", admin_user_path(user, user: {admin: true}), class: "btn btn-outline-secondary my-2", method: :put %>
-                <%= link_to "Reject", admin_user_path(user, user: {approved: false}), class: "btn btn-danger mr-2 my-2", method: :put %>
+                <%= link_to "Make admin", admin_user_path(user, user: {admin: true}), class: "btn btn-outline-secondary my-2 mr-2", method: :put %>
+                <%= link_to "Reject", admin_user_path(user, user: {approved: false}), class: "btn btn-danger my-2", method: :put, data: {confirm: 'Are you certain you want to reject this user?'} %>
               <% end %>
             </div>
           </div>
