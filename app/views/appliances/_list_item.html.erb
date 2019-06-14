@@ -1,7 +1,7 @@
 <div class="list-group-item d-flex">
   <div>
     <% if appliance.photo.present? %>
-      <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :fill, gravity: :auto %>
+      <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :pad %>
     <% else %>
       <%= image_tag "appliances.png", alt: "Appliance", width: 50 %>
     <% end %>
@@ -19,7 +19,7 @@
             <%= "#{appliance.apparent_power.round} VA" %>
           </div>
           <div class="badge badge-secondary px-2 mr-2">
-            <%= "#{appliance.daily_consumption} kWh/d" %>
+            <%= "#{appliance.daily_consumption} Wh/d" %>
           </div>
         <% end %>
         <% if appliance.energy_grade.present? %>

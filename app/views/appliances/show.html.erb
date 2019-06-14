@@ -12,7 +12,7 @@
       <div class="d-lg-flex justify-content-between mb-4">
         <div class="mr-lg-5">
           <h2 class="mb-3"><%= @appliance.name %></h2>
-          <p><%= @appliance.description %></p>
+          <p><%= sanitize auto_link(markdown_to_html(@appliance.description)) %></p>
         </div>
         <div class="flex-shrink-0">
           <div>
@@ -31,7 +31,7 @@
       <div class="d-lg-flex mb-3">
         <div class="flex-shrink-0 mr-5 mb-4">
           <% if @appliance.photo.present? %>
-            <%= cl_image_tag @appliance.photo, width: 330, height: 330, crop: :fill, gravity: :auto %>
+            <%= cl_image_tag @appliance.photo, width: 330, height: 330, crop: :pad %>
           <% else %>
             <%= image_tag "appliances.png", alt: "Appliance", width: 330 %>
           <% end %>

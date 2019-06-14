@@ -19,6 +19,8 @@ gem 'geocoder'
 gem 'carrierwave'
 gem 'cloudinary'
 gem 'postmark-rails'
+gem 'kramdown'
+gem 'rails_autolink'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
