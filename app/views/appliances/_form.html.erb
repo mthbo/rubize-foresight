@@ -4,10 +4,10 @@
   <div class="border-bottom border-tertiary pb-2 mb-4" >
     <h5 class="mb-3">General information</h5>
     <div class="row">
-      <div class="col col-12 col-sm-8">
+      <div class="col-12 col-sm-8">
         <%= f.association :use, as: :select %>
       </div>
-      <div class="col col-12 col-sm-4">
+      <div class="col-12 col-sm-4">
         <%= f.input :energy_grade, as: :select, collection: Appliance::GRADES, label: "EU Energy grade" %>
       </div>
     </div>

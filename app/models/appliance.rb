@@ -1,5 +1,6 @@
 class Appliance < ApplicationRecord
   belongs_to :use
+  has_many :sources
 
   mount_uploader :photo, PhotoUploader
 

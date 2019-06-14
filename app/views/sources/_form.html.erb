@@ -1,0 +1,31 @@
+<%= simple_form_for [appliance, source] do |f| %>
+  <%= f.error_notification %>
+
+  <div class="row">
+    <div class="col-12 col-sm-4">
+      <%= f.input :amount_cents %>
+    </div>
+    <div class="col-12 col-sm-4">
+      <%= f.input :currency_code %>
+    </div>
+    <div class="col-12 col-sm-4">
+      <%= f.input :tax_rate, label: "Tax rate (%)" %>
+    </div>
+  </div>
+  <%= f.input :supplier, placeholder: "Ramco" %>
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <%= f.input :country_code, label: "Country" %>
+    </div>
+    <div class="col-12 col-sm-6">
+      <%= f.input :city %>
+    </div>
+  </div>
+  <%= f.input :details, placeholder: "Describe offer conditions", input_html: { rows: "5" } %>
+  <%= f.input :issued_at, as: :string, placeholder: "Pick a date", input_html: { class: "datepicker", readonly: true } %>
+
+  <div class="mt-4 d-flex justify-content-end">
+    <%= link_to "Cancel", :back, class: "btn btn-outline-secondary mr-2" %>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

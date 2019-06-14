@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row justify-content-center my-5">
+    <div class="col col-md-10 col-lg-8 col-xl-7">
+
+      <h2 class="mb-3"><%= @appliance.name %></h2>
+      <h3 class="mb-4 text-secondary">New source</h3>
+
+      <%= render 'form', source: @source, appliance: @appliance %>
+
+    </div>
+  </div>
+</div>

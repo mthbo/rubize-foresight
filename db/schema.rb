@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_13_132915) do
+ActiveRecord::Schema.define(version: 2019_06_14_145212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,21 @@ ActiveRecord::Schema.define(version: 2019_06_13_132915) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "sources", force: :cascade do |t|
+    t.string "supplier"
+    t.date "issued_at"
+    t.text "details"
+    t.string "country_code"
+    t.string "city"
+    t.integer "amount_cents"
+    t.string "currency_code"
+    t.integer "tax_rate", default: 0
+    t.bigint "appliance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appliance_id"], name: "index_sources_on_appliance_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -94,4 +109,5 @@ ActiveRecord::Schema.define(version: 2019_06_13_132915) do
 
   add_foreign_key "appliances", "uses"
   add_foreign_key "projects", "users"
+  add_foreign_key "sources", "appliances"
 end
