@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :uses, only: [:new, :create, :edit, :update]
-  resources :appliances, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+  resources :appliances, only: [:index, :show, :new, :create, :edit, :update, :destroy], shallow: true do
     resources :sources, only: [:new, :create, :edit, :update, :destroy]
   end
 

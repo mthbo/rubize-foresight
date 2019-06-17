@@ -1,5 +1,5 @@
 class SourcesController < ApplicationController
-  before_action :find_appliance, only: [:new, :create, :update, :destroy]
+  before_action :find_appliance, only: [:new, :create]
   before_action :find_source, only: [:edit, :update, :destroy]
 
   def new
@@ -22,7 +22,7 @@ class SourcesController < ApplicationController
   def update
     if @source.update(source_params)
       flash[:notice] = "The source has been updated"
-      redirect_to appliance_path(@appliance)
+      redirect_to appliance_path(@source.appliance)
     else
       render :edit
     end
@@ -31,7 +31,7 @@ class SourcesController < ApplicationController
   def destroy
     @source.destroy
     flash[:notice] = "The source has been deleted"
-    redirect_to appliance_path(@appliance)
+    redirect_to appliance_path(@source.appliance)
   end
 
   private
@@ -52,9 +52,9 @@ class SourcesController < ApplicationController
       :details,
       :country_code,
       :city,
-      :amount_cents,
-      :currency_code,
-      :tax_rate
+      :price,
+      :currency,
+      :discount_rate
     )
   end
 end

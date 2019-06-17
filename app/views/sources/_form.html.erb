@@ -1,18 +1,22 @@
 <%= simple_form_for [appliance, source] do |f| %>
   <%= f.error_notification %>
-
-  <div class="row">
-    <div class="col-12 col-sm-4">
-      <%= f.input :amount_cents %>
+   <div class="row">
+    <div class="col-12 col-sm-6">
+      <%= f.input :supplier, placeholder: "Ramco", label: "Supplier name" %>
     </div>
-    <div class="col-12 col-sm-4">
-      <%= f.input :currency_code %>
-    </div>
-    <div class="col-12 col-sm-4">
-      <%= f.input :tax_rate, label: "Tax rate (%)" %>
+    <div class="col-12 col-sm-6">
+      <%= f.input :issued_at,
+        as: :string,
+        placeholder: "Pick a date",
+        label: "Date of issue",
+        input_html: {
+          class: "datepicker",
+          readonly: true,
+          value: source.issued_at ? source.issued_at.to_date : nil
+        }
+      %>
     </div>
   </div>
-  <%= f.input :supplier, placeholder: "Ramco" %>
   <div class="row">
     <div class="col-12 col-sm-6">
       <%= f.input :country_code, label: "Country" %>
@@ -22,7 +26,17 @@
     </div>
   </div>
   <%= f.input :details, placeholder: "Describe offer conditions", input_html: { rows: "5" } %>
-  <%= f.input :issued_at, as: :string, placeholder: "Pick a date", input_html: { class: "datepicker", readonly: true } %>
+  <div class="row">
+    <div class="col-12 col-sm-4">
+      <%= f.input :price, as: :numeric, placeholder: "42,50", label: "Unit price (excl. tax)" %>
+    </div>
+    <div class="col-12 col-sm-4">
+      <%= f.input :currency, as: :select, collection: Money::Currency.all %>
+    </div>
+    <div class="col-12 col-sm-4">
+      <%= f.input :discount_rate, label: "Discount rate (%)" %>
+    </div>
+  </div>
 
   <div class="mt-4 d-flex justify-content-end">
     <%= link_to "Cancel", :back, class: "btn btn-outline-secondary mr-2" %>

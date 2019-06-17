@@ -6,6 +6,7 @@ class AppliancesController < ApplicationController
   end
 
   def show
+    @sources = @appliance.sources.all
   end
 
   def new

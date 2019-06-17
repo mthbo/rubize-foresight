@@ -1,11 +1,10 @@
-import $ from 'jquery';
 import barrating from 'jquery-bar-rating';
 
-const setHourlyRate = () => {
+const initBarrating = () => {
   $('.barrating').barrating({
     theme: 'bars-horizontal',
     reverse: true
   });
 };
 
-export { setHourlyRate };
+export { initBarrating };

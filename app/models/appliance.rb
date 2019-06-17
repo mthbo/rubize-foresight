@@ -1,6 +1,6 @@
 class Appliance < ApplicationRecord
   belongs_to :use
-  has_many :sources
+  has_many :sources, dependent: :destroy
 
   mount_uploader :photo, PhotoUploader
 
@@ -10,6 +10,9 @@ class Appliance < ApplicationRecord
   validates :current_type, presence: true
   validates :voltage_min, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :voltage_max, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
+
+  monetize :min_price_cents, numericality: true, with_currency: :eur
+  monetize :max_price_cents, numericality: true, with_currency: :eur
 
   TYPES = ["AC", "DC"]
   RATES = {
@@ -76,6 +79,14 @@ class Appliance < ApplicationRecord
     else
       "n/a"
     end
+  end
+
+  def min_price_cents
+    sources.all.map { |source| source.price_discount_eur_cents }.min
+  end
+
+  def max_price_cents
+    sources.all.map { |source| source.price_eur_cents }.max
   end
 
 end

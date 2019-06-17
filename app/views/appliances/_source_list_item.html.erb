@@ -1,0 +1,35 @@
+<div class="list-group-item d-flex justify-content-between">
+  <div class="flex-grow-1 d-flex justify-content-between align-items-center m-2">
+    <div>
+      <h6>
+        <span class="mr-2"><%= source.supplier %></span>
+        <span class="text-secondary mr-2"><%= "#{source.city}, #{source.country_name}" %></span>
+        <span class="badge badge-light px-2"><%= source.issued_at.strftime('%d %b %Y') %></span>
+      </h6>
+      <p class="small mb-2">
+        <%= source.details %>
+      </p>
+      <div>
+        <% unless source.currency == 'eur' %>
+          <div class="badge badge-secondary px-2 mr-2">
+            <%= "#{money_without_cents source.price_discount} -" if source.discount_rate > 0 %>
+            <%= "#{money_without_cents source.price} #{source.price.currency}" %>
+          </div>
+        <% end %>
+        <div class="badge badge-dark px-2">
+          <%= "#{money_without_cents source.price_discount_eur} -" if source.discount_rate > 0 %>
+          <%= "#{money_without_cents source.price_eur} #{source.price_eur.currency}" %>
+        </div>
+      </div>
+    </div>
+    <div>
+      <%= link_to edit_source_path(source), class: "btn btn-outline-primary btn-sm mr-3" do %>
+        <i class="fas fa-edit"></i>
+      <% end %>
+      <%= link_to appliance_path(source), method: :delete, data: {confirm: 'Are you certain you want to delete this source?'}, class: "btn btn-outline-danger btn-sm" do %>
+        <i class="fas fa-trash-alt"></i>
+      <% end %>
+    </div>
+  </div>
+
+</div>

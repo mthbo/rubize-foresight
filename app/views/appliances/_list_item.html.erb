@@ -7,31 +7,36 @@
     <% end %>
   </div>
 
-  <div class="flex-grow-1 d-flex justify-content-between ml-4">
+  <div class="flex-grow-1 mx-4">
+    <h6><%= appliance.name %></h6>
     <div>
-      <h6><%= appliance.name %></h6>
-      <div>
-        <div class="badge badge-light px-2 mr-2">
-          <%= appliance.current_type %>
-        </div>
-        <% if appliance.apparent_power.present? %>
-          <div class="badge badge-light px-2 mr-2">
-            <%= "#{appliance.apparent_power.round} VA" %>
-          </div>
-          <div class="badge badge-secondary px-2 mr-2">
-            <%= "#{appliance.daily_consumption} Wh/d" %>
-          </div>
-        <% end %>
-        <% if appliance.energy_grade.present? %>
-          <div class="badge px-2 mr-2 <%= Appliance::GRADE_CLASSES[appliance.energy_grade] %>">
-            <%= appliance.energy_grade %>
-          </div>
-        <% end %>
+      <div class="badge badge-light px-2 mr-2">
+        <%= appliance.current_type %>
       </div>
+      <% if appliance.apparent_power.present? %>
+        <div class="badge badge-light px-2 mr-2">
+          <%= "#{appliance.apparent_power.round} VA" %>
+        </div>
+        <div class="badge badge-secondary px-2 mr-2">
+          <%= "#{appliance.daily_consumption} Wh/d" %>
+        </div>
+      <% end %>
+      <% if appliance.energy_grade.present? %>
+        <div class="badge px-2 mr-2 <%= Appliance::GRADE_CLASSES[appliance.energy_grade] %>">
+          <%= appliance.energy_grade %>
+        </div>
+      <% end %>
+      <% if appliance.max_price.present? %>
+        <div class="badge px-2 badge-dark">
+          <%= "#{money_without_cents appliance.min_price} -" if appliance.min_price != appliance.max_price %>
+          <%= "#{money_without_cents appliance.max_price} #{appliance.max_price.currency}" %>
+        </div>
+      <% end %>
     </div>
-    <div>
-      <%= link_to "Details", appliance_path(appliance) %>
-    </div>
+  </div>
+
+  <div>
+    <%= link_to "Details", appliance_path(appliance) %>
   </div>
 
 </div>
