@@ -26,7 +26,7 @@
               </small>
             </div>
             <div>
-              <%= link_to "Approve", admin_user_path(user, user: {approved: true}), class: "btn btn-primary my-2", method: :put %>
+              <%= link_to "Approve", admin_user_path(user, user: {approved: true}), class: "btn btn-primary btn-sm my-2", method: :put %>
             </div>
           </div>
         <% end %>
@@ -52,10 +52,10 @@
             </div>
             <div>
               <% if user.admin %>
-                <%= link_to "Revoke admin", admin_user_path(user, user: {admin: false}), class: "btn btn-outline-danger my-2", method: :put, data: {confirm: 'Are you certain you want to revoke admin rights to this user?'} %>
+                <%= link_to "Revoke admin", admin_user_path(user, user: {admin: false}), class: "btn btn-outline-danger btn-sm my-2", method: :put, data: {confirm: 'Are you certain you want to revoke admin rights to this user?'} %>
               <% else %>
-                <%= link_to "Make admin", admin_user_path(user, user: {admin: true}), class: "btn btn-outline-secondary my-2 mr-2", method: :put %>
-                <%= link_to "Reject", admin_user_path(user, user: {approved: false}), class: "btn btn-danger my-2", method: :put, data: {confirm: 'Are you certain you want to reject this user?'} %>
+                <%= link_to "Make admin", admin_user_path(user, user: {admin: true}), class: "btn btn-outline-secondary btn-sm my-2 mr-2", method: :put %>
+                <%= link_to "Reject", admin_user_path(user, user: {approved: false}), class: "btn btn-danger btn-sm my-2", method: :put, data: {confirm: 'Are you certain you want to reject this user?'} %>
               <% end %>
             </div>
           </div>
