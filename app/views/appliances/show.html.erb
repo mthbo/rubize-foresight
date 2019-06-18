@@ -29,11 +29,11 @@
       </div>
 
       <div class="d-lg-flex mb-3">
-        <div class="flex-shrink-0 mr-5 mb-4">
+        <div class="flex-shrink-0 mr-lg-5 mb-4 text-center">
           <% if @appliance.photo.present? %>
-            <%= cl_image_tag @appliance.photo, width: 330, height: 330, crop: :pad %>
+            <%= cl_image_tag @appliance.photo, width: 300, height: 300, crop: :pad %>
           <% else %>
-            <%= image_tag "appliances.png", alt: "Appliance", width: 330 %>
+            <%= image_tag "appliances_square.png", alt: "Appliance", width: 300 %>
           <% end %>
         </div>
         <div class="w-100">
