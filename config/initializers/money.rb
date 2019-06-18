@@ -6,6 +6,8 @@ MoneyRails.configure do |config|
   #
   config.default_currency = :eur
 
+  config.locale_backend = :i18n
+
   # Set default bank object
   #
   # Example:
@@ -66,6 +68,7 @@ MoneyRails.configure do |config|
   # oxr.force_refresh_rate_on_expire = true
 
   config.default_bank = oxr
+
 
   # Add exchange rates to current money bank object.
   # (The conversion rate refers to one direction only)

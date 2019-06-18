@@ -11,8 +11,8 @@ class Appliance < ApplicationRecord
   validates :voltage_min, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :voltage_max, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
 
-  monetize :min_price_cents, numericality: true, with_currency: :eur
-  monetize :max_price_cents, numericality: true, with_currency: :eur
+  monetize :min_price_cents, allow_nil: true, with_currency: :eur
+  monetize :max_price_cents, allow_nil: true, with_currency: :eur
 
   TYPES = ["AC", "DC"]
   RATES = {
