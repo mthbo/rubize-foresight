@@ -3,16 +3,16 @@ class Source < ApplicationRecord
 
   validates :supplier, presence: true
   validates :issued_at, presence: true
-  validates :country_code, presence: true, allow_blank: false
+  validates :country_code, presence: true, inclusion: {in: ISO3166::Country.codes }
   validates :city, presence: true
   validates :price, presence: true, numericality: {greater_than_or_equal_to: 0}
-  validates :currency, presence: true
+  validates :currency, presence: true, inclusion: {in: Money::Currency }
   validates :discount_rate, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}
 
-  monetize :price_cents, numericality: true, with_model_currency: :currency
-  monetize :price_discount_cents, numericality: true, with_model_currency: :currency
-  monetize :price_eur_cents, numericality: true, with_currency: :eur
-  monetize :price_discount_eur_cents, numericality: true, with_currency: :eur
+  monetize :price_cents, with_model_currency: :currency
+  monetize :price_discount_cents, with_model_currency: :currency
+  monetize :price_eur_cents, with_currency: :eur, allow_nil: true
+  monetize :price_discount_eur_cents, with_currency: :eur, allow_nil: true
 
   def country_name
     if country_code

@@ -24,19 +24,7 @@
       </div>
 
       <% @uses.each do |use| %>
-        <% if use.appliances.present? %>
-          <div class="mt-4 mb-3 d-flex">
-            <h5><%= use.name %> </h5>
-            <%= link_to edit_use_path(use) do %>
-              <i class="fas fa-edit ml-2"></i>
-            <% end %>
-          </div>
-          <div class="list-group">
-            <% use.appliances_ordered.each do |appliance| %>
-              <%= render 'list_item', appliance: appliance %>
-            <% end %>
-          </div>
-        <% end %>
+        <%= render 'use_section', use: use %>
       <% end %>
 
     </div>

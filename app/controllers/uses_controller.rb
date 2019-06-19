@@ -1,5 +1,5 @@
 class UsesController < ApplicationController
-  before_action :find_use, only: [:edit, :update]
+  before_action :find_use, only: [:edit, :update, :destroy]
   before_action :all_uses, only: [:new, :edit]
 
   def new
@@ -26,6 +26,12 @@ class UsesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @use.destroy
+    flash[:notice] = "#{@use.name} has been deleted"
+    redirect_to appliances_path
   end
 
   private

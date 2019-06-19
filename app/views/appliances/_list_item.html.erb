@@ -1,10 +1,7 @@
 <div class="list-group-item d-flex">
+
   <div class="mr-4 d-none d-sm-block ">
-    <% if appliance.photo.present? %>
-      <%= cl_image_tag appliance.photo, height: 50, width: 50, crop: :pad %>
-    <% else %>
-      <%= image_tag "appliances_square.png", alt: "Appliance", width: 50 %>
-    <% end %>
+    <%= render 'image', appliance: appliance, size: 50 %>
   </div>
 
   <div class="flex-grow-1 mr-2">

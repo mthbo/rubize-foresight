@@ -2,18 +2,6 @@ class Appliance < ApplicationRecord
   belongs_to :use
   has_many :sources, dependent: :destroy
 
-  mount_uploader :photo, PhotoUploader
-
-  validates :name, presence: true, uniqueness: true
-  validates :power_factor, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, allow_nil: true
-  validates :starting_coefficient, numericality: {greater_than_or_equal_to: 1}, allow_nil: true
-  validates :current_type, presence: true
-  validates :voltage_min, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
-  validates :voltage_max, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
-
-  monetize :min_price_cents, allow_nil: true, with_currency: :eur
-  monetize :max_price_cents, allow_nil: true, with_currency: :eur
-
   TYPES = ["AC", "DC"]
   RATES = {
     "1" => "10",
@@ -41,6 +29,20 @@ class Appliance < ApplicationRecord
     "G" => "grade-g"
   }
 
+  mount_uploader :photo, PhotoUploader
+
+  validates :name, presence: true, uniqueness: true
+  validates :power, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
+  validates :power_factor, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, allow_nil: true
+  validates :starting_coefficient, numericality: {greater_than_or_equal_to: 1}, allow_nil: true
+  validates :current_type, presence: true, inclusion: {in: TYPES}
+  validates :voltage_min, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
+  validates :voltage_max, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
+  validates :energy_grade, inclusion: {in: GRADES, allow_blank: true}
+
+  monetize :min_price_cents, allow_nil: true, with_currency: :eur
+  monetize :max_price_cents, allow_nil: true, with_currency: :eur
+
   def apparent_power
     (power / power_factor).round(1) if power and power_factor
   end
@@ -49,16 +51,14 @@ class Appliance < ApplicationRecord
     (apparent_power * starting_coefficient).round(1) if apparent_power and starting_coefficient
   end
 
-  (0..23).each do |i|
-    define_method("hourly_consumption_#{i}") do
-      (method("hourly_rate_#{i}").call.to_f / 10 * apparent_power).round if apparent_power
+  (0..23).each do |hour|
+    define_method("hourly_consumption_#{hour}") do
+      (method("hourly_rate_#{hour}").call.to_f / 10 * apparent_power).round if apparent_power
     end
   end
 
   def daily_consumption
-    result = 0
-    (0..23).each { |i| result += method("hourly_consumption_#{i}").call if apparent_power }
-    result
+    (0..23).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call } if apparent_power
   end
 
   def frequencies

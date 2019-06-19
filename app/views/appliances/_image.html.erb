@@ -1,0 +1,5 @@
+<% if appliance.photo.present? %>
+  <%= cl_image_tag appliance.photo, width: size, height: size, crop: :pad %>
+<% else %>
+  <%= image_tag "appliances_square.png", alt: "Appliance", width: size %>
+<% end %>
