@@ -12,7 +12,7 @@
 
 <% if use.appliances.present? %>
   <div class="list-group">
-    <% use.appliances_ordered.each do |appliance| %>
+    <% use.appliances.ordered.each do |appliance| %>
       <%= render 'list_item', appliance: appliance %>
     <% end %>
   </div>

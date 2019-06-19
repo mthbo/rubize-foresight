@@ -1,6 +1,7 @@
 class Appliance < ApplicationRecord
   belongs_to :use
   has_many :sources, dependent: :destroy
+  scope :ordered, -> { order('updated_at DESC') }
 
   TYPES = ["AC", "DC"]
   RATES = {

@@ -1,8 +1,5 @@
 class Use < ApplicationRecord
   has_many :appliances, dependent: :nullify
   validates :name, presence: true, uniqueness: true
-
-  def appliances_ordered
-    appliances.order("updated_at DESC")
-  end
+  scope :ordered, -> { left_joins(:appliances).group(:id).order('COUNT(appliances.id) DESC') }
 end
