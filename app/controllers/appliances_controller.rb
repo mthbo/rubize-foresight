@@ -6,7 +6,7 @@ class AppliancesController < ApplicationController
   end
 
   def show
-    @sources = @appliance.sources.all
+    @sources = @appliance.sources.ordered
   end
 
   def new

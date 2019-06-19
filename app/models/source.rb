@@ -1,5 +1,6 @@
 class Source < ApplicationRecord
   belongs_to :appliance
+  scope :ordered, -> { order('issued_at DESC') }
 
   validates :supplier, presence: true
   validates :issued_at, presence: true
