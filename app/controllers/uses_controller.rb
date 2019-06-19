@@ -31,7 +31,6 @@ class UsesController < ApplicationController
   def destroy
     @use.destroy
     flash[:notice] = "#{@use.name} has been deleted"
-    redirect_to appliances_path
   end
 
   private

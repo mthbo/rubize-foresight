@@ -31,7 +31,6 @@ class SourcesController < ApplicationController
   def destroy
     @source.destroy
     flash[:notice] = "The source has been deleted"
-    redirect_to appliance_path(@source.appliance)
   end
 
   private
