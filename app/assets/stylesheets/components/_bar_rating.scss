@@ -1,11 +1,9 @@
 .br-theme-bars-horizontal .br-widget {
-  width: 15px;
   white-space: nowrap;
 }
 .br-theme-bars-horizontal .br-widget a {
   display: block;
-  width: 15px;
-  height: 10px;
+  height: 12px;
   background-color: white;
   margin: 1px;
 }
@@ -14,9 +12,8 @@
   background-color: $blue;
 }
 .br-theme-bars-horizontal .br-widget .br-current-rating {
-  width: 15px;
   height: 20px;
-  font-size: 12px;
+  font-size: 0.8rem;
   font-weight: 600;
   line-height: 2;
   text-align: center;

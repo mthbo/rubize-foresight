@@ -9,11 +9,7 @@
       <% rate = electrical_load.method("hourly_rate_#{hour}").call.to_i * 10 %>
       <div class="w-100 d-flex flex-column">
         <div class="d-none d-sm-block text-center small mb-1">
-          <% if (day...night).include?(hour) %>
-            <i class="fas fa-sun text-warning"></i>
-          <% else %>
-            <i class="fas fa-moon text-secondary"></i>
-          <% end %>
+          <%= render 'shared/day_or_night_icon', hour: hour, day: day, night: night %>
         </div>
         <div class="chart-bar-container d-flex flex-column">
           <div class="<%= (day...night).include?(hour) ? 'chart-bar-empty-day' : 'chart-bar-empty-night' %>" style='height: <%= "#{100 - rate}%" %>'></div>

@@ -62,12 +62,27 @@
     </div>
     <h6>Daily load profile</h6>
     <p class="text-secondary small"><em>Set the default hourly use rates of the appliance, from 0 (off) to 1 (full power).</em></p>
-    <div class="row px-3">
-      <% (0..23).each do |hour| %>
-        <div class="col p-0">
-          <%= f.input "hourly_rate_#{hour}".to_sym, as: :select, collection: Appliance::RATES, label: hour, input_html: { class: :barrating }, label_html: { class: "small text-center"} %>
-        </div>
-      <% end %>
+    <% day = Appliance::DAY_TIME %>
+    <% night = Appliance::NIGHT_TIME %>
+    <div class="d-sm-flex">
+      <div class="d-sm-none text-center text-secondary mb-1">AM</div>
+      <div class="d-flex w-100">
+        <% (0..11).each do |hour| %>
+          <div class="w-100 text-center">
+            <%= render 'shared/day_or_night_icon', hour: hour, day: day, night: night %>
+            <%= f.input "hourly_rate_#{hour}".to_sym, as: :select, collection: Appliance::RATES, label: hour, input_html: { class: "barrating w-100" }, label_html: { class: "small text-center w-100"} %>
+          </div>
+        <% end %>
+      </div>
+      <div class="d-sm-none text-center text-secondary mb-1">PM</div>
+      <div class="d-flex w-100">
+        <% (12..23).each do |hour| %>
+          <div class="w-100 text-center">
+            <%= render 'shared/day_or_night_icon', hour: hour, day: day, night: night %>
+            <%= f.input "hourly_rate_#{hour}".to_sym, as: :select, collection: Appliance::RATES, label: hour, input_html: { class: "barrating w-100" }, label_html: { class: "small text-center w-100"} %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 
