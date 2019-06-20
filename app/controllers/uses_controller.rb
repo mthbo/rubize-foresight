@@ -44,6 +44,32 @@ class UsesController < ApplicationController
   end
 
   def use_params
-    params.require(:use).permit(:name)
+    params.require(:use).permit(
+      :name,
+      :hourly_rate_0,
+      :hourly_rate_1,
+      :hourly_rate_2,
+      :hourly_rate_3,
+      :hourly_rate_4,
+      :hourly_rate_5,
+      :hourly_rate_6,
+      :hourly_rate_7,
+      :hourly_rate_8,
+      :hourly_rate_9,
+      :hourly_rate_10,
+      :hourly_rate_11,
+      :hourly_rate_12,
+      :hourly_rate_13,
+      :hourly_rate_14,
+      :hourly_rate_15,
+      :hourly_rate_16,
+      :hourly_rate_17,
+      :hourly_rate_18,
+      :hourly_rate_19,
+      :hourly_rate_20,
+      :hourly_rate_21,
+      :hourly_rate_22,
+      :hourly_rate_23
+    )
   end
 end

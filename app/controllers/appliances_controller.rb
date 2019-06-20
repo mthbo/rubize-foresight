@@ -11,6 +11,7 @@ class AppliancesController < ApplicationController
 
   def new
     @appliance = Appliance.new
+    @appliance.use_id = appliance_params[:use_id]
   end
 
   def create

@@ -9,23 +9,18 @@
         <% end %>
       </div>
 
-      <div class="d-lg-flex justify-content-between">
-        <h2>Catalog of appliances</h2>
-        <div>
-          <%= link_to new_appliance_path, class: "btn btn-primary mr-2" do %>
-            <i class="fas fa-plus mr-1"></i>
-            New appliance
-          <% end %>
-          <%= link_to new_use_path, class: "btn btn-outline-secondary" do %>
-            <i class="fas fa-plus mr-1"></i>
-            New use
-          <% end %>
-        </div>
-      </div>
+      <h2>Catalog of appliances</h2>
 
       <% @uses.each do |use| %>
         <%= render 'use_section', use: use %>
       <% end %>
+
+      <div class="mt-4 text-center">
+        <%= link_to new_use_path, class: "btn btn-outline-secondary" do %>
+          <i class="fas fa-plus mr-1"></i>
+          Add new use
+        <% end %>
+      </div>
 
     </div>
   </div>

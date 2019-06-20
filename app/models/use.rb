@@ -1,5 +1,21 @@
 class Use < ApplicationRecord
   has_many :appliances, dependent: :nullify
-  validates :name, presence: true, uniqueness: true
   scope :ordered, -> { left_joins(:appliances).group(:id).order('COUNT(appliances.id) DESC') }
+
+  DAY_TIME = 6
+  NIGHT_TIME = 18
+  RATES = {
+    "1" => "10",
+    "0.9" => "9",
+    "0.8" => "8",
+    "0.7" => "7",
+    "0.6" => "6",
+    "0.5" => "5",
+    "0.4" => "4",
+    "0.3" => "3",
+    "0.2" => "2",
+    "0.1" => "1"
+  }
+
+  validates :name, presence: true, uniqueness: true
 end
