@@ -2,18 +2,24 @@
   max-width: 600px;
 }
 
-.chart-plot {
-  height: 250px;
-}
-
-.chart-bar-empty {
+.chart-bar-container {
+  height: 230px;
   border-left: 1px solid $light-gray;
   border-right: 1px solid $light-gray;
+}
+
+.chart-bar-empty-day {
   background-color: white;
 }
 
-.chart-bar-full {
-  border-left: 1px solid $light-gray;
-  border-right: 1px solid $light-gray;
+.chart-bar-empty-night {
+  background-color: $medium-light-gray;
+}
+
+.chart-bar-full-day {
   background-color: $blue;
+}
+
+.chart-bar-full-night {
+  background-color: $dark-blue;
 }

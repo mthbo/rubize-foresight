@@ -3,6 +3,8 @@ class Appliance < ApplicationRecord
   has_many :sources, dependent: :destroy
   scope :ordered, -> { order('updated_at DESC') }
 
+  DAY_TIME = 6
+  NIGHT_TIME = 18
   TYPES = ["AC", "DC"]
   RATES = {
     "1" => "10",
@@ -58,8 +60,16 @@ class Appliance < ApplicationRecord
     end
   end
 
+  def daytime_consumption
+    (DAY_TIME...NIGHT_TIME).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call } if apparent_power
+  end
+
   def daily_consumption
     (0..23).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call } if apparent_power
+  end
+
+  def nighttime_consumption
+    daily_consumption - daytime_consumption if apparent_power
   end
 
   def frequencies

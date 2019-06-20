@@ -1,0 +1,47 @@
+<div class="chart-container w-100">
+
+  <div class="font-weight-bold text-center mb-3">
+    <%= title %>
+  </div>
+
+  <div class="d-flex">
+    <% (0..23).each do |hour| %>
+      <% rate = electrical_load.method("hourly_rate_#{hour}").call.to_i * 10 %>
+      <div class="w-100 d-flex flex-column">
+        <div class="d-none d-sm-block text-center small mb-1">
+          <% if (day...night).include?(hour) %>
+            <i class="fas fa-sun text-warning"></i>
+          <% else %>
+            <i class="fas fa-moon text-secondary"></i>
+          <% end %>
+        </div>
+        <div class="chart-bar-container d-flex flex-column">
+          <div class="<%= (day...night).include?(hour) ? 'chart-bar-empty-day' : 'chart-bar-empty-night' %>" style='height: <%= "#{100 - rate}%" %>'></div>
+          <div class="<%= (day...night).include?(hour) ? 'chart-bar-full-day' : 'chart-bar-full-night' %>" style='height: <%= "#{rate}%" %>' data-toggle="tooltip" title="<%= electrical_load.method("hourly_consumption_#{hour}").call %> Wh" data-placement="top"></div>
+        </div>
+        <div class="text-center mt-1">
+          <span class="d-sm-none very-small font-weight-bold"><%= [0, 6, 12, 18].include?(hour) ? hour : "." %></span>
+          <span class="d-none d-sm-block small font-weight-bold"><%= hour %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+  <div class="d-flex justify-content-center align-items-center text-center mt-3">
+    <div class="border border-secondary rounded bg-secondary text-white px-3 py-2 mr-3">
+      <%= electrical_load.daily_consumption ? "#{electrical_load.daily_consumption} Wh/day" : "n/a" %>
+    </div>
+    <div>
+      <div class="text-nowrap">
+        <i class="fas fa-sun text-warning mr-1"></i>
+        <%= electrical_load.daytime_consumption ? "#{electrical_load.daytime_consumption} Wh" : "n/a" %>
+      </div>
+      <div class=" text-nowrap">
+        <i class="fas fa-moon text-secondary mr-1"></i>
+        <%= electrical_load.nighttime_consumption ? "#{electrical_load.nighttime_consumption} Wh" : "n/a" %>
+      </div>
+    </div>
+  </div>
+
+</div>
