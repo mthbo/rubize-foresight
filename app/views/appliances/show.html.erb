@@ -51,11 +51,17 @@
         </div>
       </div>
 
-      <div class="list-group">
-        <% @sources.each do |source| %>
-          <%= render 'source_list_item', source: source %>
-        <% end %>
-      </div>
+      <% if @sources.present? %>
+        <div class="list-group">
+          <% @sources.each do |source| %>
+            <%= render 'source_list_item', source: source %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="text-secondary small">
+          No source recorded for this appliance yet.
+        </div>
+      <% end %>
 
     </div>
   </div>
