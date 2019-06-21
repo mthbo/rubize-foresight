@@ -18,4 +18,14 @@ class Use < ApplicationRecord
   }
 
   validates :name, presence: true, uniqueness: true
+
+  include PgSearch
+  pg_search_scope :search,
+    against: [ :name ],
+    associated_against: {
+      appliances: [ :name ]
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
 end

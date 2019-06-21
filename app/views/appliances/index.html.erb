@@ -9,7 +9,7 @@
         <% end %>
       </div>
 
-      <div class="d-sm-flex justify-content-between align-items-center">
+      <div class="d-sm-flex justify-content-between">
         <h2>Catalog of appliances</h2>
         <div>
           <%= link_to new_appliance_path, class: "btn btn-primary my-1" do %>
@@ -17,6 +17,17 @@
             New appliance
           <% end %>
         </div>
+      </div>
+
+      <div class="d-flex mt-3 align-items-center">
+        <div class="mr-2">Search</div>
+        <%= form_tag appliances_path, method: :get do %>
+          <%= text_field_tag :query,
+            params[:query],
+            class: "form-control w-100",
+            placeholder: "Find an appliance"
+          %>
+        <% end %>
       </div>
 
       <% @uses.each do |use| %>

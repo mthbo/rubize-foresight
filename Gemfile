@@ -25,6 +25,7 @@ gem 'country_select'
 gem 'bootstrap-datepicker-rails'
 gem 'money-rails'
 gem 'money-open-exchange-rates'
+gem 'pg_search'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
