@@ -1,8 +1,6 @@
-import $ from 'jquery';
-import barrating from 'jquery-bar-rating';
-
-<% (0..23).each do |hour| %>
-  document.getElementById('appliance_hourly_rate_' + <%= hour %>).value = <%= @use.method("hourly_rate_#{hour}").call %>;
+<% if @use.present? %>
+  <% (0..23).each do |hour| %>
+    $('#appliance_hourly_rate_' + <%= hour %> ).val('<%= @use.method("hourly_rate_#{hour}").call %>');
+    $('#appliance_hourly_rate_' + <%= hour %> ).barrating('set', '<%= @use.method("hourly_rate_#{hour}").call %>');
+  <% end %>
 <% end %>
-
-$('#appliance_hourly_rate_0').barrating();

@@ -9,7 +9,15 @@
         <% end %>
       </div>
 
-      <h2>Catalog of appliances</h2>
+      <div class="d-sm-flex justify-content-between align-items-center">
+        <h2>Catalog of appliances</h2>
+        <div>
+          <%= link_to new_appliance_path, class: "btn btn-primary my-1" do %>
+            <i class="fas fa-plus mr-1"></i>
+            New appliance
+          <% end %>
+        </div>
+      </div>
 
       <% @uses.each do |use| %>
         <%= render 'use_section', use: use %>

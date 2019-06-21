@@ -3,19 +3,8 @@
 
   <div class="border-bottom border-tertiary pb-2 mb-4" >
     <h5 class="mb-3">General information</h5>
-    <div class="d-sm-flex justify-content-between align-items-end">
-      <div class="w-100 mr-3">
-        <%= f.association :use, as: :select %>
-      </div>
-      <div class="flex-shrink-0 mb-3">
-        <%= link_to refresh_load_path(use_id: 1), remote:true, class: "btn btn-secondary btn-sm py-2", id: "refresh_load" do %>
-          <i class="fas fa-redo-alt mr-1"></i>
-          Refresh load
-        <% end %>
-      </div>
-    </div>
     <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
-    <%= f.input :description, placeholder: "High energy efficiency freezer with 400L net capacity,  EU Energy rating 280kWh/year, wall thickness 7cm, climatic class T ...", input_html: { rows: "5" } %>
+    <%= f.input :description, placeholder: "High energy efficiency freezer with 400L net capacity,  EU Energy rating 280kWh/year, wall thickness 7cm, climatic class T ...", input_html: { rows: "5" }, include_blank: false %>
     <%= f.input :photo %>
     <%= f.input :photo_cache, as: :hidden %>
   </div>
@@ -25,7 +14,7 @@
     <div class="row">
       <div class="col-12 col-sm-6">
         <h6>Current type</h6>
-        <%= f.input :current_type, as: :radio_buttons, collection: Appliance::TYPES, wrapper: :horizontal_collection_inline, label: false %>
+        <%= f.input :current_type, as: :radio_buttons, collection: Appliance::TYPES, wrapper: :horizontal_collection_inline, label: false, include_blank: false %>
       </div>
       <div class="col-12 col-sm-6">
         <h6>Frequency <small class="pl-2">(if AC current)</small></h6>
@@ -48,8 +37,10 @@
         <%= f.input :voltage_max, wrapper: :horizontal_form, label: "max", placeholder: "230" %>
       </div>
     </div>
-    <div class="mt-2">
-      <%= f.input :energy_grade, as: :select, collection: Appliance::GRADES, label: "EU Energy grade", label_html: {class: "text-nowrap"}, wrapper: :horizontal_form %>
+    <div class="row">
+      <div class="col-sm-6">
+        <%= f.input :energy_grade, as: :select, collection: Appliance::GRADES, label: "EU Energy grade" %>
+      </div>
     </div>
   </div>
 
@@ -66,6 +57,21 @@
         <%= f.input :starting_coefficient, label: "Starting coefficient", placeholder: "3" %>
       </div>
     </div>
+  </div>
+
+  <div class="d-sm-flex justify-content-between align-items-end mb-2">
+    <div class="w-100 mr-3">
+      <%= f.association :use, as: :select %>
+    </div>
+    <div class="flex-shrink-0 mb-3">
+      <%= link_to refresh_load_path(use_id: appliance.use_id), remote:true, class: "btn btn-secondary btn-sm py-2", id: "refresh_load" do %>
+        <i class="fas fa-redo-alt mr-1"></i>
+        Default load
+      <% end %>
+    </div>
+  </div>
+
+  <div>
     <h6>Daily load profile</h6>
     <p class="text-secondary small"><em>Set the default hourly use rates of the appliance, from 0 (off) to 1 (full power).</em></p>
     <div id="load_chart">

@@ -14,7 +14,7 @@
     </tr>
     <tr>
       <th scope="row" class="py-2">Current type</th>
-      <td class="py-2"><%= appliance.current_type %></td>
+      <td class="py-2"><%= appliance.current_type.present? ? appliance.current_type : 'n/a' %></td>
     </tr>
     <tr>
       <th scope="row" class="py-2">Working frequency</th>

@@ -7,9 +7,11 @@
   <div class="flex-grow-1 mr-2">
     <h6><%= appliance.name %></h6>
     <div>
-      <div class="badge badge-light px-2 mr-2">
-        <%= appliance.current_type %>
-      </div>
+      <% if appliance.current_type.present? %>
+        <div class="badge badge-light px-2 mr-2">
+          <%= appliance.current_type %>
+        </div>
+      <% end %>
       <% if appliance.apparent_power.present? %>
         <div class="badge badge-light px-2 mr-2">
           <%= "#{appliance.apparent_power.round} VA" %>

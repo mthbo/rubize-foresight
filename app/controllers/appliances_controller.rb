@@ -7,11 +7,11 @@ class AppliancesController < ApplicationController
 
   def show
     @sources = @appliance.sources.ordered
+    @use = @appliance.use
   end
 
   def new
     @appliance = Appliance.new
-    @appliance.use_id = appliance_params[:use_id]
   end
 
   def create
@@ -43,7 +43,7 @@ class AppliancesController < ApplicationController
   end
 
   def refresh_load
-    @use = Use.find(params[:use_id])
+    @use = Use.find(params[:use_id]) if params[:use_id]
   end
 
   private

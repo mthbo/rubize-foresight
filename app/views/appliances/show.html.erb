@@ -11,7 +11,8 @@
 
       <div class="d-lg-flex justify-content-between mb-4">
         <div class="mr-lg-5">
-          <h2 class="mb-3"><%= @appliance.name %></h2>
+          <h2 class=""><%= @appliance.name %></h2>
+          <h5 class="mb-3 text-secondary"><%= @use.name %></h5>
           <p><%= sanitize auto_link(markdown_to_html(@appliance.description)) %></p>
         </div>
         <div class="flex-shrink-0">
@@ -60,6 +61,7 @@
       <% else %>
         <div class="text-secondary small">
           No source recorded for this appliance yet.
+          <%= link_to "Add a new one", new_appliance_source_path(@appliance) %>.
         </div>
       <% end %>
 
