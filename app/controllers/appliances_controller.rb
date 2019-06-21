@@ -42,6 +42,10 @@ class AppliancesController < ApplicationController
     redirect_to appliances_path
   end
 
+  def refresh_load
+    @use = Use.find(params[:use_id])
+  end
+
   private
 
   def find_appliance

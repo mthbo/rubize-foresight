@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :appliances, only: [:index, :show, :new, :create, :edit, :update, :destroy], shallow: true do
     resources :sources, only: [:new, :create, :edit, :update, :destroy]
   end
+  get '/refresh_load', to: 'appliances#refresh_load'
 
   resources :projects, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 end
