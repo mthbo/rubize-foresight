@@ -34,6 +34,16 @@ class Appliance < ApplicationRecord
 
   mount_uploader :photo, PhotoUploader
 
+  include PgSearch
+  pg_search_scope :search,
+    against: [ :name ],
+    associated_against: {
+      use: [ :name ]
+    },
+    using: {
+      tsearch: { prefix: true }
+    }
+
   validates :name, presence: true, uniqueness: true
   validates :power, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :power_factor, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, allow_nil: true

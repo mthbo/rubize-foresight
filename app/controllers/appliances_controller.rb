@@ -2,11 +2,8 @@ class AppliancesController < ApplicationController
   before_action :find_appliance, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:query].present?
-      @uses = Use.search(params[:query])
-    else
-      @uses = Use.ordered
-    end
+    @query = params[:query]
+    @uses = @query.present? ? Use.search(@query) : Use.ordered
   end
 
   def show

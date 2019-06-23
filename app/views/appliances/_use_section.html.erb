@@ -12,16 +12,25 @@
     <% end %>
   </div>
 
-  <% if use.appliances.present? %>
+  <% if query.blank? %>
+    <% if use.appliances.present? %>
+      <div class="list-group">
+        <% use.appliances.ordered.each do |appliance| %>
+          <%= render 'list_item', appliance: appliance %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="text-secondary small">
+        No appliance recorded for this use yet.
+        <%= link_to "Add a new one", new_appliance_path %>.
+      </div>
+    <% end %>
+
+  <% else %>
     <div class="list-group">
-      <% use.appliances.ordered.each do |appliance| %>
+      <% use.appliances.search(query).each do |appliance| %>
         <%= render 'list_item', appliance: appliance %>
       <% end %>
-    </div>
-  <% else %>
-    <div class="text-secondary small">
-      No appliance recorded for this use yet.
-      <%= link_to "Add a new one", new_appliance_path %>.
     </div>
   <% end %>
 
