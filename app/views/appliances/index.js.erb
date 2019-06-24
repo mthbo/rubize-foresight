@@ -1,0 +1,13 @@
+function refreshInput(queryHTML) {
+  const queryInput = document.getElementById('query');
+  queryInput.value = (queryHTML);
+}
+
+
+function refreshResults(resultsHTML) {
+  const queryResults = document.getElementById('results');
+  queryResults.innerHTML = (resultsHTML);
+}
+
+refreshInput('<%= @query %>');
+refreshResults('<%= j render "appliances/results", uses: @uses, query: @query %>');

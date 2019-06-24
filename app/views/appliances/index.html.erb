@@ -9,8 +9,23 @@
         <% end %>
       </div>
 
-      <div class="d-sm-flex justify-content-between">
-        <h2>Catalog of appliances</h2>
+      <div class="d-md-flex justify-content-between">
+        <div class="mr-md-4">
+          <h2 class="mb-4">Catalog of appliances</h2>
+          <div class="mt-3 mb-2 d-md-flex align-items-center">
+            <%= form_tag appliances_path, method: :get, remote: true, class: "d-flex" do %>
+              <%= text_field_tag :query,
+                params[:query],
+                class: "form-control w-100",
+                placeholder: "Search an appliance"
+              %>
+              <%= button_tag class: "btn btn-circle btn-primary ml-3" do %>
+                <i class="fas fa-search"></i>
+              <% end %>
+            <% end %>
+            <%= link_to "Clear", appliances_path, remote: true, class: "ml-2 ml-md-3 small" %>
+          </div>
+        </div>
         <div>
           <%= link_to new_appliance_path, class: "btn btn-primary my-1" do %>
             <i class="fas fa-plus mr-1"></i>
@@ -19,20 +34,9 @@
         </div>
       </div>
 
-      <div class="d-flex mt-3 align-items-center">
-        <div class="mr-2">Search</div>
-        <%= form_tag appliances_path, method: :get do %>
-          <%= text_field_tag :query,
-            params[:query],
-            class: "form-control w-100",
-            placeholder: "Find an appliance"
-          %>
-        <% end %>
+      <div id="results">
+        <%= render 'results', uses: @uses, query: @query %>
       </div>
-
-      <% @uses.each do |use| %>
-        <%= render 'use_section', use: use, query: @query %>
-      <% end %>
 
       <div class="mt-4 text-center">
         <%= link_to new_use_path, class: "btn btn-outline-secondary" do %>
