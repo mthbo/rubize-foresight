@@ -3,7 +3,7 @@ class AppliancesController < ApplicationController
 
   def index
     @query = params[:query]
-    @uses = @query.present? ? Use.search(@query) : Use.ordered
+    @uses = @query.present? ? policy_scope(Use).search(@query) : policy_scope(Use).ordered
   end
 
   def show
@@ -51,6 +51,7 @@ class AppliancesController < ApplicationController
 
   def find_appliance
     @appliance = Appliance.find(params[:id])
+    authorize @appliance
   end
 
   def appliance_params
