@@ -2,16 +2,16 @@
   <div class="row justify-content-center my-5">
     <div class="col col-xl-10">
 
-      <h1>Benoo Energies design tool</h1>
+      <h1>Benoo Foresight</h1>
       <p>Work is ongoing...</p>
 
       <div class="row mt-5">
 
         <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card h-100">
-            <%= image_tag "appliances.png", alt: "Appliances", class: "card-img-top" %>
+            <%= image_tag "appliances.png", alt: "Appliances", class: "card-img-top d-none d-sm-block" %>
             <div class="card-body">
-              <h4 class="card-title">Appliances</h4>
+              <h4 class="card-title">Catalog</h4>
               <p class="card-text text-secondary">A catalog of appliances containing technical features and sourcing references.</p>
               <%= link_to "Browse the catalog", appliances_path, class: "btn btn-primary" %>
             </div>
@@ -20,7 +20,7 @@
 
         <div class="col-12 col-sm-6 col-lg-4 mb-4">
           <div class="card h-100">
-            <%= image_tag "projects.png", alt: "Projects", class: "card-img-top" %>
+            <%= image_tag "projects.png", alt: "Projects", class: "card-img-top d-none d-sm-block" %>
             <div class="card-body">
               <h4 class="card-title">Projects</h4>
               <p class="card-text text-secondary">A tool to design energy access projects, based on setups of appliances from the catalog.</p>
@@ -32,7 +32,7 @@
         <% if user_signed_in? and current_user.admin %>
           <div class="col-12 col-sm-6 col-lg-4 mb-4">
             <div class="card h-100">
-              <%= image_tag "team.png", alt: "Projects", class: "card-img-top" %>
+              <%= image_tag "team.png", alt: "Projects", class: "card-img-top d-none d-sm-block" %>
               <div class="card-body">
                 <h4 class="card-title">Team</h4>
                 <p class="card-text text-secondary">See my team users, approve / revoke users and manage roles.</p>

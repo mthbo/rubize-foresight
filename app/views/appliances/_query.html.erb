@@ -1,0 +1,14 @@
+<%= form_tag appliances_path, method: :get, remote: true, class: "flex-grow-1 d-flex" do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Search an appliance"
+  %>
+  <%= button_tag class: "btn btn-primary ml-3" do %>
+    <i class="fas fa-search"></i>
+  <% end %>
+<% end %>
+
+<div class="mr-md-5">
+  <%= link_to "Clear", appliances_path, remote: true, class: "btn btn-link btn-sm ml-md-3 mr-md-5" %>
+</div>

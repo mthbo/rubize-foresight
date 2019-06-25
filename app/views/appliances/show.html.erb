@@ -11,7 +11,7 @@
 
       <div class="d-lg-flex justify-content-between mb-4">
         <div class="mr-lg-5">
-          <h2 class=""><%= @appliance.name %></h2>
+          <h3 class=""><%= @appliance.name %></h3>
           <h5 class="mb-3 text-secondary"><%= @use.name %></h5>
           <p><%= sanitize auto_link(markdown_to_html(@appliance.description)) %></p>
         </div>
@@ -42,26 +42,8 @@
         <%= render 'shared/load_chart', electrical_load: @appliance, title: "Daily load profile (default)", day: Appliance::DAY_TIME, night: Appliance::NIGHT_TIME %>
       </div>
 
-      <h3 class="my-4 py-1">Sourcing</h3>
-
-      <% if @sources.present? %>
-        <div class="list-group">
-          <% @sources.each do |source| %>
-            <%= render 'source_list_item', source: source %>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="text-secondary small">
-          No sources recorded for this appliance yet.
-          <%= link_to "Add a new one", new_appliance_source_path(@appliance) %>.
-        </div>
-      <% end %>
-
-      <div class="d-flex mt-3 pt-3">
-        <%= link_to new_appliance_source_path(@appliance), class: "btn btn-outline-secondary flex-grow-1" do %>
-          <i class="fas fa-plus mr-1"></i>
-          New source
-        <% end %>
+      <div>
+        <%= render 'sources/index', sources: @sources, appliance: @appliance %>
       </div>
 
     </div>
