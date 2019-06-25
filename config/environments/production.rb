@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: "https://benoo-design-tool.herokuapp.com/" }
+  config.action_mailer.default_url_options = { host: "https://benoo-foresight.herokuapp.com/" }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
@@ -62,12 +62,12 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "benoo-design-tool_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "benoo-foresight_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method     = :postmark
   config.action_mailer.postmark_settings   = { api_token: ENV['POSTMARK_API_TOKEN'] }
-  config.action_mailer.default_url_options = { host: "benoo-design-tool.herokuapp.com" }
+  config.action_mailer.default_url_options = { host: "benoo-foresight.herokuapp.com" }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
