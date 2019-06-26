@@ -1,7 +1,7 @@
 class Appliance < ApplicationRecord
   belongs_to :use
   has_many :sources, dependent: :destroy
-  scope :ordered, -> { order('updated_at DESC') }
+  scope :ordered, -> { order(updated_at: :desc) }
 
   DAY_TIME = 6
   NIGHT_TIME = 18

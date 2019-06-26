@@ -1,6 +1,6 @@
 class Use < ApplicationRecord
   has_many :appliances, dependent: :nullify
-  scope :ordered, -> { left_joins(:appliances).group(:id).order('COUNT(appliances.id) DESC') }
+  scope :ordered, -> { order(name: :asc) }
 
   DAY_TIME = 6
   NIGHT_TIME = 18

@@ -3,7 +3,7 @@ class AppliancesController < ApplicationController
 
   def index
     @query = params[:query]
-    @uses = @query.present? ? policy_scope(Use).search(@query) : policy_scope(Use).ordered
+    @uses = @query.present? ? policy_scope(Use).ordered.search(@query) : policy_scope(Use).ordered
   end
 
   def show
@@ -13,10 +13,12 @@ class AppliancesController < ApplicationController
 
   def new
     @appliance = Appliance.new
+    authorize @appliance
   end
 
   def create
     @appliance = Appliance.new(appliance_params)
+    authorize @appliance
     if @appliance.save
       flash[:notice] = "#{@appliance.name} has been created"
       redirect_to appliance_path(@appliance)
@@ -45,6 +47,7 @@ class AppliancesController < ApplicationController
 
   def refresh_load
     @use = Use.find(params[:use_id]) if params[:use_id]
+    authorize @use
   end
 
   private

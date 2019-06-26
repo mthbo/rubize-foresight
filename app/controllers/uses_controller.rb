@@ -4,10 +4,12 @@ class UsesController < ApplicationController
 
   def new
     @use = Use.new
+    authorize @use
   end
 
   def create
     @use = Use.new(use_params)
+    authorize @use
     if @use.save
       flash[:notice] = "#{@use.name} has been created"
       redirect_to appliances_path
@@ -36,11 +38,12 @@ class UsesController < ApplicationController
   private
 
   def all_uses
-    @uses = Use.all
+    @uses = policy_scope(Use)
   end
 
   def find_use
     @use = Use.find(params[:id])
+    authorize @use
   end
 
   def use_params

@@ -1,7 +1,7 @@
 <% if uses.present? %>
 
   <% uses.each do |use| %>
-    <% appliances = use.appliances %>
+    <% appliances = use.appliances.ordered %>
     <div data-use-id="<%= use.id %>">
 
       <div class="d-flex pt-2 mt-4 mb-3">
@@ -19,7 +19,7 @@
       <% if query.blank? %>
         <% if appliances.present? %>
           <div class="list-group">
-            <% appliances.ordered.each do |appliance| %>
+            <% appliances.each do |appliance| %>
               <%= render 'index_show', appliance: appliance %>
             <% end %>
           </div>
@@ -43,6 +43,6 @@
 
 <% else %>
   <p class="text-secondary small my-3"><em>
-      Sorry, no appliances found for "<%= query %>"
+      Sorry, no appliances found
   </em></p>
 <% end %>
