@@ -2,12 +2,7 @@
   <div class="row justify-content-center my-5">
     <div class="col col-xl-10">
 
-      <div class="mb-3">
-        <%= link_to root_path do %>
-          <i class="fas fa-arrow-left mr-1"></i>
-          Back to home
-        <% end %>
-      </div>
+      <%= render 'shared/back_link', path: root_path, text: "Back to home" %>
 
       <h2 class="mb-3">Appliance catalog</h2>
 
@@ -15,24 +10,17 @@
         <div class="flex-grow-1 d-flex align-items-center mr-md-5 mt-4 mb-2">
           <%= render 'query' %>
         </div>
-
         <div class="d-flex ml-lg-5 mt-4 mb-2">
-          <%= link_to new_appliance_path, class: "btn btn-primary ml-lg-5 flex-grow-1" do %>
-            <i class="fas fa-plus mr-1"></i>
-            New appliance
-          <% end %>
+          <%= render 'button_new' %>
         </div>
       </div>
 
       <div id="results">
-        <%= render 'results', uses: @uses, query: @query %>
+        <%= render 'results', uses: @uses, appliances: @appliances, query: @query %>
       </div>
 
       <div class="d-flex mt-4 pt-3">
-        <%= link_to new_use_path, class: "btn btn-outline-secondary flex-grow-1" do %>
-          <i class="fas fa-plus mr-1"></i>
-          New use
-        <% end %>
+        <%= render 'uses/button_new' %>
       </div>
 
     </div>

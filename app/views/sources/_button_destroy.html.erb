@@ -1,0 +1,6 @@
+<% if policy(source).destroy? %>
+  <%= link_to source_path(source), method: :delete, remote: true, data: {confirm: 'Are you certain you want to delete this source?'}, class: "btn btn-outline-danger btn-sm" do %>
+    <i class="fas fa-trash-alt mr-1"></i>
+    Delete
+  <% end %>
+<% end %>

@@ -1,1 +1,10 @@
+function showNoSourceMessage(messageHTML) {
+  const sourceContainer = document.getElementById('source_container');
+  sourceContainer.innerHTML = (messageHTML);
+}
+
 document.querySelector("[data-source-id='<%= @source.id %>']").remove();
+
+<% if @appliance.sources.blank? %>
+  showNoSourceMessage("<%= j render 'sources/index_empty', appliance: @appliance %>");
+<% end %>

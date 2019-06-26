@@ -1,0 +1,25 @@
+<div data-use-id="<%= use.id %>">
+
+  <div class="d-flex pt-2 mt-4 mb-3">
+    <h5><%= use.name %></h5>
+    <%= render 'uses/button_edit', use: use %>
+    <%= render 'uses/button_destroy', use: use %>
+  </div>
+
+  <% use_appliances = appliances.where(use_id: use.id) %>
+
+  <% if use_appliances.present? %>
+    <div class="list-group">
+      <% use_appliances.each do |appliance| %>
+        <%= render 'index_show', appliance: appliance %>
+      <% end %>
+    </div>
+
+  <% else %>
+    <div class="text-secondary small">
+      No appliances recorded for this use.
+      <%= link_to "Add a new one", new_appliance_path if policy(Appliance).create? %>.
+    </div>
+  <% end %>
+
+</div>

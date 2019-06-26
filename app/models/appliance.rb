@@ -3,6 +3,22 @@ class Appliance < ApplicationRecord
   has_many :sources, dependent: :destroy
   scope :ordered, -> { order(updated_at: :desc) }
 
+  include PgSearch
+  pg_search_scope :search,
+    against: [ :name ],
+    associated_against: {
+      use: [ :name ]
+    },
+    using: {
+      tsearch: {
+        prefix: true,
+        dictionary: "english",
+        any_word: true
+      }
+    }
+
+  mount_uploader :photo, PhotoUploader
+
   DAY_TIME = 6
   NIGHT_TIME = 18
   TYPES = ["AC", "DC"]
@@ -31,18 +47,6 @@ class Appliance < ApplicationRecord
     "F" => "grade-f",
     "G" => "grade-g"
   }
-
-  mount_uploader :photo, PhotoUploader
-
-  include PgSearch
-  pg_search_scope :search,
-    against: [ :name ],
-    associated_against: {
-      use: [ :name ]
-    },
-    using: {
-      tsearch: { prefix: true }
-    }
 
   validates :name, presence: true, uniqueness: true
   validates :power, numericality: {greater_than_or_equal_to: 0}, allow_nil: true

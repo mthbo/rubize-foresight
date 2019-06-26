@@ -1,0 +1,5 @@
+<% if policy(use).destroy? %>
+  <%= link_to use_path(use), method: :delete, remote: true, data: {confirm: 'Are you certain you want to delete this use?'}, class: "text-danger ml-3" do %>
+    <i class="fas fa-trash-alt"></i>
+  <% end %>
+<% end %>

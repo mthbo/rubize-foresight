@@ -4,10 +4,12 @@ class SourcesController < ApplicationController
 
   def new
     @source = @appliance.sources.new
+    authorize @source
   end
 
   def create
     @source = @appliance.sources.new(source_params)
+    authorize @source
     if @source.save
       flash[:notice] = "A new source has been added to #{@appliance.name}"
       redirect_to appliance_path(@appliance)
@@ -30,6 +32,7 @@ class SourcesController < ApplicationController
 
   def destroy
     @source.destroy
+    @appliance = @source.appliance
     flash[:notice] = "The source has been deleted"
   end
 
@@ -41,6 +44,7 @@ class SourcesController < ApplicationController
 
   def find_source
     @source = Source.find(params[:id])
+    authorize @source
   end
 
   def source_params

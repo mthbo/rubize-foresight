@@ -1,0 +1,6 @@
+<% if policy(appliance).destroy? %>
+  <%= link_to appliance_path(appliance), method: :delete, data: {confirm: 'Are you certain you want to delete this appliance?'}, class: "btn btn-outline-danger" do %>
+    <i class="fas fa-trash-alt mr-1"></i>
+    Delete
+  <% end %>
+<% end %>

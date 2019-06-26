@@ -1,44 +1,6 @@
 <% if uses.present? %>
-
   <% uses.each do |use| %>
-    <% appliances = use.appliances.ordered %>
-    <div data-use-id="<%= use.id %>">
-
-      <div class="d-flex pt-2 mt-4 mb-3">
-        <h5><%= use.name %></h5>
-        <%= link_to edit_use_path(use), class: "ml-3" do %>
-          <i class="fas fa-edit"></i>
-        <% end %>
-        <% if appliances.blank? %>
-          <%= link_to use_path(use), method: :delete, remote: true, data: {confirm: 'Are you certain you want to delete this use?'}, class: "text-danger ml-3" do %>
-            <i class="fas fa-trash-alt"></i>
-          <% end %>
-        <% end %>
-      </div>
-
-      <% if query.blank? %>
-        <% if appliances.present? %>
-          <div class="list-group">
-            <% appliances.each do |appliance| %>
-              <%= render 'index_show', appliance: appliance %>
-            <% end %>
-          </div>
-        <% else %>
-          <div class="text-secondary small">
-            No appliances recorded for this use yet.
-            <%= link_to "Add a new one", new_appliance_path %>.
-          </div>
-        <% end %>
-
-      <% else %>
-        <div class="list-group">
-          <% appliances.search(query).each do |appliance| %>
-            <%= render 'index_show', appliance: appliance %>
-          <% end %>
-        </div>
-      <% end %>
-
-    </div>
+    <%= render 'index_section', use: use, appliances: appliances %>
   <% end %>
 
 <% else %>

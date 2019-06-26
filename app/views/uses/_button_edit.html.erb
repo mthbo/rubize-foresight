@@ -1,0 +1,5 @@
+<% if policy(use).update? %>
+  <%= link_to edit_use_path(use), class: "ml-3" do %>
+    <i class="fas fa-edit"></i>
+  <% end %>
+<% end %>

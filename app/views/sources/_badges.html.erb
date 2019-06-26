@@ -1,0 +1,11 @@
+<% unless source.currency == 'eur' %>
+  <div class="badge badge-secondary px-2 mr-2">
+    <%= "#{money_without_cents source.price_discount} -" if source.discount_rate > 0 %>
+    <%= "#{money_without_cents source.price} #{source.price.currency}" %>
+  </div>
+<% end %>
+
+<div class="badge badge-dark px-2">
+  <%= "#{money_without_cents source.price_discount_eur} -" if source.discount_rate > 0 %>
+  <%= "#{money_without_cents source.price_eur} #{source.price_eur.currency}" %>
+</div>

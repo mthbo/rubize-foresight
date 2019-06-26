@@ -2,8 +2,8 @@ class Admin::UsersController < ApplicationController
   before_action :find_user, only: [:update]
 
   def index
-    @users_approved = User.all.where(approved: true)
-    @users_not_approved = User.all.where(approved: false)
+    @users_approved = policy_scope(User).where(approved: true)
+    @users_not_approved = policy_scope(User).where(approved: false)
   end
 
   def update
@@ -16,6 +16,7 @@ class Admin::UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+    authorize @user
   end
 
   def user_params
