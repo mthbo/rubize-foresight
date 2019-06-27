@@ -1,6 +1,7 @@
 class SourcesController < ApplicationController
   before_action :find_appliance, only: [:new, :create]
   before_action :find_source, only: [:edit, :update, :destroy]
+  layout 'form', only: [:new, :create, :edit, :update]
 
   def new
     @source = @appliance.sources.new

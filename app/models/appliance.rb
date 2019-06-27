@@ -107,11 +107,11 @@ class Appliance < ApplicationRecord
   end
 
   def min_price_cents
-    sources.all.map { |source| source.price_discount_eur_cents }.min
+    sources.select{ |source| source.price_discount_eur_cents }.map{ |source| source.price_discount_eur_cents }.min
   end
 
   def max_price_cents
-    sources.all.map { |source| source.price_eur_cents }.max
+    sources.select{ |source| source.price_eur_cents }.map{ |source| source.price_eur_cents }.max
   end
 
 end

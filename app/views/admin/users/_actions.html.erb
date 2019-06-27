@@ -1,0 +1,13 @@
+<% if policy(user).update? %>
+
+  <% if user.approved? == false %>
+    <%= link_to "Approve", admin_user_path(user, user: {approved: true}), class: "btn btn-primary btn-sm my-2", method: :put %>
+
+  <% elsif user.admin? %>
+    <%= link_to "Dismiss admin", admin_user_path(user, user: {admin: false}), class: "btn btn-outline-secondary btn-sm my-2", method: :put, data: {confirm: 'Are you certain you want to dismiss admin rights to this user?'} %>
+
+  <% else %>
+    <%= link_to "Ban", admin_user_path(user, user: {approved: false}), class: "btn btn-outline-danger btn-sm my-2", method: :put, data: {confirm: 'Are you certain you want to ban this user?'} %>
+    <%= link_to "Name admin", admin_user_path(user, user: {admin: true}), class: "btn btn-outline-secondary btn-sm my-2 ml-2", method: :put %>
+  <% end %>
+<% end %>

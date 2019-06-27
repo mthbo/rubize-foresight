@@ -1,5 +1,6 @@
 class AppliancesController < ApplicationController
   before_action :find_appliance, only: [:show, :edit, :update, :destroy]
+  layout 'form', only: [:new, :create, :edit, :update]
 
   def index
     @query = params[:query]

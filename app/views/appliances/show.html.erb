@@ -1,38 +1,30 @@
-<div class="container">
-  <div class="row justify-content-center my-5">
-    <div class="col col-xl-10">
+<%= render 'shared/back_link', path: appliances_path, text: "Back to catalogue" %>
 
-      <%= render 'shared/back_link', path: appliances_path, text: "Back to catalogue" %>
-
-      <div class="d-lg-flex justify-content-between mb-4">
-        <div class="mr-lg-5">
-          <%= render 'info', appliance: @appliance, use: @use %>
-        </div>
-        <div class="flex-shrink-0">
-          <div>
-            <%= render 'button_edit', appliance: @appliance %>
-            <%= render 'button_destroy', appliance: @appliance %>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-lg-flex mb-3">
-        <div class="flex-shrink-0 mr-lg-5 mb-4 text-center">
-          <%= render 'image', appliance: @appliance, size: 300 %>
-        </div>
-        <div class="w-100">
-          <%= render 'features', appliance: @appliance %>
-        </div>
-      </div>
-
-      <div class="d-flex py-4 mb-4 justify-content-center border-top border-bottom border-tertiary">
-        <%= render 'shared/load_chart', electrical_load: @appliance, title: "Daily load profile (default)", day: Appliance::DAY_TIME, night: Appliance::NIGHT_TIME %>
-      </div>
-
-      <div>
-        <%= render 'sources/index', sources: @sources, appliance: @appliance %>
-      </div>
-
+<div class="d-lg-flex justify-content-between mb-4">
+  <div class="mr-lg-5">
+    <%= render 'info', appliance: @appliance, use: @use %>
+  </div>
+  <div class="flex-shrink-0">
+    <div>
+      <%= render 'button_edit', appliance: @appliance %>
+      <%= render 'button_destroy', appliance: @appliance %>
     </div>
   </div>
+</div>
+
+<div class="d-lg-flex mb-3">
+  <div class="flex-shrink-0 mr-lg-5 mb-4 text-center">
+    <%= render 'image', appliance: @appliance, size: 300 %>
+  </div>
+  <div class="w-100">
+    <%= render 'features', appliance: @appliance %>
+  </div>
+</div>
+
+<div class="d-flex py-4 mb-4 justify-content-center border-top border-bottom border-tertiary">
+  <%= render 'shared/load_chart', electrical_load: @appliance, title: "Daily load profile (default)", day: Appliance::DAY_TIME, night: Appliance::NIGHT_TIME %>
+</div>
+
+<div>
+  <%= render 'sources/index', sources: @sources, appliance: @appliance %>
 </div>

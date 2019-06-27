@@ -1,6 +1,7 @@
 class UsesController < ApplicationController
   before_action :find_use, only: [:edit, :update, :destroy]
   before_action :all_uses, only: [:new, :create, :edit, :update]
+  layout 'form', only: [:new, :create, :edit, :update]
 
   def new
     @use = Use.new

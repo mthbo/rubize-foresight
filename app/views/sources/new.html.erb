@@ -1,11 +1,3 @@
-<div class="container">
-  <div class="row justify-content-center my-5">
-    <div class="col col-md-10 col-lg-8 col-xl-7">
+<h3 class="mb-4">New source for <em>"<%= @appliance.name %>"</em></h3>
 
-      <h3 class="mb-4">New source for <em>"<%= @appliance.name %>"</em></h3>
-
-      <%= render 'form', source: @source, appliance: @appliance %>
-
-    </div>
-  </div>
-</div>
+<%= render 'form', source: @source, appliance: @appliance %>

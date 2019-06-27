@@ -1,68 +1,21 @@
-<div class="container">
-  <div class="row justify-content-center my-5">
-    <div class="col col-xl-10">
+<%= render 'shared/back_link', path: root_path, text: "Back to home" %>
 
-    <div class="mb-3">
-      <%= link_to root_path do %>
-        <i class="fas fa-arrow-left mr-1"></i>
-        Back to home
-      <% end %>
-    </div>
+<h2 class="mb-3">My team</h2>
 
-    <h2 class="mb-4">My team</h2>
-
-    <% if @users_not_approved.present? %>
-      <h5 class="mt-4 mb-3">Waiting for approval</h5>
-      <div class="list-group">
-        <% @users_not_approved.each do |user| %>
-          <div class="list-group-item d-md-flex justify-content-between align-items-center">
-            <div class="flex-grow-1 overflow-hidden mb-2">
-              <h6>
-                <span class="mr-2"><%= "#{user.first_name} #{user.last_name}" %></span>
-                <span class="text-secondary"><%= user.email %></span>
-              </h6>
-              <small class="mr-2">
-                Created on <%= user.created_at.strftime("%Y-%m-%d") %>
-              </small>
-            </div>
-            <div>
-              <%= link_to "Approve", admin_user_path(user, user: {approved: true}), class: "btn btn-primary btn-sm my-2", method: :put %>
-            </div>
-          </div>
-        <% end %>
-      </div>
+<% if @users_not_approved.present? %>
+  <h5 class="mt-4 mb-3">Waiting for approval</h5>
+  <div class="list-group">
+    <% @users_not_approved.each do |user| %>
+      <%= render 'index_show', user: user %>
     <% end %>
-
-    <% if @users_approved.present? %>
-      <h5 class="mt-4 mb-3">Approved users</h5>
-      <div class="list-group">
-        <% @users_approved.each do |user| %>
-          <div class="list-group-item d-md-flex justify-content-between align-items-center">
-            <div class="flex-grow-1 overflow-hidden mb-2">
-              <h6>
-                <span class="mr-2"><%= "#{user.first_name} #{user.last_name}" %></span>
-                <span class="text-secondary"><%= user.email %></span>
-              </h6>
-              <small class="mr-2">
-                Created on <%= user.created_at.strftime("%Y-%m-%d") %>
-              </small>
-              <% if user.admin %>
-                <div class="badge badge-secondary px-2 mr-2">admin</div>
-              <% end %>
-            </div>
-            <div>
-              <% if user.admin %>
-                <%= link_to "Revoke admin", admin_user_path(user, user: {admin: false}), class: "btn btn-outline-danger btn-sm my-2", method: :put, data: {confirm: 'Are you certain you want to revoke admin rights to this user?'} %>
-              <% else %>
-                <%= link_to "Make admin", admin_user_path(user, user: {admin: true}), class: "btn btn-outline-secondary btn-sm my-2", method: :put %>
-                <%= link_to "Reject", admin_user_path(user, user: {approved: false}), class: "btn btn-danger btn-sm my-2 ml-2", method: :put, data: {confirm: 'Are you certain you want to reject this user?'} %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-
-    </div>
   </div>
-</div>
+<% end %>
+
+<% if @users_approved.present? %>
+  <h5 class="mt-4 mb-3">Approved users</h5>
+  <div class="list-group">
+    <% @users_approved.each do |user| %>
+      <%= render 'index_show', user: user %>
+    <% end %>
+  </div>
+<% end %>

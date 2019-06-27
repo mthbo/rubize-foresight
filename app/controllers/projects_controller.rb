@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
+  layout 'form', only: [:new, :create, :edit, :update]
 
   def index
-    @projects = Project.all
+    @projects = policy_scope(Project).all
 
     @markers = @projects.map do |project|
       {
@@ -18,10 +19,12 @@ class ProjectsController < ApplicationController
 
   def new
     @project = current_user.projects.new
+    authorize @project
   end
 
   def create
     @project = current_user.project.new(project_params)
+    authorize @project
     if @project.save
       flash[:notice] = "#{@project.name} has been created"
       redirect_to project_path(@project)
@@ -50,6 +53,7 @@ class ProjectsController < ApplicationController
 
   def find_project
     @project = Project.find(params[:id])
+    authorize @project
   end
 
   def project_params

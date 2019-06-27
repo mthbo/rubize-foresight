@@ -1,38 +1,26 @@
-<div class="container">
-  <div class="row my-5">
-    <div class="col col-xl-10">
+<%= render 'shared/back_link', path: root_path, text: "Back to home" %>
 
-      <div class="mb-3">
-        <%= link_to root_path do %>
-          <i class="fas fa-arrow-left mr-1"></i>
-          Back to home
-        <% end %>
+<h2 class="mb-4">Saved projects</h2>
+<ul class="list-group">
+  <% @projects.each do |project| %>
+    <li class="list-group-item d-flex justify-content-between">
+      <div>
+        <%= project.name %>
       </div>
+      <div>
+        <span><%= link_to "Show", project_path(project) %></span>
+        <span><%= "Copy" %></span>
+      </div>
+    </li>
+  <% end %>
+</ul>
 
-      <h2 class="mb-4">Saved projects</h2>
-      <ul class="list-group">
-        <% @projects.each do |project| %>
-          <li class="list-group-item d-flex justify-content-between">
-            <div>
-              <%= project.name %>
-            </div>
-            <div>
-              <span><%= link_to "Show", project_path(project) %></span>
-              <span><%= "Copy" %></span>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-    </div>
-
-    <div class="col-xs-12 col-lg-7">
-      <div
-        id="map"
-        style="width: 100%;
-        height: 600px;"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-      ></div>
-    </div>
-  </div>
+<div class="">
+  <div
+    id="map"
+    style="width: 100%;
+    height: 600px;"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+  ></div>
 </div>

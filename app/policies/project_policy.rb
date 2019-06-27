@@ -1,4 +1,8 @@
-class UsePolicy < ApplicationPolicy
+class ProjectPolicy < ApplicationPolicy
+
+  def show?
+    true
+  end
 
   def create?
     true
@@ -9,10 +13,6 @@ class UsePolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.appliances.blank?
-  end
-
-  def refresh_load?
     true
   end
 
