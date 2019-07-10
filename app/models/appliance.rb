@@ -52,7 +52,7 @@ class Appliance < ApplicationRecord
   validates :power, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :power_factor, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, allow_nil: true
   validates :starting_coefficient, numericality: {greater_than_or_equal_to: 1}, allow_nil: true
-  validates :current_type, inclusion: {in: TYPES, allow_blank: true}
+  validates :current_type, inclusion: {in: TYPES, allow_blank: true}, presence: true
   validates :voltage_min, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :voltage_max, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :energy_grade, inclusion: {in: GRADES, allow_blank: true}

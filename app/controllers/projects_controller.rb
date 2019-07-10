@@ -56,6 +56,18 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description)
+    params.require(:project).permit(
+      :name,
+      :description,
+      :country_code,
+      :city,
+      :day_time,
+      :night_time,
+      :current_ac,
+      :current_dc,
+      :voltage_min,
+      :voltage_max,
+      :frequency
+    )
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_09_155025) do
+ActiveRecord::Schema.define(version: 2019_07_10_151615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,18 +63,15 @@ ActiveRecord::Schema.define(version: 2019_07_09_155025) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "supply_mode"
-    t.string "supply_current_type"
-    t.integer "supply_voltage"
-    t.string "load_current_type"
-    t.integer "load_voltage_min"
-    t.integer "load_voltage_max"
+    t.integer "voltage_min"
+    t.integer "voltage_max"
     t.string "frequency"
-    t.string "solar_panel_power"
-    t.string "battery_technology"
-    t.string "battery_voltage"
-    t.string "battery_capacity"
-    t.boolean "distribution"
+    t.time "day_time"
+    t.time "night_time"
+    t.string "country_code"
+    t.string "city"
+    t.boolean "current_ac"
+    t.boolean "current_dc"
   end
 
   create_table "sources", force: :cascade do |t|
