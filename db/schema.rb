@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_163506) do
+ActiveRecord::Schema.define(version: 2019_07_09_155025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,13 +61,20 @@ ActiveRecord::Schema.define(version: 2019_06_20_163506) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "address"
-    t.float "latitude"
-    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_projects_on_user_id"
+    t.string "supply_mode"
+    t.string "supply_current_type"
+    t.integer "supply_voltage"
+    t.string "load_current_type"
+    t.integer "load_voltage_min"
+    t.integer "load_voltage_max"
+    t.string "frequency"
+    t.string "solar_panel_power"
+    t.string "battery_technology"
+    t.string "battery_voltage"
+    t.string "battery_capacity"
+    t.boolean "distribution"
   end
 
   create_table "sources", force: :cascade do |t|
@@ -132,6 +139,5 @@ ActiveRecord::Schema.define(version: 2019_06_20_163506) do
   end
 
   add_foreign_key "appliances", "uses"
-  add_foreign_key "projects", "users"
   add_foreign_key "sources", "appliances"
 end

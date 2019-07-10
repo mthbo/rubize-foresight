@@ -1,0 +1,12 @@
+<div class="list-group-item d-flex align-items-center">
+
+  <div class="flex-grow-1 mr-2">
+    <h6><%= project.name %></h6>
+    <div><%= render 'badges', project: project %></div>
+  </div>
+
+  <div>
+    <%= link_to "Details", project_path(project) if policy(project).show? %>
+  </div>
+
+</div>

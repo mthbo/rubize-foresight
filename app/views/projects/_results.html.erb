@@ -1,0 +1,19 @@
+<% if projects.present? %>
+  <div class="list-group">
+    <% projects.each do |project| %>
+      <%= render 'index_show', project: project %>
+    <% end %>
+  </div>
+
+<% elsif query.present? %>
+  <div class="text-secondary small my-3"><em>
+      Sorry, no projects found.
+  </em></div>
+
+<% else %>
+  <div class="text-secondary small my-3">
+    No project recorded.
+    <%= link_to "Add a new one", new_project_path if policy(Project).create? %>.
+  </div>
+
+<% end %>

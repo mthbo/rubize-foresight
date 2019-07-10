@@ -1,0 +1,18 @@
+<%= simple_form_for(project) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="border-bottom border-tertiary pb-2 mb-4" >
+    <h5 class="mb-3">General information</h5>
+    <%= f.input :name, placeholder: "Kiosk Benoo Energies KM001" %>
+    <%= f.input :description, placeholder: "Benoo Energies standard kiosk ...", input_html: { rows: "5" }, include_blank: false %>
+  </div>
+
+  <div>
+    <h5 class="mb-4">Technical information</h5>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3">
+    <%= link_to "Cancel", :back, class: "btn btn-outline-secondary mr-2" %>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

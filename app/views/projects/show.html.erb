@@ -1,8 +1,13 @@
-<h3><%= @project.name %></h3>
-<p><%= @project.description %></p>
-<p><%= @project.address %></p>
-<ul>
-  <li>Latitude : <%= @project.latitude %></li>
-  <li>Longitude : <%= @project.longitude %></li>
-</ul>
-<p><%= link_to "Back to project list", projects_path %></p>
+<%= render 'shared/back_link', path: projects_path, text: "Back to project list" %>
+
+<div class="d-lg-flex justify-content-between mb-4">
+  <div class="mr-lg-5">
+    <%= render 'info', project: @project %>
+  </div>
+  <div class="flex-shrink-0">
+    <div>
+      <%= render 'button_edit', project: @project %>
+      <%= render 'button_destroy', project: @project %>
+    </div>
+  </div>
+</div>

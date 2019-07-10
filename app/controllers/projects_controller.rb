@@ -3,14 +3,11 @@ class ProjectsController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def index
-    @projects = policy_scope(Project).all
-
-    @markers = @projects.map do |project|
-      {
-        lat: project.latitude,
-        lng: project.longitude,
-        infoWindow: render_to_string(partial: "infowindow", locals: { project: project })
-      }
+    @query = params[:query]
+    if @query.present?
+      @projects = policy_scope(Project).search(@query)
+    else
+      @projects = policy_scope(Project).ordered
     end
   end
 
@@ -18,12 +15,12 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = current_user.projects.new
+    @project = Project.new
     authorize @project
   end
 
   def create
-    @project = current_user.project.new(project_params)
+    @project = Project.new(project_params)
     authorize @project
     if @project.save
       flash[:notice] = "#{@project.name} has been created"
@@ -47,6 +44,8 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
+    flash[:notice] = "#{@project.name} has been deleted"
+    redirect_to projects_path
   end
 
   private
@@ -57,6 +56,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:name, :description, :address, :latitude, :longitude)
+    params.require(:project).permit(:name, :description)
   end
 end

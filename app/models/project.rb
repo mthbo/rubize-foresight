@@ -1,7 +1,17 @@
 class Project < ApplicationRecord
-  belongs_to :user
-  validates :name, presence: true, uniqueness: true
 
-  geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_address?
+  scope :ordered, -> { order(updated_at: :desc) }
+
+  include PgSearch
+  pg_search_scope :search,
+    against: [ :name ],
+    using: {
+      tsearch: {
+        prefix: true,
+        dictionary: "english",
+        any_word: true
+      }
+    }
+
+  validates :name, presence: true, uniqueness: true
 end
