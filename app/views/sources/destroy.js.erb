@@ -6,5 +6,5 @@ function showNoSourceMessage(messageHTML) {
 document.querySelector("[data-source-id='<%= @source.id %>']").remove();
 
 <% if @appliance.sources.blank? %>
-  showNoSourceMessage("<%= j render 'sources/index_empty', appliance: @appliance %>");
+  showNoSourceMessage("<%= j render 'sources/no_source', appliance: @appliance %>");
 <% end %>

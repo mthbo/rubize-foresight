@@ -1,0 +1,17 @@
+<div class="list-group-item d-flex align-items-center">
+
+  <div class="mr-4 d-none d-sm-block ">
+    <%= render 'appliances/image', appliance: appliance, size: 50 %>
+  </div>
+
+  <div class="flex-grow-1 mr-2">
+    <h6><%= appliance.name %></h6>
+    <div><%= render 'appliances/badges', appliance: appliance %></div>
+  </div>
+
+  <div class="flex-shrink-0 my-3">
+    <%= render 'project_appliances/button_edit', project_appliance: project_appliance %>
+    <%= render 'project_appliances/button_destroy', project_appliance: project_appliance %>
+  </div>
+
+</div>

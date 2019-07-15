@@ -44,4 +44,12 @@ class Project < ApplicationRecord
       country.translations[I18n.locale.to_s] || country.name
     end
   end
+
+  def day_time_hour
+    day_time.min.zero? ? day_time.hour : day_time.hour + 1
+  end
+
+  def night_time_hour
+    night_time.min.zero? ? night_time.hour : night_time.hour + 1
+  end
 end

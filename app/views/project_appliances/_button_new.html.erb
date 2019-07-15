@@ -1,0 +1,6 @@
+<% if policy(ProjectAppliance).create? %>
+  <%= link_to new_project_project_appliance_path(project, appliance_id: appliance.id), class: "btn btn-primary btn-sm flex-grow-1" do %>
+    <i class="fas fa-plus mr-1"></i>
+    Add
+  <% end %>
+<% end %>

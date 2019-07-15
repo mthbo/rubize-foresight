@@ -1,6 +1,6 @@
 class ProjectAppliancesController < ApplicationController
   before_action :find_project, only: [:index, :new, :create]
-  before_action :find_appliance, only: [:new, :create]
+  before_action :find_appliance, only: [:new]
   before_action :find_project_appliance, only: [:edit, :update, :destroy]
   layout 'form', only: [:new, :create, :edit, :update]
 
@@ -13,12 +13,17 @@ class ProjectAppliancesController < ApplicationController
   end
 
   def new
-    @project_appliance = ProjectAppliance.new
+    @project_appliance = @project.project_appliances.new
+    @project_appliance.appliance = @appliance
+    (0..23).each do |hour|
+      @project_appliance["hourly_rate_#{hour}"] = @appliance["hourly_rate_#{hour}"]
+    end
     authorize @project_appliance
   end
 
   def create
-    @project_appliance = ProjectAppliance.new(project_appliance_params)
+    @project_appliance = @project.project_appliances.new(project_appliance_params)
+    @appliance = @project_appliance.appliance
     authorize @project_appliance
     if @project_appliance.save
       flash[:notice] = "#{@project_appliance.appliance.name} has been added to the project."
@@ -68,6 +73,8 @@ class ProjectAppliancesController < ApplicationController
 
   def project_appliance_params
     params.require(:project_appliance).permit(
+      :appliance_id,
+      :quantity,
       :hourly_rate_0,
       :hourly_rate_1,
       :hourly_rate_2,

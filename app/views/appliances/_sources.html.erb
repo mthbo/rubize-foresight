@@ -4,11 +4,11 @@
   <% if sources.present? %>
     <div class="list-group">
       <% sources.each do |source| %>
-        <%= render 'sources/index_show', source: source %>
+        <%= render 'sources/card', source: source %>
       <% end %>
     </div>
   <% else %>
-    <%= render 'sources/index_empty', appliance: appliance %>
+    <%= render 'sources/no_source', appliance: appliance %>
   <% end %>
 </div>
 

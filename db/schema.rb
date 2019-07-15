@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_094525) do
+ActiveRecord::Schema.define(version: 2019_07_15_134557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2019_07_15_094525) do
     t.string "hourly_rate_23"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 1
     t.index ["appliance_id"], name: "index_project_appliances_on_appliance_id"
     t.index ["project_id"], name: "index_project_appliances_on_project_id"
   end

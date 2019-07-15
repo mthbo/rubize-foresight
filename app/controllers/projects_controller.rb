@@ -12,6 +12,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @project_appliances = @project.project_appliances.ordered
+    appliance_ids = @project_appliances.select(:appliance_id).reorder("").distinct
+    @appliances = policy_scope(Appliance).where(id: appliance_ids)
+    use_ids = @appliances.select(:use_id).reorder("").distinct
+    @uses = policy_scope(Use).where(id: use_ids).ordered
   end
 
   def new

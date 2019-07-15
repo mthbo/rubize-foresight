@@ -1,7 +1,7 @@
 <% if projects.present? %>
   <div class="list-group">
     <% projects.each do |project| %>
-      <%= render 'index_show', project: project %>
+      <%= render 'card', project: project %>
     <% end %>
   </div>
 

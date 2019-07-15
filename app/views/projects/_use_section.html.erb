@@ -1,0 +1,15 @@
+<div>
+
+  <div class="d-flex pt-2 mt-4 mb-3">
+    <h5><%= use.name %></h5>
+  </div>
+
+  <div class="list-group">
+    <% appliances.where(use_id: use.id).each do |appliance| %>
+      <% project_appliances.where(appliance_id: appliance.id).each do |project_appliance| %>
+        <%= render 'project_appliances/card', project_appliance: project_appliance, appliance: appliance %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

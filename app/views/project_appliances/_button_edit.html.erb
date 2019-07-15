@@ -1,0 +1,6 @@
+<% if policy(project_appliance).update? %>
+  <%= link_to edit_project_appliance_path(project_appliance), class: "btn btn-primary btn-sm mr-3" do %>
+    <i class="fas fa-edit mr-1"></i>
+    Edit
+  <% end %>
+<% end %>
