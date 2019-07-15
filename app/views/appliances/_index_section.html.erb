@@ -11,7 +11,7 @@
   <% if use_appliances.present? %>
     <div class="list-group">
       <% use_appliances.each do |appliance| %>
-        <%= render 'index_show', appliance: appliance %>
+        <%= render 'appliances/index_show', appliance: appliance %>
       <% end %>
     </div>
 

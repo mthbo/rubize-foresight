@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_10_151615) do
+ActiveRecord::Schema.define(version: 2019_07_15_094525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,39 @@ ActiveRecord::Schema.define(version: 2019_07_10_151615) do
     t.boolean "frequency_fifty_hz"
     t.boolean "frequency_sixty_hz"
     t.index ["use_id"], name: "index_appliances_on_use_id"
+  end
+
+  create_table "project_appliances", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "appliance_id"
+    t.string "hourly_rate_0"
+    t.string "hourly_rate_1"
+    t.string "hourly_rate_2"
+    t.string "hourly_rate_3"
+    t.string "hourly_rate_4"
+    t.string "hourly_rate_5"
+    t.string "hourly_rate_6"
+    t.string "hourly_rate_7"
+    t.string "hourly_rate_8"
+    t.string "hourly_rate_9"
+    t.string "hourly_rate_10"
+    t.string "hourly_rate_11"
+    t.string "hourly_rate_12"
+    t.string "hourly_rate_13"
+    t.string "hourly_rate_14"
+    t.string "hourly_rate_15"
+    t.string "hourly_rate_16"
+    t.string "hourly_rate_17"
+    t.string "hourly_rate_18"
+    t.string "hourly_rate_19"
+    t.string "hourly_rate_20"
+    t.string "hourly_rate_21"
+    t.string "hourly_rate_22"
+    t.string "hourly_rate_23"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["appliance_id"], name: "index_project_appliances_on_appliance_id"
+    t.index ["project_id"], name: "index_project_appliances_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -136,5 +169,7 @@ ActiveRecord::Schema.define(version: 2019_07_10_151615) do
   end
 
   add_foreign_key "appliances", "uses"
+  add_foreign_key "project_appliances", "appliances"
+  add_foreign_key "project_appliances", "projects"
   add_foreign_key "sources", "appliances"
 end

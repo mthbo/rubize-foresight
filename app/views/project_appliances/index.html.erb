@@ -1,0 +1,11 @@
+<%= render 'shared/back_link', path: project_path(@project), text: "Back to project" %>
+
+<h2 class="mb-3">Appliance catalog</h2>
+
+<div class="mt-4 mb-2">
+  <%= render 'appliances/query' %>
+</div>
+
+<div id="results">
+  <%= render 'appliances/results', uses: @uses, appliances: @appliances, query: @query %>
+</div>

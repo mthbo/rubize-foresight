@@ -1,6 +1,6 @@
 <% if uses.present? %>
   <% uses.each do |use| %>
-    <%= render 'index_section', use: use, appliances: appliances %>
+    <%= render 'appliances/index_section', use: use, appliances: appliances %>
   <% end %>
 
 <% else %>

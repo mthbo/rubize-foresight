@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  has_many :project_appliances, dependent: :destroy
 
   scope :ordered, -> { order(updated_at: :desc) }
 
@@ -29,6 +30,12 @@ class Project < ApplicationRecord
     unless current_ac? or current_dc?
       errors.add(:current_dc, "or ac must be selected")
     end
+  end
+
+  def currents
+    currents = []
+    currents << "AC" if current_ac?
+    currents << "DC" if current_dc?
   end
 
   def country_name
