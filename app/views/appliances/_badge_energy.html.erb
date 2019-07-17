@@ -1,0 +1,5 @@
+<% if appliance.daily_consumption.present? %>
+  <div class="badge badge-secondary px-2 mr-2">
+    <%= "#{appliance.daily_consumption} Wh/d" %>
+  </div>
+<% end %>

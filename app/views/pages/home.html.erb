@@ -4,16 +4,16 @@
 <div class="row mt-5">
 
   <div class="col-12 col-sm-6 col-lg-4 mb-4">
-    <%= render 'card', title: "Appliances", description: "A catalog of appliances containing technical features and sourcing references.", image: "appliances.png", action: "Browse the catalog", path: appliances_path %>
+    <%= render 'pages/card', title: "Appliances", description: "A catalog of appliances containing technical features and sourcing references.", image: "appliances.png", action: "Browse the catalog", path: appliances_path %>
   </div>
 
   <div class="col-12 col-sm-6 col-lg-4 mb-4">
-    <%= render 'card', title: "Projects", description: "A tool to design energy access projects, based on setups of appliances from the catalog.", image: "projects.png", action: "Browse projects", path: projects_path %>
+    <%= render 'pages/card', title: "Projects", description: "A tool to design energy access projects, based on setups of appliances from the catalog.", image: "projects.png", action: "Browse projects", path: projects_path %>
   </div>
 
   <% if user_signed_in? and current_user.admin %>
     <div class="col-12 col-sm-6 col-lg-4 mb-4">
-      <%= render 'card', title: "Team", description: "See my team users, approve / revoke users and manage roles.", image: "team.png", action: "Manage my team", path: admin_users_path %>
+      <%= render 'pages/card', title: "Team", description: "See my team users, approve / revoke users and manage roles.", image: "team.png", action: "Manage my team", path: admin_users_path %>
     </div>
   <% end %>
 

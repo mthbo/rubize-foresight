@@ -4,10 +4,17 @@
     <h5><%= use.name %></h5>
   </div>
 
-  <div class="list-group">
-    <% appliances.where(use_id: use.id).each do |appliance| %>
-      <%= render 'card_catalog', appliance: appliance, project: project %>
-    <% end %>
-  </div>
+  <% if use_appliances.present? %>
+    <div class="list-group">
+      <% use_appliances.each do |appliance| %>
+        <%= render 'appliances/card_project', appliance: appliance, project: project %>
+      <% end %>
+    </div>
+
+  <% else %>
+    <div class="text-secondary small">
+      No appliances recorded for this use.
+    </div>
+  <% end %>
 
 </div>

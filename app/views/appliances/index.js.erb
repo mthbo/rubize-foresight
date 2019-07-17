@@ -10,4 +10,4 @@ function refreshResults(resultsHTML) {
 }
 
 refreshInput('<%= @query %>');
-refreshResults('<%= j render "appliances/results", uses: @uses, appliances: @appliances, query: @query %>');
+refreshResults('<%= j render "appliances/results", uses: @uses, appliances: @appliances %>');

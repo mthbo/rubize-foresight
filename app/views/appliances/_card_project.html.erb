@@ -9,10 +9,14 @@
     <div>
       <%= render 'appliances/badge_current', appliance: appliance %>
       <%= render 'appliances/badge_power', appliance: appliance %>
-      <%= render 'appliances/badge_energy', appliance: project_appliance %>
+      <%= render 'appliances/badge_energy', appliance: appliance %>
       <%= render 'appliances/badge_grade', appliance: appliance %>
       <%= render 'appliances/badge_price', appliance: appliance %>
     </div>
+  </div>
+
+  <div>
+    <%= render 'project_appliances/button_new', appliance: appliance, project: project %>
   </div>
 
 </div>

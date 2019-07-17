@@ -4,13 +4,13 @@
 
 <div class="d-md-flex justify-content-between align-items-center">
   <div class="flex-grow-1 d-flex align-items-center mr-md-5 mt-4 mb-2">
-    <%= render 'query' %>
+    <%= render 'projects/query' %>
   </div>
   <div class="d-flex ml-lg-5 mt-4 mb-2">
-    <%= render 'button_new' %>
+    <%= render 'projects/button_new' %>
   </div>
 </div>
 
 <div id="results" class="mt-5 mb-3">
-  <%= render 'results', projects: @projects, query: @query %>
+  <%= render 'projects/results', projects: @projects, query: @query %>
 </div>

@@ -2,22 +2,22 @@
 
 <div class="d-lg-flex justify-content-between mb-4">
   <div class="mr-lg-5">
-    <%= render 'info', appliance: @appliance, use: @use %>
+    <%= render 'appliances/info', appliance: @appliance, use: @use %>
   </div>
   <div class="flex-shrink-0">
     <div>
-      <%= render 'button_edit', appliance: @appliance %>
-      <%= render 'button_destroy', appliance: @appliance %>
+      <%= render 'appliances/button_edit', appliance: @appliance %>
+      <%= render 'appliances/button_destroy', appliance: @appliance %>
     </div>
   </div>
 </div>
 
 <div class="d-lg-flex mb-3">
   <div class="flex-shrink-0 mr-lg-5 mb-4 text-center">
-    <%= render 'image', appliance: @appliance, size: 300 %>
+    <%= render 'appliances/image', appliance: @appliance, size: 300 %>
   </div>
   <div class="w-100">
-    <%= render 'features', appliance: @appliance %>
+    <%= render 'appliances/features', appliance: @appliance %>
   </div>
 </div>
 
@@ -26,5 +26,5 @@
 </div>
 
 <div>
-  <%= render 'sources', sources: @sources, appliance: @appliance %>
+  <%= render 'appliances/sources', sources: @sources, appliance: @appliance %>
 </div>

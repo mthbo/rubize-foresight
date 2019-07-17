@@ -1,6 +1,6 @@
 <% if uses.present? %>
   <% uses.each do |use| %>
-    <%= render 'appliances/use_section', use: use, appliances: appliances %>
+    <%= render 'appliances/use_section', use: use, use_appliances: appliances.where(use_id: use.id) %>
   <% end %>
 
 <% else %>

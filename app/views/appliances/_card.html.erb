@@ -6,11 +6,17 @@
 
   <div class="flex-grow-1 mr-2">
     <h6><%= appliance.name %></h6>
-    <div><%= render 'appliances/badges', appliance: appliance %></div>
+    <div>
+      <%= render 'appliances/badge_current', appliance: appliance %>
+      <%= render 'appliances/badge_power', appliance: appliance %>
+      <%= render 'appliances/badge_energy', appliance: appliance %>
+      <%= render 'appliances/badge_grade', appliance: appliance %>
+      <%= render 'appliances/badge_price', appliance: appliance %>
+    </div>
   </div>
 
   <div>
-    <%= link_to "Details", appliance_path(appliance) if policy(appliance).show? %>
+    <%= render 'appliances/button_show', appliance: appliance %>
   </div>
 
 </div>

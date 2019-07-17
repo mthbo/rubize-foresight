@@ -2,6 +2,8 @@ class Appliance < ApplicationRecord
   belongs_to :use
   has_many :sources, dependent: :destroy
   has_many :project_appliances
+  has_many :projects, -> { distinct }, through: :project_appliances
+
   scope :ordered, -> { order(updated_at: :desc) }
 
   include PgSearch

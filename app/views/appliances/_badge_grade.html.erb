@@ -1,0 +1,5 @@
+<% if appliance.energy_grade.present? %>
+  <div class="badge px-2 mr-2 <%= Appliance::GRADE_CLASSES[appliance.energy_grade] %>">
+    <%= appliance.energy_grade %>
+  </div>
+<% end %>

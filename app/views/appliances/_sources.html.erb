@@ -8,7 +8,10 @@
       <% end %>
     </div>
   <% else %>
-    <%= render 'sources/no_source', appliance: appliance %>
+    <div class="text-secondary small">
+      No sources recorded for this appliance.
+      <%= link_to "Add a new one", new_appliance_source_path(appliance) if policy(Source).create? %>.
+    </div>
   <% end %>
 </div>
 

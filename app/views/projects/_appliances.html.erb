@@ -3,7 +3,7 @@
 <div id="appliance_container">
   <% if uses.present? %>
     <% uses.each do |use| %>
-      <%= render 'use_section', use: use, project_appliances: project_appliances, appliances: appliances %>
+      <%= render 'projects/use_section', use: use, use_project_appliances: project_appliances.joins(:appliance).where(appliances: {use_id: use.id}) %>
     <% end %>
 
   <% else %>
@@ -14,5 +14,5 @@
 </div>
 
 <div class="d-flex mt-4 pt-3">
-  <%= render 'button_catalog', project: project %>
+  <%= render 'project_appliances/button_index', project: project %>
 </div>

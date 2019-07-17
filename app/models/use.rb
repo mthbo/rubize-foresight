@@ -1,6 +1,7 @@
 class Use < ApplicationRecord
   has_many :appliances, dependent: :nullify
   has_many :project_appliances, through: :appliances
+  has_many :projects, -> { distinct }, through: :project_appliances
   scope :ordered, -> { order(name: :asc) }
 
   DAY_TIME = 6

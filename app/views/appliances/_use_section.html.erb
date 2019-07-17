@@ -6,8 +6,6 @@
     <%= render 'uses/button_destroy', use: use %>
   </div>
 
-  <% use_appliances = appliances.where(use_id: use.id) %>
-
   <% if use_appliances.present? %>
     <div class="list-group">
       <% use_appliances.each do |appliance| %>

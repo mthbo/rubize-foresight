@@ -2,16 +2,16 @@
 
 <div class="d-lg-flex justify-content-between mb-4">
   <div class="mr-lg-5">
-    <%= render 'info', project: @project %>
+    <%= render 'projects/info', project: @project %>
   </div>
   <div class="flex-shrink-0">
     <div>
-      <%= render 'button_edit', project: @project %>
-      <%= render 'button_destroy', project: @project %>
+      <%= render 'projects/button_edit', project: @project %>
+      <%= render 'projects/button_destroy', project: @project %>
     </div>
   </div>
 </div>
 
 <div class="mt-5 mb-3">
-  <%= render 'appliances', project_appliances: @project_appliances, appliances: @appliances, uses: @uses, project: @project %>
+  <%= render 'projects/appliances', project_appliances: @project_appliances, uses: @uses, project: @project %>
 </div>

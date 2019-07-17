@@ -5,10 +5,8 @@
   </div>
 
   <div class="list-group">
-    <% appliances.where(use_id: use.id).each do |appliance| %>
-      <% project_appliances.where(appliance_id: appliance.id).each do |project_appliance| %>
-        <%= render 'project_appliances/card', project_appliance: project_appliance, appliance: appliance %>
-      <% end %>
+    <% use_project_appliances.each do |project_appliance| %>
+      <%= render 'project_appliances/card', project_appliance: project_appliance, appliance: project_appliance.appliance %>
     <% end %>
   </div>
 
