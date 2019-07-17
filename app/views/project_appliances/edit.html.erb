@@ -1,3 +1,7 @@
-<h3 class="mb-4">Edit appliance(s) for <em>"<%= @project_appliance.project.name %>"</em></h3>
+<h5 class="text-secondary mb-4 border-bottom border-tertiary pb-2">
+  <strong>Project:</strong>
+  <%= @project_appliance.project.name %>
+</h5>
+<h3 class="mb-4">Edit appliance in setup</h3>
 
-<%= render 'form', project_appliance: @project_appliance, appliance: @project_appliance.appliance, action: "Add appliance(s)" %>
+<%= render 'form', project_appliance: @project_appliance, appliance: @project_appliance.appliance, project: @project, action: "Update appliance" %>

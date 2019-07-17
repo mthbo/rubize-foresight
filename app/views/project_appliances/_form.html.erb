@@ -21,7 +21,7 @@
     <h6>Daily load profile</h6>
     <p class="text-secondary small"><em>Set the hourly use rates of the appliance for this project, from 0 (off) to 1 (full power).</em></p>
     <div id="load_chart">
-      <%= render 'shared/load_chart_form', f: f, collection: Appliance::RATES, day: project.day_time_hour, night: project.night_time_hour, electrical_load: project_appliance %>
+      <%= render 'shared/load_chart_form', f: f, collection: Appliance::RATES, day: project_appliance.project.day_time_hour, night: project_appliance.project.night_time_hour, electrical_load: project_appliance %>
     </div>
   </div>
 

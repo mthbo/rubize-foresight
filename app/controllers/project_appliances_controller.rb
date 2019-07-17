@@ -26,8 +26,8 @@ class ProjectAppliancesController < ApplicationController
     @appliance = @project_appliance.appliance
     authorize @project_appliance
     if @project_appliance.save
-      flash[:notice] = "#{@project_appliance.appliance.name} has been added to the project."
-      redirect_to project_path(@project_appliance.project)
+      flash[:notice] = "#{@appliance.name} has been added to the project #{@project.name}."
+      redirect_to project_path(@project)
     else
       render :new
     end

@@ -1,3 +1,7 @@
-<h3 class="mb-4">Add appliance(s) for <em>"<%= @project.name %>"</em></h3>
+<h5 class="text-secondary mb-4 border-bottom border-tertiary pb-2">
+  <strong>Project:</strong>
+  <%= @project.name %>
+</h5>
+<h3 class="mb-4">Add appliance to setup</h3>
 
-<%= render 'form', project: @project, project_appliance: @project_appliance, appliance: @appliance, action: "Add appliance(s)" %>
+<%= render 'form', project: @project, project_appliance: @project_appliance, appliance: @appliance, action: "Add appliance" %>

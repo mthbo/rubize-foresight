@@ -1,3 +1,7 @@
-<h3 class="mb-4">New source for <em>"<%= @appliance.name %>"</em></h3>
+<h5 class="text-secondary mb-4 border-bottom border-tertiary pb-2">
+  <strong>Appliance:</strong>
+  <%= @appliance.name %>
+</h5>
+<h3 class="mb-4">New source</h3>
 
 <%= render 'form', source: @source, appliance: @appliance %>
