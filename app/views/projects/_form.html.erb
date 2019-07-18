@@ -6,7 +6,7 @@
     <%= f.input :name, placeholder: "Kiosk Benoo Energies KM001" %>
     <div class="row">
       <div class="col-12 col-sm-6">
-        <%= f.input :country_code, label: "Country", selected: "FR" %>
+        <%= f.input :country_code, label: "Country" %>
       </div>
       <div class="col-12 col-sm-6">
         <%= f.input :city, placeholder: "Bordeaux" %>
@@ -15,10 +15,10 @@
     <%= f.input :description, placeholder: "Benoo Energies standard kiosk ...", input_html: { rows: "5" }, include_blank: false %>
     <div class="row">
       <div class="col-sm-5">
-        <%= f.input :day_time, selected: "6:00".to_time, label: "<i class='fas fa-sun text-warning mr-2'></i> Sunrise".html_safe %>
+        <%= f.input :day_time, label: "<i class='fas fa-sun text-warning mr-2'></i> Sunrise".html_safe %>
       </div>
       <div class="col-sm-5 offset-sm-1">
-        <%= f.input :night_time, selected: "18:00".to_time, label: "<i class='fas fa-moon text-secondary mr-2'></i> Sunset".html_safe %>
+        <%= f.input :night_time,  label: "<i class='fas fa-moon text-secondary mr-2'></i> Sunset".html_safe %>
       </div>
     </div>
   </div>
