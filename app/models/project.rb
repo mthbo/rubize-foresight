@@ -35,9 +35,10 @@ class Project < ApplicationRecord
   end
 
   def currents
-    currents = []
-    currents << "AC" if current_ac?
-    currents << "DC" if current_dc?
+    list = []
+    list << "AC" if current_ac?
+    list << "DC" if current_dc?
+    list
   end
 
   def country_name

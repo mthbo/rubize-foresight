@@ -12,6 +12,9 @@
       <%= render 'appliances/badge_energy', appliance: project_appliance %>
       <%= render 'appliances/badge_grade', appliance: appliance %>
       <%= render 'appliances/badge_price', appliance: appliance %>
+      <div class="small mt-2">
+        <%= link_to "See details in catalog", appliance_path(appliance) %>
+      </div>
     </div>
   </div>
 
