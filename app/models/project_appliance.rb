@@ -20,7 +20,7 @@ class ProjectAppliance < ApplicationRecord
   end
 
   def daytime_consumption
-    if appliance.apparent_power
+    if appliance.apparent_power and project.day_time and project.night_time
       day_h = project.day_time.hour
       day_m = project.day_time.min
       night_h = project.night_time.hour

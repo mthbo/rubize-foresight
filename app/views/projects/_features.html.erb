@@ -1,0 +1,31 @@
+<div class="mr-2">
+
+  <div class="font-weight-bold text-center mb-3">
+    Setup features
+  </div>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <th scope="row" class="py-2 text-nowrap">Current type</th>
+        <td class="py-2 text-nowrap"><%= project.currents %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="py-2 text-nowrap">Working frequency</th>
+        <td class="py-2 text-nowrap"><%= project.current_ac? ? project.frequency : "n/a" %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="py-2 text-nowrap">Voltage range</th>
+        <td class="py-2 text-nowrap"><%= project.voltage_range %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="py-2 text-nowrap">Apparent power</th>
+        <td class="py-2 text-nowrap"><%= project.apparent_power ? "#{project.apparent_power} VA" : "n/a" %></td>
+      </tr>
+      <tr>
+        <th scope="row" class="py-2 text-nowrap">Peak power</th>
+        <td class="py-2 text-nowrap"><%= project.peak_power ? "#{project.peak_power} VA" : "n/a" %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

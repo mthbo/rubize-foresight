@@ -12,15 +12,18 @@
       <%= render 'appliances/badge_energy', appliance: project_appliance %>
       <%= render 'appliances/badge_grade', appliance: appliance %>
       <%= render 'appliances/badge_price', appliance: appliance %>
-      <div class="small mt-2">
-        <%= link_to "See details in catalog", appliance_path(appliance) %>
-      </div>
     </div>
+    <%= render 'project_appliances/warning_current', project: project, appliance: appliance %>
   </div>
 
   <div class="flex-shrink-0">
-    <%= render 'project_appliances/button_edit', project_appliance: project_appliance %>
-    <%= render 'project_appliances/button_destroy', project_appliance: project_appliance %>
+    <div>
+      <%= render 'project_appliances/button_edit', project_appliance: project_appliance %>
+      <%= render 'project_appliances/button_destroy', project_appliance: project_appliance %>
+    </div>
+    <div class="small mt-2">
+      <%= link_to "See in catalog", appliance_path(appliance) %>
+    </div>
   </div>
 
 </div>

@@ -12,10 +12,11 @@
   </div>
 </div>
 
-<div class="d-flex py-4 mb-4 justify-content-center border-top border-bottom border-tertiary">
-  <%= render 'shared/load_chart', electrical_load: @project, title: "Daily load profile", day: @project.day_time_hour, night: @project.night_time_hour %>
+<div class="d-md-flex py-4 mb-4 justify-content-between border-top border-bottom border-tertiary">
+  <%= render 'projects/features', project: @project %>
+  <%= render 'shared/load_chart', electrical_load: @project, title: "Daily load profile", day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>
 </div>
 
-<div class="mt-5 mb-3">
+<div class="mb-3">
   <%= render 'projects/appliances', project_appliances: @project_appliances, uses: @uses, project: @project %>
 </div>

@@ -1,3 +1,13 @@
-<h3 class=""><%= project.name %></h3>
+<h3 class="mb-3"><%= project.name %></h3>
+<h5>
+  <span class="text-secondary mr-3">
+    <%= "#{project.city}, #{project.country_name}" %>
+  </span>
+  <span class="small text-nowrap">
+    <i class='fas fa-sun text-warning mr-2'></i>
+    <%= project.day_time ? project.day_time.strftime("%Hh%M") : "n/a" %>
+    <i class='fas fa-moon text-secondary mr-2 ml-3'></i>
+    <%= project.night_time ? project.night_time.strftime("%Hh%M") : "n/a" %>
+  </span>
+</h5>
 <p><%= sanitize auto_link(markdown_to_html(project.description)) %></p>
-<p><%= project.country_name %></p>

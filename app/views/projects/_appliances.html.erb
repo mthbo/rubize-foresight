@@ -1,9 +1,9 @@
-<h4 class="my-4 py-1">Setup of appliances</h4>
+<h4 class="mb-4 pt-1">Setup of appliances</h4>
 
 <div id="appliance_container">
   <% if uses.present? %>
     <% uses.each do |use| %>
-      <%= render 'projects/use_section', use: use, use_project_appliances: project_appliances.joins(:appliance).where(appliances: {use_id: use.id}) %>
+      <%= render 'projects/use_section', use: use, use_project_appliances: project_appliances.joins(:appliance).where(appliances: {use_id: use.id}), project: project %>
     <% end %>
 
   <% else %>

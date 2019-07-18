@@ -6,7 +6,7 @@ class ProjectAppliancesController < ApplicationController
 
   def index
     @query = params[:query]
-    appliance_subset = policy_scope(Appliance).where(current_type: @project.currents)
+    appliance_subset = policy_scope(Appliance).where(current_type: @project.current_array)
     @appliances = @query.present? ? appliance_subset.search(@query) : appliance_subset.ordered
     use_ids = @appliances.select(:use_id).reorder("").distinct
     @uses = policy_scope(Use).where(id: use_ids).ordered

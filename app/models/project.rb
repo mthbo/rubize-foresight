@@ -34,11 +34,33 @@ class Project < ApplicationRecord
     end
   end
 
-  def currents
+  def current_array
     list = []
     list << "AC" if current_ac?
     list << "DC" if current_dc?
     list
+  end
+
+  def currents
+    if current_ac? and current_dc?
+      "AC or DC"
+    elsif current_ac?
+      "AC"
+    elsif current_dc?
+      "DC"
+    else
+      "n/a"
+    end
+  end
+
+  def voltage_range
+    if voltage_min
+      voltage_max ? "#{voltage_min} V - #{voltage_max} V" : "#{voltage_min} V"
+    elsif voltage_max
+      "#{voltage_max} V"
+    else
+      "n/a"
+    end
   end
 
   def country_name
@@ -93,14 +115,18 @@ class Project < ApplicationRecord
   end
 
   def daytime_consumption
-    day_h = day_time.hour
-    day_m = day_time.min
-    night_h = night_time.hour
-    night_m = night_time.min
-    consumption = (day_h...night_h).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
-    consumption -= day_m.to_f / 60 * method("hourly_consumption_#{day_h}").call
-    consumption += night_m.to_f / 60 * method("hourly_consumption_#{night_h}").call
-    consumption.round
+    if day_time and night_time
+      day_h = day_time.hour
+      day_m = day_time.min
+      night_h = night_time.hour
+      night_m = night_time.min
+      consumption = (day_h...night_h).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
+      consumption -= day_m.to_f / 60 * method("hourly_consumption_#{day_h}").call
+      consumption += night_m.to_f / 60 * method("hourly_consumption_#{night_h}").call
+      consumption.round
+    else
+      0
+    end
   end
 
   def nighttime_consumption

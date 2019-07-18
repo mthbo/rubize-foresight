@@ -25,6 +25,6 @@
   <%= render 'shared/load_chart', electrical_load: @appliance, title: "Daily load profile (default)", day: Appliance::DAY_TIME, night: Appliance::NIGHT_TIME %>
 </div>
 
-<div>
+<div class="mb-3">
   <%= render 'appliances/sources', sources: @sources, appliance: @appliance %>
 </div>
