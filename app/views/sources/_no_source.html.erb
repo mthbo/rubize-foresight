@@ -1,0 +1,4 @@
+<div class="text-secondary small">
+  No sources recorded for this appliance.
+  <%= link_to "Add a new one", new_appliance_source_path(appliance) if policy(Source).create? %>.
+</div>

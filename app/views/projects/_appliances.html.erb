@@ -1,15 +1,12 @@
 <h4 class="mb-4 pt-1">Setup of appliances</h4>
 
-<div id="appliance_container">
+<div id="project_appliance_container">
   <% if uses.present? %>
     <% uses.each do |use| %>
       <%= render 'projects/use_section', use: use, use_project_appliances: project_appliances.joins(:appliance).where(appliances: {use_id: use.id}), project: project %>
     <% end %>
-
   <% else %>
-    <div class="text-secondary small my-3"><em>
-      No appliances recorded for this project.
-    </em></div>
+    <%= render 'project_appliances/no_project_appliance' %>
   <% end %>
 </div>
 
