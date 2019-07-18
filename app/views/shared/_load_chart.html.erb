@@ -6,7 +6,7 @@
 
   <div class="d-flex">
     <% (0..23).each do |hour| %>
-      <% rate = electrical_load.method("hourly_rate_#{hour}").call.to_i * 10 %>
+      <% rate = electrical_load.method("hourly_rate_#{hour}").call.to_f * 10 %>
       <div class="w-100 d-flex flex-column">
         <div class="d-none d-sm-block text-center small mb-1">
           <%= render 'shared/day_or_night_icon', hour: hour, day: day, night: night %>

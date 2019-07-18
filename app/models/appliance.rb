@@ -67,22 +67,28 @@ class Appliance < ApplicationRecord
     (power / power_factor).round(1) if power and power_factor
   end
 
-  def max_power
+  def peak_power
     (apparent_power * starting_coefficient).round(1) if apparent_power and starting_coefficient
   end
 
   (0..23).each do |hour|
     define_method("hourly_consumption_#{hour}") do
-      (method("hourly_rate_#{hour}").call.to_f / 10 * apparent_power).round if apparent_power
+      if apparent_power
+        (method("hourly_rate_#{hour}").call.to_f / 10 * apparent_power).round
+      end
+    end
+  end
+
+  def daily_consumption
+    if apparent_power
+      (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
     end
   end
 
   def daytime_consumption
-    (DAY_TIME...NIGHT_TIME).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call } if apparent_power
-  end
-
-  def daily_consumption
-    (0..23).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call } if apparent_power
+    if apparent_power
+      (DAY_TIME...NIGHT_TIME).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
+    end
   end
 
   def nighttime_consumption

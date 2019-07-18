@@ -14,18 +14,20 @@ class ProjectAppliance < ApplicationRecord
   end
 
   def daily_consumption
-    (0..23).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call } if appliance.apparent_power
+    if appliance.apparent_power
+      (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
+    end
   end
 
   def daytime_consumption
     if appliance.apparent_power
-      day_hour = project.day_time.hour
-      day_min = project.day_time.min
-      night_hour = project.night_time.hour
-      night_min = project.night_time.min
-      consumption = (day_hour...night_hour).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call }
-      consumption -= day_min.to_f / 60 * method("hourly_consumption_#{day_hour}").call
-      consumption += night_min.to_f / 60 * method("hourly_consumption_#{night_hour}").call
+      day_h = project.day_time.hour
+      day_m = project.day_time.min
+      night_h = project.night_time.hour
+      night_m = project.night_time.min
+      consumption = (day_h...night_h).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
+      consumption -= day_m.to_f / 60 * method("hourly_consumption_#{day_h}").call
+      consumption += night_m.to_f / 60 * method("hourly_consumption_#{night_h}").call
       consumption.round
     end
   end

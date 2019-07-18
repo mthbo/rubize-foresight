@@ -54,4 +54,57 @@ class Project < ApplicationRecord
   def night_time_hour
     night_time.min.zero? ? night_time.hour : night_time.hour + 1
   end
+
+  def apparent_power
+    sum = 0
+    project_appliances.each do |project_appliance|
+      sum += project_appliance.appliance.apparent_power if project_appliance.appliance.apparent_power
+    end
+    sum.round(1)
+  end
+
+  def peak_power
+    sum = 0
+    project_appliances.each do |project_appliance|
+      sum += project_appliance.appliance.peak_power if project_appliance.appliance.peak_power
+    end
+    sum.round(1)
+  end
+
+  (0..23).each do |hour|
+    define_method("hourly_consumption_#{hour}") do
+      sum = 0
+      project_appliances.each do |project_appliance|
+        sum += project_appliance.method("hourly_consumption_#{hour}").call if project_appliance.appliance.apparent_power
+      end
+      sum
+    end
+  end
+
+  (0..23).each do |hour|
+    define_method("hourly_rate_#{hour}") do
+      apparent_power ? (method("hourly_consumption_#{hour}").call.to_f / apparent_power * 10).round(2) : 0
+    end
+  end
+
+  def daily_consumption
+    (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
+  end
+
+  def daytime_consumption
+    if appliance.apparent_power
+      day_hour = project.day_time.hour
+      day_min = project.day_time.min
+      night_hour = project.night_time.hour
+      night_min = project.night_time.min
+      consumption = (day_hour...night_hour).reduce(0) { |result, hour| result + method("hourly_consumption_#{hour}").call }
+      consumption -= day_min.to_f / 60 * method("hourly_consumption_#{day_hour}").call
+      consumption += night_min.to_f / 60 * method("hourly_consumption_#{night_hour}").call
+      consumption.round
+    end
+  end
+
+  def nighttime_consumption
+    daily_consumption - daytime_consumption if appliance.apparent_power
+  end
 end
