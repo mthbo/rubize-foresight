@@ -20,11 +20,11 @@
       </tr>
       <tr>
         <th scope="row" class="py-2 text-nowrap">Apparent power</th>
-        <td class="py-2 text-nowrap"><%= project.apparent_power ? "#{project.apparent_power} VA" : "n/a" %></td>
+        <td class="py-2 text-nowrap"><%= project.apparent_power ? "#{number_with_delimiter(project.apparent_power.round, delimiter: " ")} VA" : "n/a" %></td>
       </tr>
       <tr>
         <th scope="row" class="py-2 text-nowrap">Peak power</th>
-        <td class="py-2 text-nowrap"><%= project.peak_power ? "#{project.peak_power} VA" : "n/a" %></td>
+        <td class="py-2 text-nowrap"><%= project.peak_power ? "#{number_with_delimiter(project.peak_power.round, delimiter: " ")} VA" : "n/a" %></td>
       </tr>
     </tbody>
   </table>

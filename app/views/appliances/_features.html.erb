@@ -26,13 +26,13 @@
     </tr>
     <tr>
       <th scope="row" class="py-2">Active power</th>
-      <td class="py-2"><%= appliance.power ? "#{appliance.power} W" : 'n/a' %></td>
+      <td class="py-2"><%= appliance.power ? "#{number_with_delimiter(appliance.power.round, delimiter: " ")} W" : 'n/a' %></td>
     </tr>
     <tr>
       <th scope="row" class="py-2">Apparent power</th>
       <td class="py-2">
         <span class="mr-3 text-nowrap">
-          <%= appliance.apparent_power ? "#{appliance.apparent_power} VA" : "n/a" %>
+          <%= appliance.apparent_power ? "#{number_with_delimiter(appliance.apparent_power.round, delimiter: " ")} VA" : "n/a" %>
         </span>
         <small class="text-nowrap">
           Power factor (cos φ) : <%= appliance.power_factor ? "#{appliance.power_factor}" : "n/a" %>
@@ -43,7 +43,7 @@
       <th scope="row" class="py-2">Peak power</th>
       <td class="py-2">
         <span class="mr-3 text-nowrap">
-          <%= appliance.peak_power ? "#{appliance.peak_power} VA" : "n/a" %>
+          <%= appliance.peak_power ? "#{number_with_delimiter(appliance.peak_power.round, delimiter: " ")} VA" : "n/a" %>
         </span>
         <small class="text-nowrap">
           Starting coefficient : <%= appliance.starting_coefficient ? "#{appliance.starting_coefficient}" : "n/a" %>

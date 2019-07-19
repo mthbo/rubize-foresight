@@ -64,11 +64,15 @@ class Appliance < ApplicationRecord
   monetize :max_price_cents, allow_nil: true, with_currency: :eur
 
   def apparent_power
-    (power / power_factor).round(1) if power and power_factor
+    (power / power_factor) if power and power_factor
   end
 
   def peak_power
-    (apparent_power * starting_coefficient).round(1) if apparent_power and starting_coefficient
+    if apparent_power and starting_coefficient
+      (apparent_power * starting_coefficient)
+    elsif apparent_power
+      apparent_power
+    end
   end
 
   (0..23).each do |hour|

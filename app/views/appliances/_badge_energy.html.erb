@@ -1,5 +1,5 @@
 <% if appliance.daily_consumption.present? %>
-  <div class="badge badge-secondary px-2 mr-2">
-    <%= "#{appliance.daily_consumption} Wh/d" %>
+  <div class="badge badge-secondary px-2 mr-2 text-nowrap">
+    <%= "#{number_with_delimiter(appliance.daily_consumption, delimiter: " ")} Wh/d" %>
   </div>
 <% end %>

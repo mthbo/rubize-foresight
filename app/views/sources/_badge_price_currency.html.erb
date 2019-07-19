@@ -1,6 +1,6 @@
 <% unless source.currency == 'eur' %>
   <div class="badge badge-secondary px-2 mr-2">
-    <%= "#{money_without_cents source.price_discount} -" if source.discount_rate > 0 %>
-    <%= "#{money_without_cents source.price} #{source.price.currency}" %>
+    <%= "#{source.price_discount.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if source.discount_rate > 0 %>
+    <%= "#{source.price.format(no_cents: true, symbol: false, thousands_separator: " ")} #{source.price.currency}" %>
   </div>
 <% end %>
