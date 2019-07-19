@@ -5,7 +5,7 @@ const updateRefreshButton = () => {
     let useId = useInput.options[useInput.selectedIndex].value;
     useInput.addEventListener("change", (event) => {
       useId = useInput.options[useInput.selectedIndex].value;
-      refreshButton.setAttribute('href', '/refresh_load?use_id=' + useId)
+      refreshButton.setAttribute('href', '/appliance_refresh_load?use_id=' + useId)
     });
   }
 };

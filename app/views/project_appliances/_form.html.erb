@@ -19,7 +19,17 @@
 
   <div>
     <h6>Daily load profile</h6>
-    <p class="text-secondary small"><em>Set the hourly use rates of the appliance for this project, from 0 (off) to 1 (full power).</em></p>
+    <div class="d-sm-flex justify-content-between mb-2">
+      <div class="mr-sm-4">
+        <p class="text-secondary small"><em>Set the hourly use rates of the appliance for this project, from 0 (off) to 1 (full power).</em></p>
+      </div>
+      <div>
+        <%= link_to project_appliance_refresh_load_path(appliance_id: appliance.id), remote:true, class: "btn btn-secondary btn-sm w-100 text-nowrap" do %>
+            <i class="fas fa-redo-alt mr-1"></i>
+            Reset default load
+          <% end %>
+      </div>
+    </div>
     <div id="load_chart">
       <%= render 'shared/load_chart_form', f: f, collection: Appliance::RATES, day: project_appliance.project.day_time_hour, night: project_appliance.project.night_time_hour, electrical_load: project_appliance %>
     </div>

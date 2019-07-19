@@ -16,4 +16,8 @@ class AppliancePolicy < ApplicationPolicy
     true
   end
 
+  def refresh_load?
+    true
+  end
+
 end

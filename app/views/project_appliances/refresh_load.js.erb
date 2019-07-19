@@ -1,0 +1,6 @@
+<% if @appliance.present? %>
+  <% (0..23).each do |hour| %>
+    $('#project_appliance_hourly_rate_' + <%= hour %> ).val('<%= @appliance.method("hourly_rate_#{hour}").call %>');
+    $('#project_appliance_hourly_rate_' + <%= hour %> ).barrating('set', '<%= @appliance.method("hourly_rate_#{hour}").call %>');
+  <% end %>
+<% end %>
