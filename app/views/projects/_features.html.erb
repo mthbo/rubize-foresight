@@ -10,7 +10,7 @@
     </tr>
     <tr>
       <th scope="row" class="py-2 text-nowrap">Working frequency</th>
-      <td class="py-2 text-nowrap"><%= project.current_ac? ? project.frequency : "n/a" %></td>
+      <td class="py-2 text-nowrap"><%= (project.current_ac? and project.frequency.present?) ? project.frequency : "n/a" %></td>
     </tr>
     <tr>
       <th scope="row" class="py-2 text-nowrap">Voltage range</th>
