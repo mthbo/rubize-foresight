@@ -48,7 +48,8 @@ class ProjectAppliancesController < ApplicationController
   def destroy
     @project_appliance.destroy
     @project = @project_appliance.project
-    flash[:notice] = "#{@project_appliance.appliance.name} has been removed from the project."
+    @use = @project_appliance.appliance.use
+    # flash[:notice] = "#{@project_appliance.appliance.name} has been removed from the project."
   end
 
   # def refresh_load

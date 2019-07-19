@@ -34,7 +34,7 @@ class SourcesController < ApplicationController
   def destroy
     @source.destroy
     @appliance = @source.appliance
-    flash[:notice] = "The source has been deleted"
+    # flash[:notice] = "The source has been deleted"
   end
 
   private

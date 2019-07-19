@@ -3,8 +3,23 @@ function showNoProjectApplianceMessage(messageHTML) {
   projectApplianceContainer.innerHTML = (messageHTML);
 }
 
-document.querySelector("[data-project-appliance-id='<%= @project_appliance.id %>']").remove();
+function updateLoadChart(loadChartHTML) {
+  const loadChartContainer = document.getElementById('load_chart_container');
+  loadChartContainer.innerHTML = (loadChartHTML);
+  $('[data-toggle="tooltip"]').tooltip();
+}
 
+function updateProjectFeatures(featuresHTML) {
+  const projectFeaturesContainer = document.getElementById('project_features_container');
+  projectFeaturesContainer.innerHTML = (featuresHTML);
+}
+
+document.querySelector("[data-project-appliance-id='<%= @project_appliance.id %>']").remove();
+<% if @use.project_appliances.blank? %>
+  document.querySelector("[data-project-use-id='<%= @use.id %>']").remove();
+<% end %>
 <% if @project.project_appliances.blank? %>
   showNoProjectApplianceMessage("<%= j render 'project_appliances/no_project_appliance' %>");
 <% end %>
+updateLoadChart("<%= j render 'shared/load_chart', electrical_load: @project, title: 'Daily load profile', day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>");
+updateProjectFeatures("<%= j render 'projects/features', project: @project %>");

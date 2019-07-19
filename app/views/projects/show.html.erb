@@ -13,8 +13,12 @@
 </div>
 
 <div class="d-md-flex py-4 mb-4 justify-content-between border-top border-bottom border-tertiary">
-  <%= render 'projects/features', project: @project %>
-  <%= render 'shared/load_chart', electrical_load: @project, title: "Daily load profile", day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>
+  <div class="mr-2" id="project_features_container">
+    <%= render 'projects/features', project: @project %>
+  </div>
+  <div class="w-100" id="load_chart_container">
+    <%= render 'shared/load_chart', electrical_load: @project, title: "Daily load profile", day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>
+  </div>
 </div>
 
 <div class="mb-3">
