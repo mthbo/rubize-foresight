@@ -1,6 +1,10 @@
-<div class="list-group-item d-flex align-items-center" data-project-appliance-id="<%= project_appliance.id %>">
+<div class="list-group-item w-100 d-flex align-items-center pl-0 overflow-hidden" data-project-appliance-id="<%= project_appliance.id %>">
 
-  <div class="mr-4 d-none d-sm-block ">
+  <div class="appliance-quantity position-absolute h-100 font-weight-bold bg-secondary text-white d-flex align-items-center justify-content-center">
+    <%= project_appliance.quantity %>
+  </div>
+
+  <div class="ml-5 mr-4 d-none d-sm-block">
     <%= render 'appliances/image', appliance: appliance, size: 50 %>
   </div>
 
