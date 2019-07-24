@@ -5,13 +5,13 @@
   <div>
     <h6>Number of appliances</h6>
     <div class="row align-items-center mt-3 mb-4">
-      <div class="col-md-9">
+      <div class="col-md-9 pr-md-0">
         <%= render "project_appliances/card_in_form", project_appliance: project_appliance, appliance: appliance  %>
       </div>
       <div class="col-md-1 text-center font-weight-bold my-1">
         x
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 pl-md-0">
         <%= f.input :quantity, label: false, wrapper_html: { class: 'mb-0' } %>
       </div>
     </div>

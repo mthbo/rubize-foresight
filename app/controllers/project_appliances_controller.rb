@@ -2,6 +2,7 @@ class ProjectAppliancesController < ApplicationController
   before_action :find_project, only: [:index, :new, :create]
   before_action :find_appliance, only: [:new, :refresh_load]
   before_action :find_project_appliance, only: [:edit, :update, :destroy]
+  skip_after_action :verify_authorized, only: [:refresh_load]
   layout 'form', only: [:new, :create, :edit, :update]
 
   def index
@@ -53,7 +54,6 @@ class ProjectAppliancesController < ApplicationController
   end
 
   def refresh_load
-    authorize @appliance
   end
 
   private

@@ -12,8 +12,4 @@ class UsePolicy < ApplicationPolicy
     record.appliances.blank?
   end
 
-  def refresh_load?
-    true
-  end
-
 end

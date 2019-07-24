@@ -81,7 +81,9 @@ class Project < ApplicationRecord
   def apparent_power
     sum = 0
     project_appliances.each do |project_appliance|
-      sum += project_appliance.appliance.apparent_power if project_appliance.appliance.apparent_power
+      if project_appliance.appliance.apparent_power
+        sum += project_appliance.appliance.apparent_power * project_appliance.quantity
+      end
     end
     sum.round(1)
   end
@@ -89,7 +91,9 @@ class Project < ApplicationRecord
   def peak_power
     sum = 0
     project_appliances.each do |project_appliance|
-      sum += project_appliance.appliance.peak_power if project_appliance.appliance.peak_power
+      if project_appliance.appliance.peak_power
+        sum += project_appliance.appliance.peak_power * project_appliance.quantity
+      end
     end
     sum.round(1)
   end
@@ -98,7 +102,9 @@ class Project < ApplicationRecord
     define_method("hourly_consumption_#{hour}") do
       sum = 0
       project_appliances.each do |project_appliance|
-        sum += project_appliance.method("hourly_consumption_#{hour}").call if project_appliance.appliance.apparent_power
+        if project_appliance.appliance.apparent_power
+          sum += project_appliance.method("hourly_consumption_#{hour}").call * project_appliance.quantity
+        end
       end
       sum
     end

@@ -1,14 +1,14 @@
 <div class="list-group-item w-100 d-flex align-items-center pl-0 overflow-hidden" data-project-appliance-id="<%= project_appliance.id %>">
 
-  <div class="appliance-quantity position-absolute h-100 font-weight-bold bg-secondary text-white d-flex align-items-center justify-content-center">
+  <div class="appliance-quantity position-absolute h-100 bg-secondary text-white d-flex align-items-center justify-content-center">
     <%= project_appliance.quantity %>
   </div>
 
-  <div class="ml-5 mr-4 d-none d-sm-block">
+  <div class="d-none d-sm-block mr-4 ml-5">
     <%= render 'appliances/image', appliance: appliance, size: 50 %>
   </div>
 
-  <div class="flex-grow-1 mr-2">
+  <div class="flex-grow-1 mr-2 ml-5 ml-sm-0">
     <h6><%= appliance.name %></h6>
     <div>
       <%= render 'appliances/badge_current', appliance: appliance %>

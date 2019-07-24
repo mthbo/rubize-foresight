@@ -1,5 +1,6 @@
 class AppliancesController < ApplicationController
   before_action :find_appliance, only: [:show, :edit, :update, :destroy]
+  skip_after_action :verify_authorized, only: [:refresh_load]
   layout 'form', only: [:new, :create, :edit, :update]
 
   def index
@@ -55,7 +56,6 @@ class AppliancesController < ApplicationController
 
   def refresh_load
     @use = Use.find(params[:use_id]) if params[:use_id]
-    authorize @use
   end
 
   private
