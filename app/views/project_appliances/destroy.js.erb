@@ -15,7 +15,7 @@ function updateProjectFeatures(featuresHTML) {
 }
 
 document.querySelector("[data-project-appliance-id='<%= @project_appliance.id %>']").remove();
-<% if @use.project_appliances.blank? %>
+<% unless @project.uses.include? @use %>
   document.querySelector("[data-project-use-id='<%= @use.id %>']").remove();
 <% end %>
 <% if @project.project_appliances.blank? %>

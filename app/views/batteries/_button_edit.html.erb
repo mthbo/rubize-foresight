@@ -1,0 +1,5 @@
+<% if policy(battery).update? %>
+  <%= link_to edit_battery_path(battery), class: "ml-3" do %>
+    <i class="fas fa-edit"></i>
+  <% end %>
+<% end %>

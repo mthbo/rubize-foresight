@@ -1,0 +1,16 @@
+<% if solar_panels.present? %>
+  <div class="list-group">
+    <% solar_panels.each do |solar_panel| %>
+      <%= render 'solar_panels/card', solar_panel: solar_panel %>
+    <% end %>
+  </div>
+
+<% else %>
+  <div class="text-secondary small">
+    No solar panel recorded.
+  </div>
+<% end %>
+
+<div class="d-flex mt-3 pt-3">
+  <%= render 'solar_panels/button_new' %>
+</div>

@@ -1,0 +1,29 @@
+<%= render 'shared/back_link', path: root_path, text: "Back to home" %>
+
+<h2 class="mb-4">Power components</h2>
+
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-power-systems-tab" data-toggle="tab" href="#nav-power-systems" role="tab" aria-controls="nav-power-systems" aria-selected="false">
+      Power systems
+    </a>
+    <a class="nav-item nav-link" id="nav-solar-panels-tab" data-toggle="tab" href="#nav-solar-panels" role="tab" aria-controls="nav-solar-panels" aria-selected="true">
+      Solar panels
+    </a>
+    <a class="nav-item nav-link" id="nav-batteries-tab" data-toggle="tab" href="#nav-batteries" role="tab" aria-controls="nav-batteries" aria-selected="false">
+      Batteries
+    </a>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="my-5 tab-pane fade" id="nav-power-systems" role="tabpanel" aria-labelledby="nav-power-systems-tab">
+    <%= render 'power_systems/index', power_systems: @power_systems %>
+  </div>
+  <div class="my-5 tab-pane fade show active" id="nav-solar-panels" role="tabpanel" aria-labelledby="nav-solar-panels-tab">
+    <%= render 'solar_panels/index', solar_panels: @solar_panels %>
+  </div>
+  <div class="my-5 tab-pane fade" id="nav-batteries" role="tabpanel" aria-labelledby="nav-batteries-tab">
+    <%= render 'batteries/index', batteries: @batteries %>
+  </div>
+</div>

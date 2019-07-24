@@ -1,0 +1,31 @@
+<%= simple_form_for(battery) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :technology, collection: Battery::TECHNOLOGIES %>
+
+  <div class="row">
+    <div class="col-12 col-sm-4">
+      <%= f.input :voltage, label: 'Voltage (V)', placeholder: "12" %>
+    </div>
+    <div class="col-12 col-sm-4">
+      <%= f.input :capacity, label: 'Capacity (Ah)', placeholder: "100" %>
+    </div>
+    <div class="col-12 col-sm-4">
+      <%= f.input :dod, label: 'DOD (%)', placeholder: "80" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-6">
+      <%= f.input :price, as: :numeric, placeholder: "42,50", label: "Unit price (excl. tax)" %>
+    </div>
+    <div class="col-12 col-sm-6">
+      <%= f.input :currency, as: :select, collection: Money::Currency.all %>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3">
+    <%= link_to "Cancel", :back, class: "btn btn-outline-secondary mr-2" %>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

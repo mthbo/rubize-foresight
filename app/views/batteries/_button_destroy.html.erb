@@ -1,0 +1,5 @@
+<% if policy(battery).destroy? %>
+  <%= link_to battery_path(battery), method: :delete, remote: true, data: {confirm: 'Are you certain you want to delete this battery?'}, class: "text-danger ml-3" do %>
+    <i class="fas fa-trash-alt"></i>
+  <% end %>
+<% end %>

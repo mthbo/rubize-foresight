@@ -1,0 +1,21 @@
+<div class="list-group-item d-flex justify-content-between align-items-center" data-battery-id="<%= battery.id %>">
+
+  <div>
+    <h6>
+      <span class="mr-2"><%= battery.technology %></span>
+      <span class="text-secondary mr-2">
+        <%= "#{battery.voltage} V | #{battery.capacity} Ah" %>
+      </span>
+    </h6>
+    <div class="mb-2">
+      <%= render 'batteries/badge_price_currency', battery: battery %>
+      <%= render 'batteries/badge_price_eur', battery: battery %>
+    </div>
+  </div>
+
+  <div class="flex-shrink-0">
+    <%= render 'batteries/button_edit', battery: battery %>
+    <%= render 'batteries/button_destroy', battery: battery %>
+  </div>
+
+</div>

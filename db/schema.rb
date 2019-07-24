@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_15_134557) do
+ActiveRecord::Schema.define(version: 2019_07_24_130411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,52 @@ ActiveRecord::Schema.define(version: 2019_07_15_134557) do
     t.boolean "frequency_fifty_hz"
     t.boolean "frequency_sixty_hz"
     t.index ["use_id"], name: "index_appliances_on_use_id"
+  end
+
+  create_table "batteries", force: :cascade do |t|
+    t.string "technology"
+    t.integer "dod"
+    t.integer "voltage"
+    t.integer "capacity"
+    t.integer "price_cents"
+    t.string "currency", default: "eur"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "power_supplies", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "solar_panel_id"
+    t.bigint "battery_id"
+    t.bigint "power_system_id"
+    t.integer "system_voltage"
+    t.boolean "communication"
+    t.boolean "distribution"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["battery_id"], name: "index_power_supplies_on_battery_id"
+    t.index ["power_system_id"], name: "index_power_supplies_on_power_system_id"
+    t.index ["project_id"], name: "index_power_supplies_on_project_id"
+    t.index ["solar_panel_id"], name: "index_power_supplies_on_solar_panel_id"
+  end
+
+  create_table "power_systems", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "charge_current"
+    t.boolean "voltage_12"
+    t.boolean "voltage_24"
+    t.boolean "voltage_36"
+    t.boolean "voltage_48"
+    t.boolean "inverter"
+    t.integer "power_out"
+    t.integer "voltage_out_min"
+    t.integer "voltage_out_max"
+    t.boolean "communication"
+    t.integer "price_cents"
+    t.string "currency", default: "eur"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "project_appliances", force: :cascade do |t|
@@ -106,6 +152,14 @@ ActiveRecord::Schema.define(version: 2019_07_15_134557) do
     t.string "city"
     t.boolean "current_ac"
     t.boolean "current_dc"
+  end
+
+  create_table "solar_panels", force: :cascade do |t|
+    t.integer "power"
+    t.integer "price_cents"
+    t.string "currency", default: "eur"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sources", force: :cascade do |t|
@@ -170,6 +224,10 @@ ActiveRecord::Schema.define(version: 2019_07_15_134557) do
   end
 
   add_foreign_key "appliances", "uses"
+  add_foreign_key "power_supplies", "batteries"
+  add_foreign_key "power_supplies", "power_systems"
+  add_foreign_key "power_supplies", "projects"
+  add_foreign_key "power_supplies", "solar_panels"
   add_foreign_key "project_appliances", "appliances"
   add_foreign_key "project_appliances", "projects"
   add_foreign_key "sources", "appliances"

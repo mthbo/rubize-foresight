@@ -1,0 +1,2 @@
+class PowerSystem < ApplicationRecord
+end
