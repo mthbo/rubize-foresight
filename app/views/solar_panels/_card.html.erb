@@ -1,7 +1,21 @@
-<div class="list-group-item d-flex align-items-center">
+<div class="list-group-item d-flex justify-content-between align-items-center" data-solar-panel-id="<%= solar_panel.id %>">
 
-  <div class="flex-grow-1 mr-2">
-    <h6><%= solar_panel.power %></h6>
+  <div>
+    <h6>
+      <span class="mr-2"><%= solar_panel.technology %></span>
+      <span class="text-secondary mr-2">
+        <%= "#{solar_panel.power} Wp | #{solar_panel.voltage} V" %>
+      </span>
+    </h6>
+    <div class="mb-2">
+      <%= render 'solar_panels/badge_price_currency', solar_panel: solar_panel %>
+      <%= render 'solar_panels/badge_price_eur', solar_panel: solar_panel %>
+    </div>
+  </div>
+
+  <div class="flex-shrink-0">
+    <%= render 'solar_panels/button_edit', solar_panel: solar_panel %>
+    <%= render 'solar_panels/button_destroy', solar_panel: solar_panel %>
   </div>
 
 </div>

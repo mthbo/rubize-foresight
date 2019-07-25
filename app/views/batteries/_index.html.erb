@@ -1,15 +1,15 @@
-<% if batteries.present? %>
-  <div class="list-group">
-    <% batteries.each do |battery| %>
-      <%= render 'batteries/card', battery: battery %>
-    <% end %>
-  </div>
+<div id="battery_container">
+  <% if batteries.present? %>
+    <div class="list-group">
+      <% batteries.each do |battery| %>
+        <%= render 'batteries/card', battery: battery %>
+      <% end %>
+    </div>
 
-<% else %>
-  <div class="text-secondary small">
-    No battery recorded.
-  </div>
-<% end %>
+  <% else %>
+    <%= render 'batteries/no_battery' %>
+  <% end %>
+</div>
 
 <div class="d-flex mt-3 pt-3">
   <%= render 'batteries/button_new' %>

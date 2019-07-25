@@ -32,6 +32,7 @@ class PowerSystemsController < ApplicationController
 
   def destroy
     @power_system.destroy
+    @power_systems = policy_scope(PowerSystem).all
     # flash[:notice] = "The power system has been deleted"
   end
 

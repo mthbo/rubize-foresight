@@ -17,10 +17,10 @@
 </nav>
 
 <div class="tab-content" id="nav-tabContent">
-  <div class="my-5 tab-pane fade" id="nav-power-systems" role="tabpanel" aria-labelledby="nav-power-systems-tab">
+  <div class="my-5 tab-pane fade show active" id="nav-power-systems" role="tabpanel" aria-labelledby="nav-power-systems-tab">
     <%= render 'power_systems/index', power_systems: @power_systems %>
   </div>
-  <div class="my-5 tab-pane fade show active" id="nav-solar-panels" role="tabpanel" aria-labelledby="nav-solar-panels-tab">
+  <div class="my-5 tab-pane fade" id="nav-solar-panels" role="tabpanel" aria-labelledby="nav-solar-panels-tab">
     <%= render 'solar_panels/index', solar_panels: @solar_panels %>
   </div>
   <div class="my-5 tab-pane fade" id="nav-batteries" role="tabpanel" aria-labelledby="nav-batteries-tab">

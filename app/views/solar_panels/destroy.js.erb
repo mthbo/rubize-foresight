@@ -1,0 +1,10 @@
+function showNoSolarPanelMessage(messageHTML) {
+  const solarPanelContainer = document.getElementById('solar_panel_container');
+  solarPanelContainer.innerHTML = (messageHTML);
+}
+
+document.querySelector("[data-solar-panel-id='<%= @solar_panel.id %>']").remove();
+
+<% if @solar_panels.blank? %>
+  showNoSolarPanelMessage("<%= j render 'solar_panels/no_solar_panel' %>");
+<% end %>

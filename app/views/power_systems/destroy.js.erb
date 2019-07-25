@@ -1,0 +1,10 @@
+function showNoPowerSystemMessage(messageHTML) {
+  const powerSystemContainer = document.getElementById('power_system_container');
+  powerSystemContainer.innerHTML = (messageHTML);
+}
+
+document.querySelector("[data-power-system-id='<%= @power_system.id %>']").remove();
+
+<% if @power_systems.blank? %>
+  showNoPowerSystemMessage("<%= j render 'power_systems/no_power_system' %>");
+<% end %>

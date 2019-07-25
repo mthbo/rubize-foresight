@@ -1,15 +1,15 @@
-<% if power_systems.present? %>
-  <div class="list-group">
-    <% power_systems.each do |power_system| %>
-      <%= render 'power_systems/card', power_system: power_system %>
-    <% end %>
-  </div>
+<div id="power_system_container">
+  <% if power_systems.present? %>
+    <div class="list-group">
+      <% power_systems.each do |power_system| %>
+        <%= render 'power_systems/card', power_system: power_system %>
+      <% end %>
+    </div>
 
-<% else %>
-  <div class="text-secondary small">
-    No power system recorded.
-  </div>
-<% end %>
+  <% else %>
+    <%= render 'power_systems/no_power_system' %>
+  <% end %>
+</div>
 
 <div class="d-flex mt-3 pt-3">
   <%= render 'power_systems/button_new' %>

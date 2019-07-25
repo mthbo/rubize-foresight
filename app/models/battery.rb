@@ -1,11 +1,17 @@
 class Battery < ApplicationRecord
 
-  TECHNOLOGIES = ["Lithium", "Lead acid"]
+  TECHNOLOGIES = [
+    "Lead acid - Flooded / 0PzS",
+    "Lead acid - Sealed GEL / 0PzV",
+    "Lead acid - Sealed AGM",
+    "Lithium"
+  ]
 
   validates :technology, inclusion: {in: TECHNOLOGIES, allow_blank: true}, presence: true
-  validates :dod, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}, presence: true
-  validates :voltage, numericality: {greater_than_or_equal_to: 0}, presence: true
-  validates :capacity, numericality: {greater_than_or_equal_to: 0}, presence: true
+  validates :dod, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: true}, presence: true
+  validates :efficiency, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: true}, presence: true
+  validates :voltage, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :capacity, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
 
   monetize :price_cents, with_model_currency: :currency
   monetize :price_eur_cents, with_currency: :eur, allow_nil: true
@@ -15,4 +21,5 @@ class Battery < ApplicationRecord
       price.exchange_to(:EUR).fractional
     end
   end
+
 end

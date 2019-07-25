@@ -32,6 +32,7 @@ class BatteriesController < ApplicationController
 
   def destroy
     @battery.destroy
+    @batteries = policy_scope(Battery).all
     # flash[:notice] = "The battery has been deleted"
   end
 
@@ -48,6 +49,7 @@ class BatteriesController < ApplicationController
       :dod,
       :voltage,
       :capacity,
+      :efficiency,
       :price,
       :currency
     )

@@ -1,0 +1,5 @@
+<% if power_system.price_eur.present? %>
+  <div class="badge badge-dark px-2">
+    <%= "#{power_system.price_eur.format(no_cents: true, symbol: false, thousands_separator: " ")} #{power_system.price_eur.currency}" %>
+  </div>
+<% end %>

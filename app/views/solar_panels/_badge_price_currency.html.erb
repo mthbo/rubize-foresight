@@ -1,0 +1,5 @@
+<% unless solar_panel.currency == 'eur' %>
+  <div class="badge badge-secondary px-2 mr-2">
+    <%= "#{solar_panel.price.format(no_cents: true, symbol: false, thousands_separator: " ")} #{solar_panel.price.currency}" %>
+  </div>
+<% end %>

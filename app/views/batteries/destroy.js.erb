@@ -1,0 +1,10 @@
+function showNoBatteryMessage(messageHTML) {
+  const batteryContainer = document.getElementById('battery_container');
+  batteryContainer.innerHTML = (messageHTML);
+}
+
+document.querySelector("[data-battery-id='<%= @battery.id %>']").remove();
+
+<% if @batteries.blank? %>
+  showNoBatteryMessage("<%= j render 'batteries/no_battery' %>");
+<% end %>

@@ -1,0 +1,5 @@
+<% if policy(solar_panel).update? %>
+  <%= link_to edit_solar_panel_path(solar_panel), class: "ml-3" do %>
+    <i class="fas fa-edit"></i>
+  <% end %>
+<% end %>

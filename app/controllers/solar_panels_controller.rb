@@ -32,6 +32,7 @@ class SolarPanelsController < ApplicationController
 
   def destroy
     @solar_panel.destroy
+    @solar_panels = policy_scope(SolarPanel).all
     # flash[:notice] = "The solar panel has been deleted"
   end
 
@@ -44,7 +45,9 @@ class SolarPanelsController < ApplicationController
 
   def solar_panel_params
     params.require(:solar_panel).permit(
+      :technology,
       :power,
+      :voltage,
       :price,
       :currency
     )
