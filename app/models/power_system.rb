@@ -1,4 +1,5 @@
 class PowerSystem < ApplicationRecord
+  has_many :power_supplies
 
   validates :name, presence: true, uniqueness: true
   validates :power_out, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true

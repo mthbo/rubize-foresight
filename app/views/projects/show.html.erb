@@ -1,6 +1,6 @@
 <%= render 'shared/back_link', path: projects_path, text: "Back to project list" %>
 
-<div class="d-lg-flex justify-content-between mb-4">
+<div class="d-lg-flex justify-content-between border-bottom border-tertiary pb-4">
   <div class="mr-lg-5">
     <%= render 'projects/info', project: @project %>
   </div>
@@ -12,7 +12,7 @@
   </div>
 </div>
 
-<div class="d-md-flex py-4 mb-4 justify-content-between border-top border-bottom border-tertiary">
+<div class="d-md-flex justify-content-between border-bottom border-tertiary py-5">
   <div class="mr-md-2 mr-lg-4" id="project_features_container">
     <%= render 'projects/features', project: @project %>
   </div>
@@ -21,6 +21,18 @@
   </div>
 </div>
 
-<div class="mb-3">
+<div class="d-flex border-bottom border-tertiary py-5">
+  <% if @project.power_supplies.present? %>
+  <% else %>
+    <div class="w-100 text-center">
+      <div class="text-secondary small mb-3">
+        This project doesn't have any solar system.
+      </div>
+      <%= render 'power_supplies/button_new', project: @project %>
+    </div>
+  <% end %>
+</div>
+
+<div class="py-4">
   <%= render 'projects/appliances', project_appliances: @project_appliances, uses: @uses, project: @project %>
 </div>

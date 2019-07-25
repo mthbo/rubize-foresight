@@ -1,0 +1,20 @@
+<%= simple_form_for [project, power_supply] do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.association :solar_panel, as: :select, label_method: :name, label: "Solar panel model" %>
+  <div class="row">
+    <div class="col-sm-4">
+      <%= f.input :system_voltage, label: "System voltage (V)", placeholder: "24" %>
+    </div>
+    <div class="col-sm-8">
+      <%= f.association :battery, as: :select, label_method: :name, label: "Battery model" %>
+    </div>
+  </div>
+  <%= f.input :communication, as: :radio_buttons, wrapper: :horizontal_collection_inline, label: "Remote monitoring?", label_html: { class: "text-nowrap" } %>
+  <%= f.input :distribution, as: :radio_buttons, wrapper: :horizontal_collection_inline, label: "Distibution?", label_html: { class: "text-nowrap" } %>
+
+  <div class="mt-4 d-flex justify-content-end">
+    <%= link_to "Cancel", project_path(power_supply.project), class: "btn btn-outline-secondary mr-2" %>
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+<% end %>

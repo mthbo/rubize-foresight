@@ -1,0 +1,7 @@
+<h5 class="text-secondary mb-4 border-bottom border-tertiary pb-2">
+  <strong>Project:</strong>
+  <%= @project.name %>
+</h5>
+<h3 class="mb-4">New solar system</h3>
+
+<%= render 'power_supplies/form', power_supply: @power_supply, project: @project %>

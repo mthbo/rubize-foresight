@@ -1,4 +1,5 @@
 class SolarPanel < ApplicationRecord
+  has_many :power_supplies
 
   TECHNOLOGIES = [
     "Polycristalline",
@@ -16,5 +17,9 @@ class SolarPanel < ApplicationRecord
     if price and Money.default_bank.get_rate(currency, :EUR)
       price.exchange_to(:EUR).fractional
     end
+  end
+
+  def name
+    "#{technology} - #{voltage} V | #{power} Wp"
   end
 end
