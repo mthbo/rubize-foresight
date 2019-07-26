@@ -37,8 +37,8 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-sm-6">
-        <h6>Frequency <small class="pl-2">(if AC current)</small></h6>
+      <div class="col-12 col-sm-6 <%= 'd-none' unless project.current_ac? %>" id="project-frequency-form-group">
+        <h6>Frequency</h6>
         <%= f.input :frequency, as: :radio_buttons, collection: Project::FREQUENCIES, wrapper: :horizontal_collection_inline, label: false, include_blank: false %>
       </div>
     </div>
