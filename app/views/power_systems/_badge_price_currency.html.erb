@@ -1,5 +1,0 @@
-<% unless power_system.currency == 'eur' %>
-  <div class="badge badge-secondary px-2 mr-2">
-    <%= "#{power_system.price.format(no_cents: true, symbol: false, thousands_separator: " ")} #{power_system.price.currency}" %>
-  </div>
-<% end %>

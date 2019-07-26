@@ -47,8 +47,8 @@ class SolarPanelsController < ApplicationController
     params.require(:solar_panel).permit(
       :technology,
       :power,
-      :voltage,
-      :price,
+      :price_min,
+      :price_max,
       :currency
     )
   end

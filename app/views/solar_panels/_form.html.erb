@@ -1,23 +1,24 @@
 <%= simple_form_for(solar_panel) do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :technology, collection: SolarPanel::TECHNOLOGIES %>
-
   <div class="row">
-    <div class="col-12 col-sm-6">
-      <%= f.input :power, label: 'Rated power (Wp)', placeholder: "270" %>
+    <div class="col-sm-8">
+      <%= f.input :technology, collection: SolarPanel::TECHNOLOGIES %>
     </div>
-    <div class="col-12 col-sm-6">
-      <%= f.input :voltage, label: 'Voltage (V)', placeholder: "12" %>
+    <div class="col-sm-4">
+      <%= f.input :power, label: 'Rated power (Wp)', placeholder: "270" %>
     </div>
   </div>
 
-  <h5 class="mb-3 mt-2">Price</h5>
+  <h5 class="mb-3 mt-2">Price range (excl. tax)</h5>
   <div class="row">
-    <div class="col-12 col-sm-6">
-      <%= f.input :price, as: :numeric, placeholder: "42,50", label: "Unit price (excl. tax)" %>
+    <div class="col-12 col-sm-4">
+      <%= f.input :price_min, as: :numeric, placeholder: "100", label: "Min" %>
     </div>
-    <div class="col-12 col-sm-6">
+    <div class="col-12 col-sm-4">
+      <%= f.input :price_max, as: :numeric, placeholder: "150", label: "Max" %>
+    </div>
+    <div class="col-12 col-sm-4">
       <%= f.input :currency, as: :select, collection: Money::Currency.all %>
     </div>
   </div>

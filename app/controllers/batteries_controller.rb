@@ -50,7 +50,8 @@ class BatteriesController < ApplicationController
       :voltage,
       :capacity,
       :efficiency,
-      :price,
+      :price_min,
+      :price_max,
       :currency
     )
   end

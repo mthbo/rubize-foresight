@@ -1,5 +1,0 @@
-<% if solar_panel.price_eur.present? %>
-  <div class="badge badge-dark px-2">
-    <%= "#{solar_panel.price_eur.format(no_cents: true, symbol: false, thousands_separator: " ")} #{solar_panel.price_eur.currency}" %>
-  </div>
-<% end %>

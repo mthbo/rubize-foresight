@@ -4,12 +4,11 @@
     <h6>
       <span class="mr-2"><%= solar_panel.technology %></span>
       <span class="text-secondary mr-2">
-        <%= "#{solar_panel.power} Wp | #{solar_panel.voltage} V" %>
+        <%= "#{solar_panel.power} Wp" %>
       </span>
     </h6>
     <div class="mb-2">
-      <%= render 'solar_panels/badge_price_currency', solar_panel: solar_panel %>
-      <%= render 'solar_panels/badge_price_eur', solar_panel: solar_panel %>
+      <%= render 'solar_panels/badge_price', solar_panel: solar_panel %>
     </div>
   </div>
 

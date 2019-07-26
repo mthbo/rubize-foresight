@@ -3,17 +3,14 @@
   <div>
     <h6>
       <span class="mr-2"><%= power_system.name %></span>
-      <%= render 'power_systems/badge_inverter', power_system: power_system %>
-      <%= render 'power_systems/badge_communication', power_system: power_system %>
+      <%= render 'power_systems/badge_currents', power_system: power_system %>
+      <%= render 'power_systems/badge_voltage', power_system: power_system %>
     </h6>
-    <p class="small mb-1">
-      <%= power_system.description %>
-    </p>
+    <%= render 'power_systems/info', power_system: power_system %>
     <div class="mb-2">
-      <%= render 'power_systems/badge_input', power_system: power_system %>
-      <%= render 'power_systems/badge_output', power_system: power_system %>
-      <%= render 'power_systems/badge_price_currency', power_system: power_system %>
-      <%= render 'power_systems/badge_price_eur', power_system: power_system %>
+      <%= render 'power_systems/badge_in', power_system: power_system %>
+      <%= render 'power_systems/badge_out', power_system: power_system %>
+      <%= render 'power_systems/badge_price', power_system: power_system %>
     </div>
   </div>
 

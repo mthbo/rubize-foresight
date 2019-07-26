@@ -1,0 +1,9 @@
+<% if power_system.power_out_max? %>
+  <div class="badge badge-light px-2 mr-2">
+    OUT :
+    <%= "< #{power_system.power_out_max} VA" %>
+    <% if power_system.voltage_range %>
+      <%= "@ #{power_system.voltage_range}" %>
+    <% end %>
+  </div>
+<% end %>

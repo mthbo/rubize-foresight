@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_090035) do
+ActiveRecord::Schema.define(version: 2019_07_26_112443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,11 +63,12 @@ ActiveRecord::Schema.define(version: 2019_07_25_090035) do
     t.integer "dod"
     t.integer "voltage"
     t.integer "capacity"
-    t.integer "price_cents"
+    t.integer "price_min_cents"
     t.string "currency", default: "eur"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "efficiency"
+    t.integer "price_max_cents"
   end
 
   create_table "power_supplies", force: :cascade do |t|
@@ -88,21 +89,21 @@ ActiveRecord::Schema.define(version: 2019_07_25_090035) do
 
   create_table "power_systems", force: :cascade do |t|
     t.string "name"
-    t.text "description"
-    t.integer "charge_current"
-    t.boolean "voltage_12"
-    t.boolean "voltage_24"
-    t.boolean "voltage_36"
-    t.boolean "voltage_48"
-    t.boolean "inverter"
-    t.integer "power_out"
+    t.boolean "ac_out"
+    t.integer "power_out_max"
     t.integer "voltage_out_min"
     t.integer "voltage_out_max"
-    t.boolean "communication"
-    t.integer "price_cents"
+    t.integer "price_min_cents"
     t.string "currency", default: "eur"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price_max_cents"
+    t.boolean "dc_out"
+    t.string "mppt"
+    t.string "inverter"
+    t.integer "system_voltage"
+    t.integer "power_in_min"
+    t.integer "power_in_max"
   end
 
   create_table "project_appliances", force: :cascade do |t|
@@ -157,12 +158,12 @@ ActiveRecord::Schema.define(version: 2019_07_25_090035) do
 
   create_table "solar_panels", force: :cascade do |t|
     t.integer "power"
-    t.integer "price_cents"
+    t.integer "price_min_cents"
     t.string "currency", default: "eur"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "technology"
-    t.integer "voltage"
+    t.integer "price_max_cents"
   end
 
   create_table "sources", force: :cascade do |t|

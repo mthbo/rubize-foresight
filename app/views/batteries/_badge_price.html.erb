@@ -1,0 +1,6 @@
+<% if battery.price_max_eur.present? and battery.price_min_eur.present? %>
+  <div class="badge px-2 badge-dark">
+    <%= "#{battery.price_min_eur.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if battery.price_min_eur != battery.price_max_eur %>
+    <%= "#{battery.price_max_eur.format(no_cents: true, symbol: false, thousands_separator: " ")} #{battery.price_max_eur.currency.symbol}" %>
+  </div>
+<% end %>

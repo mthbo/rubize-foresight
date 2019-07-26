@@ -1,36 +1,47 @@
 class PowerSystem < ApplicationRecord
   has_many :power_supplies
 
+  VOLTAGES = [24, 48]
+
   validates :name, presence: true, uniqueness: true
-  validates :power_out, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
-  validates :charge_current, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :system_voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true
+  validates :power_in_min, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :power_in_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :power_out_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
   validates :voltage_out_min, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
   validates :voltage_out_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
-  validate :select_at_least_one_voltage
+  validate :select_at_least_one_output
 
-  monetize :price_cents, with_model_currency: :currency
-  monetize :price_eur_cents, with_currency: :eur, allow_nil: true
+  monetize :price_min_cents, with_model_currency: :currency
+  monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
 
-  def select_at_least_one_voltage
-    unless voltage_12? or voltage_24? or voltage_36? or voltage_48?
-      errors.add(:voltage_48, "/ 36 / 24 / 12 must be selected")
+  monetize :price_max_cents, with_model_currency: :currency
+  monetize :price_max_eur_cents, with_currency: :eur, allow_nil: true
+
+  def select_at_least_one_output
+    unless dc_out? or ac_out?
+      errors.add(:ac_out, "or DC out must be selected")
     end
   end
 
-  def price_eur_cents
-    if price and Money.default_bank.get_rate(currency, :EUR)
-      price.exchange_to(:EUR).fractional
+  def price_min_eur_cents
+    if price_min and Money.default_bank.get_rate(currency, :EUR)
+      price_min.exchange_to(:EUR).fractional
     end
   end
 
-  def charge_voltage
-    voltages = ""
-    voltages << (voltages.blank? ? "12" : "/12") if voltage_12?
-    voltages << (voltages.blank? ? "24" : "/24") if voltage_24?
-    voltages << (voltages.blank? ? "36" : "/36") if voltage_36?
-    voltages << (voltages.blank? ? "48" : "/48") if voltage_48?
-    voltages.present? ? (voltages << " V") : voltages = nil
-    voltages
+  def price_max_eur_cents
+    if price_max and Money.default_bank.get_rate(currency, :EUR)
+      price_max.exchange_to(:EUR).fractional
+    end
+  end
+
+  def outputs
+    if dc_out?
+      ac_out? ? "DC/AC" : "DC"
+    elsif ac_out?
+      "AC"
+    end
   end
 
   def voltage_range

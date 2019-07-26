@@ -46,18 +46,18 @@ class PowerSystemsController < ApplicationController
   def power_system_params
     params.require(:power_system).permit(
       :name,
-      :description,
-      :charge_current,
-      :voltage_12,
-      :voltage_24,
-      :voltage_36,
-      :voltage_48,
+      :mppt,
       :inverter,
-      :power_out,
+      :system_voltage,
+      :power_in_min,
+      :power_in_max,
+      :dc_out,
+      :ac_out,
+      :power_out_max,
       :voltage_out_min,
       :voltage_out_max,
-      :communication,
-      :price,
+      :price_min,
+      :price_max,
       :currency
     )
   end

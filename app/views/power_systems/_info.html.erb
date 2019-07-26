@@ -1,0 +1,13 @@
+<% if power_system.mppt.present? or power_system.inverter.present? %>
+  <p class="small mb-1">
+
+    <% if power_system.mppt.present? %>
+      <span class="mr-3">MPPT : <%= power_system.mppt %></span>
+    <% end %>
+
+    <% if power_system.inverter.present? and power_system.ac_out? %>
+      Inverter : <%= power_system.inverter %>
+    <% end %>
+
+  </p>
+<% end %>

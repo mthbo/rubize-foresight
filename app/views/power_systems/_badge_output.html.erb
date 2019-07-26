@@ -1,9 +1,0 @@
-<div class="badge badge-light px-2 mr-2">
-  OUT :
-  <% if power_system.power_out? %>
-    <%= "#{power_system.power_out} VA" %>
-  <% end %>
-  <% if power_system.voltage_range %>
-    <%= "@ #{power_system.voltage_range}" %>
-  <% end %>
-</div>
