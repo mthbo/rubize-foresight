@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :projects, only: [:index, :show, :new, :create, :edit, :update, :destroy], shallow: true do
     resources :project_appliances, only: [:index, :new, :create, :edit, :update, :destroy]
-    resources :power_supplies, only: [:new, :create, :edit, :update]
+    resources :solar_systems, only: [:new, :create, :edit, :update]
   end
 
   get 'appliance_refresh_load', to: 'appliances#refresh_load'

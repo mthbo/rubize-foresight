@@ -51,7 +51,6 @@ class PowerSystemsController < ApplicationController
       :system_voltage,
       :power_in_min,
       :power_in_max,
-      :dc_out,
       :ac_out,
       :power_out_max,
       :voltage_out_min,

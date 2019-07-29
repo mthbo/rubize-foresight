@@ -1,5 +1,5 @@
 class SolarPanel < ApplicationRecord
-  has_many :power_supplies
+  has_many :solar_systems
 
   TECHNOLOGIES = [
     "Polycristalline",

@@ -1,7 +1,6 @@
 <% if power_system.power_in_min.present? and power_system.power_in_max.present? %>
   <div class="badge badge-light px-2 mr-2">
-      IN :
-      <%= "#{power_system.power_in_min} -" if power_system.power_in_min != power_system.power_in_max %>
-      <%= "#{power_system.power_in_max} Wp" %>
+    <%= "#{power_system.power_in_min} -" if power_system.power_in_min != power_system.power_in_max %>
+    <%= "#{power_system.power_in_max} Wp" %>
   </div>
 <% end %>

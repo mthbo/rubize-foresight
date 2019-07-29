@@ -3,8 +3,10 @@
   <div>
     <h6>
       <span class="mr-2"><%= power_system.name %></span>
-      <%= render 'power_systems/badge_currents', power_system: power_system %>
-      <%= render 'power_systems/badge_voltage', power_system: power_system %>
+      <span class="text-secondary mr-2">
+        <%= "#{power_system.system_voltage} V" if power_system.system_voltage %>
+        <%= " - #{power_system.output}" if power_system.output %>
+      </span>
     </h6>
     <%= render 'power_systems/info', power_system: power_system %>
     <div class="mb-2">

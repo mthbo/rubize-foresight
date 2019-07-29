@@ -1,4 +1,4 @@
-class PowerSupplyPolicy < ApplicationPolicy
+class SolarSystemPolicy < ApplicationPolicy
 
   def create?
     true

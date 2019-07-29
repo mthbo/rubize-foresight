@@ -2,7 +2,7 @@ class Project < ApplicationRecord
   has_many :project_appliances, dependent: :destroy
   has_many :appliances, -> { distinct }, through: :project_appliances
   has_many :uses, -> { distinct }, through: :appliances
-  has_many :power_supplies, dependent: :destroy
+  has_many :solar_systems, dependent: :destroy
 
   scope :ordered, -> { order(updated_at: :desc) }
 

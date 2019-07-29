@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PowerSupplyTest < ActiveSupport::TestCase
+class SolarSystemTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

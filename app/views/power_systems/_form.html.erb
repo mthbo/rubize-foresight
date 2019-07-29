@@ -29,15 +29,11 @@
   <div class="border-bottom border-tertiary pb-2 mb-4">
     <h5 class="mb-3 mt-2">Output features</h5>
     <div class="row">
-      <div class="col-sm-6">
-        <h6>Output type(s)</h6>
-        <div class="d-flex align-items-center">
-          <%= f.input :dc_out, label: "DC", label_html: {class: "mr-3"} %>
-          <%= f.input :ac_out, label: "AC", label_html: {class: "mr-3"} %>
-        </div>
-      </div>
-      <div class="col-sm-6">
+      <div class="col-sm-5">
         <%= f.input :power_out_max, label: "Max power (VA)", placeholder: "1500" %>
+      </div>
+      <div class="col-sm-6 offset-sm-1">
+        <%= f.input :ac_out, as: :radio_buttons, wrapper: :vertical_collection_inline, label: "Inverter?", label_html: { class: "text-nowrap" } %>
       </div>
     </div>
     <div id="inverter-form-group" class="mb-4 <%= 'd-none' unless power_system.ac_out? %>">

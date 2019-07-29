@@ -1,5 +1,5 @@
 class Battery < ApplicationRecord
-  has_many :power_supplies
+  has_many :solar_systems
 
   TECHNOLOGIES = [
     "Lead acid - Flooded / 0PzS",
@@ -32,8 +32,16 @@ class Battery < ApplicationRecord
     end
   end
 
+  def storage_max
+    voltage * capacity if voltage and capacity
+  end
+
+  def storage
+    storage_max * dod.to_f / 100 * efficiency.to_f / 100 if storage_max and dod and efficiency
+  end
+
   def name
-    "#{technology} - #{voltage} V | #{capacity} Ah"
+    "#{technology} - #{voltage} V | #{capacity} Ah - #{storage_max} Wh"
   end
 
 end

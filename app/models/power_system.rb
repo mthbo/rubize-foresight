@@ -1,5 +1,5 @@
 class PowerSystem < ApplicationRecord
-  has_many :power_supplies
+  has_many :solar_systems
 
   VOLTAGES = [24, 48]
 
@@ -10,19 +10,12 @@ class PowerSystem < ApplicationRecord
   validates :power_out_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
   validates :voltage_out_min, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
   validates :voltage_out_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
-  validate :select_at_least_one_output
 
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
 
   monetize :price_max_cents, with_model_currency: :currency
   monetize :price_max_eur_cents, with_currency: :eur, allow_nil: true
-
-  def select_at_least_one_output
-    unless dc_out? or ac_out?
-      errors.add(:ac_out, "or DC out must be selected")
-    end
-  end
 
   def price_min_eur_cents
     if price_min and Money.default_bank.get_rate(currency, :EUR)
@@ -36,12 +29,8 @@ class PowerSystem < ApplicationRecord
     end
   end
 
-  def outputs
-    if dc_out?
-      ac_out? ? "DC/AC" : "DC"
-    elsif ac_out?
-      "AC"
-    end
+  def output
+    ac_out? ? "AC" : "DC"
   end
 
   def voltage_range

@@ -22,13 +22,13 @@
 </div>
 
 <div class="d-flex border-bottom border-tertiary py-5">
-  <% if @project.power_supplies.present? %>
+  <% if @project.solar_systems.present? %>
   <% else %>
     <div class="w-100 text-center">
       <div class="text-secondary small mb-3">
         This project doesn't have any solar system.
       </div>
-      <%= render 'power_supplies/button_new', project: @project %>
+      <%= render 'solar_systems/button_new', project: @project %>
     </div>
   <% end %>
 </div>

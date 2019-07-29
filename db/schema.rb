@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_112443) do
+ActiveRecord::Schema.define(version: 2019_07_29_110332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,22 +71,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_112443) do
     t.integer "price_max_cents"
   end
 
-  create_table "power_supplies", force: :cascade do |t|
-    t.bigint "project_id"
-    t.bigint "solar_panel_id"
-    t.bigint "battery_id"
-    t.bigint "power_system_id"
-    t.integer "system_voltage"
-    t.boolean "communication"
-    t.boolean "distribution"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["battery_id"], name: "index_power_supplies_on_battery_id"
-    t.index ["power_system_id"], name: "index_power_supplies_on_power_system_id"
-    t.index ["project_id"], name: "index_power_supplies_on_project_id"
-    t.index ["solar_panel_id"], name: "index_power_supplies_on_solar_panel_id"
-  end
-
   create_table "power_systems", force: :cascade do |t|
     t.string "name"
     t.boolean "ac_out"
@@ -98,7 +82,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_112443) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "price_max_cents"
-    t.boolean "dc_out"
     t.string "mppt"
     t.string "inverter"
     t.integer "system_voltage"
@@ -166,6 +149,23 @@ ActiveRecord::Schema.define(version: 2019_07_26_112443) do
     t.integer "price_max_cents"
   end
 
+  create_table "solar_systems", force: :cascade do |t|
+    t.bigint "project_id"
+    t.bigint "solar_panel_id"
+    t.bigint "battery_id"
+    t.bigint "power_system_id"
+    t.integer "system_voltage"
+    t.boolean "communication"
+    t.boolean "distribution"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "autonomy", default: 1.0
+    t.index ["battery_id"], name: "index_solar_systems_on_battery_id"
+    t.index ["power_system_id"], name: "index_solar_systems_on_power_system_id"
+    t.index ["project_id"], name: "index_solar_systems_on_project_id"
+    t.index ["solar_panel_id"], name: "index_solar_systems_on_solar_panel_id"
+  end
+
   create_table "sources", force: :cascade do |t|
     t.string "supplier"
     t.datetime "issued_at"
@@ -228,11 +228,11 @@ ActiveRecord::Schema.define(version: 2019_07_26_112443) do
   end
 
   add_foreign_key "appliances", "uses"
-  add_foreign_key "power_supplies", "batteries"
-  add_foreign_key "power_supplies", "power_systems"
-  add_foreign_key "power_supplies", "projects"
-  add_foreign_key "power_supplies", "solar_panels"
   add_foreign_key "project_appliances", "appliances"
   add_foreign_key "project_appliances", "projects"
+  add_foreign_key "solar_systems", "batteries"
+  add_foreign_key "solar_systems", "power_systems"
+  add_foreign_key "solar_systems", "projects"
+  add_foreign_key "solar_systems", "solar_panels"
   add_foreign_key "sources", "appliances"
 end
