@@ -9,7 +9,7 @@ class SolarPanelPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
+    record.solar_systems.blank?
   end
 
 end

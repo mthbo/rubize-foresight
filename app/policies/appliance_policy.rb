@@ -13,7 +13,7 @@ class AppliancePolicy < ApplicationPolicy
   end
 
   def destroy?
-    true
+    record.projects.blank?
   end
 
 end

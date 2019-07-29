@@ -8,10 +8,12 @@ class Battery < ApplicationRecord
     "Lithium"
   ]
 
+  VOLTAGES = [2, 6, 12, 24]
+
   validates :technology, inclusion: {in: TECHNOLOGIES, allow_blank: true}, presence: true
   validates :dod, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: true}, presence: true
   validates :efficiency, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100, allow_nil: true}, presence: true
-  validates :voltage, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true
   validates :capacity, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
 
   monetize :price_min_cents, with_model_currency: :currency

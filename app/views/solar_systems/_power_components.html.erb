@@ -1,0 +1,5 @@
+<div class="list-group">
+  <%= render 'power_systems/card_with_quantity', power_system: solar_system.power_system %>
+  <%= render 'solar_panels/card_with_quantity', solar_panel: solar_system.solar_panel, solar_system: solar_system %>
+  <%= render 'batteries/card_with_quantity', battery: solar_system.battery, solar_system: solar_system %>
+</div>

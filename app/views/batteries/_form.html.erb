@@ -5,7 +5,7 @@
 
   <div class="row">
     <div class="col-12 col-sm-6">
-      <%= f.input :voltage, label: 'Voltage (V)', placeholder: "12" %>
+      <%= f.input :voltage, as: :select, label: 'Voltage (V)', collection: Battery::VOLTAGES %>
     </div>
     <div class="col-12 col-sm-6">
       <%= f.input :capacity, label: 'Capacity (Ah)', placeholder: "100" %>

@@ -1,4 +1,5 @@
 class BatteriesController < ApplicationController
+  include PowerSystemAttribution
   before_action :find_battery, only: [:edit, :update, :destroy]
   layout 'form', only: [:new, :create, :edit, :update]
 
@@ -23,6 +24,11 @@ class BatteriesController < ApplicationController
 
   def update
     if @battery.update(battery_params)
+      @battery.solar_systems.each do |solar_system|
+        @project = solar_system.project
+        @solar_system = solar_system
+        attribute_power_system_to_solar_system
+      end
       flash[:notice] = "The battery has been updated."
       redirect_to power_components_path
     else

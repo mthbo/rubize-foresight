@@ -1,0 +1,54 @@
+<table class="table">
+  <tbody>
+    <tr>
+      <th scope="row" class="py-2 text-nowrap">Output</th>
+      <td class="py-2 text-nowrap"><%= solar_system.project.current_ac? ? "AC" : "DC" %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="py-2 text-nowrap">System voltage</th>
+      <td class="py-2 text-nowrap"><%= solar_system.system_voltage.present? ? "#{solar_system.system_voltage} V" : "n/a" %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="py-2 text-nowrap">Autonomy</th>
+      <td class="py-2 text-nowrap"><%= solar_system.autonomy.present? ? pluralize(solar_system.autonomy, 'day') : "n/a" %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="py-2 text-nowrap">PV power</th>
+      <td class="py-2 text-nowrap">
+        <% if solar_system.power_system.present? and solar_system.power.present? %>
+          <%= "#{number_with_delimiter(solar_system.power.round, delimiter: " ")} Wp" %>
+        <% else %>
+          n/a
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" class="py-2 text-nowrap">Battery park</th>
+      <td class="py-2 text-nowrap">
+        <% if solar_system.power_system.present? and solar_system.storage_max.present? %>
+          <%= "#{number_with_delimiter(solar_system.storage_max.round, delimiter: " ")} Wh" %>
+        <% else %>
+          n/a
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" class="py-2 text-nowrap">Monitoring</th>
+      <td class="py-2 text-nowrap">
+        <% if solar_system.communication? %>
+          <i class='fas fa-check text-primary'></i>
+        <% else %>
+          <i class='fas fa-times text-danger'></i>
+        <% end %>
+    </tr>
+    <tr>
+      <th scope="row" class="py-2 text-nowrap">Distribution</th>
+      <td class="py-2 text-nowrap">
+        <% if solar_system.distribution? %>
+          <i class='fas fa-check text-primary'></i>
+        <% else %>
+          <i class='fas fa-times text-danger'></i>
+        <% end %>
+    </tr>
+  </tbody>
+</table>

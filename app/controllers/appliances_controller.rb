@@ -1,4 +1,5 @@
 class AppliancesController < ApplicationController
+  include PowerSystemAttribution
   before_action :find_appliance, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_authorized, only: [:refresh_load]
   layout 'form', only: [:new, :create, :edit, :update]
@@ -41,6 +42,11 @@ class AppliancesController < ApplicationController
 
   def update
     if @appliance.update(appliance_params)
+      @appliance.projects.each do |project|
+        @project = project
+        @solar_system = @project.solar_systems.first
+        attribute_power_system_to_solar_system
+      end
       flash[:notice] = "#{@appliance.name} has been updated"
       redirect_to appliance_path(@appliance)
     else

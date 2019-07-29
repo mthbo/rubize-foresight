@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  include PowerSystemAttribution
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   layout 'form', only: [:new, :create, :edit, :update]
 
@@ -37,6 +38,8 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
+      @solar_system = @project.solar_systems.first
+      attribute_power_system_to_solar_system
       flash[:notice] = "#{@project.name} has been updated"
       redirect_to project_path(@project)
     else

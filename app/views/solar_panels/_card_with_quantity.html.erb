@@ -1,0 +1,19 @@
+<div class="list-group-item d-flex align-items-center pl-0 overflow-hidden">
+
+  <div class="card-quantity position-absolute h-100 bg-secondary text-white d-flex align-items-center justify-content-center">
+    <%= solar_system.solar_panel_quantity %>
+  </div>
+
+  <div class="flex-grow-1 ml-5">
+    <h6>
+      <span class="mr-2"><%= solar_panel.technology %></span>
+      <span class="text-secondary mr-2">
+        <%= "#{solar_panel.power} Wp" %>
+      </span>
+    </h6>
+    <div class="mb-2">
+      <%= render 'solar_panels/badge_price', solar_panel: solar_panel %>
+    </div>
+  </div>
+
+</div>

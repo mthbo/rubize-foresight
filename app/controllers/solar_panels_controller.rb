@@ -1,4 +1,5 @@
 class SolarPanelsController < ApplicationController
+  include PowerSystemAttribution
   before_action :find_solar_panel, only: [:edit, :update, :destroy]
   layout 'form', only: [:new, :create, :edit, :update]
 
@@ -23,6 +24,11 @@ class SolarPanelsController < ApplicationController
 
   def update
     if @solar_panel.update(solar_panel_params)
+      @solar_panel.solar_systems.each do |solar_system|
+        @project = solar_system.project
+        @solar_system = solar_system
+        attribute_power_system_to_solar_system
+      end
       flash[:notice] = "The solar panel has been updated."
       redirect_to power_components_path
     else

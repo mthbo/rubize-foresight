@@ -1,4 +1,5 @@
 class PowerSystemsController < ApplicationController
+  include PowerSystemAttribution
   before_action :find_power_system, only: [:edit, :update, :destroy]
   layout 'form', only: [:new, :create, :edit, :update]
 
@@ -23,6 +24,11 @@ class PowerSystemsController < ApplicationController
 
   def update
     if @power_system.update(power_system_params)
+      @power_system.solar_systems.each do |solar_system|
+        @project = solar_system.project
+        @solar_system = solar_system
+        attribute_power_system_to_solar_system
+      end
       flash[:notice] = "The power system has been updated."
       redirect_to power_components_path
     else

@@ -1,0 +1,23 @@
+<div class="list-group-item d-flex align-items-center pl-0 overflow-hidden">
+
+  <div class="card-quantity position-absolute h-100 bg-secondary text-white d-flex align-items-center justify-content-center">
+    1
+  </div>
+
+  <div class="flex-grow-1 ml-5">
+    <h6>
+      <span class="mr-2"><%= power_system.name %></span>
+      <span class="text-secondary mr-2">
+        <%= "#{power_system.system_voltage} V" if power_system.system_voltage %>
+        <%= " - #{power_system.output}" if power_system.output %>
+      </span>
+    </h6>
+    <%= render 'power_systems/info', power_system: power_system %>
+    <div class="mb-2">
+      <%= render 'power_systems/badge_in', power_system: power_system %>
+      <%= render 'power_systems/badge_out', power_system: power_system %>
+      <%= render 'power_systems/badge_price', power_system: power_system %>
+    </div>
+  </div>
+
+</div>
