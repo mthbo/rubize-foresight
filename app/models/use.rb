@@ -93,7 +93,7 @@ class Use < ApplicationRecord
     sum = 0
     project_appliances(project).each do |project_appliance|
       if project_appliance.appliance.price_min_cents
-        sum += project_appliance.appliance.price_min_cents
+        sum += project_appliance.appliance.price_min_cents * project_appliance.quantity
       end
     end
     sum.round(1)
@@ -103,7 +103,7 @@ class Use < ApplicationRecord
     sum = 0
     project_appliances(project).each do |project_appliance|
       if project_appliance.appliance.price_max_cents
-        sum += project_appliance.appliance.price_max_cents
+        sum += project_appliance.appliance.price_max_cents * project_appliance.quantity
       end
     end
     sum.round(1)
