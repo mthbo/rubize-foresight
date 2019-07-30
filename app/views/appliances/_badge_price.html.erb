@@ -1,6 +1,6 @@
-<% if appliance.max_price.present? %>
+<% if appliance.price_max.present? %>
   <div class="badge px-2 badge-dark">
-    <%= "#{appliance.min_price.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if appliance.min_price != appliance.max_price %>
-    <%= "#{appliance.max_price.format(no_cents: true, symbol: false, thousands_separator: " ")} #{appliance.max_price.currency.symbol}" %>
+    <%= "#{appliance.price_min.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if appliance.price_min != appliance.price_max %>
+    <%= "#{appliance.price_max.format(no_cents: true, symbol: false, thousands_separator: " ")} #{appliance.price_max.currency.symbol}" %>
   </div>
 <% end %>

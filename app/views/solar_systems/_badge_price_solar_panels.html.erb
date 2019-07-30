@@ -1,0 +1,6 @@
+<% if solar_system.solar_panels_price_min.present? and solar_system.solar_panels_price_max.present? %>
+  <div class="badge px-2 badge-dark">
+    <%= "#{solar_system.solar_panels_price_min.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if solar_system.solar_panels_price_min != solar_system.solar_panels_price_max %>
+    <%= "#{solar_system.solar_panels_price_max.format(no_cents: true, symbol: false, thousands_separator: " ")} #{solar_system.solar_panels_price_max.currency.symbol}" %>
+  </div>
+<% end %>

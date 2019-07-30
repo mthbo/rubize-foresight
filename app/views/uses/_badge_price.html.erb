@@ -1,0 +1,6 @@
+<% if use.price_min(project).present? and use.price_max(project).present? %>
+  <div class="badge px-2 badge-dark">
+    <%= "#{use.price_min(project).format(no_cents: true, symbol: false, thousands_separator: " ")} -" if use.price_min(project) != use.price_max(project) %>
+    <%= "#{use.price_max(project).format(no_cents: true, symbol: false, thousands_separator: " ")} #{use.price_max(project).currency.symbol}" %>
+  </div>
+<% end %>

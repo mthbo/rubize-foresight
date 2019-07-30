@@ -60,8 +60,8 @@ class Appliance < ApplicationRecord
   validates :voltage_max, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :energy_grade, inclusion: {in: GRADES, allow_blank: true}
 
-  monetize :min_price_cents, allow_nil: true, with_currency: :eur
-  monetize :max_price_cents, allow_nil: true, with_currency: :eur
+  monetize :price_min_cents, allow_nil: true, with_currency: :eur
+  monetize :price_max_cents, allow_nil: true, with_currency: :eur
 
   def apparent_power
     (power / power_factor) if power and power_factor
@@ -119,11 +119,11 @@ class Appliance < ApplicationRecord
     end
   end
 
-  def min_price_cents
+  def price_min_cents
     sources.select{ |source| source.price_discount_eur_cents }.map{ |source| source.price_discount_eur_cents }.min
   end
 
-  def max_price_cents
+  def price_max_cents
     sources.select{ |source| source.price_eur_cents }.map{ |source| source.price_eur_cents }.max
   end
 
