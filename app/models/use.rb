@@ -67,4 +67,23 @@ class Use < ApplicationRecord
     (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call(project) }
   end
 
+  def daytime_consumption(project)
+    if project.day_time and project.night_time
+      day_h = project.day_time.hour
+      day_m = project.day_time.min
+      night_h = project.night_time.hour
+      night_m = project.night_time.min
+      consumption = (day_h...night_h).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call(project) }
+      consumption -= day_m.to_f / 60 * method("hourly_consumption_#{day_h}").call(project)
+      consumption += night_m.to_f / 60 * method("hourly_consumption_#{night_h}").call(project)
+      consumption.round
+    else
+      0
+    end
+  end
+
+  def nighttime_consumption(project)
+    daily_consumption(project) - daytime_consumption(project)
+  end
+
 end
