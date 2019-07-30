@@ -42,7 +42,7 @@ class PowerSystemsController < ApplicationController
   private
 
   def update_all_solar_systems
-    SolarSystem.each do |solar_system|
+    SolarSystem.all.each do |solar_system|
       @project = solar_system.project
       @solar_system = solar_system
       attribute_power_system_to_solar_system

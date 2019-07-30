@@ -21,6 +21,9 @@ class Use < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  monetize :price_min_cents(project), allow_nil: true, with_currency: :eur
+  monetize :price_max_cents, allow_nil: true, with_currency: :eur
+
   def project_appliances(project)
     project.project_appliances.joins(:appliance).where(appliances: {use_id: self.id})
   end
@@ -84,6 +87,10 @@ class Use < ApplicationRecord
 
   def nighttime_consumption(project)
     daily_consumption(project) - daytime_consumption(project)
+  end
+
+  def min_price_cents(project)
+    project_appliances(project).reduce(0) { |sum, project_appliance| sum + project_appliance.appliance.min_price_cents }
   end
 
 end
