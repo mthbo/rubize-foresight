@@ -1,7 +1,11 @@
 <div data-project-use-id="<%= use.id %>">
 
-  <div class="d-flex pt-2 mt-4 mb-3">
+  <div class="d-flex pt-2 mt-4 mb-3 justify-content-between">
     <h5><%= use.name %></h5>
+    <div class="d-flex align-items-center ml-4">
+      <%= render 'uses/badge_power', use: use, project: project %>
+      <%= render 'uses/badge_energy', use: use, project: project %>
+    </div>
   </div>
 
   <div class="list-group">

@@ -21,4 +21,50 @@ class Use < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  def project_appliances(project)
+    project.project_appliances.joins(:appliance).where(appliances: {use_id: self.id})
+  end
+
+  def apparent_power(project)
+    sum = 0
+    project_appliances(project).each do |project_appliance|
+      if project_appliance.appliance.apparent_power
+        sum += project_appliance.appliance.apparent_power * project_appliance.quantity
+      end
+    end
+    sum.round(1)
+  end
+
+  def peak_power(project)
+    sum = 0
+    project_appliances(project).each do |project_appliance|
+      if project_appliance.appliance.peak_power
+        sum += project_appliance.appliance.peak_power * project_appliance.quantity
+      end
+    end
+    sum.round(1)
+  end
+
+  (0..23).each do |hour|
+    define_method("hourly_consumption_#{hour}") do |project|
+      sum = 0
+      project_appliances(project).each do |project_appliance|
+        if project_appliance.appliance.apparent_power
+          sum += project_appliance.method("hourly_consumption_#{hour}").call * project_appliance.quantity
+        end
+      end
+      sum
+    end
+  end
+
+  (0..23).each do |hour|
+    define_method("hourly_rate_#{hour}") do |project|
+      apparent_power(project).zero? ? 0 : (method("hourly_consumption_#{hour}").call(project).to_f / apparent_power(project) * 10).round(2)
+    end
+  end
+
+  def daily_consumption(project)
+    (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call(project) }
+  end
+
 end

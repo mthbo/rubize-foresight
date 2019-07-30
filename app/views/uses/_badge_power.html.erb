@@ -1,0 +1,5 @@
+<% if use.apparent_power(project).present? %>
+  <div class="badge badge-light px-2 mr-2 text-nowrap">
+    <%= "#{number_with_delimiter(use.apparent_power(project).round, delimiter: " ")} VA" %>
+  </div>
+<% end %>
