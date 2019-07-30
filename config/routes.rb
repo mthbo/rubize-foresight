@@ -23,4 +23,6 @@ Rails.application.routes.draw do
   resources :power_systems, only: [:new, :create, :edit, :update, :destroy]
   resources :batteries, only: [:new, :create, :edit, :update, :destroy]
   resources :solar_panels, only: [:new, :create, :edit, :update, :destroy]
+  resources :communication_modules, only: [:new, :create, :edit, :update]
+  resources :distributions, only: [:new, :create, :edit, :update]
 end

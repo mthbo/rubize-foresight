@@ -3,6 +3,8 @@ class SolarSystem < ApplicationRecord
   belongs_to :solar_panel
   belongs_to :battery
   belongs_to :power_system, optional: true
+  belongs_to :communication_module, optional: true
+  belongs_to :distribution, optional: true
 
   VOLTAGES = [24, 48]
 
