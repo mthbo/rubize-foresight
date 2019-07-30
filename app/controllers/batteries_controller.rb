@@ -24,11 +24,7 @@ class BatteriesController < ApplicationController
 
   def update
     if @battery.update(battery_params)
-      @battery.solar_systems.each do |solar_system|
-        @project = solar_system.project
-        @solar_system = solar_system
-        attribute_power_system_to_solar_system
-      end
+      update_solar_systems
       flash[:notice] = "The battery has been updated."
       redirect_to power_components_path
     else
@@ -43,6 +39,14 @@ class BatteriesController < ApplicationController
   end
 
   private
+
+  def update_solar_systems
+    @battery.solar_systems.each do |solar_system|
+      @project = solar_system.project
+      @solar_system = solar_system
+      attribute_power_system_to_solar_system
+    end
+  end
 
   def find_battery
     @battery = Battery.find(params[:id])

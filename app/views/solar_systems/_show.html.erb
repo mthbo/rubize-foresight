@@ -1,6 +1,7 @@
 <div class="d-flex mb-4">
   <h4>Solar system</h4>
   <%= render 'solar_systems/button_edit', solar_system: solar_system %>
+  <%= render 'solar_systems/button_destroy', solar_system: solar_system %>
 </div>
 
 <div class="d-lg-flex justify-content-between">
@@ -13,7 +14,7 @@
     <% if solar_system.power_system.present? %>
       <%= render 'solar_systems/power_components', solar_system: solar_system %>
     <% else %>
-      <%= render 'solar_systems/no_solar_system' %>
+      <%= render 'solar_systems/no_solar_system_match' %>
     <% end %>
   </div>
 

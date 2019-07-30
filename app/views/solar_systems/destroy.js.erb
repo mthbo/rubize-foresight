@@ -1,0 +1,10 @@
+function updateSolarSystem(messageHTML) {
+  const solarSystemContainer = document.getElementById('solar_system_container');
+  solarSystemContainer.innerHTML = (messageHTML);
+}
+
+<% if @project.solar_systems.present? %>
+  updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_systems.first %>");
+<% else %>
+  updateSolarSystem("<%= j render 'solar_systems/no_solar_system', project: @project %>");
+<% end %>

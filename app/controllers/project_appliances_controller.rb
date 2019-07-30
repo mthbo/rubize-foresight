@@ -28,8 +28,7 @@ class ProjectAppliancesController < ApplicationController
     @appliance = @project_appliance.appliance
     authorize @project_appliance
     if @project_appliance.save
-      @solar_system = @project.solar_systems.first
-      attribute_power_system_to_solar_system
+      update_project_solar_systems
       flash[:notice] = "#{@appliance.name} has been added to the project #{@project.name}."
       redirect_to project_path(@project)
     else
@@ -43,10 +42,9 @@ class ProjectAppliancesController < ApplicationController
   def update
     if @project_appliance.update(project_appliance_params)
       @project = @project_appliance.project
-      @solar_system = @project.solar_systems.first
-      attribute_power_system_to_solar_system
+      update_project_solar_systems
       flash[:notice] = "#{@project_appliance.appliance.name} has been updated for the project."
-      redirect_to project_path(@project_appliance.project)
+      redirect_to project_path(@project)
     else
       render :edit
     end
@@ -54,10 +52,9 @@ class ProjectAppliancesController < ApplicationController
 
   def destroy
     @project_appliance.destroy
-    @project = @project_appliance.project
     @use = @project_appliance.appliance.use
-    @solar_system = @project.solar_systems.first
-    attribute_power_system_to_solar_system
+    @project = @project_appliance.project
+    update_project_solar_systems
     # flash[:notice] = "#{@project_appliance.appliance.name} has been removed from the project."
   end
 
@@ -77,6 +74,13 @@ class ProjectAppliancesController < ApplicationController
   def find_project_appliance
     @project_appliance = ProjectAppliance.find(params[:id])
     authorize @project_appliance
+  end
+
+  def update_project_solar_systems
+    @project.solar_systems.each do |solar_system|
+      @solar_system = solar_system
+      attribute_power_system_to_solar_system
+    end
   end
 
   def project_appliance_params

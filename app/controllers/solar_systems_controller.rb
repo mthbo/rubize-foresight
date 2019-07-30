@@ -1,6 +1,6 @@
 class SolarSystemsController < ApplicationController
   include PowerSystemAttribution
-  before_action :find_solar_system, only: [:edit, :update]
+  before_action :find_solar_system, only: [:edit, :update, :destroy]
   before_action :find_project, only: [:new, :create]
   layout 'form', only: [:new, :create, :edit, :update]
 
@@ -33,6 +33,12 @@ class SolarSystemsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    @solar_system.destroy
+    @project = @solar_system.project
+    # flash[:notice] = "The solar system has been removed from the project."
   end
 
   private

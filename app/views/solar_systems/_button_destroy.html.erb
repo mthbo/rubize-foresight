@@ -1,0 +1,5 @@
+<% if policy(solar_system).destroy? %>
+  <%= link_to solar_system_path(solar_system), method: :delete, remote: true, data: {confirm: 'Are you certain you want to remove this solar system?'}, class: "text-danger ml-3" do %>
+    <i class="fas fa-trash-alt"></i>
+  <% end %>
+<% end %>

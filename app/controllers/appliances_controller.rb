@@ -42,11 +42,7 @@ class AppliancesController < ApplicationController
 
   def update
     if @appliance.update(appliance_params)
-      @appliance.projects.each do |project|
-        @project = project
-        @solar_system = @project.solar_systems.first
-        attribute_power_system_to_solar_system
-      end
+      update_appliance_solar_systems
       flash[:notice] = "#{@appliance.name} has been updated"
       redirect_to appliance_path(@appliance)
     else
@@ -69,6 +65,16 @@ class AppliancesController < ApplicationController
   def find_appliance
     @appliance = Appliance.find(params[:id])
     authorize @appliance
+  end
+
+  def update_appliance_solar_systems
+    @appliance.projects.each do |project|
+      @project = project
+      @project.solar_systems.each do |solar_system|
+        @solar_system = solar_system
+        attribute_power_system_to_solar_system
+      end
+    end
   end
 
   def appliance_params

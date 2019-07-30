@@ -38,8 +38,7 @@ class ProjectsController < ApplicationController
 
   def update
     if @project.update(project_params)
-      @solar_system = @project.solar_systems.first
-      attribute_power_system_to_solar_system
+      update_solar_systems
       flash[:notice] = "#{@project.name} has been updated"
       redirect_to project_path(@project)
     else
@@ -58,6 +57,13 @@ class ProjectsController < ApplicationController
   def find_project
     @project = Project.find(params[:id])
     authorize @project
+  end
+
+  def update_solar_systems
+    @project.solar_systems.each do |solar_system|
+      @solar_system = solar_system
+      attribute_power_system_to_solar_system
+    end
   end
 
   def project_params

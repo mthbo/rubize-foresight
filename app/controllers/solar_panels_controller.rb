@@ -24,11 +24,7 @@ class SolarPanelsController < ApplicationController
 
   def update
     if @solar_panel.update(solar_panel_params)
-      @solar_panel.solar_systems.each do |solar_system|
-        @project = solar_system.project
-        @solar_system = solar_system
-        attribute_power_system_to_solar_system
-      end
+      update_solar_systems
       flash[:notice] = "The solar panel has been updated."
       redirect_to power_components_path
     else
@@ -47,6 +43,14 @@ class SolarPanelsController < ApplicationController
   def find_solar_panel
     @solar_panel = SolarPanel.find(params[:id])
     authorize @solar_panel
+  end
+
+  def update_solar_systems
+    @solar_panel.solar_systems.each do |solar_system|
+      @project = solar_system.project
+      @solar_system = solar_system
+      attribute_power_system_to_solar_system
+    end
   end
 
   def solar_panel_params

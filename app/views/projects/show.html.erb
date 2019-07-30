@@ -12,16 +12,11 @@
   </div>
 </div>
 
-<div class="border-bottom border-tertiary pt-4 pb-5">
+<div class="border-bottom border-tertiary pt-4 pb-5" id="solar_system_container">
   <% if @project.solar_systems.present? %>
-    <%= render 'solar_systems/show', project: @project, solar_system: @project.solar_systems.first %>
+    <%= render 'solar_systems/show', solar_system: @project.solar_systems.first %>
   <% else %>
-    <div class="text-center">
-      <div class="text-secondary small mb-3">
-        This project doesn't have any solar system.
-      </div>
-      <%= render 'solar_systems/button_new', project: @project %>
-    </div>
+    <%= render 'solar_systems/no_solar_system', project: @project %>
   <% end %>
 </div>
 

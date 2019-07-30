@@ -12,6 +12,7 @@ class PowerSystemsController < ApplicationController
     @power_system = PowerSystem.new(power_system_params)
     authorize @power_system
     if @power_system.save
+      update_all_solar_systems
       flash[:notice] = "A new power system has been created."
       redirect_to power_components_path
     else
@@ -24,11 +25,7 @@ class PowerSystemsController < ApplicationController
 
   def update
     if @power_system.update(power_system_params)
-      @power_system.solar_systems.each do |solar_system|
-        @project = solar_system.project
-        @solar_system = solar_system
-        attribute_power_system_to_solar_system
-      end
+      update_all_solar_systems
       flash[:notice] = "The power system has been updated."
       redirect_to power_components_path
     else
@@ -43,6 +40,14 @@ class PowerSystemsController < ApplicationController
   end
 
   private
+
+  def update_all_solar_systems
+    SolarSystem.each do |solar_system|
+      @project = solar_system.project
+      @solar_system = solar_system
+      attribute_power_system_to_solar_system
+    end
+  end
 
   def find_power_system
     @power_system = PowerSystem.find(params[:id])
