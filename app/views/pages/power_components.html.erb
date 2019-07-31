@@ -13,6 +13,12 @@
     <a class="nav-item nav-link" id="nav-batteries-tab" data-toggle="tab" href="#nav-batteries" role="tab" aria-controls="nav-batteries" aria-selected="false">
       Batteries
     </a>
+    <a class="nav-item nav-link" id="nav-communication-modules-tab" data-toggle="tab" href="#nav-communication-modules" role="tab" aria-controls="nav-communication-modules" aria-selected="false">
+      Remote monitoring
+    </a>
+    <a class="nav-item nav-link" id="nav-distributions-tab" data-toggle="tab" href="#nav-distributions" role="tab" aria-controls="nav-distributions" aria-selected="false">
+      Distribution
+    </a>
   </div>
 </nav>
 
@@ -25,5 +31,11 @@
   </div>
   <div class="my-5 tab-pane fade" id="nav-batteries" role="tabpanel" aria-labelledby="nav-batteries-tab">
     <%= render 'batteries/index', batteries: @batteries %>
+  </div>
+  <div class="my-5 tab-pane fade" id="nav-communication-modules" role="tabpanel" aria-labelledby="nav-communication-modules-tab">
+    <%= render 'communication_modules/index', communication_modules: @communication_modules %>
+  </div>
+  <div class="my-5 tab-pane fade" id="nav-distributions" role="tabpanel" aria-labelledby="nav-distributions-tab">
+    <%= render 'distributions/index', distributions: @distributions %>
   </div>
 </div>

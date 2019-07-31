@@ -29,6 +29,11 @@ class Project < ApplicationRecord
   validates :frequency, inclusion: {in: FREQUENCIES, allow_blank: true}
   validate :select_at_least_one_current_type
 
+  monetize :price_min_cents, allow_nil: true, with_currency: :eur
+  monetize :price_max_cents, allow_nil: true, with_currency: :eur
+  monetize :price_total_min_cents, allow_nil: true, with_currency: :eur
+  monetize :price_total_max_cents, allow_nil: true, with_currency: :eur
+
   def select_at_least_one_current_type
     unless current_ac? or current_dc?
       errors.add(:current_dc, "or ac must be selected")
@@ -69,6 +74,10 @@ class Project < ApplicationRecord
       country = ISO3166::Country[country_code]
       country.translations[I18n.locale.to_s] || country.name
     end
+  end
+
+  def appliance_quantity
+    project_appliances.sum(:quantity)
   end
 
   def day_time_hour
@@ -138,5 +147,37 @@ class Project < ApplicationRecord
 
   def nighttime_consumption
     daily_consumption - daytime_consumption
+  end
+
+  def price_min_cents
+    sum = 0
+    project_appliances.each do |project_appliance|
+      if project_appliance.appliance.price_min_cents
+        sum += project_appliance.appliance.price_min_cents * project_appliance.quantity
+      end
+    end
+    sum.round(1)
+  end
+
+  def price_max_cents
+    sum = 0
+    project_appliances.each do |project_appliance|
+      if project_appliance.appliance.price_max_cents
+        sum += project_appliance.appliance.price_max_cents * project_appliance.quantity
+      end
+    end
+    sum.round(1)
+  end
+
+  def price_total_min_cents
+    sum = price_min_cents
+    sum += solar_systems.first.price_min_cents if (solar_systems.present? and solar_systems.first.price_min_cents)
+    sum
+  end
+
+  def price_total_max_cents
+    sum = price_max_cents
+    sum += solar_systems.first.price_max_cents if (solar_systems.present? and solar_systems.first.price_max_cents)
+    sum
   end
 end

@@ -1,0 +1,16 @@
+<div id="communication_module_container">
+  <% if communication_modules.present? %>
+    <div class="list-group">
+      <% communication_modules.each do |communication_module| %>
+        <%= render 'communication_modules/card', communication_module: communication_module %>
+      <% end %>
+    </div>
+
+  <% else %>
+    <%= render 'communication_modules/no_communication_module' %>
+  <% end %>
+</div>
+
+<div class="d-flex mt-3 pt-3">
+  <%= render 'communication_modules/button_new' %>
+</div>

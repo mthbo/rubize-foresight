@@ -1,0 +1,14 @@
+<div class="list-group-item d-flex justify-content-between align-items-center" data-communication-module-id="<%= communication_module.id %>">
+
+  <div>
+    <h6>Remote monitoring module</h6>
+    <div class="mb-2">
+      <%= render 'communication_modules/badge_price', communication_module: communication_module %>
+    </div>
+  </div>
+
+  <div class="flex-shrink-0">
+    <%= render 'communication_modules/button_edit', communication_module: communication_module %>
+  </div>
+
+</div>

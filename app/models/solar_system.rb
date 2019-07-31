@@ -3,8 +3,6 @@ class SolarSystem < ApplicationRecord
   belongs_to :solar_panel
   belongs_to :battery
   belongs_to :power_system, optional: true
-  belongs_to :communication_module, optional: true
-  belongs_to :distribution, optional: true
 
   VOLTAGES = [24, 48]
 
@@ -19,6 +17,10 @@ class SolarSystem < ApplicationRecord
   monetize :solar_panels_price_max_cents, allow_nil: true, with_currency: :eur
   monetize :power_system_price_min_cents, allow_nil: true, with_currency: :eur
   monetize :power_system_price_max_cents, allow_nil: true, with_currency: :eur
+  monetize :communication_price_min_cents, allow_nil: true, with_currency: :eur
+  monetize :communication_price_max_cents, allow_nil: true, with_currency: :eur
+  monetize :distribution_price_min_cents, allow_nil: true, with_currency: :eur
+  monetize :distribution_price_max_cents, allow_nil: true, with_currency: :eur
   monetize :price_min_cents, allow_nil: true, with_currency: :eur
   monetize :price_max_cents, allow_nil: true, with_currency: :eur
 
@@ -54,30 +56,6 @@ class SolarSystem < ApplicationRecord
     end
   end
 
-  def batteries_price_min_cents
-    if battery.price_min_eur_cents.present? and battery_quantity.present?
-      battery.price_min_eur_cents * battery_quantity
-    end
-  end
-
-  def batteries_price_max_cents
-    if battery.price_max_eur_cents.present? and battery_quantity.present?
-      battery.price_max_eur_cents * battery_quantity
-    end
-  end
-
-  def solar_panels_price_min_cents
-    if solar_panel.price_min_eur_cents.present? and solar_panel_quantity.present?
-      solar_panel.price_min_eur_cents * solar_panel_quantity
-    end
-  end
-
-  def solar_panels_price_max_cents
-    if solar_panel.price_max_eur_cents.present? and solar_panel_quantity.present?
-      solar_panel.price_max_eur_cents * solar_panel_quantity
-    end
-  end
-
   def power_system_price_min_cents
     if power_system.present? and power_system.price_min_eur_cents.present?
       power_system.price_min_eur_cents
@@ -90,15 +68,63 @@ class SolarSystem < ApplicationRecord
     end
   end
 
+  def batteries_price_min_cents
+    if power_system.present? and battery.price_min_eur_cents.present? and battery_quantity.present?
+      battery.price_min_eur_cents * battery_quantity
+    end
+  end
+
+  def batteries_price_max_cents
+    if power_system.present? and battery.price_max_eur_cents.present? and battery_quantity.present?
+      battery.price_max_eur_cents * battery_quantity
+    end
+  end
+
+  def solar_panels_price_min_cents
+    if power_system.present? and solar_panel.price_min_eur_cents.present? and solar_panel_quantity.present?
+      solar_panel.price_min_eur_cents * solar_panel_quantity
+    end
+  end
+
+  def solar_panels_price_max_cents
+    if power_system.present? and solar_panel.price_max_eur_cents.present? and solar_panel_quantity.present?
+      solar_panel.price_max_eur_cents * solar_panel_quantity
+    end
+  end
+
+  def communication_price_min_cents
+    if power_system.present?
+      (communication? and CommunicationModule.first.present?) ? CommunicationModule.first.price_min_eur_cents : 0
+    end
+  end
+
+  def communication_price_max_cents
+    if power_system.present?
+      (communication? and CommunicationModule.first.present?) ? CommunicationModule.first.price_max_eur_cents : 0
+    end
+  end
+
+  def distribution_price_min_cents
+    if power_system.present?
+      (distribution? and Distribution.first.present?) ? Distribution.first.price_min_eur_cents * project.appliance_quantity : 0
+    end
+  end
+
+  def distribution_price_max_cents
+    if power_system.present?
+      (distribution? and Distribution.first.present?) ? Distribution.first.price_max_eur_cents * project.appliance_quantity : 0
+    end
+  end
+
   def price_min_cents
     if batteries_price_min_cents.present? and solar_panels_price_min_cents.present? and power_system_price_min_cents.present?
-      batteries_price_min_cents + solar_panels_price_min_cents + power_system_price_min_cents
+      batteries_price_min_cents + solar_panels_price_min_cents + power_system_price_min_cents + communication_price_min_cents + distribution_price_min_cents
     end
   end
 
   def price_max_cents
     if batteries_price_max_cents.present? and solar_panels_price_max_cents.present? and power_system_price_max_cents.present?
-      batteries_price_max_cents + solar_panels_price_max_cents + power_system_price_max_cents
+      batteries_price_max_cents + solar_panels_price_max_cents + power_system_price_max_cents + communication_price_max_cents + distribution_price_max_cents
     end
   end
 

@@ -24,6 +24,16 @@ function updateSolarSystemFeatures(featuresHTML) {
   solarSystemFeaturesContainer.innerHTML = (featuresHTML);
 }
 
+function updateProjectBudget(budgetHTML) {
+  const projectBudgetContainer = document.getElementById('project_budget_container');
+  projectBudgetContainer.innerHTML = (budgetHTML);
+}
+
+function updateSolarSystemBudget(budgetHTML) {
+  const solarSystemBudgetContainer = document.getElementById('solar_system_budget_container');
+  solarSystemBudgetContainer.innerHTML = (budgetHTML);
+}
+
 document.querySelector("[data-project-appliance-id='<%= @project_appliance.id %>']").remove();
 <% unless @project.uses.include? @use %>
   document.querySelector("[data-project-use-id='<%= @use.id %>']").remove();
@@ -38,4 +48,8 @@ updateSolarSystemFeatures("<%= j render 'solar_systems/features', solar_system: 
   updatePowerComponents("<%= j render 'solar_systems/power_components', solar_system: @solar_system %>");
 <% else %>
   updatePowerComponents("<%= j render 'solar_systems/no_solar_system_match' %>");
+<% end %>
+updateProjectBudget("<%= j render 'projects/budget', project: @project %>");
+<% if @solar_system.present? %>
+  updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @solar_system %>");
 <% end %>

@@ -1,0 +1,52 @@
+<table class="table table-sm">
+  <tbody>
+    <tr class="table-secondary">
+      <th scope="row" class="py-2">
+        Solar system
+      </th>
+      <td class="text-right font-weight-bold py-2">
+        <%= render 'shared/price_range', price_min: solar_system.price_min, price_max: solar_system.price_max %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" class="font-weight-normal pl-sm-4">
+        Power system
+      </th>
+      <td class="text-right">
+        <%= render 'shared/price_range', price_min: solar_system.power_system_price_min, price_max: solar_system.power_system_price_max %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" class="font-weight-normal pl-sm-4">
+        Solar panels
+      </th>
+      <td class="text-right">
+        <%= render 'shared/price_range', price_min: solar_system.solar_panels_price_min, price_max: solar_system.solar_panels_price_max %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" class="font-weight-normal pl-sm-4">
+        Batteries
+      </th>
+      <td class="text-right">
+        <%= render 'shared/price_range', price_min: solar_system.batteries_price_min, price_max: solar_system.batteries_price_max %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" class="font-weight-normal pl-sm-4">
+        Remote monitoring module
+      </th>
+      <td class="text-right">
+        <%= render 'shared/price_range', price_min: solar_system.communication_price_min, price_max: solar_system.communication_price_max %>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row" class="font-weight-normal pl-sm-4">
+        Electrical distribution
+      </th>
+      <td class="text-right">
+        <%= render 'shared/price_range', price_min: solar_system.distribution_price_min, price_max: solar_system.distribution_price_max %>
+      </td>
+    </tr>
+  </tbody>
+</table>

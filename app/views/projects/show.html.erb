@@ -13,8 +13,14 @@
 </div>
 
 <div class="border-bottom border-tertiary pt-4 pb-5">
-  <h4 class="mb-4">Budget</h4>
-  <div class="">
+  <h4 class="mb-4">Electrical load</h4>
+  <div class="d-lg-flex justify-content-between">
+    <div class="mr-lg-5" id="project_features_container">
+      <%= render 'projects/features', project: @project %>
+    </div>
+    <div class="w-100 d-flex justify-content-center" id="load_chart_container">
+      <%= render 'shared/load_chart', electrical_load: @project, title: "Daily load profile", day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>
+    </div>
   </div>
 </div>
 
@@ -26,14 +32,16 @@
   <% end %>
 </div>
 
-<div class="border-bottom border-tertiary pt-4 pb-5">
-  <h4 class="mb-4">Electrical load</h4>
-  <div class="d-lg-flex justify-content-between">
-    <div class="mr-lg-5" id="project_features_container">
-      <%= render 'projects/features', project: @project %>
+<div class="border-bottom border-tertiary pt-4 pb-4">
+  <h4 class="mb-4">Budget</h4>
+  <div class="row">
+    <div class="col-lg-6" id="project_budget_container">
+      <%= render 'projects/budget', project: @project %>
     </div>
-    <div class="w-100" id="load_chart_container">
-      <%= render 'shared/load_chart', electrical_load: @project, title: "Daily load profile", day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>
+    <div class="col-lg-6" id="solar_system_budget_container">
+      <% if @project.solar_systems.first.present? %>
+        <%= render 'solar_systems/budget', solar_system: @project.solar_systems.first %>
+      <% end %>
     </div>
   </div>
 </div>

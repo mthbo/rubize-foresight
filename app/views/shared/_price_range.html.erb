@@ -1,0 +1,6 @@
+<% if price_min.present? %>
+  <%= "#{price_min.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if price_min != price_max %>
+  <%= "#{price_max.format(no_cents: true, symbol: false, thousands_separator: " ")} #{price_min.currency.symbol}" %>
+<% else %>
+  n/a
+<% end %>

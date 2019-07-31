@@ -1,17 +1,7 @@
-<%= simple_form_for(solar_panel) do |f| %>
+<%= simple_form_for(communication_module) do |f| %>
   <%= f.error_notification %>
 
-  <div class="row">
-    <div class="col-sm-8">
-      <%= f.input :technology, collection: SolarPanel::TECHNOLOGIES %>
-    </div>
-    <div class="col-sm-4">
-      <%= f.input :power, label: 'Rated power (Wp)', placeholder: "270" %>
-    </div>
-  </div>
-
-  <h5 class="mt-3">Price range (excl. tax)</h5>
-  <p class="text-secondary small"><em>Include wiring and mounting equipment costs (per panel).</em></p>
+  <h5 class="mb-3 mt-2">Price range (excl. tax)</h5>
   <div class="row">
     <div class="col-12 col-sm-4">
       <%= f.input :price_min, as: :numeric, placeholder: "100", label: "Min" %>

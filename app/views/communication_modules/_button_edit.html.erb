@@ -1,0 +1,5 @@
+<% if policy(communication_module).update? %>
+  <%= link_to edit_communication_module_path(communication_module), class: "ml-3" do %>
+    <i class="fas fa-edit"></i>
+  <% end %>
+<% end %>

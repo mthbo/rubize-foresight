@@ -1,6 +1,4 @@
 class CommunicationModule < ApplicationRecord
-  has_many :solar_systems
-
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
 
