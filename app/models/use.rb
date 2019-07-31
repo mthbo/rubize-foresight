@@ -60,12 +60,6 @@ class Use < ApplicationRecord
     end
   end
 
-  (0..23).each do |hour|
-    define_method("hourly_rate_#{hour}") do |project|
-      apparent_power(project).zero? ? 0 : (method("hourly_consumption_#{hour}").call(project).to_f / apparent_power(project) * 10).round(2)
-    end
-  end
-
   def daily_consumption(project)
     (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call(project) }
   end
