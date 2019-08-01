@@ -3,7 +3,6 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:public]
   layout 'form', only: [:new, :create, :edit, :update]
-  layout 'public', only: [:public]
 
   def index
     @query = params[:query]
@@ -59,6 +58,7 @@ class ProjectsController < ApplicationController
     authorize @project
     @project_appliances = @project.project_appliances.ordered
     @uses = @project.uses.ordered
+    render layout: 'public'
   end
 
   private
