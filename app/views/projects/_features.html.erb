@@ -22,3 +22,10 @@
     </tr>
   </tbody>
 </table>
+
+<% unless project.all_consumptions? %>
+  <div class="text-warning mt-2 mb-3 small">
+    <i class="fas fa-exclamation-triangle mr-1"></i>
+    Technical features are missing in appliance setup.
+  </div>
+<% end %>

@@ -20,3 +20,10 @@
     <% end %>
   </tbody>
 </table>
+
+<% unless project.all_prices? %>
+  <div class="text-warning mt-2 mb-3 small">
+    <i class="fas fa-exclamation-triangle mr-1"></i>
+    Price information is missing in appliance setup.
+  </div>
+<% end %>

@@ -180,4 +180,26 @@ class Project < ApplicationRecord
     sum += solar_systems.first.price_max_cents if (solar_systems.present? and solar_systems.first.price_max_cents)
     sum
   end
+
+  def all_prices?
+    result = true
+    appliances.each do |appliance|
+      if appliance.price_min.blank?
+        result = false
+        break
+      end
+    end
+    result
+  end
+
+  def all_consumptions?
+    result = true
+    appliances.each do |appliance|
+      if appliance.apparent_power.blank?
+        result = false
+        break
+      end
+    end
+    result
+  end
 end
