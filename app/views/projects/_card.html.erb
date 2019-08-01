@@ -1,10 +1,27 @@
-<div class="list-group-item d-flex align-items-center">
-
-  <div class="flex-grow-1 mr-2">
-    <h6><%= project.name %></h6>
-  </div>
+<div class="list-group-item d-flex justify-content-between align-items-center">
 
   <div>
+    <h6>
+      <%= project.name %>
+      <%= render 'projects/badge_solar_system', solar_system: project.solar_systems.first %>
+    </h6>
+    <div class="mb-1">
+      <ul class="list-inline text-secondary small mb-2">
+        <% project.uses.each do |use| %>
+          <li class="list-inline-item"><%= use.name %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="mb-2">
+      <%= render 'projects/badge_current', project: project %>
+      <%= render 'projects/badge_power', project: project %>
+      <%= render 'projects/badge_energy', project: project %>
+      <%= render 'projects/badge_price', project: project %>
+      <%= render 'solar_systems/badge_price', solar_system: project.solar_systems.first %>
+    </div>
+  </div>
+
+  <div class="flex-shrink-0">
     <%= render 'projects/button_show', project: project %>
   </div>
 

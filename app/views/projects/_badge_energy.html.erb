@@ -1,0 +1,5 @@
+<% if project.daily_consumption.present? %>
+  <div class="badge badge-secondary px-2 mr-2 text-nowrap">
+    <%= "#{number_with_delimiter(project.daily_consumption, delimiter: " ")} Wh/d" %>
+  </div>
+<% end %>

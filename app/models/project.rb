@@ -49,7 +49,7 @@ class Project < ApplicationRecord
 
   def currents
     if current_ac? and current_dc?
-      "AC or DC"
+      "AC / DC"
     elsif current_ac?
       "AC"
     elsif current_dc?

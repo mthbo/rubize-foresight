@@ -1,5 +1,5 @@
 <% if power_system.price_max_eur.present? and power_system.price_min_eur.present? %>
-  <div class="badge px-2 badge-dark">
+  <div class="badge px-2 mr-2 badge-dark">
     <%= "#{power_system.price_min_eur.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if power_system.price_min_eur != power_system.price_max_eur %>
     <%= "#{power_system.price_max_eur.format(no_cents: true, symbol: false, thousands_separator: " ")} #{power_system.price_max_eur.currency.symbol}" %>
   </div>

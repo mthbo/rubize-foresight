@@ -13,7 +13,10 @@
 </div>
 
 <div class="border-bottom border-tertiary pt-4 pb-5">
-  <h4 class="mb-4">Electrical load</h4>
+  <h4 class="mb-4">
+    <i class="fas fa-chart-bar fa-fw mr-2"></i>
+    Electrical load
+  </h4>
   <div class="d-lg-flex justify-content-between">
     <div class="mr-lg-5" id="project_features_container">
       <%= render 'projects/features', project: @project %>
@@ -33,7 +36,13 @@
 </div>
 
 <div class="border-bottom border-tertiary pt-4 pb-4">
-  <h4 class="mb-4">Budget</h4>
+  <h4 class="mb-3">
+    <i class="fas fa-receipt fa-fw mr-2"></i>
+    Budget
+  </h4>
+  <p class="text-secondary small">
+    Prices excluding taxes.
+  </p>
   <div class="row">
     <div class="col-lg-6" id="project_budget_container">
       <%= render 'projects/budget', project: @project %>

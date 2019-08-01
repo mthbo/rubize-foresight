@@ -35,7 +35,7 @@ class PowerSystem < ApplicationRecord
 
   def voltage_range
     if voltage_out_min
-      voltage_out_max ? "#{voltage_out_min} V - #{voltage_out_max} V" : "#{voltage_out_min} V"
+      voltage_out_max ? "#{voltage_out_min} - #{voltage_out_max} V" : "#{voltage_out_min} V"
     elsif voltage_out_max
       "#{voltage_out_max} V"
     else

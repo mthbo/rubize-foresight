@@ -1,0 +1,8 @@
+<% if solar_system.present? and solar_system.price_max.present? %>
+  <div class="badge px-2 mr-2 badge-dark">
+    <i class="fas fa-solar-panel fa-fw mr-1"></i>
+    <%= "#{solar_system.price_min.format(no_cents: true, symbol: false, thousands_separator: " ")} -" if solar_system.price_min != solar_system.price_max %>
+    <%= "#{solar_system.price_max.format(no_cents: true, symbol: false, thousands_separator: " ")} #{solar_system.price_max.currency.symbol}" %>
+  </div>
+
+<% end %>
