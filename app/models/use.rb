@@ -83,24 +83,28 @@ class Use < ApplicationRecord
     daily_consumption(project) - daytime_consumption(project)
   end
 
-  def price_min_cents(project)
-    sum = 0
-    project_appliances(project).each do |project_appliance|
-      if project_appliance.appliance.price_min_cents
-        sum += project_appliance.appliance.price_min_cents * project_appliance.quantity
+  def price_min_cents(project=nil)
+    if project.present?
+      sum = 0
+      project_appliances(project).each do |project_appliance|
+        if project_appliance.appliance.price_min_cents
+          sum += project_appliance.appliance.price_min_cents * project_appliance.quantity
+        end
       end
+      sum.round(1)
     end
-    sum.round(1)
   end
 
-  def price_max_cents(project)
-    sum = 0
-    project_appliances(project).each do |project_appliance|
-      if project_appliance.appliance.price_max_cents
-        sum += project_appliance.appliance.price_max_cents * project_appliance.quantity
+  def price_max_cents(project=nil)
+    if project.present?
+      sum = 0
+      project_appliances(project).each do |project_appliance|
+        if project_appliance.appliance.price_max_cents
+          sum += project_appliance.appliance.price_max_cents * project_appliance.quantity
+        end
       end
+      sum.round(1)
     end
-    sum.round(1)
   end
 
 end
