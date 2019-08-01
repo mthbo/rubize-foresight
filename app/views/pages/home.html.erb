@@ -1,5 +1,5 @@
 <h1>Benoo Foresight</h1>
-<p>An application to forecast electrical system load by Benoo Energies.</p>
+<p>An application to design energy access projects by Benoo Energies.</p>
 
 <div class="row mt-5">
 
@@ -12,7 +12,7 @@
   </div>
 
   <div class="col-12 col-sm-6 col-lg-4 mb-4">
-    <%= render 'pages/card', title: "Projects", description: "A tool to design energy access projects.", image: "projects.png", action: "Browse projects", path: projects_path %>
+    <%= render 'pages/card', title: "Projects", description: "A tool to design setups of appliances and solar systems.", image: "projects.png", action: "Browse projects", path: projects_path %>
   </div>
 
   <% if user_signed_in? and current_user.admin %>
