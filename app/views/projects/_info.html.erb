@@ -1,4 +1,5 @@
 <h3 class="mb-3"><%= project.name %></h3>
+
 <h5>
   <span class="text-secondary mr-3">
     <%= "#{project.city}, #{project.country_name}" %>
@@ -10,4 +11,7 @@
     <%= project.night_time ? project.night_time.strftime("%Hh%M") : "n/a" %>
   </span>
 </h5>
-<p><%= sanitize auto_link(markdown_to_html(project.description)) %></p>
+
+<p>
+  <%= sanitize auto_link(markdown_to_html(project.description)) %>
+</p>

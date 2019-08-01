@@ -3,8 +3,16 @@ function updateSolarSystem(messageHTML) {
   solarSystemContainer.innerHTML = (messageHTML);
 }
 
+function updateSolarSystemBudget(budgetHTML) {
+  const solarSystemBudgetContainer = document.getElementById('solar_system_budget_container');
+  solarSystemBudgetContainer.innerHTML = (budgetHTML);
+}
+
 <% if @project.solar_systems.present? %>
   updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_systems.first %>");
+  updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @project.solar_systems.first %>");
 <% else %>
   updateSolarSystem("<%= j render 'solar_systems/no_solar_system', project: @project %>");
+  document.getElementById('solar_system_budget_container').innerHTML ="";
 <% end %>
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_144834) do
+ActiveRecord::Schema.define(version: 2019_08_01_112458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 2019_07_30_144834) do
     t.string "city"
     t.boolean "current_ac"
     t.boolean "current_dc"
+    t.string "token"
   end
 
   create_table "solar_panels", force: :cascade do |t|

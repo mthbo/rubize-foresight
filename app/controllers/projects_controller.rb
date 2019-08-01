@@ -1,7 +1,9 @@
 class ProjectsController < ApplicationController
   include PowerSystemAttribution
   before_action :find_project, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:public]
   layout 'form', only: [:new, :create, :edit, :update]
+  layout 'public', only: [:public]
 
   def index
     @query = params[:query]
@@ -50,6 +52,13 @@ class ProjectsController < ApplicationController
     @project.destroy
     flash[:notice] = "#{@project.name} has been deleted"
     redirect_to projects_path
+  end
+
+  def public
+    @project = Project.find_by(token: params[:token])
+    authorize @project
+    @project_appliances = @project.project_appliances.ordered
+    @uses = @project.uses.ordered
   end
 
   private

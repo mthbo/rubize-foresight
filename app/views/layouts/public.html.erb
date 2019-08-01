@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'layouts/head' %>
+  </head>
+  <body>
+    <%= render 'shared/navbar_public' %>
+    <%= render 'shared/flashes' %>
+    <div class="container">
+      <div class="row justify-content-center my-5">
+        <div class="col col-xl-10">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+    <%= render 'layouts/bottom' %>
+  </body>
+</html>

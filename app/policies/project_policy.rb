@@ -16,4 +16,8 @@ class ProjectPolicy < ApplicationPolicy
     true
   end
 
+  def public?
+    true
+  end
+
 end

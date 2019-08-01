@@ -1,0 +1,23 @@
+<div class="list-group-item w-100 d-flex align-items-center pl-0 overflow-hidden" data-project-appliance-id="<%= project_appliance.id %>">
+
+  <div class="card-quantity position-absolute h-100 bg-secondary text-white d-flex align-items-center justify-content-center">
+    <%= project_appliance.quantity %>
+  </div>
+
+  <div class="d-none d-sm-block mr-4 ml-5">
+    <%= render 'appliances/image', appliance: appliance, size: 50 %>
+  </div>
+
+  <div class="flex-grow-1 mr-2 ml-5 ml-sm-0">
+    <h6><%= appliance.name %></h6>
+    <div>
+      <%= render 'appliances/badge_current', appliance: appliance %>
+      <%= render 'appliances/badge_power', appliance: appliance %>
+      <%= render 'appliances/badge_energy', appliance: project_appliance %>
+      <%= render 'appliances/badge_grade', appliance: appliance %>
+      <%= render 'appliances/badge_price', appliance: appliance %>
+    </div>
+    <%= render 'project_appliances/warning_current', project: project, appliance: appliance %>
+  </div>
+
+</div>

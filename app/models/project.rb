@@ -6,6 +6,8 @@ class Project < ApplicationRecord
 
   scope :ordered, -> { order(updated_at: :desc) }
 
+  before_save :generate_unique_token
+
   include PgSearch
   pg_search_scope :search,
     against: [ :name ],
@@ -38,6 +40,10 @@ class Project < ApplicationRecord
     unless current_ac? or current_dc?
       errors.add(:current_dc, "or ac must be selected")
     end
+  end
+
+  def generate_unique_token
+    self.token ||= SecureRandom.hex
   end
 
   def current_array
