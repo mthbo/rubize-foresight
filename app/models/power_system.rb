@@ -3,7 +3,7 @@ class PowerSystem < ApplicationRecord
 
   VOLTAGES = [24, 48]
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :system_voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true
   validates :power_in_min, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
   validates :power_in_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true

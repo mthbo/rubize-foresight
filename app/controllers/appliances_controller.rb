@@ -2,7 +2,7 @@ class AppliancesController < ApplicationController
   include PowerSystemAttribution
   before_action :find_appliance, only: [:show, :edit, :update, :destroy]
   skip_after_action :verify_authorized, only: [:refresh_load]
-  layout 'form', only: [:new, :create, :edit, :update]
+  layout 'form', only: [:new, :create, :edit, :update, :duplicate]
 
   def index
     @query = params[:query]
@@ -24,6 +24,14 @@ class AppliancesController < ApplicationController
   def new
     @appliance = Appliance.new
     authorize @appliance
+  end
+
+  def duplicate
+    @parent_appliance = Appliance.find(params[:id])
+    @appliance = @parent_appliance.dup
+    @appliance.name += " -- copy"
+    authorize @appliance
+    @appliance.save
   end
 
   def create

@@ -9,14 +9,19 @@ Rails.application.routes.draw do
   resources :uses, only: [:new, :create, :edit, :update, :destroy]
   resources :appliances, only: [:index, :show, :new, :create, :edit, :update, :destroy], shallow: true do
     resources :sources, only: [:new, :create, :edit, :update, :destroy]
+    member do
+      post 'duplicate'
+    end
   end
 
   resources :projects, only: [:index, :show, :new, :create, :edit, :update, :destroy], shallow: true do
     resources :project_appliances, only: [:index, :new, :create, :edit, :update, :destroy]
     resources :solar_systems, only: [:new, :create, :edit, :update, :destroy]
+    member do
+      post 'duplicate'
+    end
   end
 
-  get 'projects/duplicate', to: 'projects#duplicate', as: 'duplicate_project'
   get 'projects/public/:token', to: 'projects#public', as: 'public_project'
 
   get 'appliance_refresh_load', to: 'appliances#refresh_load'

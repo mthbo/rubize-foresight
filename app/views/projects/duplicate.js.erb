@@ -1,0 +1,9 @@
+function prependProjectCard(cardHTML) {
+  const projectList = document.getElementById('project-list');
+  newDiv = document.createElement("div");
+  newDiv.innerHTML = cardHTML;
+  newDiv.classList.add("border", "border-primary");
+  projectList.insertBefore(newDiv, projectList.firstChild);
+}
+
+prependProjectCard("<%= j render 'projects/card', project: @project %>");

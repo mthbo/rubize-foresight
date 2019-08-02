@@ -21,7 +21,7 @@ class Project < ApplicationRecord
 
   FREQUENCIES = ["50 Hz", "60 Hz"]
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :country_code, presence: true, inclusion: {in: ISO3166::Country.codes }
   validates :city, presence: true
   validates :day_time, presence: true

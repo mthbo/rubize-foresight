@@ -8,6 +8,10 @@ class AppliancePolicy < ApplicationPolicy
     true
   end
 
+  def duplicate?
+    create?
+  end
+
   def update?
     true
   end

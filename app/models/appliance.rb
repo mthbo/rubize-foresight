@@ -51,7 +51,7 @@ class Appliance < ApplicationRecord
     "G" => "grade-g"
   }
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :power, numericality: {greater_than_or_equal_to: 0}, allow_nil: true
   validates :power_factor, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 1}, allow_nil: true
   validates :starting_coefficient, numericality: {greater_than_or_equal_to: 1}, allow_nil: true

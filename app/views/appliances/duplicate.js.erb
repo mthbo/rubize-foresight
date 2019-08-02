@@ -1,0 +1,9 @@
+function prependApplianceCard(cardHTML, useID) {
+  const applianceList = document.querySelector("[data-use-appliances-id='" + useID + "']");
+  newDiv = document.createElement("div");
+  newDiv.innerHTML = cardHTML;
+  newDiv.classList.add("border", "border-primary");
+  applianceList.insertBefore(newDiv, applianceList.firstChild);
+}
+
+prependApplianceCard("<%= j render 'appliances/card', appliance: @appliance %>", "<%= @appliance.use.id %>");

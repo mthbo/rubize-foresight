@@ -24,8 +24,13 @@ class ProjectsController < ApplicationController
   end
 
   def duplicate
-    @project = Project.find(params[:project_id]).dup
+    @parent_project = Project.find(params[:id])
+    @project = @parent_project.dup
+    @project.name += " -- copy"
     authorize @project
+    @project.save
+    duplicate_project_appliances
+    duplicate_solar_systems
   end
 
   def create
@@ -77,6 +82,22 @@ class ProjectsController < ApplicationController
     @project.solar_systems.each do |solar_system|
       @solar_system = solar_system
       attribute_power_system_to_solar_system
+    end
+  end
+
+  def duplicate_project_appliances
+    @parent_project.project_appliances.each do |parent_project_appliance|
+      project_appliance = parent_project_appliance.dup
+      project_appliance.project = @project
+      project_appliance.save
+    end
+  end
+
+  def duplicate_solar_systems
+    @parent_project.solar_systems.each do |parent_solar_system|
+      solar_system = parent_solar_system.dup
+      solar_system.project = @project
+      solar_system.save
     end
   end
 
