@@ -27,10 +27,11 @@ class ProjectsController < ApplicationController
     @parent_project = Project.find(params[:id])
     @project = @parent_project.dup
     @project.name += " -- copy"
+    @project.token = SecureRandom.hex
     authorize @project
-    @project.save
     duplicate_project_appliances
     duplicate_solar_systems
+    @project.save
   end
 
   def create
@@ -87,17 +88,13 @@ class ProjectsController < ApplicationController
 
   def duplicate_project_appliances
     @parent_project.project_appliances.each do |parent_project_appliance|
-      project_appliance = parent_project_appliance.dup
-      project_appliance.project = @project
-      project_appliance.save
+      @project.project_appliances.new(parent_project_appliance.dup.attributes)
     end
   end
 
   def duplicate_solar_systems
     @parent_project.solar_systems.each do |parent_solar_system|
-      solar_system = parent_solar_system.dup
-      solar_system.project = @project
-      solar_system.save
+      @project.solar_systems.new(parent_solar_system.dup.attributes)
     end
   end
 
