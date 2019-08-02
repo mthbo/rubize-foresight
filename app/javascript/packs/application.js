@@ -7,6 +7,7 @@ import { updateRefreshButton } from '../plugins/refresh_button';
 import { dismissAlerts } from '../plugins/dismiss_alerts';
 import { toggleInverter } from '../plugins/toggle_inverter';
 import { toggleFrequency } from '../plugins/toggle_frequency';
+import { toggleLoader } from '../plugins/loader';
 
 initTooltip();
 initBarrating();
@@ -15,4 +16,5 @@ updateRefreshButton();
 dismissAlerts();
 toggleInverter();
 toggleFrequency();
+toggleLoader();
 

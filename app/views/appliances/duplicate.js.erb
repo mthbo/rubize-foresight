@@ -7,3 +7,5 @@ function prependApplianceCard(cardHTML, useID) {
 }
 
 prependApplianceCard("<%= j render 'appliances/card', appliance: @appliance %>", "<%= @appliance.use.id %>");
+$('[data-toggle="tooltip"]').tooltip();
+
