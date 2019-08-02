@@ -20,14 +20,10 @@
     <%= render 'project_appliances/warning_current', project: project, appliance: appliance %>
   </div>
 
-  <div class="flex-shrink-0">
-    <div>
-      <%= render 'project_appliances/button_edit', project_appliance: project_appliance %>
-      <%= render 'project_appliances/button_destroy', project_appliance: project_appliance %>
-    </div>
-    <div class="small mt-2">
-      <%= link_to "See in catalog", appliance_path(appliance) %>
-    </div>
+  <div class="d-flex flex-column flex-sm-row">
+    <%= render 'project_appliances/button_show', appliance: appliance %>
+    <%= render 'project_appliances/button_edit', project_appliance: project_appliance %>
+    <%= render 'project_appliances/button_destroy', project_appliance: project_appliance %>
   </div>
 
 </div>

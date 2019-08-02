@@ -1,5 +1,5 @@
 <% if policy(power_system).destroy? %>
-  <%= link_to power_system_path(power_system), method: :delete, remote: true, data: {confirm: 'Are you certain you want to delete this power system?'}, class: "text-danger ml-3" do %>
+  <%= link_to power_system_path(power_system), method: :delete, remote: true, data: {confirm: 'Are you certain you want to delete this power system?', toggle: "tooltip"}, class: "text-danger my-1 ml-3 mr-sm-2", title:"Delete power system" do %>
     <i class="fas fa-trash-alt"></i>
   <% end %>
 <% end %>

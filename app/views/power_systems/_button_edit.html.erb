@@ -1,5 +1,5 @@
 <% if policy(power_system).update? %>
-  <%= link_to edit_power_system_path(power_system), class: "ml-3" do %>
+  <%= link_to edit_power_system_path(power_system), class: "my-1 ml-3 mr-sm-2", data: {toggle: "tooltip"}, title:"Edit power system" do %>
     <i class="fas fa-edit"></i>
   <% end %>
 <% end %>

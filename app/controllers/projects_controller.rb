@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
   include PowerSystemAttribution
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:public]
-  layout 'form', only: [:new, :create, :edit, :update]
+  layout 'form', only: [:new, :create, :edit, :update, :duplicate]
 
   def index
     @query = params[:query]
@@ -20,6 +20,11 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    authorize @project
+  end
+
+  def duplicate
+    @project = Project.find(params[:project_id]).dup
     authorize @project
   end
 

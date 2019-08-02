@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :solar_systems, only: [:new, :create, :edit, :update, :destroy]
   end
 
+  get 'projects/duplicate', to: 'projects#duplicate', as: 'duplicate_project'
   get 'projects/public/:token', to: 'projects#public', as: 'public_project'
 
   get 'appliance_refresh_load', to: 'appliances#refresh_load'

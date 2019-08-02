@@ -1,5 +1,5 @@
 <% if policy(solar_system).update? %>
-  <%= link_to edit_solar_system_path(solar_system), class: "ml-3" do %>
+  <%= link_to edit_solar_system_path(solar_system), class: "ml-3", data: {toggle: "tooltip"}, title:"Edit solar system" do %>
     <i class="fas fa-edit"></i>
   <% end %>
 <% end %>

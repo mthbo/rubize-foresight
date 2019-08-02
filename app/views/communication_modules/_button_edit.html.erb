@@ -1,5 +1,5 @@
 <% if policy(communication_module).update? %>
-  <%= link_to edit_communication_module_path(communication_module), class: "ml-3" do %>
+  <%= link_to edit_communication_module_path(communication_module), class: "my-1 ml-3 mr-sm-2", data: {toggle: "tooltip"}, title:"Edit monitoring module" do %>
     <i class="fas fa-edit"></i>
   <% end %>
 <% end %>

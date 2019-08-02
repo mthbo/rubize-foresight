@@ -1,5 +1,5 @@
 <% if policy(project_appliance).destroy? %>
-  <%= link_to project_appliance_path(project_appliance), method: :delete, remote: true, data: {confirm: 'Are you certain you want to remove this appliance?'}, class: "text-danger ml-3" do %>
+  <%= link_to project_appliance_path(project_appliance), method: :delete, remote: true, data: {confirm: 'Are you certain you want to remove this appliance?', toggle: "tooltip"}, class: "text-danger my-1 ml-3 mr-sm-2", title:"Remove appliance" do %>
     <i class="fas fa-trash-alt"></i>
   <% end %>
 <% end %>
