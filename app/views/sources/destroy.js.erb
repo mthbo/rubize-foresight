@@ -1,10 +1,15 @@
-function showNoSourceMessage(messageHTML) {
-  const sourceContainer = document.getElementById('source_container');
-  sourceContainer.innerHTML = (messageHTML);
+function hideSourceCard(sourceId) {
+  const sourceCard = document.querySelector(`[data-source-id='${sourceId}']`);
+  sourceCard.classList.add("d-none");
+  sourceCard.classList.remove("d-flex");
 }
 
-document.querySelector("[data-source-id='<%= @source.id %>']").style.display = 'none';
+function showNoSourceMessage(messageHTML) {
+  const sourceContainer = document.getElementById('source_container');
+  sourceContainer.insertAdjacentHTML('beforeend', messageHTML);
+}
 
+hideSourceCard("<%= @source.id %>");
 <% if @appliance.sources.blank? %>
   showNoSourceMessage("<%= j render 'sources/no_source', appliance: @appliance %>");
 <% end %>

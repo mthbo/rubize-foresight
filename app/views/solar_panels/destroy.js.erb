@@ -1,10 +1,15 @@
-function showNoSolarPanelMessage(messageHTML) {
-  const solarPanelContainer = document.getElementById('solar_panel_container');
-  solarPanelContainer.innerHTML = (messageHTML);
+function hideSolarPanelCard(solarPanelId) {
+  const solarPanelCard = document.querySelector(`[data-solar-panel-id='${solarPanelId}']`);
+  solarPanelCard.classList.add("d-none");
+  solarPanelCard.classList.remove("d-flex");
 }
 
-document.querySelector("[data-solar-panel-id='<%= @solar_panel.id %>']").style.display = 'none';
+function showNoSolarPanelMessage(messageHTML) {
+  const solarPanelContainer = document.getElementById('solar_panel_container');
+  solarPanelContainer.insertAdjacentHTML('beforeend', messageHTML);
+}
 
+hideSolarPanelCard("<%= @solar_panel.id %>");
 <% if @solar_panels.blank? %>
   showNoSolarPanelMessage("<%= j render 'solar_panels/no_solar_panel' %>");
 <% end %>

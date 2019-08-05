@@ -1,10 +1,15 @@
-function showNoBatteryMessage(messageHTML) {
-  const batteryContainer = document.getElementById('battery_container');
-  batteryContainer.innerHTML = (messageHTML);
+function hideBatteryCard(batteryId) {
+  const batteryCard = document.querySelector(`[data-battery-id='${batteryId}']`);
+  batteryCard.classList.add("d-none");
+  batteryCard.classList.remove("d-flex");
 }
 
-document.querySelector("[data-battery-id='<%= @battery.id %>']").style.display = 'none';
+function showNoBatteryMessage(messageHTML) {
+  const batteryContainer = document.getElementById('battery_container');
+  batteryContainer.insertAdjacentHTML('beforeend', messageHTML);
+}
 
+hideBatteryCard("<%= @battery.id %>");
 <% if @batteries.blank? %>
   showNoBatteryMessage("<%= j render 'batteries/no_battery' %>");
 <% end %>

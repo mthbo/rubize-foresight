@@ -1,47 +1,68 @@
+function hideProjectApplianceCard(projectApplianceId) {
+  const projectApplianceCard = document.querySelector(`[data-project-appliance-id='${projectApplianceId}']`);
+  projectApplianceCard.classList.add("d-none");
+  projectApplianceCard.classList.remove("d-flex");
+}
+
+function updateUseBadges(useId, badgesHTML) {
+  const useBadgesContainer = document.querySelector(`[data-project-use-id='${useId}'] #use-badges`);
+  useBadgesContainer.innerHTML = badgesHTML;
+}
+
+function hideUseSection(useId) {
+  const useContainer = document.querySelector(`[data-project-use-id='${useId}']`);
+  useContainer.classList.add("d-none");
+}
+
 function showNoProjectApplianceMessage(messageHTML) {
-  const projectApplianceContainer = document.getElementById('project_appliance_container');
-  projectApplianceContainer.innerHTML = (messageHTML);
+  const projectApplianceContainer = document.querySelector("#project_appliance_container");
+  projectApplianceContainer.insertAdjacentHTML('beforeend', messageHTML);
+}
+
+function updateProjectApplianceQuantity(quantity) {
+  document.querySelector("#appliance-quantity").innerHTML = quantity;
 }
 
 function updateLoadChart(loadChartHTML) {
-  const loadChartContainer = document.getElementById('load_chart_container');
+  const loadChartContainer = document.querySelector("#load_chart_container");
   loadChartContainer.innerHTML = (loadChartHTML);
   $('[data-toggle="tooltip"]').tooltip();
 }
 
 function updateProjectFeatures(featuresHTML) {
-  const projectFeaturesContainer = document.getElementById('project_features_container');
+  const projectFeaturesContainer = document.querySelector("#project_features_container");
   projectFeaturesContainer.innerHTML = (featuresHTML);
 }
 
 function updatePowerComponents(componentsHTML) {
-  const powerComponentsContainer = document.getElementById('power_components_container');
+  const powerComponentsContainer = document.querySelector("#power_components_container");
   powerComponentsContainer.innerHTML = (componentsHTML);
 }
 
 function updateSolarSystemFeatures(featuresHTML) {
-  const solarSystemFeaturesContainer = document.getElementById('solar_system_features_container');
+  const solarSystemFeaturesContainer = document.querySelector("#solar_system_features_container");
   solarSystemFeaturesContainer.innerHTML = (featuresHTML);
 }
 
 function updateProjectBudget(budgetHTML) {
-  const projectBudgetContainer = document.getElementById('project_budget_container');
+  const projectBudgetContainer = document.querySelector("#project_budget_container");
   projectBudgetContainer.innerHTML = (budgetHTML);
 }
 
 function updateSolarSystemBudget(budgetHTML) {
-  const solarSystemBudgetContainer = document.getElementById('solar_system_budget_container');
+  const solarSystemBudgetContainer = document.querySelector("#solar_system_budget_container");
   solarSystemBudgetContainer.innerHTML = (budgetHTML);
 }
 
-document.querySelector("[data-project-appliance-id='<%= @project_appliance.id %>']").style.display = 'none';
+hideProjectApplianceCard("<%= @project_appliance.id %>");
+updateUseBadges("<%= @use.id %>", "<%= j render 'projects/use_badges', use: @use, project: @project %>");
 <% unless @project.uses.include? @use %>
-  document.querySelector("[data-project-use-id='<%= @use.id %>']").style.display = 'none';
+  hideUseSection("<%= @use.id %>");
 <% end %>
 <% if @project.project_appliances.blank? %>
   showNoProjectApplianceMessage("<%= j render 'project_appliances/no_project_appliance' %>");
 <% end %>
-document.getElementById('appliance-quantity').innerHTML = "<%= @project.appliance_quantity %>";
+updateProjectApplianceQuantity("<%= @project.appliance_quantity %>");
 updateLoadChart("<%= j render 'shared/load_chart', electrical_load: @project, title: 'Daily load profile', day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>");
 updateProjectFeatures("<%= j render 'projects/features', project: @project %>");
 updateSolarSystemFeatures("<%= j render 'solar_systems/features', solar_system: @solar_system %>");

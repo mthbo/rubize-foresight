@@ -2,10 +2,8 @@
 
   <div class="d-sm-flex pt-2 mt-4 mb-3 justify-content-between">
     <h5><%= use.name %></h5>
-    <div class="ml-sm-4">
-      <%= render 'uses/badge_power', use: use, project: project %>
-      <%= render 'uses/badge_energy', use: use, project: project %>
-      <%= render 'uses/badge_price', use: use, project: project %>
+    <div class="ml-sm-4" id="use-badges">
+      <%= render 'projects/use_badges', use: use, project: project %>
     </div>
   </div>
 
