@@ -5,7 +5,11 @@
     <h5 class="mb-3">General information</h5>
     <%= f.association :use, as: :select %>
     <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
-    <%= f.input :description, placeholder: "High energy efficiency freezer with 400L net capacity,  EU Energy rating 280kWh/year, wall thickness 7cm, climatic class T ...", input_html: { rows: "5" }, include_blank: false %>
+    <%= f.input :description,
+      placeholder: "High energy efficiency freezer with 400L net capacity,  EU Energy rating 280kWh/year, wall thickness 7cm, climatic class T ...",
+      input_html: { rows: "5" },
+      include_blank: false
+    %>
     <%= f.input :photo %>
     <%= f.input :photo_cache, as: :hidden %>
   </div>
@@ -15,16 +19,28 @@
     <div class="row">
       <div class="col-12 col-sm-6">
         <h6>Current type</h6>
-        <%= f.input :current_type, as: :radio_buttons, collection: Appliance::TYPES, wrapper: :horizontal_collection_inline, label: false, include_blank: false %>
+        <%= f.input :current_type,
+          as: :radio_buttons,
+          collection: Appliance::TYPES,
+          wrapper: :horizontal_collection_inline,
+          label: false,
+          include_blank: false
+        %>
       </div>
       <div class="col-12 col-sm-6 <%= 'd-none' unless appliance.current_type == 'AC' %>" id="appliance-frequency-form-group">
         <h6>Working frequency</h6>
         <div class="d-flex">
           <div>
-            <%= f.input :frequency_fifty_hz, label: "50 Hz", label_html: {class: "mr-3"} %>
+            <%= f.input :frequency_fifty_hz,
+              label: "50 Hz",
+              label_html: {class: "mr-3"}
+            %>
           </div>
           <div>
-            <%= f.input :frequency_sixty_hz, label: "60 Hz", label_html: {class: "mr-3"} %>
+            <%= f.input :frequency_sixty_hz,
+              label: "60 Hz",
+              label_html: {class: "mr-3"}
+            %>
           </div>
         </div>
       </div>
@@ -32,15 +48,27 @@
     <h6>Voltage range (V)</h6>
     <div class="row">
       <div class="col">
-        <%= f.input :voltage_min, wrapper: :horizontal_form, label: "min", placeholder: "200" %>
+        <%= f.input :voltage_min,
+          wrapper: :horizontal_form,
+          label: "min",
+          placeholder: "200"
+        %>
       </div>
       <div class="col">
-        <%= f.input :voltage_max, wrapper: :horizontal_form, label: "max", placeholder: "230" %>
+        <%= f.input :voltage_max,
+          wrapper: :horizontal_form,
+          label: "max",
+          placeholder: "230"
+        %>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
-        <%= f.input :energy_grade, as: :select, collection: Appliance::GRADES, label: "EU Energy grade" %>
+        <%= f.input :energy_grade,
+          as: :select,
+          collection: Appliance::GRADES,
+          label: "EU Energy grade"
+        %>
       </div>
     </div>
   </div>
@@ -49,13 +77,22 @@
     <h5 class="mb-3">Working features</h5>
     <div class="row mb-2">
       <div class="col col-12 col-sm-4">
-        <%= f.input :power, label: "Active power (W)", placeholder: "42" %>
+        <%= f.input :power,
+          label: "Active power (W)",
+          placeholder: "42"
+        %>
       </div>
       <div class="col col-12 col-sm-4">
-        <%= f.input :power_factor, label: "Power factor (cos φ)", placeholder: "0,85" %>
+        <%= f.input :power_factor,
+          label: "Power factor (cos φ)",
+          placeholder: "0,85"
+        %>
       </div>
       <div class="col col-12 col-sm-4">
-        <%= f.input :starting_coefficient, label: "Starting coefficient", placeholder: "3" %>
+        <%= f.input :starting_coefficient,
+          label: "Starting coefficient",
+          placeholder: "3"
+        %>
       </div>
     </div>
   </div>

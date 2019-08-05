@@ -3,10 +3,15 @@
 
   <div class="row">
     <div class="col-sm-8">
-      <%= f.input :technology, collection: SolarPanel::TECHNOLOGIES %>
+      <%= f.input :technology,
+        collection: SolarPanel::TECHNOLOGIES
+      %>
     </div>
     <div class="col-sm-4">
-      <%= f.input :power, label: 'Rated power (Wp)', placeholder: "270" %>
+      <%= f.input :power,
+        label: 'Rated power (Wp)',
+        placeholder: "270"
+      %>
     </div>
   </div>
 
@@ -14,13 +19,24 @@
   <p class="text-secondary small"><em>Include wiring and mounting equipment costs (per panel).</em></p>
   <div class="row">
     <div class="col-12 col-sm-4">
-      <%= f.input :price_min, as: :numeric, placeholder: "100", label: "Min" %>
+      <%= f.input :price_min,
+        as: :numeric,
+        placeholder: "100",
+        label: "Min"
+      %>
     </div>
     <div class="col-12 col-sm-4">
-      <%= f.input :price_max, as: :numeric, placeholder: "150", label: "Max" %>
+      <%= f.input :price_max,
+        as: :numeric,
+        placeholder: "150",
+        label: "Max"
+      %>
     </div>
     <div class="col-12 col-sm-4">
-      <%= f.input :currency, as: :select, collection: Money::Currency.all %>
+      <%= f.input :currency,
+        as: :select,
+        collection: Money::Currency.all
+      %>
     </div>
   </div>
 

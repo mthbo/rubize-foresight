@@ -4,13 +4,24 @@
   <h5 class="mb-3 mt-2">Price range (excl. tax)</h5>
   <div class="row">
     <div class="col-12 col-sm-4">
-      <%= f.input :price_min, as: :numeric, placeholder: "100", label: "Min" %>
+      <%= f.input :price_min,
+        as: :numeric,
+        placeholder: "100",
+        label: "Min"
+      %>
     </div>
     <div class="col-12 col-sm-4">
-      <%= f.input :price_max, as: :numeric, placeholder: "150", label: "Max" %>
+      <%= f.input :price_max,
+        as: :numeric,
+        placeholder: "150",
+        label: "Max"
+      %>
     </div>
     <div class="col-12 col-sm-4">
-      <%= f.input :currency, as: :select, collection: Money::Currency.all %>
+      <%= f.input :currency,
+        as: :select,
+        collection: Money::Currency.all
+      %>
     </div>
   </div>
 

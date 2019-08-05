@@ -9,19 +9,34 @@
     <h5 class="mb-3">Input features</h5>
     <div class="row">
       <div class="col-sm-4">
-        <%= f.input :system_voltage, as: :select, collection: PowerSystem::VOLTAGES, label: "System voltage (V)" %>
+        <%= f.input :system_voltage,
+          as: :select,
+          collection: PowerSystem::VOLTAGES,
+          label: "System voltage (V)"
+        %>
       </div>
       <div class="col-sm-8">
-        <%= f.input :mppt, placeholder: "Victron 150/70", label: "MPPT model" %>
+        <%= f.input :mppt,
+          placeholder: "Victron 150/70",
+          label: "MPPT model"
+        %>
       </div>
     </div>
     <h6>Solar array input power (Wp)</h6>
     <div class="row">
       <div class="col">
-        <%= f.input :power_in_min, wrapper: :horizontal_form, label: "min", placeholder: "500" %>
+        <%= f.input :power_in_min,
+          wrapper: :horizontal_form,
+          label: "min",
+          placeholder: "500"
+        %>
       </div>
       <div class="col">
-        <%= f.input :power_in_max, wrapper: :horizontal_form, label: "max", placeholder: "1000" %>
+        <%= f.input :power_in_max,
+          wrapper: :horizontal_form,
+          label: "max",
+          placeholder: "1000"
+        %>
       </div>
     </div>
   </div>
@@ -30,22 +45,41 @@
     <h5 class="mb-3 mt-2">Output features</h5>
     <div class="row">
       <div class="col-sm-5">
-        <%= f.input :power_out_max, label: "Max power (VA)", placeholder: "1500" %>
+        <%= f.input :power_out_max,
+          label: "Max power (VA)",
+          placeholder: "1500"
+        %>
       </div>
       <div class="col-sm-6 offset-sm-1">
-        <%= f.input :ac_out, as: :radio_buttons, wrapper: :vertical_collection_inline, label: "Inverter?", label_html: { class: "text-nowrap" } %>
+        <%= f.input :ac_out,
+          as: :radio_buttons,
+          wrapper: :vertical_collection_inline,
+          label: "Inverter?",
+          label_html: { class: "text-nowrap" }
+        %>
       </div>
     </div>
     <div id="inverter-form-group" class="mb-4 <%= 'd-none' unless power_system.ac_out? %>">
-      <%= f.input :inverter, placeholder: "Victron Phoenix 24/3000", label: "Inverter model" %>
+      <%= f.input :inverter,
+        placeholder: "Victron Phoenix 24/3000",
+        label: "Inverter model"
+      %>
     </div>
     <h6>Voltage range (V)</h6>
     <div class="row">
       <div class="col">
-        <%= f.input :voltage_out_min, wrapper: :horizontal_form, label: "min", placeholder: "200" %>
+        <%= f.input :voltage_out_min,
+          wrapper: :horizontal_form,
+          label: "min",
+          placeholder: "200"
+        %>
       </div>
       <div class="col">
-        <%= f.input :voltage_out_max, wrapper: :horizontal_form, label: "max", placeholder: "230" %>
+        <%= f.input :voltage_out_max,
+          wrapper: :horizontal_form,
+          label: "max",
+          placeholder: "230"
+        %>
       </div>
     </div>
 
@@ -54,13 +88,24 @@
   <h5 class="mb-3 mt-2">Price range (excl. tax)</h5>
   <div class="row">
     <div class="col-12 col-sm-4">
-      <%= f.input :price_min, as: :numeric, placeholder: "100", label: "Min" %>
+      <%= f.input :price_min,
+        as: :numeric,
+        placeholder: "100",
+        label: "Min"
+      %>
     </div>
     <div class="col-12 col-sm-4">
-      <%= f.input :price_max, as: :numeric, placeholder: "150", label: "Max" %>
+      <%= f.input :price_max,
+        as: :numeric,
+        placeholder: "150",
+        label: "Max"
+      %>
     </div>
     <div class="col-12 col-sm-4">
-      <%= f.input :currency, as: :select, collection: Money::Currency.all %>
+      <%= f.input :currency,
+        as: :select,
+        collection: Money::Currency.all
+      %>
     </div>
   </div>
 

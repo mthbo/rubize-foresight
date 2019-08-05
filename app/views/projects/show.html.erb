@@ -30,7 +30,6 @@
 
 <div class="border-bottom border-tertiary pt-4 pb-5" id="solar_system_container">
   <% if @project.solar_systems.present? %>
-    <%= render 'solar_systems/title', solar_system: @project.solar_systems.first %>
     <%= render 'solar_systems/show', solar_system: @project.solar_systems.first %>
   <% else %>
     <%= render 'solar_systems/no_solar_system', project: @project %>

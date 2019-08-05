@@ -1,18 +1,24 @@
-function updateSolarSystem(messageHTML) {
-  const solarSystemContainer = document.getElementById('solar_system_container');
-  solarSystemContainer.innerHTML = (messageHTML);
+function hideSolarSystem(solarSystemId) {
+  const solarSystemSection = document.querySelector(`[data-solar-system-id='${solarSystemId}']`);
+  solarSystemSection.classList.add("d-none");
+}
+
+function updateSolarSystem(contentHTML) {
+  const solarSystemContainer = document.querySelector("#solar_system_container");
+  solarSystemContainer.insertAdjacentHTML('beforeend', contentHTML);
 }
 
 function updateSolarSystemBudget(budgetHTML) {
-  const solarSystemBudgetContainer = document.getElementById('solar_system_budget_container');
+  const solarSystemBudgetContainer = document.querySelector("#solar_system_budget_container");
   solarSystemBudgetContainer.innerHTML = (budgetHTML);
 }
 
+hideSolarSystem("<%= @solar_system.id %>");
 <% if @project.solar_systems.present? %>
   updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_systems.first %>");
   updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @project.solar_systems.first %>");
 <% else %>
   updateSolarSystem("<%= j render 'solar_systems/no_solar_system', project: @project %>");
-  document.getElementById('solar_system_budget_container').innerHTML ="";
+  updateSolarSystemBudget("");
 <% end %>
 

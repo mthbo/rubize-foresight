@@ -1,15 +1,28 @@
-<div class="d-lg-flex justify-content-between">
+<div data-solar-system-id="<%= solar_system.id %>">
 
-  <div class="mr-lg-5" id="solar_system_features_container">
-    <%= render 'solar_systems/features', solar_system: solar_system %>
+  <div class="d-flex mb-4">
+    <h4>
+      <i class="fas fa-solar-panel fa-fw mr-2"></i>
+      Solar system
+    </h4>
+    <%= render 'solar_systems/button_edit', solar_system: solar_system %>
+    <%= render 'solar_systems/button_destroy', solar_system: solar_system %>
   </div>
 
-  <div class="w-100" id="power_components_container">
-    <% if solar_system.power_system.present? %>
-      <%= render 'solar_systems/power_components', solar_system: solar_system %>
-    <% else %>
-      <%= render 'solar_systems/no_solar_system_match' %>
-    <% end %>
+  <div class="d-lg-flex justify-content-between">
+
+    <div class="mr-lg-5" id="solar_system_features_container">
+      <%= render 'solar_systems/features', solar_system: solar_system %>
+    </div>
+
+    <div class="w-100" id="power_components_container">
+      <% if solar_system.power_system.present? %>
+        <%= render 'solar_systems/power_components', solar_system: solar_system %>
+      <% else %>
+        <%= render 'solar_systems/no_solar_system_match' %>
+      <% end %>
+    </div>
+
   </div>
 
 </div>
