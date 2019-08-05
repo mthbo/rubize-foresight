@@ -34,19 +34,14 @@ function updateProjectFeatures(featuresHTML) {
   projectFeaturesContainer.innerHTML = (featuresHTML);
 }
 
-function updatePowerComponents(componentsHTML) {
-  const powerComponentsContainer = document.querySelector("#power_components_container");
-  powerComponentsContainer.innerHTML = (componentsHTML);
-}
-
-function updateSolarSystemFeatures(featuresHTML) {
-  const solarSystemFeaturesContainer = document.querySelector("#solar_system_features_container");
-  solarSystemFeaturesContainer.innerHTML = (featuresHTML);
-}
-
 function updateProjectBudget(budgetHTML) {
   const projectBudgetContainer = document.querySelector("#project_budget_container");
   projectBudgetContainer.innerHTML = (budgetHTML);
+}
+
+function updateSolarSystem(contentHTML) {
+  const solarSystemContainer = document.querySelector("#solar_system_container");
+  solarSystemContainer.innerHTML = (contentHTML);
 }
 
 function updateSolarSystemBudget(budgetHTML) {
@@ -65,13 +60,8 @@ updateUseBadges("<%= @use.id %>", "<%= j render 'projects/use_badges', use: @use
 updateProjectApplianceQuantity("<%= @project.appliance_quantity %>");
 updateLoadChart("<%= j render 'shared/load_chart', electrical_load: @project, title: 'Daily load profile', day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>");
 updateProjectFeatures("<%= j render 'projects/features', project: @project %>");
-updateSolarSystemFeatures("<%= j render 'solar_systems/features', solar_system: @solar_system %>");
-<% if @solar_system.power_system.present? %>
-  updatePowerComponents("<%= j render 'solar_systems/power_components', solar_system: @solar_system %>");
-<% else %>
-  updatePowerComponents("<%= j render 'solar_systems/no_solar_system_match' %>");
-<% end %>
 updateProjectBudget("<%= j render 'projects/budget', project: @project %>");
-<% if @solar_system.present? %>
-  updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @solar_system %>");
+<% if @project.solar_systems.present? %>
+  updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_systems.first %>");
+  updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @project.solar_systems.first %>");
 <% end %>

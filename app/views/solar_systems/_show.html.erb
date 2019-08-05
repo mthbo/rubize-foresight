@@ -11,11 +11,11 @@
 
   <div class="d-lg-flex justify-content-between">
 
-    <div class="mr-lg-5" id="solar_system_features_container">
+    <div class="mr-lg-5">
       <%= render 'solar_systems/features', solar_system: solar_system %>
     </div>
 
-    <div class="w-100" id="power_components_container">
+    <div class="w-100">
       <% if solar_system.power_system.present? %>
         <%= render 'solar_systems/power_components', solar_system: solar_system %>
       <% else %>
