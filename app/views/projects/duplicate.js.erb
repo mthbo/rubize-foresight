@@ -1,10 +1,13 @@
-function prependProjectCard(cardHTML) {
-  const projectList = document.getElementById('project-list');
-  newDiv = document.createElement("div");
+function addProjectCard(parentProjectId, cardHTML) {
+  const parentProjectCard = document.querySelector(`[data-project-id='${parentProjectId}']`);
+  const projectList = parentProjectCard.parentNode;
+  let newDiv = document.createElement("div");
   newDiv.innerHTML = cardHTML;
-  newDiv.classList.add("border", "border-primary");
-  projectList.insertBefore(newDiv, projectList.firstChild);
+  let newProjectCard = newDiv.firstChild;
+  newProjectCard.classList.add("bg-light");
+  projectList.insertBefore(newProjectCard, parentProjectCard);
 }
 
-prependProjectCard("<%= j render 'projects/card', project: @project %>");
+addProjectCard("<%= @parent_project.id%>", "<%= j render 'projects/card', project: @project %>");
+
 $('[data-toggle="tooltip"]').tooltip();

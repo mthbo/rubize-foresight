@@ -34,9 +34,9 @@ function updateSolarSystemBudget(budgetHTML) {
   solarSystemBudgetContainer.innerHTML = (budgetHTML);
 }
 
-document.querySelector("[data-project-appliance-id='<%= @project_appliance.id %>']").remove();
+document.querySelector("[data-project-appliance-id='<%= @project_appliance.id %>']").style.display = 'none';
 <% unless @project.uses.include? @use %>
-  document.querySelector("[data-project-use-id='<%= @use.id %>']").remove();
+  document.querySelector("[data-project-use-id='<%= @use.id %>']").style.display = 'none';
 <% end %>
 <% if @project.project_appliances.blank? %>
   showNoProjectApplianceMessage("<%= j render 'project_appliances/no_project_appliance' %>");

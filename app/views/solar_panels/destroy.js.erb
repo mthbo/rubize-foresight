@@ -3,7 +3,7 @@ function showNoSolarPanelMessage(messageHTML) {
   solarPanelContainer.innerHTML = (messageHTML);
 }
 
-document.querySelector("[data-solar-panel-id='<%= @solar_panel.id %>']").remove();
+document.querySelector("[data-solar-panel-id='<%= @solar_panel.id %>']").style.display = 'none';
 
 <% if @solar_panels.blank? %>
   showNoSolarPanelMessage("<%= j render 'solar_panels/no_solar_panel' %>");

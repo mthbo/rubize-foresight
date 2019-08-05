@@ -6,9 +6,9 @@ class Source < ApplicationRecord
   validates :issued_at, presence: true
   validates :country_code, presence: true, inclusion: {in: ISO3166::Country.codes }
   validates :city, presence: true
-  validates :price, presence: true, numericality: {greater_than_or_equal_to: 0}
-  validates :currency, presence: true, inclusion: {in: Money::Currency }
-  validates :discount_rate, presence: true, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}
+  validates :price, numericality: {greater_than_or_equal_to: 0}, presence: true
+  validates :currency, inclusion: {in: Money::Currency }, presence: true
+  validates :discount_rate, numericality: {greater_than_or_equal_to: 0, less_than_or_equal_to: 100}, presence: true
 
   monetize :price_cents, with_model_currency: :currency
   monetize :price_discount_cents, with_model_currency: :currency
@@ -27,13 +27,13 @@ class Source < ApplicationRecord
   end
 
   def price_eur_cents
-    if price and Money.default_bank.get_rate(currency, :EUR)
+    if price.present? and currency.present? and Money.default_bank.get_rate(currency, :EUR)
       price.exchange_to(:EUR).fractional
     end
   end
 
   def price_discount_eur_cents
-    if price_discount and Money.default_bank.get_rate(currency, :EUR)
+    if price_discount.present? and currency.present? and Money.default_bank.get_rate(currency, :EUR)
       price_discount.exchange_to(:EUR).fractional
     end
   end

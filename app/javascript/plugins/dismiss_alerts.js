@@ -2,7 +2,7 @@ const dismissAlert = (alert) => {
   window.setTimeout(
     function() {
       alert.alert('close');
-    }, 4000);
+    }, 3000);
 };
 
 const dismissAlerts = () => {

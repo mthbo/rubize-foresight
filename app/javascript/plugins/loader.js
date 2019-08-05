@@ -1,5 +1,3 @@
-import modal from 'bootstrap';
-
 const toggleLoader = () => {
   let forceClose = false;
   const $customLoader = $("#custom-loader");
@@ -17,12 +15,12 @@ const toggleLoader = () => {
     console.log("hidden.bs.modal");
     console.log(forceClose);
   });
-  $(document).on('ajax:send', function(){
+  document.body.addEventListener('ajax:send', function(event) {
     $customLoader.modal('show');
     console.log("ajax:send");
     console.log(forceClose);
   });
-  $(document).on('ajax:complete', function(){
+  document.body.addEventListener('ajax:complete', function(event) {
     forceClose = true;
     $customLoader.modal('hide');
     console.log("ajax:complete");

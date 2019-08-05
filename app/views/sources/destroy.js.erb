@@ -3,7 +3,7 @@ function showNoSourceMessage(messageHTML) {
   sourceContainer.innerHTML = (messageHTML);
 }
 
-document.querySelector("[data-source-id='<%= @source.id %>']").remove();
+document.querySelector("[data-source-id='<%= @source.id %>']").style.display = 'none';
 
 <% if @appliance.sources.blank? %>
   showNoSourceMessage("<%= j render 'sources/no_source', appliance: @appliance %>");

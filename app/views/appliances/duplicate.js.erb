@@ -1,11 +1,14 @@
-function prependApplianceCard(cardHTML, useID) {
-  const applianceList = document.querySelector("[data-use-appliances-id='" + useID + "']");
-  newDiv = document.createElement("div");
+function addApplianceCard(parentApplianceId, cardHTML) {
+  const parentApplianceCard = document.querySelector(`[data-appliance-id='${parentApplianceId}']`);
+  const applianceList = parentApplianceCard.parentNode;
+  let newDiv = document.createElement("div");
   newDiv.innerHTML = cardHTML;
-  newDiv.classList.add("border", "border-primary");
-  applianceList.insertBefore(newDiv, applianceList.firstChild);
+  let newApplianceCard = newDiv.firstChild;
+  newApplianceCard.classList.add("bg-light");
+  applianceList.insertBefore(newApplianceCard, parentApplianceCard);
 }
 
-prependApplianceCard("<%= j render 'appliances/card', appliance: @appliance %>", "<%= @appliance.use.id %>");
+addApplianceCard("<%= @parent_appliance.id %>", "<%= j render 'appliances/card', appliance: @appliance %>");
+
 $('[data-toggle="tooltip"]').tooltip();
 
