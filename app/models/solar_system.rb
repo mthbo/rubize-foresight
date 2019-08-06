@@ -27,7 +27,9 @@ class SolarSystem < ApplicationRecord
   def battery_quantity
     unless battery.voltage.blank? or battery.voltage.zero? or battery.storage.blank? or battery.storage.zero?
       factor = (system_voltage / battery.voltage).to_i
-      quantity = project.daily_consumption.to_f / battery.storage * autonomy
+      total_daily_consumption = project.daily_consumption
+      total_daily_consumption += CommunicationModule.first.daily_consumption if (communication? and CommunicationModule.first.present?)
+      quantity = total_daily_consumption.to_f / battery.storage * autonomy
       quantity % factor == 0 ? quantity.to_i : quantity.div(factor) * factor + factor
     end
   end

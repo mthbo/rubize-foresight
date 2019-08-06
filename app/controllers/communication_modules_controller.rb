@@ -41,7 +41,8 @@ class CommunicationModulesController < ApplicationController
     params.require(:communication_module).permit(
       :price_min,
       :price_max,
-      :currency
+      :currency,
+      :daily_consumption
     )
   end
 end
