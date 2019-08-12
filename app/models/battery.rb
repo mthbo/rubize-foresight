@@ -35,11 +35,11 @@ class Battery < ApplicationRecord
   end
 
   def storage_max
-    voltage * capacity if voltage and capacity
+    voltage * capacity if (voltage and capacity)
   end
 
   def storage
-    storage_max * dod.to_f / 100 * efficiency.to_f / 100 if storage_max and dod and efficiency
+    storage_max * dod.to_f / 100 if (storage_max and dod)
   end
 
   def name

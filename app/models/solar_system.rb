@@ -5,6 +5,7 @@ class SolarSystem < ApplicationRecord
   belongs_to :power_system, optional: true
 
   VOLTAGES = [24, 48]
+  PV_COEFF = 5.5
 
   validates :system_voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true
   validates :autonomy, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
@@ -47,8 +48,9 @@ class SolarSystem < ApplicationRecord
   end
 
   def solar_panel_quantity
-    unless storage_max.blank? or solar_panel.power.blank? or solar_panel.power.zero?
-      (storage_max.to_f / (solar_panel.power * 5)).ceil
+    unless storage_max.blank? or solar_panel.power.blank? or solar_panel.power.zero? or battery.efficiency.blank? or battery.efficiency.zero?
+      min_pv_power = storage_max.to_f / (PV_COEFF * battery.efficiency) * 100
+      (min_pv_power.to_f / solar_panel.power).ceil
     end
   end
 
