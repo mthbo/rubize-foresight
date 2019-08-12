@@ -1,16 +1,18 @@
 class PowerSystem < ApplicationRecord
   has_many :solar_systems
 
+  scope :ordered, -> { order(:ac_out, :system_voltage, :power_in_min) }
+
   VOLTAGES = [24, 48]
 
   validates :name, presence: true
   validates :system_voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true
   validates :power_in_min, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
-  validates :power_in_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :power_in_max, numericality: {greater_than: 0, allow_nil: true}, presence: true
   validates :ac_out, inclusion: {in: [true, false]}
-  validates :power_out_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :power_out_max, numericality: {greater_than: 0, allow_nil: true}, presence: true
   validates :voltage_out_min, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
-  validates :voltage_out_max, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :voltage_out_max, numericality: {greater_than: 0, allow_nil: true}, presence: true
 
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true

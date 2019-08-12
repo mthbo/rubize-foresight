@@ -5,9 +5,9 @@ class PagesController < ApplicationController
   end
 
   def power_components
-    @power_systems = policy_scope(PowerSystem).all
-    @solar_panels = policy_scope(SolarPanel).all
-    @batteries = policy_scope(Battery).all
+    @power_systems = policy_scope(PowerSystem).ordered
+    @solar_panels = policy_scope(SolarPanel).ordered
+    @batteries = policy_scope(Battery).ordered
     @communication_modules = policy_scope(CommunicationModule).all
     @distributions = policy_scope(Distribution).all
   end

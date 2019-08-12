@@ -16,12 +16,14 @@
   <%= f.association :solar_panel,
     as: :select,
     label_method: :name,
-    label: "Solar panel model"
+    label: "Solar panel model",
+    collection: SolarPanel.ordered
   %>
   <%= f.association :battery,
     as: :select,
     label_method: :name,
-    label: "Battery model"
+    label: "Battery model",
+    collection: Battery.ordered
   %>
   <%= f.input :communication,
     as: :radio_buttons,

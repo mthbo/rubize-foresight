@@ -1,0 +1,5 @@
+<% if battery.storage_max.present? %>
+  <div class="badge badge-secondary px-2 mr-2 text-nowrap">
+    <%= "#{number_with_delimiter(battery.storage_max, delimiter: " ")} Wh" %>
+  </div>
+<% end %>

@@ -1,13 +1,15 @@
 class SolarPanel < ApplicationRecord
   has_many :solar_systems
 
+  scope :ordered, -> { order(:technology, :power) }
+
   TECHNOLOGIES = [
     "Polycristalline",
     "Monocristalline"
   ]
 
   validates :technology, inclusion: {in: TECHNOLOGIES, allow_blank: true}, presence: true
-  validates :power, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  validates :power, numericality: {greater_than: 0, allow_nil: true}, presence: true
 
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true

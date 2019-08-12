@@ -6,10 +6,10 @@
       <span class="mr-2"><%= battery.technology %></span>
       <span class="text-secondary mr-2">
         <%= "#{battery.voltage} V | #{battery.capacity} Ah" %>
-        <%= " - #{battery.storage_max} Wh" if battery.storage_max %>
       </span>
     </h6>
     <div class="mb-2">
+      <%= render 'batteries/badge_energy', battery: battery %>
       <%= render 'batteries/badge_dod', battery: battery %>
       <%= render 'batteries/badge_efficiency', battery: battery %>
       <%= render 'batteries/badge_price', battery: battery %>
