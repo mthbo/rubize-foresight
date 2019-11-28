@@ -27,7 +27,7 @@
       <div class="col-sm-5 offset-sm-1">
         <%= f.input :night_time,
           label: "<i class='fas fa-moon text-secondary mr-2'></i> Sunset".html_safe,
-          selected: project.day_time ? project.night_time : "#{Appliance::NIGHT_TIME}:00".to_time
+          selected: project.night_time ? project.night_time : "#{Appliance::NIGHT_TIME}:00".to_time
         %>
       </div>
     </div>
