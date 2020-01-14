@@ -17,7 +17,8 @@ class Project < ApplicationRecord
         dictionary: "english",
         any_word: true
       }
-    }
+    },
+    order_within_rank: "updated_at DESC"
 
   FREQUENCIES = ["50 Hz", "60 Hz"]
 

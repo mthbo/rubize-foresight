@@ -1,8 +1,17 @@
 <% if projects.present? %>
+
+  <div class="pb-3 text-secondary">
+    <%= page_entries_info projects %>
+  </div>
+
   <div class="list-group">
     <% projects.each do |project| %>
       <%= render 'projects/card', project: project %>
     <% end %>
+  </div>
+
+  <div class="py-5 d-flex justify-content-center">
+    <%= paginate projects, window: 2 %>
   </div>
 
 <% elsif query.present? %>

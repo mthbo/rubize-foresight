@@ -6,10 +6,11 @@ class ProjectsController < ApplicationController
 
   def index
     @query = params[:query]
+    page_number = params[:page]
     if @query.present?
-      @projects = policy_scope(Project).search(@query)
+      @projects = policy_scope(Project).search(@query).page(page_number)
     else
-      @projects = policy_scope(Project).ordered
+      @projects = policy_scope(Project).ordered.page(page_number)
     end
   end
 
