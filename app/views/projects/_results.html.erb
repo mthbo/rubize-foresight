@@ -11,7 +11,7 @@
   </div>
 
   <div class="py-5 d-flex justify-content-center">
-    <%= paginate projects, window: 2 %>
+    <%= paginate projects, window: 2, remote: true %>
   </div>
 
 <% elsif query.present? %>
