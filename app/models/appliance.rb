@@ -76,28 +76,28 @@ class Appliance < ApplicationRecord
     end
   end
 
-  (0..23).each do |hour|
-    define_method("hourly_consumption_#{hour}") do
-      if apparent_power
-        (method("hourly_rate_#{hour}").call.to_f / 10 * apparent_power).round
-      end
-    end
-  end
-
   def daily_consumption
     if apparent_power
-      (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
+      (0..23).reduce(0) { |sum, hour| sum + method("hourly_rate_#{hour}").call.to_f / 10 } * apparent_power
     end
   end
 
   def daytime_consumption
     if apparent_power
-      (DAY_TIME...NIGHT_TIME).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
+      (DAY_TIME...NIGHT_TIME).reduce(0) { |sum, hour| sum + method("hourly_rate_#{hour}").call.to_f / 10 } * apparent_power
     end
   end
 
   def nighttime_consumption
     daily_consumption - daytime_consumption if apparent_power
+  end
+
+  (0..23).each do |hour|
+    define_method("hourly_consumption_#{hour}") do
+      if apparent_power
+        (method("hourly_rate_#{hour}").call.to_f / 10 * apparent_power)
+      end
+    end
   end
 
   def frequencies
