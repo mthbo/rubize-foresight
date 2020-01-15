@@ -18,7 +18,8 @@ class Appliance < ApplicationRecord
         dictionary: "english",
         any_word: true
       }
-    }
+    },
+    order_within_rank: "updated_at DESC"
 
   mount_uploader :photo, PhotoUploader
 

@@ -1,6 +1,6 @@
 <% if uses.present? %>
   <% uses.each do |use| %>
-    <%= render 'appliances/use_section', use: use, use_appliances: appliances.where(use_id: use.id) %>
+    <%= render 'appliances/use_section', use: use, use_appliances: appliances.where(use_id: use.id).page(use.id == use_pagination_id ? page_number : 1) %>
   <% end %>
 
 <% else %>

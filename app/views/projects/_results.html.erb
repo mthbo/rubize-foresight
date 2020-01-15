@@ -1,6 +1,6 @@
 <% if projects.present? %>
 
-  <div class="pb-3 text-secondary">
+  <div class="pb-3 text-secondary small">
     <%= page_entries_info projects %>
   </div>
 
@@ -10,7 +10,7 @@
     <% end %>
   </div>
 
-  <div class="py-5 d-flex justify-content-center">
+  <div class="py-5 d-flex justify-content-center small">
     <%= paginate projects, window: 2, remote: true %>
   </div>
 

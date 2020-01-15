@@ -6,6 +6,8 @@ class AppliancesController < ApplicationController
 
   def index
     @query = params[:query]
+    @page_number = params[:page]
+    @use_pagination_id = params[:use].to_i
     if @query.present?
       @appliances = policy_scope(Appliance).search(@query)
       use_ids = @appliances.select(:use_id).reorder("").distinct

@@ -7,10 +7,18 @@
   </div>
 
   <% if use_appliances.present? %>
+    <div class="pb-3 text-secondary small">
+      <%= page_entries_info use_appliances %>
+    </div>
+
     <div class="list-group">
       <% use_appliances.each do |appliance| %>
         <%= render 'appliances/card', appliance: appliance %>
       <% end %>
+    </div>
+
+    <div class="pt-4 d-flex justify-content-center small">
+      <%= paginate use_appliances, window: 2, remote: true, params: {use: use} %>
     </div>
 
   <% else %>

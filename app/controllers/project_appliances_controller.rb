@@ -8,6 +8,8 @@ class ProjectAppliancesController < ApplicationController
 
   def index
     @query = params[:query]
+    @page_number = params[:page]
+    @use_pagination_id = params[:use].to_i
     appliance_subset = policy_scope(Appliance).where(current_type: @project.current_array)
     @appliances = @query.present? ? appliance_subset.search(@query) : appliance_subset.ordered
     use_ids = @appliances.select(:use_id).reorder("").distinct

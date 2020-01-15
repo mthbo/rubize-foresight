@@ -10,4 +10,5 @@ function refreshResults(resultsHTML) {
 }
 
 refreshInput('<%= @query %>');
-refreshResults('<%= j render "project_appliances/results", uses: @uses, appliances: @appliances, project: @project %>');
+refreshResults('<%= j render "project_appliances/results", uses: @uses, appliances: @appliances, project: @project, page_number: @page_number, use_pagination_id: @use_pagination_id %>');
+$("#custom-loader").modal('hide');
