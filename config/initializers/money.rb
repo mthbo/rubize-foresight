@@ -18,7 +18,7 @@ oxr.show_alternative = true
 oxr.prettyprint = false
 
 # This can be removed is you have data to avoid http call on boot for production
-oxr.update_rates
+# oxr.update_rates
 
 MoneyRails.configure do |config|
 
