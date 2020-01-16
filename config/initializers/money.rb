@@ -1,5 +1,25 @@
 require 'money/bank/open_exchange_rates_bank'
 
+OXR_CACHE_KEY = "#{Rails.env}:money:exchange_rates".freeze
+oxr = Money::Bank::OpenExchangeRatesBank.new(ExchangeRate)
+oxr.ttl_in_seconds = 86400
+oxr.cache = Proc.new do |text|
+  if text
+    # only expire when refresh_rates is called or `force_refresh_rate_on_expire`
+    # option is enabled
+    # you can also set `expires_in` option on write to force fetch new rates
+    Rails.cache.write(OXR_CACHE_KEY, text)
+  else
+    Rails.cache.read(OXR_CACHE_KEY)
+  end
+end
+oxr.app_id = ENV['OXR_APP_ID']
+oxr.show_alternative = true
+oxr.prettyprint = false
+
+# This can be removed is you have data to avoid http call on boot for production
+oxr.update_rates
+
 MoneyRails.configure do |config|
 
   # To set the default currency
@@ -13,62 +33,7 @@ MoneyRails.configure do |config|
   # Example:
   # config.default_bank = EuCentralBank.new
 
-  oxr = Money::Bank::OpenExchangeRatesBank.new
-  oxr.app_id = ENV['OXR_APP_ID']
-  oxr.update_rates
-
-  # (optional)
-  # See https://github.com/spk/money-open-exchange-rates#cache for more info
-  # Updated only when `refresh_rates` is called
-  # oxr.cache = 'path/to/file/cache.json'
-
-  # (optional)
-  # Set the seconds after than the current rates are automatically expired
-  # by default, they never expire, in this example 1 day.
-  # This ttl is about money store (memory, database ...) passed though
-  # `Money::Bank::OpenExchangeRatesBank` as argument not about `cache` option.
-  # The base time is the timestamp fetched from API.
-  # oxr.ttl_in_seconds = 86400
-
-  # (optional)
-  # Set historical date of the rate
-  # see https://openexchangerates.org/documentation#historical-data
-  # oxr.date = '2015-01-01'
-
-  # (optional)
-  # Set the base currency for all rates. By default, USD is used.
-  # OpenExchangeRates only allows USD as base currency
-  # for the free plan users.
-  # oxr.source = 'USD'
-
-  # (optional)
-  # Extend returned values with alternative, black market and digital currency
-  # rates. By default, false is used
-  # see: https://docs.openexchangerates.org/docs/alternative-currencies
-  # oxr.show_alternative = true
-
-  # (optional)
-  # Minified Response ('prettyprint')
-  # see https://docs.openexchangerates.org/docs/prettyprint
-  # oxr.prettyprint = false
-
-  # (optional)
-  # Refresh rates, store in cache and update rates
-  # Should be used on crontab/worker/scheduler `Money.default_bank.refresh_rates`
-  # If you are using unicorn-worker-killer gem or on Heroku like platform,
-  # you should avoid to put this on the initializer of your Rails application,
-  # because will increase your OXR API usage.
-  # oxr.refresh_rates
-
-  # (optional)
-  # Force refresh rates cache and store on the fly when ttl is expired
-  # This will slow down request on get_rate, so use at your on risk, if you don't
-  # want to setup crontab/worker/scheduler for your application.
-  # Again this is not safe with multiple servers and could increase API usage.
-  # oxr.force_refresh_rate_on_expire = true
-
   config.default_bank = oxr
-
 
   # Add exchange rates to current money bank object.
   # (The conversion rate refers to one direction only)
