@@ -1,7 +1,7 @@
 require 'money/bank/open_exchange_rates_bank'
 
 OXR_CACHE_KEY = "#{Rails.env}:money:exchange_rates".freeze
-oxr = Money::Bank::OpenExchangeRatesBank.new()
+oxr = Money::Bank::OpenExchangeRatesBank.new(ExchangeRate)
 oxr.ttl_in_seconds = 86400
 oxr.cache = Proc.new do |text|
   if text
