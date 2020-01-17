@@ -3,19 +3,17 @@ class CommunicationModule < ApplicationRecord
 
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
-
   monetize :price_max_cents, with_model_currency: :currency
   monetize :price_max_eur_cents, with_currency: :eur, allow_nil: true
 
-  def price_min_eur_cents
-    if price_min and Money.default_bank.get_rate(currency, :EUR)
-      price_min.exchange_to(:EUR).fractional
-    end
-  end
+  before_save :set_prices_in_eur
 
-  def price_max_eur_cents
-    if price_max and Money.default_bank.get_rate(currency, :EUR)
-      price_max.exchange_to(:EUR).fractional
+  private
+
+  def set_prices_in_eur
+    if currency and Money.default_bank.get_rate(currency, :EUR)
+      self.price_min_eur_cents = price_min.exchange_to(:EUR).fractional if price_min
+      self.price_max_eur_cents = price_max.exchange_to(:EUR).fractional if price_max
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_133845) do
+ActiveRecord::Schema.define(version: 2020_01_17_141627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_133845) do
     t.datetime "updated_at", null: false
     t.integer "efficiency"
     t.integer "price_max_cents"
+    t.integer "price_min_eur_cents"
+    t.integer "price_max_eur_cents"
   end
 
   create_table "communication_modules", force: :cascade do |t|
@@ -78,6 +80,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_133845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "daily_consumption"
+    t.integer "price_min_eur_cents"
+    t.integer "price_max_eur_cents"
   end
 
   create_table "distributions", force: :cascade do |t|
@@ -86,6 +90,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_133845) do
     t.string "currency", default: "eur"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "price_min_eur_cents"
+    t.integer "price_max_eur_cents"
   end
 
   create_table "exchange_rates", force: :cascade do |t|
@@ -112,6 +118,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_133845) do
     t.integer "system_voltage"
     t.integer "power_in_min"
     t.integer "power_in_max"
+    t.integer "price_min_eur_cents"
+    t.integer "price_max_eur_cents"
   end
 
   create_table "project_appliances", force: :cascade do |t|
@@ -173,6 +181,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_133845) do
     t.datetime "updated_at", null: false
     t.string "technology"
     t.integer "price_max_cents"
+    t.integer "price_min_eur_cents"
+    t.integer "price_max_eur_cents"
   end
 
   create_table "solar_systems", force: :cascade do |t|
