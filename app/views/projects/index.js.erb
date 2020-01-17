@@ -9,6 +9,7 @@ function refreshResults(resultsHTML) {
   queryResults.innerHTML = (resultsHTML);
 }
 
+var $loader = $("#custom-loader");
 refreshInput('<%= @query %>');
 refreshResults('<%= j render "projects/results", projects: @projects, query: @query %>');
-$("#custom-loader").modal('hide');
+$loader.modal('hide');
