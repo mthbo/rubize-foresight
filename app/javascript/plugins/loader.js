@@ -12,10 +12,10 @@ const toggleLoader = () => {
   document.body.addEventListener('ajax:send', function(event) {
     $customLoader.modal('show');
   });
-  document.body.addEventListener('ajax:complete', function(event) {
-    forceClose = true;
-    $customLoader.modal('hide');
-  });
+  // document.body.addEventListener('ajax:complete', function(event) {
+  //   forceClose = true;
+  //   $customLoader.modal('hide');
+  // });
 };
 
 export { toggleLoader };
