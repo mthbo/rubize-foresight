@@ -102,8 +102,9 @@ class Project < ApplicationRecord
         sum += project_appliance.appliance.apparent_power * project_appliance.quantity
       end
     end
-    sum.round(1)
+    sum
   end
+
 
   def peak_power
     sum = 0
@@ -112,7 +113,31 @@ class Project < ApplicationRecord
         sum += project_appliance.appliance.peak_power * project_appliance.quantity
       end
     end
-    sum.round(1)
+    sum
+  end
+
+  def daily_consumption
+    sum = 0
+    project_appliances.each do |project_appliance|
+      if project_appliance.daily_consumption
+        sum += project_appliance.daily_consumption * project_appliance.quantity
+      end
+    end
+    sum
+  end
+
+  def daytime_consumption
+    sum = 0
+    project_appliances.each do |project_appliance|
+      if project_appliance.daytime_consumption
+        sum += project_appliance.daytime_consumption * project_appliance.quantity
+      end
+    end
+    sum
+  end
+
+  def nighttime_consumption
+    daily_consumption - daytime_consumption
   end
 
   (0..23).each do |hour|
@@ -129,31 +154,8 @@ class Project < ApplicationRecord
 
   (0..23).each do |hour|
     define_method("hourly_rate_#{hour}") do
-      apparent_power.zero? ? 0 : (method("hourly_consumption_#{hour}").call.to_f / apparent_power * 10).round(2)
+      apparent_power.zero? ? 0 : (method("hourly_consumption_#{hour}").call.to_f / apparent_power * 10)
     end
-  end
-
-  def daily_consumption
-    (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
-  end
-
-  def daytime_consumption
-    if day_time and night_time
-      day_h = day_time.hour
-      day_m = day_time.min
-      night_h = night_time.hour
-      night_m = night_time.min
-      consumption = (day_h...night_h).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call }
-      consumption -= day_m.to_f / 60 * method("hourly_consumption_#{day_h}").call
-      consumption += night_m.to_f / 60 * method("hourly_consumption_#{night_h}").call
-      consumption.round
-    else
-      0
-    end
-  end
-
-  def nighttime_consumption
-    daily_consumption - daytime_consumption
   end
 
   def price_min_cents
@@ -163,7 +165,7 @@ class Project < ApplicationRecord
         sum += project_appliance.appliance.price_min_cents * project_appliance.quantity
       end
     end
-    sum.round(1)
+    sum
   end
 
   def price_max_cents
@@ -173,7 +175,7 @@ class Project < ApplicationRecord
         sum += project_appliance.appliance.price_max_cents * project_appliance.quantity
       end
     end
-    sum.round(1)
+    sum
   end
 
   def price_total_min_cents

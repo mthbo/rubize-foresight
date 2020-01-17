@@ -23,6 +23,8 @@ class Appliance < ApplicationRecord
 
   mount_uploader :photo, PhotoUploader
 
+  before_save :set_power_factor_and_starting_coeff
+
   DAY_TIME = 6
   NIGHT_TIME = 18
   TYPES = ["AC", "DC"]
@@ -65,14 +67,14 @@ class Appliance < ApplicationRecord
   monetize :price_max_cents, allow_nil: true, with_currency: :eur
 
   def apparent_power
-    (power / power_factor) if power and power_factor
+    if power and power_factor
+      (power / power_factor)
+    end
   end
 
   def peak_power
     if apparent_power and starting_coefficient
-      (apparent_power * starting_coefficient)
-    elsif apparent_power
-      apparent_power
+      apparent_power * starting_coefficient
     end
   end
 
@@ -120,12 +122,19 @@ class Appliance < ApplicationRecord
     end
   end
 
-  def price_min_cents
-    sources.select{ |source| source.price_discount_eur_cents }.map{ |source| source.price_discount_eur_cents }.min
+  def price_max_cents
+    sources.maximum(:price_eur_cents)
   end
 
-  def price_max_cents
-    sources.select{ |source| source.price_eur_cents }.map{ |source| source.price_eur_cents }.max
+  def price_min_cents
+    sources.minimum("price_eur_cents - price_eur_cents * discount_rate / 100")
+  end
+
+  private
+
+  def set_power_factor_and_starting_coeff
+    self.power_factor = 1 if power_factor.blank?
+    self.starting_coefficient = 1 if starting_coefficient.blank?
   end
 
 end

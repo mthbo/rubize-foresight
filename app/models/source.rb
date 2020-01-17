@@ -15,6 +15,8 @@ class Source < ApplicationRecord
   monetize :price_eur_cents, with_currency: :eur, allow_nil: true
   monetize :price_discount_eur_cents, with_currency: :eur, allow_nil: true
 
+  before_save :set_price_in_eur
+
   def country_name
     if country_code
       country = ISO3166::Country[country_code]
@@ -26,15 +28,15 @@ class Source < ApplicationRecord
     (price_cents * (1 - discount_rate.to_f / 100)).to_i if price_cents
   end
 
-  def price_eur_cents
-    if price.present? and currency.present? and Money.default_bank.get_rate(currency, :EUR)
-      price.exchange_to(:EUR).fractional
-    end
+  def price_discount_eur_cents
+    (price_eur_cents * (1 - discount_rate.to_f / 100)).to_i if price_eur_cents
   end
 
-  def price_discount_eur_cents
-    if price_discount.present? and currency.present? and Money.default_bank.get_rate(currency, :EUR)
-      price_discount.exchange_to(:EUR).fractional
+  private
+
+  def set_price_in_eur
+    if price and currency and Money.default_bank.get_rate(currency, :EUR)
+      self.price_eur_cents = price.exchange_to(:EUR).fractional
     end
   end
 

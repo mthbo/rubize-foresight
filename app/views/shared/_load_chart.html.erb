@@ -13,7 +13,7 @@
         </div>
         <div class="chart-bar-container d-flex flex-column">
           <div class="<%= (day...night).include?(hour) ? 'chart-bar-empty-day' : 'chart-bar-empty-night' %>" style='height: <%= "#{100 - rate}%" %>'></div>
-          <div class="<%= (day...night).include?(hour) ? 'chart-bar-full-day' : 'chart-bar-full-night' %>" style='height: <%= "#{rate}%" %>' data-toggle="tooltip" title="<%= number_with_delimiter(electrical_load.method("hourly_consumption_#{hour}").call.round, delimiter: " ") %> Wh" data-placement="top"></div>
+          <div class="<%= (day...night).include?(hour) ? 'chart-bar-full-day' : 'chart-bar-full-night' %>" style='height: <%= "#{rate}%" %>' data-toggle="tooltip" title="<%= number_with_delimiter(electrical_load.method("hourly_consumption_#{hour}").call.round, delimiter: " ") if electrical_load.method("hourly_consumption_#{hour}").call %> Wh" data-placement="top"></div>
         </div>
         <div class="text-center mt-1">
           <span class="d-sm-none very-small font-weight-bold"><%= [0, 6, 12, 18].include?(hour) ? hour : "." %></span>

@@ -35,7 +35,7 @@ class Use < ApplicationRecord
         sum += project_appliance.appliance.apparent_power * project_appliance.quantity
       end
     end
-    sum.round(1)
+    sum
   end
 
   def peak_power(project)
@@ -45,7 +45,31 @@ class Use < ApplicationRecord
         sum += project_appliance.appliance.peak_power * project_appliance.quantity
       end
     end
-    sum.round(1)
+    sum
+  end
+
+  def daily_consumption(project)
+    sum = 0
+    project_appliances(project).each do |project_appliance|
+      if project_appliance.daily_consumption
+        sum += project_appliance.daily_consumption * project_appliance.quantity
+      end
+    end
+    sum
+  end
+
+  def daytime_consumption(project)
+    sum = 0
+    project_appliances(project).each do |project_appliance|
+      if project_appliance.daytime_consumption
+        sum += project_appliance.daytime_consumption * project_appliance.quantity
+      end
+    end
+    sum
+  end
+
+  def nighttime_consumption(project)
+    daily_consumption(project) - daytime_consumption(project)
   end
 
   (0..23).each do |hour|
@@ -60,29 +84,6 @@ class Use < ApplicationRecord
     end
   end
 
-  def daily_consumption(project)
-    (0..23).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call(project) }
-  end
-
-  def daytime_consumption(project)
-    if project.day_time and project.night_time
-      day_h = project.day_time.hour
-      day_m = project.day_time.min
-      night_h = project.night_time.hour
-      night_m = project.night_time.min
-      consumption = (day_h...night_h).reduce(0) { |sum, hour| sum + method("hourly_consumption_#{hour}").call(project) }
-      consumption -= day_m.to_f / 60 * method("hourly_consumption_#{day_h}").call(project)
-      consumption += night_m.to_f / 60 * method("hourly_consumption_#{night_h}").call(project)
-      consumption.round
-    else
-      0
-    end
-  end
-
-  def nighttime_consumption(project)
-    daily_consumption(project) - daytime_consumption(project)
-  end
-
   def price_min_cents(project=nil)
     if project.present?
       sum = 0
@@ -91,7 +92,7 @@ class Use < ApplicationRecord
           sum += project_appliance.appliance.price_min_cents * project_appliance.quantity
         end
       end
-      sum.round(1)
+      sum
     end
   end
 
@@ -103,7 +104,7 @@ class Use < ApplicationRecord
           sum += project_appliance.appliance.price_max_cents * project_appliance.quantity
         end
       end
-      sum.round(1)
+      sum
     end
   end
 
