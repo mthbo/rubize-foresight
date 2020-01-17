@@ -11,5 +11,4 @@ function refreshResults(resultsHTML) {
 
 refreshInput('<%= @query %>');
 refreshResults('<%= j render "appliances/results", uses: @uses, appliances: @appliances, page_number: @page_number, use_pagination_id: @use_pagination_id %>');
-$("#custom-loader").modal('hide');
-
+document.body.dispatchEvent(new Event('ajax:complete'));
