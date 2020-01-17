@@ -16,6 +16,10 @@ const toggleLoader = () => {
     forceClose = true;
     $customLoader.modal('hide');
   });
+  document.body.addEventListener('ajax:stopped', function(event) {
+    forceClose = true;
+    $customLoader.modal('hide');
+  });
 };
 
 export { toggleLoader };
