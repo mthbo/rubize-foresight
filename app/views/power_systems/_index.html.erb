@@ -1,7 +1,16 @@
 <div id="power_system_container">
   <% if power_systems.present? %>
+
+    <h6 class="pb-2">DC systems</h6>
+    <div class="list-group pb-4">
+      <% power_systems.where.not(ac_out: true).each do |power_system| %>
+        <%= render 'power_systems/card', power_system: power_system %>
+      <% end %>
+    </div>
+
+    <h6 class="pb-2">AC systems</h6>
     <div class="list-group">
-      <% power_systems.each do |power_system| %>
+      <% power_systems.where(ac_out: true).each do |power_system| %>
         <%= render 'power_systems/card', power_system: power_system %>
       <% end %>
     </div>

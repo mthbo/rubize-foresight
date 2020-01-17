@@ -1,10 +1,16 @@
 <div id="solar_panel_container">
   <% if solar_panels.present? %>
-    <div class="list-group">
-      <% solar_panels.each do |solar_panel| %>
-        <%= render 'solar_panels/card', solar_panel: solar_panel %>
+
+    <% SolarPanel::TECHNOLOGIES.each do |technology| %>
+      <% if solar_panels.where(technology: technology).present? %>
+        <h6 class="pb-2"><%= technology %></h6>
+        <div class="list-group pb-4">
+          <% solar_panels.where(technology: technology).each do |solar_panel| %>
+            <%= render 'solar_panels/card', solar_panel: solar_panel %>
+          <% end %>
+        </div>
       <% end %>
-    </div>
+    <% end %>
 
   <% else %>
     <%= render 'solar_panels/no_solar_panel' %>

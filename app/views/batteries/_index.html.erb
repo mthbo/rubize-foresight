@@ -1,10 +1,16 @@
 <div id="battery_container">
   <% if batteries.present? %>
-    <div class="list-group">
-      <% batteries.each do |battery| %>
+
+    <% Battery::TECHNOLOGIES.each do |technology| %>
+      <% if batteries.where(technology: technology).present? %>
+        <h6 class="pb-2"><%= technology %></h6>
+        <div class="list-group pb-4">
+          <% batteries.where(technology: technology).each do |battery| %>
         <%= render 'batteries/card', battery: battery %>
       <% end %>
-    </div>
+        </div>
+      <% end %>
+    <% end %>
 
   <% else %>
     <%= render 'batteries/no_battery' %>
