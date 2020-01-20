@@ -18,10 +18,4 @@
     <%= render 'pages/card', title: "Projects", description: "A tool to design setups of appliances and solar systems.", image: "projects.svg", action: "Browse projects", path: projects_path %>
   </div>
 
-  <% if user_signed_in? and current_user.admin %>
-    <div class="col-12 col-sm-6 col-lg-4 mb-4">
-      <%= render 'pages/card', title: "Team", description: "See my team users, approve / revoke users and manage roles.", image: "team.svg", action: "Manage my team", path: admin_users_path %>
-    </div>
-  <% end %>
-
 </div>

@@ -1,0 +1,6 @@
+<% if policy(User).create? %>
+  <%= link_to new_user_registration_path, class: "btn btn-primary ml-lg-5 flex-grow-1" do %>
+    <i class="fas fa-plus mr-1"></i>
+    New user
+  <% end %>
+<% end %>

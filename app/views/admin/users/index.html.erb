@@ -1,20 +1,27 @@
-<%= render 'shared/back_link', path: root_path, text: "Back to home" %>
+<div class="d-lg-flex justify-content-between mb-4">
+  <div class="mr-lg-5">
+    <h2 class="mb-3">Users</h2>
+  </div>
+  <div class="flex-shrink-0">
+    <div>
+      <%= render 'button_new' %>
+    </div>
+  </div>
+</div>
 
-<h2 class="mb-3">My team</h2>
-
-<% if @users_not_approved.present? %>
-  <h5 class="mt-4 mb-3">Waiting for approval</h5>
+<% if @users_approved.present? %>
+  <h5 class="mt-4 mb-3">Allowed users</h5>
   <div class="list-group">
-    <% @users_not_approved.each do |user| %>
+    <% @users_approved.each do |user| %>
       <%= render 'index_show', user: user %>
     <% end %>
   </div>
 <% end %>
 
-<% if @users_approved.present? %>
-  <h5 class="mt-4 mb-3">Approved users</h5>
+<% if @users_not_approved.present? %>
+  <h5 class="mt-4 mb-3">Ban users</h5>
   <div class="list-group">
-    <% @users_approved.each do |user| %>
+    <% @users_not_approved.each do |user| %>
       <%= render 'index_show', user: user %>
     <% end %>
   </div>

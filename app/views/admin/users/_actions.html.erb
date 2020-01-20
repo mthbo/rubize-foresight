@@ -1,7 +1,7 @@
 <% if policy(user).update? %>
 
   <% if user.approved? == false %>
-    <%= link_to "Approve", admin_user_path(user, user: {approved: true}), class: "btn btn-primary btn-sm my-2", method: :put %>
+    <%= link_to "Allow", admin_user_path(user, user: {approved: true}), class: "btn btn-primary btn-sm my-2", method: :put %>
 
   <% elsif user.admin? %>
     <%= link_to "Dismiss admin", admin_user_path(user, user: {admin: false}), class: "btn btn-outline-secondary btn-sm my-2", method: :put, data: {confirm: 'Are you certain you want to dismiss admin rights to this user?'} %>

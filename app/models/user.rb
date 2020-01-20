@@ -4,10 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :name, presence: true
 
-  after_create :send_admin_mail
+  after_create :send_welcome_email
 
   def active_for_authentication?
     super && approved?
@@ -17,7 +16,13 @@ class User < ApplicationRecord
     approved? ? super : :not_approved
   end
 
-  def send_admin_mail
-    AdminMailer.new_user_waiting_for_approval(email).deliver
+  private
+
+  def send_welcome_email
+    token, enc_token = Devise.token_generator.generate(self.class, :reset_password_token)
+    self.reset_password_token   = enc_token
+    self.reset_password_sent_at = Time.now.utc
+    self.save(validate: false)
+    UserMailer.user_welcome_email(self, token).deliver
   end
 end
