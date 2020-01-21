@@ -17,8 +17,22 @@
       <% end %>
     </div>
 
-    <div class="pt-4 d-flex justify-content-center small">
-      <%= paginate use_appliances, window: 2, remote: true, params: {use: use} %>
+    <div class="pt-4 d-flex justify-content-center">
+      <div class="d-none d-sm-block small">
+        <%= paginate use_appliances, window: 2, remote: true, params: {use: use} %>
+      </div>
+      <div class="d-sm-none">
+        <nav>
+          <ul class="pagination">
+            <li class="page-item">
+              <%= link_to_prev_page use_appliances, "&laquo;".html_safe, class: "page-link", remote: true, params: {use: use} %>
+            </li>
+            <li class="page-item">
+              <%= link_to_next_page use_appliances, "&raquo;".html_safe, class: "page-link", remote: true, params: {use: use} %>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
 
   <% else %>

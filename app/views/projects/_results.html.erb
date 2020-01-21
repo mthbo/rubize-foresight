@@ -10,8 +10,22 @@
     <% end %>
   </div>
 
-  <div class="py-5 d-flex justify-content-center small">
-    <%= paginate projects, window: 2, remote: true %>
+  <div class="py-5 d-flex justify-content-center">
+    <div class="d-none d-sm-block small">
+      <%= paginate projects, window: 2, remote: true %>
+    </div>
+    <div class="d-sm-none">
+      <nav>
+        <ul class="pagination">
+          <li class="page-item">
+            <%= link_to_prev_page projects, "&laquo;".html_safe, class: "page-link", remote: true %>
+          </li>
+          <li class="page-item">
+            <%= link_to_next_page projects, "&raquo;".html_safe, class: "page-link", remote: true %>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
 
 <% elsif query.present? %>
