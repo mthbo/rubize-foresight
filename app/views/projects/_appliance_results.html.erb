@@ -1,0 +1,10 @@
+<% if uses.present? %>
+  <% uses.each do |use| %>
+    <%= render 'projects/appliance_use_section', use: use, use_appliances: appliances.where(use_id: use.id).page(use.id == use_pagination_id ? page_number : 1), project: project %>
+  <% end %>
+
+<% else %>
+  <div class="text-secondary small my-3"><em>
+      Sorry, no appliances found
+  </em></div>
+<% end %>

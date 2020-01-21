@@ -58,8 +58,8 @@
 
 <div class="py-4">
   <%= render 'project_appliances/title', project: @project %>
-  <%= render 'projects/appliances', project_appliances: @project_appliances, uses: @uses, project: @project, card: 'card' %>
+  <%= render 'projects/project_appliances', project_appliances: @project_appliances, uses: @uses, project: @project, card: 'card' %>
   <div class="d-flex mt-4 pt-3">
-    <%= render 'project_appliances/button_index', project: @project %>
+    <%= render 'projects/appliance_button_index', project: @project %>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<%= form_tag project_project_appliances_path, method: :get, remote: true, class: "flex-grow-1 d-flex" do %>
+<%= form_tag appliances_project_path, method: :get, remote: true, class: "flex-grow-1 d-flex" do %>
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
@@ -10,5 +10,5 @@
 <% end %>
 
 <div class="">
-  <%= link_to "Clear", project_project_appliances_path, remote: true, class: "btn btn-link btn-sm ml-md-3" %>
+  <%= link_to "Clear", appliances_project_path, remote: true, class: "btn btn-link btn-sm ml-md-3" %>
 </div>

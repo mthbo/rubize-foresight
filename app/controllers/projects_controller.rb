@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   include PowerSystemAttribution
-  before_action :find_project, only: [:show, :edit, :update, :destroy]
+  before_action :find_project, only: [:show, :edit, :update, :destroy, :appliances]
   skip_before_action :authenticate_user!, only: [:public]
   layout 'form', only: [:new, :create, :edit, :update, :duplicate]
 
@@ -71,6 +71,16 @@ class ProjectsController < ApplicationController
     @project_appliances = @project.project_appliances.ordered
     @uses = @project.uses.ordered
     render layout: 'public'
+  end
+
+  def appliances
+    @query = params[:query]
+    @page_number = params[:page]
+    @use_pagination_id = params[:use].to_i
+    appliance_subset = policy_scope(Appliance).where(current_type: @project.current_array)
+    @appliances = @query.present? ? appliance_subset.search(@query) : appliance_subset.ordered
+    use_ids = @appliances.select(:use_id).reorder("").distinct
+    @uses = policy_scope(Use).where(id: use_ids).ordered
   end
 
   private

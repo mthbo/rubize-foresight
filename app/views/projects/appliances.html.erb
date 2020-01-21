@@ -3,9 +3,9 @@
 <h3 class="mb-3">Select an appliance from catalog</h3>
 
 <div class="d-flex align-items-center mt-4 mb-2">
-  <%= render 'query' %>
+  <%= render 'projects/appliance_query' %>
 </div>
 
 <div id="results">
-  <%= render 'results', uses: @uses, appliances: @appliances, project: @project, page_number: @page_number, use_pagination_id: @use_pagination_id %>
+  <%= render 'projects/appliance_results', uses: @uses, appliances: @appliances, project: @project, page_number: @page_number, use_pagination_id: @use_pagination_id %>
 </div>

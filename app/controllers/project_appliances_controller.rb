@@ -1,20 +1,10 @@
 class ProjectAppliancesController < ApplicationController
   include PowerSystemAttribution
-  before_action :find_project, only: [:index, :new, :create]
+  before_action :find_project, only: [:new, :create]
   before_action :find_appliance, only: [:new, :refresh_load]
   before_action :find_project_appliance, only: [:edit, :update, :destroy]
   skip_after_action :verify_authorized, only: [:refresh_load]
   layout 'form', only: [:new, :create, :edit, :update]
-
-  def index
-    @query = params[:query]
-    @page_number = params[:page]
-    @use_pagination_id = params[:use].to_i
-    appliance_subset = policy_scope(Appliance).where(current_type: @project.current_array)
-    @appliances = @query.present? ? appliance_subset.search(@query) : appliance_subset.ordered
-    use_ids = @appliances.select(:use_id).reorder("").distinct
-    @uses = policy_scope(Use).where(id: use_ids).ordered
-  end
 
   def new
     @project_appliance = @project.project_appliances.new

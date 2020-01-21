@@ -15,9 +15,10 @@ Rails.application.routes.draw do
   end
 
   resources :projects, only: [:index, :show, :new, :create, :edit, :update, :destroy], shallow: true do
-    resources :project_appliances, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :project_appliances, only: [:new, :create, :edit, :update, :destroy]
     resources :solar_systems, only: [:new, :create, :edit, :update, :destroy]
     member do
+      get 'appliances'
       post 'duplicate'
     end
   end
