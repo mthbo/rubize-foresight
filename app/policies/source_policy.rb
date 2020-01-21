@@ -5,11 +5,11 @@ class SourcePolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    record.appliance.user == user
   end
 
   def destroy?
-    true
+    record.appliance.user == user
   end
 
 end

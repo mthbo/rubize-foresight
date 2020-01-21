@@ -5,11 +5,11 @@ class SolarSystemPolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    record.project.user == user
   end
 
   def destroy?
-    true
+    record.project.user == user
   end
 
 end
