@@ -4,12 +4,12 @@ class SolarPanelsController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def new
-    @solar_panel = SolarPanel.new
+    @solar_panel = current_user.solar_panels.new
     authorize @solar_panel
   end
 
   def create
-    @solar_panel = SolarPanel.new(solar_panel_params)
+    @solar_panel = current_user.solar_panels.new(solar_panel_params)
     authorize @solar_panel
     if @solar_panel.save
       flash[:notice] = "A new solar panel has been created."
@@ -34,7 +34,7 @@ class SolarPanelsController < ApplicationController
 
   def destroy
     @solar_panel.destroy
-    @solar_panels = policy_scope(SolarPanel).all
+    @solar_panels = policy_scope(SolarPanel).ordered
     # flash[:notice] = "The solar panel has been deleted"
   end
 

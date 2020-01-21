@@ -5,11 +5,17 @@ class UsePolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    record.user == user
   end
 
   def destroy?
-    record.appliances.blank?
+    record.user == user && record.appliances.blank?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.where(user: user)
+    end
   end
 
 end

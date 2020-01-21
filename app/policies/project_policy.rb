@@ -1,7 +1,7 @@
 class ProjectPolicy < ApplicationPolicy
 
   def show?
-    true
+    record.user == user
   end
 
   def create?
@@ -9,19 +9,25 @@ class ProjectPolicy < ApplicationPolicy
   end
 
   def duplicate?
-    create?
+    record.user == user
   end
 
   def update?
-    true
+    record.user == user
   end
 
   def destroy?
-    true
+    record.user == user
   end
 
   def public?
     true
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.where(user: user)
+    end
   end
 
 end

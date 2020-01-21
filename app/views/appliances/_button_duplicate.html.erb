@@ -1,4 +1,4 @@
-<% if policy(Appliance).duplicate? %>
+<% if policy(appliance).duplicate? %>
   <%= link_to duplicate_appliance_path(appliance), class: "my-1 ml-3 mr-sm-2 text-secondary", method: :post, remote: true, data: {confirm: "Do you want to create a clone of the applaince '#{appliance.name}'?", toggle: "tooltip"}, title:"Clone appliance" do %>
     <i class="fas fa-clone fa-fw"></i>
   <% end %>

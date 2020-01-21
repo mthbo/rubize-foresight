@@ -1,4 +1,5 @@
 class PowerSystem < ApplicationRecord
+  belongs_to :user
   has_many :solar_systems
 
   scope :ordered, -> { order(:ac_out, :system_voltage, :power_in_min) }

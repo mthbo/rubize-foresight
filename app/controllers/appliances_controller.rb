@@ -24,7 +24,7 @@ class AppliancesController < ApplicationController
   end
 
   def new
-    @appliance = Appliance.new
+    @appliance = current_user.appliances.new
     authorize @appliance
   end
 
@@ -37,7 +37,7 @@ class AppliancesController < ApplicationController
   end
 
   def create
-    @appliance = Appliance.new(appliance_params)
+    @appliance = current_user.appliances.new(appliance_params)
     authorize @appliance
     if @appliance.save
       flash[:notice] = "#{@appliance.name} has been created"

@@ -1,4 +1,5 @@
 class SolarPanel < ApplicationRecord
+  belongs_to :user
   has_many :solar_systems
 
   scope :ordered, -> { order(:technology, :power) }

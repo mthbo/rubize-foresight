@@ -1,4 +1,5 @@
 class Battery < ApplicationRecord
+  belongs_to :user
   has_many :solar_systems
 
   scope :ordered, -> { order(:technology, :voltage, :capacity) }

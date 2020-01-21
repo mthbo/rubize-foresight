@@ -1,4 +1,6 @@
 class Distribution < ApplicationRecord
+  belongs_to :user
+
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
   monetize :price_max_cents, with_model_currency: :currency

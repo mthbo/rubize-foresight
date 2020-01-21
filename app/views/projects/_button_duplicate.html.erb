@@ -1,4 +1,4 @@
-<% if policy(Project).duplicate? %>
+<% if policy(project).duplicate? %>
   <%= link_to duplicate_project_path(project), class: "my-1 ml-3 mr-sm-2 text-secondary", method: :post, remote: true, data: {confirm: "Do you want to create a clone of the project '#{project.name}'?", toggle: "tooltip"}, title:"Clone project" do %>
     <i class="fas fa-clone fa-fw"></i>
   <% end %>

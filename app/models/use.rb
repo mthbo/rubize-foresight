@@ -1,4 +1,5 @@
 class Use < ApplicationRecord
+  belongs_to :user
   has_many :appliances, dependent: :nullify
   has_many :project_appliances, through: :appliances
   has_many :projects, -> { distinct }, through: :project_appliances

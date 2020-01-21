@@ -3,12 +3,12 @@ class DistributionsController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def new
-    @distribution = Distribution.new
+    @distribution = current_user.distributions.new
     authorize @distribution
   end
 
   def create
-    @distribution = Distribution.new(distribution_params)
+    @distribution = current_user.distributions.new(distribution_params)
     authorize @distribution
     if @distribution.save
       flash[:notice] = "A new electrical distribution has been created."

@@ -3,12 +3,12 @@ class CommunicationModulesController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def new
-    @communication_module = CommunicationModule.new
+    @communication_module = current_user.communication_modules.new
     authorize @communication_module
   end
 
   def create
-    @communication_module = CommunicationModule.new(communication_module_params)
+    @communication_module = current_user.communication_modules.new(communication_module_params)
     authorize @communication_module
     if @communication_module.save
       flash[:notice] = "A new monitoring system has been created."

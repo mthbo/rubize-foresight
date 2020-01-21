@@ -4,12 +4,12 @@ class UsesController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def new
-    @use = Use.new
+    @use = current_user.uses.new
     authorize @use
   end
 
   def create
-    @use = Use.new(use_params)
+    @use = current_user.uses.new(use_params)
     authorize @use
     if @use.save
       flash[:notice] = "#{@use.name} has been created"

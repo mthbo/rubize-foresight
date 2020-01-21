@@ -1,11 +1,17 @@
 class CommunicationModulePolicy < ApplicationPolicy
 
   def create?
-    CommunicationModule.all.blank?
+    user.communication_modules.blank?
   end
 
   def update?
-    true
+    record.user == user
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.where(user: user)
+    end
   end
 
 end

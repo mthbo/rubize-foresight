@@ -1,4 +1,6 @@
 class CommunicationModule < ApplicationRecord
+  belongs_to :user
+
   validates :daily_consumption, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
 
   monetize :price_min_cents, with_model_currency: :currency

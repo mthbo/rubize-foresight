@@ -1,4 +1,5 @@
 class Appliance < ApplicationRecord
+  belongs_to :user
   belongs_to :use
   has_many :sources, dependent: :destroy
   has_many :project_appliances

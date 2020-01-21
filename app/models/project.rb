@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  belongs_to :user
   has_many :project_appliances, dependent: :destroy
   has_many :appliances, -> { distinct }, through: :project_appliances
   has_many :uses, -> { distinct }, through: :appliances

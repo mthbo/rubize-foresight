@@ -5,11 +5,17 @@ class SolarPanelPolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    record.user == user
   end
 
   def destroy?
-    record.solar_systems.blank?
+    record.user == user && record.solar_systems.blank?
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.where(user: user)
+    end
   end
 
 end

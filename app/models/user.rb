@@ -1,4 +1,15 @@
 class User < ApplicationRecord
+  has_many :appliances
+  has_many :batteries
+  has_many :communication_modules
+  has_many :distributions
+  has_many :power_systems
+  has_many :projects
+  has_many :project_appliances, through: :projects
+  has_many :solar_systems, through: :projects
+  has_many :solar_panels
+  has_many :uses
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

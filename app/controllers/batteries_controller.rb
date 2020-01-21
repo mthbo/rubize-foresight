@@ -4,12 +4,12 @@ class BatteriesController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def new
-    @battery = Battery.new
+    @battery = current_user.batteries.new
     authorize @battery
   end
 
   def create
-    @battery = Battery.new(battery_params)
+    @battery = current_user.batteries.new(battery_params)
     authorize @battery
     if @battery.save
       flash[:notice] = "A new battery has been created."
@@ -34,7 +34,7 @@ class BatteriesController < ApplicationController
 
   def destroy
     @battery.destroy
-    @batteries = policy_scope(Battery).all
+    @batteries = policy_scope(Battery).ordered
     # flash[:notice] = "The battery has been deleted"
   end
 

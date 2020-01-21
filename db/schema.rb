@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_20_161445) do
+ActiveRecord::Schema.define(version: 2020_01_21_090835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,9 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.integer "voltage_max"
     t.boolean "frequency_fifty_hz"
     t.boolean "frequency_sixty_hz"
+    t.bigint "user_id"
     t.index ["use_id"], name: "index_appliances_on_use_id"
+    t.index ["user_id"], name: "index_appliances_on_user_id"
   end
 
   create_table "batteries", force: :cascade do |t|
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.integer "price_max_cents"
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_batteries_on_user_id"
   end
 
   create_table "communication_modules", force: :cascade do |t|
@@ -82,6 +86,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.integer "daily_consumption"
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_communication_modules_on_user_id"
   end
 
   create_table "distributions", force: :cascade do |t|
@@ -92,6 +98,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.datetime "updated_at", null: false
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_distributions_on_user_id"
   end
 
   create_table "exchange_rates", force: :cascade do |t|
@@ -120,6 +128,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.integer "power_in_max"
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_power_systems_on_user_id"
   end
 
   create_table "project_appliances", force: :cascade do |t|
@@ -171,6 +181,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.boolean "current_ac"
     t.boolean "current_dc"
     t.string "token"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "solar_panels", force: :cascade do |t|
@@ -183,6 +195,8 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.integer "price_max_cents"
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_solar_panels_on_user_id"
   end
 
   create_table "solar_systems", force: :cascade do |t|
@@ -261,14 +275,24 @@ ActiveRecord::Schema.define(version: 2020_01_20_161445) do
     t.string "hourly_rate_21"
     t.string "hourly_rate_22"
     t.string "hourly_rate_23"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_uses_on_user_id"
   end
 
+  add_foreign_key "appliances", "users"
   add_foreign_key "appliances", "uses"
+  add_foreign_key "batteries", "users"
+  add_foreign_key "communication_modules", "users"
+  add_foreign_key "distributions", "users"
+  add_foreign_key "power_systems", "users"
   add_foreign_key "project_appliances", "appliances"
   add_foreign_key "project_appliances", "projects"
+  add_foreign_key "projects", "users"
+  add_foreign_key "solar_panels", "users"
   add_foreign_key "solar_systems", "batteries"
   add_foreign_key "solar_systems", "power_systems"
   add_foreign_key "solar_systems", "projects"
   add_foreign_key "solar_systems", "solar_panels"
   add_foreign_key "sources", "appliances"
+  add_foreign_key "uses", "users"
 end

@@ -4,15 +4,15 @@ class PowerSystemsController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def new
-    @power_system = PowerSystem.new
+    @power_system = current_user.power_systems.new
     authorize @power_system
   end
 
   def create
-    @power_system = PowerSystem.new(power_system_params)
+    @power_system = current_user.power_systems.new(power_system_params)
     authorize @power_system
     if @power_system.save
-      update_all_solar_systems
+      update_all_user_solar_systems
       flash[:notice] = "A new power system has been created."
       redirect_to power_components_path
     else
@@ -25,7 +25,7 @@ class PowerSystemsController < ApplicationController
 
   def update
     if @power_system.update(power_system_params)
-      update_all_solar_systems
+      update_all_user_solar_systems
       flash[:notice] = "The power system has been updated."
       redirect_to power_components_path
     else
@@ -35,14 +35,14 @@ class PowerSystemsController < ApplicationController
 
   def destroy
     @power_system.destroy
-    @power_systems = policy_scope(PowerSystem).all
+    @power_systems = policy_scope(PowerSystem).ordered
     # flash[:notice] = "The power system has been deleted"
   end
 
   private
 
-  def update_all_solar_systems
-    SolarSystem.all.each do |solar_system|
+  def update_all_user_solar_systems
+    current_user.solar_systems.each do |solar_system|
       @project = solar_system.project
       @solar_system = solar_system
       attribute_power_system_to_solar_system
