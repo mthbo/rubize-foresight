@@ -17,13 +17,13 @@
     as: :select,
     label_method: :name,
     label: "Solar panel model",
-    collection: SolarPanel.ordered
+    collection: policy_scope(SolarPanel).ordered
   %>
   <%= f.association :battery,
     as: :select,
     label_method: :name,
     label: "Battery model",
-    collection: Battery.ordered
+    collection: policy_scope(Battery).ordered
   %>
   <%= f.input :communication,
     as: :radio_buttons,
@@ -31,10 +31,10 @@
     label: "Remote monitoring?",
     label_html: { class: "text-nowrap" }
   %>
-  <%= f.input :distribution,
+  <%= f.input :wiring,
     as: :radio_buttons,
     wrapper: :horizontal_collection_inline,
-    label: "Distibution?",
+    label: "Distribution wiring?",
     label_html: { class: "text-nowrap" }
   %>
 

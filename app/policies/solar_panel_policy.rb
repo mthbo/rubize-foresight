@@ -1,7 +1,11 @@
 class SolarPanelPolicy < ApplicationPolicy
 
-  def create?
+  def new?
     true
+  end
+
+  def create?
+    record.user == user
   end
 
   def update?

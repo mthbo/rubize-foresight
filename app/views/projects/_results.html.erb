@@ -22,7 +22,7 @@
 <% else %>
   <div class="text-secondary small my-3">
     No project recorded.
-    <%= link_to "Add a new one", new_project_path if policy(Project).create? %>.
+    <%= link_to "Add a new one", new_project_path if policy(Project).new? %>.
   </div>
 
 <% end %>

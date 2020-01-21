@@ -11,6 +11,7 @@ class CommunicationModulesController < ApplicationController
     @communication_module = current_user.communication_modules.new(communication_module_params)
     authorize @communication_module
     if @communication_module.save
+      update_solar_systems
       flash[:notice] = "A new monitoring system has been created."
       redirect_to power_components_path
     else
@@ -32,6 +33,14 @@ class CommunicationModulesController < ApplicationController
 
   private
 
+  def update_solar_systems
+    policy_scope(Project).each do |project|
+      project.solar_systems.each do |solar_system|
+        solar_system.update(communication_module_id: @communication_module.id)
+      end
+    end
+  end
+
   def find_communication_module
     @communication_module = CommunicationModule.find(params[:id])
     authorize @communication_module
@@ -42,7 +51,7 @@ class CommunicationModulesController < ApplicationController
       :price_min,
       :price_max,
       :currency,
-      :daily_consumption
+      :power
     )
   end
 end

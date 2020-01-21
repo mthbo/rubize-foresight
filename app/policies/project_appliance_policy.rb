@@ -1,15 +1,19 @@
 class ProjectAppliancePolicy < ApplicationPolicy
 
-  def create?
+  def new?
     true
+  end
+
+  def create?
+    record.project.user == user
   end
 
   def update?
-    true
+    record.project.user == user
   end
 
   def destroy?
-    true
+    record.project.user == user
   end
 
 end

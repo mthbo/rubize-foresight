@@ -1,7 +1,11 @@
 class DistributionPolicy < ApplicationPolicy
 
+  def new?
+    user.distributions.persisted.blank?
+  end
+
   def create?
-    user.distributions.blank?
+    record.user == user && user.distributions.persisted.blank?
   end
 
   def update?

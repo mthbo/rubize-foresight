@@ -1,7 +1,11 @@
 class SourcePolicy < ApplicationPolicy
 
-  def create?
+  def new?
     true
+  end
+
+  def create?
+    record.appliance.user == user
   end
 
   def update?

@@ -11,6 +11,8 @@ class SolarSystemsController < ApplicationController
 
   def create
     @solar_system = @project.solar_systems.new(solar_system_params)
+    @solar_system.communication_module = policy_scope(CommunicationModule).first
+    @solar_system.distribution = policy_scope(Distribution).first
     authorize @solar_system
     if @solar_system.save
       attribute_power_system_to_solar_system
@@ -59,7 +61,7 @@ class SolarSystemsController < ApplicationController
       :system_voltage,
       :autonomy,
       :communication,
-      :distribution
+      :wiring
     )
   end
 end

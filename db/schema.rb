@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_090835) do
+ActiveRecord::Schema.define(version: 2020_01_21_144643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_090835) do
     t.string "currency", default: "eur"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "daily_consumption"
+    t.float "power"
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
     t.bigint "user_id"
@@ -206,11 +206,15 @@ ActiveRecord::Schema.define(version: 2020_01_21_090835) do
     t.bigint "power_system_id"
     t.integer "system_voltage"
     t.boolean "communication"
-    t.boolean "distribution"
+    t.boolean "wiring"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "autonomy", default: 1.0
+    t.bigint "communication_module_id"
+    t.bigint "distribution_id"
     t.index ["battery_id"], name: "index_solar_systems_on_battery_id"
+    t.index ["communication_module_id"], name: "index_solar_systems_on_communication_module_id"
+    t.index ["distribution_id"], name: "index_solar_systems_on_distribution_id"
     t.index ["power_system_id"], name: "index_solar_systems_on_power_system_id"
     t.index ["project_id"], name: "index_solar_systems_on_project_id"
     t.index ["solar_panel_id"], name: "index_solar_systems_on_solar_panel_id"
@@ -290,6 +294,8 @@ ActiveRecord::Schema.define(version: 2020_01_21_090835) do
   add_foreign_key "projects", "users"
   add_foreign_key "solar_panels", "users"
   add_foreign_key "solar_systems", "batteries"
+  add_foreign_key "solar_systems", "communication_modules"
+  add_foreign_key "solar_systems", "distributions"
   add_foreign_key "solar_systems", "power_systems"
   add_foreign_key "solar_systems", "projects"
   add_foreign_key "solar_systems", "solar_panels"

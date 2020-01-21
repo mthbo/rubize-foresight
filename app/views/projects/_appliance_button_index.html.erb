@@ -1,4 +1,4 @@
-<% if policy(ProjectAppliance).create? %>
+<% if policy(ProjectAppliance).new? %>
   <%= link_to appliances_project_path(project), class: "btn btn-outline-secondary flex-grow-1" do %>
     <i class="fas fa-plus mr-1"></i>
     Add an appliance to the project

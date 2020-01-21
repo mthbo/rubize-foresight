@@ -11,7 +11,8 @@ class DistributionsController < ApplicationController
     @distribution = current_user.distributions.new(distribution_params)
     authorize @distribution
     if @distribution.save
-      flash[:notice] = "A new electrical distribution has been created."
+      update_solar_systems
+      flash[:notice] = "A new distribution wiring has been created."
       redirect_to power_components_path
     else
       render :new
@@ -23,7 +24,7 @@ class DistributionsController < ApplicationController
 
   def update
     if @distribution.update(distribution_params)
-      flash[:notice] = "The electrical distribution has been updated."
+      flash[:notice] = "The distribution wiring has been updated."
       redirect_to power_components_path
     else
       render :edit
@@ -31,6 +32,14 @@ class DistributionsController < ApplicationController
   end
 
   private
+
+  def update_solar_systems
+    policy_scope(Project).each do |project|
+      project.solar_systems.each do |solar_system|
+        solar_system.update(distribution_id: @distribution.id)
+      end
+    end
+  end
 
   def find_distribution
     @distribution = Distribution.find(params[:id])

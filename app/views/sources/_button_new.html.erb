@@ -1,4 +1,4 @@
-<% if policy(Source).create? %>
+<% if policy(Source).new? %>
   <%= link_to new_appliance_source_path(appliance), class: "btn btn-outline-secondary flex-grow-1" do %>
     <i class="fas fa-plus mr-1"></i>
     New source

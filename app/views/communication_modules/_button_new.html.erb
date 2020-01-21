@@ -1,4 +1,4 @@
-<% if policy(CommunicationModule).create? %>
+<% if policy(CommunicationModule).new? %>
   <%= link_to new_communication_module_path, class: "btn btn-outline-secondary flex-grow-1" do %>
     <i class="fas fa-plus mr-1"></i>
     New remote monitoring module

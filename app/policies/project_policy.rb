@@ -4,8 +4,12 @@ class ProjectPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def create?
+  def new?
     true
+  end
+
+  def create?
+    record.user == user
   end
 
   def duplicate?

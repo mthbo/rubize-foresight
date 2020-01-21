@@ -24,7 +24,7 @@
   <% else %>
     <div class="text-secondary small">
       No appliances recorded for this use.
-      <%= link_to "Add a new one", new_appliance_path if policy(Appliance).create? %>.
+      <%= link_to "Add a new one", new_appliance_path if policy(Appliance).new? %>.
     </div>
   <% end %>
 

@@ -1,7 +1,11 @@
 class CommunicationModulePolicy < ApplicationPolicy
 
+  def new?
+    user.communication_modules.persisted.blank?
+  end
+
   def create?
-    user.communication_modules.blank?
+    record.user == user && user.communication_modules.persisted.blank?
   end
 
   def update?

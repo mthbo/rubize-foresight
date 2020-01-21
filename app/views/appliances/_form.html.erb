@@ -3,7 +3,7 @@
 
   <div class="border-bottom border-tertiary pb-2 mb-4" >
     <h5 class="mb-3">General information</h5>
-    <%= f.association :use, as: :select %>
+    <%= f.association :use, as: :select, collection: policy_scope(Use) %>
     <%= f.input :name, placeholder: "Freezer 400L Benoo Energies" %>
     <%= f.input :description,
       placeholder: "High energy efficiency freezer with 400L net capacity,  EU Energy rating 280kWh/year, wall thickness 7cm, climatic class T ...",

@@ -1,7 +1,11 @@
 class SolarSystemPolicy < ApplicationPolicy
 
-  def create?
+  def new?
     true
+  end
+
+  def create?
+    record.project.user == user
   end
 
   def update?

@@ -1,7 +1,10 @@
 class CommunicationModule < ApplicationRecord
   belongs_to :user
+  has_many :solar_systems
 
-  validates :daily_consumption, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
+  scope :persisted, -> { where.not(id: nil) }
+
+  validates :power, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
 
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
@@ -9,6 +12,10 @@ class CommunicationModule < ApplicationRecord
   monetize :price_max_eur_cents, with_currency: :eur, allow_nil: true
 
   before_save :set_prices_in_eur
+
+  def daily_consumption
+    power * 24 if power
+  end
 
   private
 

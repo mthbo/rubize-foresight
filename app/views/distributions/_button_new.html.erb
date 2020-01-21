@@ -1,6 +1,6 @@
-<% if policy(Distribution).create? %>
+<% if policy(Distribution).new? %>
   <%= link_to new_distribution_path, class: "btn btn-outline-secondary flex-grow-1" do %>
     <i class="fas fa-plus mr-1"></i>
-    New electrical distribution
+    New distribution wiring
   <% end %>
 <% end %>

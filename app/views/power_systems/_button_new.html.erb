@@ -1,4 +1,4 @@
-<% if policy(PowerSystem).create? %>
+<% if policy(PowerSystem).new? %>
   <%= link_to new_power_system_path, class: "btn btn-outline-secondary flex-grow-1" do %>
     <i class="fas fa-plus mr-1"></i>
     New power system

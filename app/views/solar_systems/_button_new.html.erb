@@ -1,4 +1,4 @@
-<% if policy(SolarSystem).create? %>
+<% if policy(SolarSystem).new? %>
   <%= link_to new_project_solar_system_path(project), class: "btn btn-sm btn-outline-primary flex-grow-1 px-4" do %>
     <i class="fas fa-plus mr-1"></i>
     Add a solar system

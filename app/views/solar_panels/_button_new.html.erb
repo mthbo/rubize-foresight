@@ -1,4 +1,4 @@
-<% if policy(SolarPanel).create? %>
+<% if policy(SolarPanel).new? %>
   <%= link_to new_solar_panel_path, class: "btn btn-outline-secondary flex-grow-1" do %>
     <i class="fas fa-plus mr-1"></i>
     New solar panel

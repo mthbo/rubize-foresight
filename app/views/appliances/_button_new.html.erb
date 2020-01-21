@@ -1,4 +1,4 @@
-<% if policy(Appliance).create? %>
+<% if policy(Appliance).new? %>
   <%= link_to new_appliance_path, class: "btn btn-primary ml-lg-5 flex-grow-1" do %>
     <i class="fas fa-plus mr-1"></i>
     New appliance
