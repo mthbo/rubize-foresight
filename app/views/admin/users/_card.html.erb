@@ -1,0 +1,37 @@
+<div class="list-group-item d-md-flex justify-content-between align-items-center">
+
+  <div class="flex-grow-1 overflow-hidden mb-2">
+    <div class="d-sm-flex">
+      <h6 class="mr-3"><%= user.name %></h6>
+      <h6>
+        <small class="mr-2 text-secondary">
+          Created on <%= user.created_at.strftime("%b %d %Y") %>
+        </small>
+        <%= render 'admin/users/badge_admin', user: user  %>
+      </h6>
+    </div>
+
+    <div class="pb-2">
+      <small>
+        <i class="fas fa-envelope text-warning pr-2"></i>
+        <span class="text-warning"><%= user.email %></span>
+      </small>
+    </div>
+
+    <div>
+      <ul class="list-inline text-secondary small mb-0">
+        <li class="list-inline-item">
+          <strong><%= user.appliances.count %></strong> appliances
+        </li>
+        <li class="list-inline-item">
+          <strong><%= user.projects.count %></strong> projects
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <%= render 'actions', user: user %>
+  </div>
+
+</div>

@@ -1,28 +1,28 @@
 <div class="d-lg-flex justify-content-between mb-4">
   <div class="mr-lg-5">
-    <h2 class="mb-3">Users</h2>
+    <h2 class="mb-3">Registrated accounts</h2>
   </div>
   <div class="flex-shrink-0">
     <div>
-      <%= render 'button_new' %>
+      <%= render 'admin/users/button_new' %>
     </div>
   </div>
 </div>
 
 <% if @users_approved.present? %>
-  <h5 class="mt-4 mb-3">Allowed users</h5>
+  <h5 class="mt-4 mb-3">Allowed accounts</h5>
   <div class="list-group">
     <% @users_approved.each do |user| %>
-      <%= render 'index_show', user: user %>
+      <%= render 'admin/users/card', user: user %>
     <% end %>
   </div>
 <% end %>
 
 <% if @users_not_approved.present? %>
-  <h5 class="mt-4 mb-3">Ban users</h5>
+  <h5 class="mt-4 mb-3">Ban accounts</h5>
   <div class="list-group">
     <% @users_not_approved.each do |user| %>
-      <%= render 'index_show', user: user %>
+      <%= render 'admin/users/card', user: user %>
     <% end %>
   </div>
 <% end %>

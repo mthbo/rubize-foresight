@@ -1,10 +1,10 @@
 <p>Hello <%= @user.name %>! 👋 </p>
 
-<p>You have been registered as a Rubize Foresight user. Your account email is <strong><%= @user.email %></strong></p>
+<p>Your account has been created on Rubize Foresight with the email <strong><%= @user.email %></strong></p>.
 
 <p>To access the plateforme, set your password by clicking the link bellow:</p>
 
-<p><%= link_to "Set your personal password",  edit_password_url(@user, reset_password_token: @token)
+<p><%= link_to "Set your account password",  edit_password_url(@user, reset_password_token: @token)
  %></p>
 
 <p>The Rubize team</p>

@@ -3,18 +3,31 @@
     <%= image_tag "logo.png" %>
   <% end %>
 
-  <div class="d-flex align-items-center">
-    <% if user_signed_in? %>
-      <div class="mr-4 d-none d-sm-block">
-        <%= current_user.name %>
-      </div>
-      <% if current_user.admin %>
-        <%= link_to "Admin", admin_users_path, class: "btn btn-primary mr-3" %>
-      <% end %>
-      <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-outline-secondary" %>
-    <% else %>
-      <%= link_to "Log in", new_user_session_path, class: "btn btn-primary mr-3" %>
-    <% end %>
-  </div>
+  <% if user_signed_in? %>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item align-items-center d-none d-sm-flex">
+          <span class="mr-3"><%= current_user.name %></span>
+        </li>
+        <li class="nav-item dropdown">
+          <%= image_tag "user.png", class: "avatar dropdown-toggle d-none d-sm-block", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu dropdown-menu-right" id="navbarSupportedContent" aria-labelledby="navbarDropdown">
+            <%= link_to "Home", root_path, class: "dropdown-item" %>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <%= link_to "Edit my account", edit_user_registration_path, class: "dropdown-item" %>
+            <% if current_user.admin %>
+              <%= link_to "Admin", admin_users_path, class: "dropdown-item text-warning" %>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  <% else %>
+    <%= link_to "Log in", new_user_session_path, class: "btn btn-primary" %>
+  <% end %>
 </div>
