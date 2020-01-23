@@ -1,5 +1,9 @@
 <h3 class="mb-4">New account</h3>
 
+<p class="text-secondary">
+  An email will be sent to the account owner after creation.
+</p>
+
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
@@ -17,6 +21,6 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, class: "btn btn-primary btn-block mb-3 mt-4" %>
+    <%= f.button :submit, "New account",class: "btn btn-primary btn-block mb-3 mt-4" %>
   </div>
 <% end %>
