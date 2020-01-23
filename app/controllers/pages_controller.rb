@@ -13,7 +13,6 @@ class PagesController < ApplicationController
   end
 
   def request_registration
-    puts params
     redirect_to root_path
   end
 end
