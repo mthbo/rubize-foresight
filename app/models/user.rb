@@ -34,6 +34,6 @@ class User < ApplicationRecord
     self.reset_password_token   = enc_token
     self.reset_password_sent_at = Time.now.utc
     self.save(validate: false)
-    UserMailer.user_welcome_email(self, token).deliver
+    UserMailer.with(user: self, token: token).welcome.deliver_now
   end
 end

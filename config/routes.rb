@@ -34,4 +34,6 @@ Rails.application.routes.draw do
   resources :solar_panels, only: [:new, :create, :edit, :update, :destroy]
   resources :communication_modules, only: [:new, :create, :edit, :update]
   resources :distributions, only: [:new, :create, :edit, :update]
+
+  post 'request_registration', to: 'pages#request_registration'
 end

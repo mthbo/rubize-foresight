@@ -1,20 +1,9 @@
 <h1>Rubize Foresight</h1>
-<p>
-  An application to design energy access projects.
-</p>
 
-<div class="row mt-5">
+<% if user_signed_in? %>
+  <%= render "pages/home_menu" %>
 
-  <div class="col-12 col-sm-6 col-lg-4 mb-4">
-    <%= render 'pages/card', title: "Appliances", description: "A catalog of electrical appliances.", image: "appliances.svg", action: "Browse appliances", path: appliances_path %>
-  </div>
+<% else %>
+  <%= render "pages/home_onboarding" %>
 
-  <div class="col-12 col-sm-6 col-lg-4 mb-4">
-    <%= render 'pages/card', title: "Power components", description: "A catalog of solar system components.", image: "solar_system.svg", action: "Browse components", path: power_components_path %>
-  </div>
-
-  <div class="col-12 col-sm-6 col-lg-4 mb-4">
-    <%= render 'pages/card', title: "Projects", description: "A tool to design setups of appliances and solar systems.", image: "projects.svg", action: "Browse projects", path: projects_path %>
-  </div>
-
-</div>
+<% end %>

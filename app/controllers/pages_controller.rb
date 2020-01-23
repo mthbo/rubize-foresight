@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home]
+  skip_before_action :authenticate_user!, only: [:home, :request_registration]
 
   def home
   end
@@ -10,5 +10,10 @@ class PagesController < ApplicationController
     @batteries = policy_scope(Battery).ordered
     @communication_modules = policy_scope(CommunicationModule).all
     @distributions = policy_scope(Distribution).all
+  end
+
+  def request_registration
+    puts params
+    redirect_to root_path
   end
 end

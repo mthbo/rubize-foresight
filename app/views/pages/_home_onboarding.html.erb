@@ -1,0 +1,61 @@
+<h5 class="font-weight-light text-secondary">An application to design productive uses of energy.</h5>
+
+<div class="pt-4">
+  <p class="font-weight-light">
+    <span class="mr-2">📒</span>
+    Put in order <strong class="text-warning">appliance data</strong> in your catalog online.
+  </p>
+  <p class="font-weight-light">
+    <span class="mr-2">📊</span>
+    Pick up appliances to build projects and <strong class="text-warning">forecast energy demand</strong>.
+  </p>
+  <p class="font-weight-light">
+    <span class="mr-2">💰</span>
+    Estimate the <strong class="text-warning">cost of energy</strong> before deploying your projects.
+  </p>
+</div>
+
+<div class="d-flex flex-wrap py-4">
+  <%= link_to "Log in", new_user_session_path, class: "btn btn-primary mb-2 mr-3" %>
+  <button type="button" class="btn btn-outline-secondary mb-2" data-toggle="modal" data-target="#onboarding">
+    Request beta test
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="onboarding" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request beta test</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary">
+          Please leave your email address and briefly describe your interest in Rubize Foresight. We will study your request to join as a beta tester.
+        </p>
+        <form id="requestForm">
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input type="text" class="form-control" id="inputName" placeholder="Your organization" required>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="your.email@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label for="inputMessage">Message</label>
+            <textarea class="form-control" id="inputMessage" rows="5" placeholder="What is your interest in Rubize Foresight?" required></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <%= link_to "Send", request_registration_path, method: :post, type: "submit", form: "requestForm", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,6 +1,6 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light bg-white justify-content-between">
   <%= link_to root_path, class: "navbar-brand" do %>
-    <%= image_tag "logo.png" %>
+    <%= image_tag "rubize-foresight.png", alt: "Rubize foresight", height: "40px" %>
   <% end %>
 
   <% if user_signed_in? %>
@@ -8,7 +8,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item align-items-center d-none d-sm-flex">
           <span class="mr-3"><%= current_user.name %></span>
