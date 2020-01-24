@@ -11,9 +11,7 @@ class UserMailer < Devise::Mailer
   def request_registration
     @name = params[:name]
     @email = params[:email]
-    @message =params[:message]
-    User.where(admin: true).each do |user|
-      mail(to: user.email, subject: "New request on Rubize Foresight")
-    end
+    @message = params[:message]
+    mail(to: params[:user].email, subject: "New request on Rubize Foresight")
   end
 end
