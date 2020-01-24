@@ -1,6 +1,6 @@
 class Battery < ApplicationRecord
   belongs_to :user
-  has_many :solar_systems
+  has_many :solar_systems, dependent: :destroy
 
   scope :ordered, -> { order(:technology, :voltage, :capacity) }
 

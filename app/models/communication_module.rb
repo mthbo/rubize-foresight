@@ -1,6 +1,6 @@
 class CommunicationModule < ApplicationRecord
   belongs_to :user
-  has_many :solar_systems
+  has_many :solar_systems, dependent: :destroy
 
   scope :persisted, -> { where.not(id: nil) }
 
