@@ -13,6 +13,8 @@ class PagesController < ApplicationController
   end
 
   def request_registration
+    UserMailer.with(name: params[:inputName], email: params[:inputEmail], message: params[:inputMessage]).request_registration.deliver_now
+    flash[:notice] = "Your message have been sent to the Rubize Foresight team!"
     redirect_to root_path
   end
 end

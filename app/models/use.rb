@@ -20,7 +20,7 @@ class Use < ApplicationRecord
     "0.1" => "1"
   }
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: {scope: :user}
 
   monetize :price_min_cents, allow_nil: true, with_currency: :eur
   monetize :price_max_cents, allow_nil: true, with_currency: :eur
