@@ -6,11 +6,11 @@ class SolarSystem < ApplicationRecord
   belongs_to :distribution, optional: true
   belongs_to :power_system, optional: true
 
+  include Discounting
+
   VOLTAGES = [24, 48]
   PV_COEFF = 5.5
-  DISCOUNT_RATE = 0.1
-  O_AND_M = 0.015
-  YEARS = 15
+  O_AND_M_COST_RATIO = 0.015
 
   validates :system_voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true
   validates :autonomy, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
@@ -36,6 +36,10 @@ class SolarSystem < ApplicationRecord
     sum = project.daily_consumption
     sum += communication_module.daily_consumption if communication? and communication_module.present?
     sum
+  end
+
+  def project_yearly_consumption
+    (project_daily_consumption * 365).to_f / 1000 if project_daily_consumption
   end
 
   def communication_module_consumption
@@ -163,119 +167,103 @@ class SolarSystem < ApplicationRecord
 
   # LCOE Calculation
 
-  def power_system_discounted_cost_min_cents
+  def power_system_capex_discounted_min_cents
     if power_system_price_min_cents and power_system.lifetime
-      discounted_cost(power_system_price_min_cents, power_system.lifetime)
+      capex_discounted(power_system_price_min_cents, power_system.lifetime)
     end
   end
 
-  def power_system_discounted_cost_max_cents
+  def power_system_capex_discounted_max_cents
     if power_system_price_max_cents and power_system.lifetime
-      discounted_cost(power_system_price_max_cents, power_system.lifetime)
+      capex_discounted(power_system_price_max_cents, power_system.lifetime)
     end
   end
 
-  def batteries_discounted_cost_min_cents
+  def batteries_capex_discounted_min_cents
     if batteries_price_min_cents and battery.lifetime
-      discounted_cost(batteries_price_min_cents, battery.lifetime)
+      capex_discounted(batteries_price_min_cents, battery.lifetime)
     end
   end
 
-  def batteries_discounted_cost_max_cents
+  def batteries_capex_discounted_max_cents
     if batteries_price_max_cents and battery.lifetime
-      discounted_cost(batteries_price_max_cents, battery.lifetime)
+      capex_discounted(batteries_price_max_cents, battery.lifetime)
     end
   end
 
-  def solar_panels_discounted_cost_min_cents
+  def solar_panels_capex_discounted_min_cents
     if solar_panels_price_min_cents and solar_panel.lifetime
-      discounted_cost(solar_panels_price_min_cents, solar_panel.lifetime)
+      capex_discounted(solar_panels_price_min_cents, solar_panel.lifetime)
     end
   end
 
-  def solar_panels_discounted_cost_max_cents
+  def solar_panels_capex_discounted_max_cents
     if solar_panels_price_max_cents and solar_panel.lifetime
-      discounted_cost(solar_panels_price_max_cents, solar_panel.lifetime)
+      capex_discounted(solar_panels_price_max_cents, solar_panel.lifetime)
     end
   end
 
-  def communication_discounted_cost_min_cents
+  def communication_capex_discounted_min_cents
     if communication_price_min_cents and communication_module.lifetime
-      discounted_cost(communication_price_min_cents, communication_module.lifetime)
+      capex_discounted(communication_price_min_cents, communication_module.lifetime)
     end
   end
 
-  def communication_discounted_cost_max_cents
+  def communication_capex_discounted_max_cents
     if communication_price_max_cents and communication_module.lifetime
-      discounted_cost(communication_price_max_cents, communication_module.lifetime)
+      capex_discounted(communication_price_max_cents, communication_module.lifetime)
     end
   end
 
-  def distribution_discounted_cost_min_cents
+  def distribution_capex_discounted_min_cents
     if distribution_price_min_cents and distribution.lifetime
-      discounted_cost(distribution_price_min_cents, distribution.lifetime)
+      capex_discounted(distribution_price_min_cents, distribution.lifetime)
     end
   end
 
-  def distribution_discounted_cost_max_cents
+  def distribution_capex_discounted_max_cents
     if distribution_price_max_cents and distribution.lifetime
-      discounted_cost(distribution_price_max_cents, distribution.lifetime)
+      capex_discounted(distribution_price_max_cents, distribution.lifetime)
     end
   end
 
-  def operation_discounted_cost_min_cents
+  def opex_discounted_min_cents
     if price_min_cents
-      (1..YEARS).reduce(0) { |cost, year| cost + (price_min_cents * O_AND_M).to_f / ((1 + DISCOUNT_RATE) ** year ) }
+      opex_discounted(price_min_cents * O_AND_M_COST_RATIO)
     end
   end
 
-  def operation_discounted_cost_max_cents
+  def opex_discounted_max_cents
     if price_max_cents
-      (1..YEARS).reduce(0) { |cost, year| cost + (price_max_cents * O_AND_M).to_f / ((1 + DISCOUNT_RATE) ** year ) }
+      opex_discounted(price_max_cents * O_AND_M_COST_RATIO)
     end
   end
 
-  def project_consumption_kWh_discounted
-    if project_daily_consumption
-      yearly_consumption = (project_daily_consumption * 365).to_f / 1000
-      (1..YEARS).reduce(0) { |energy, year| energy + yearly_consumption.to_f / ((1 + DISCOUNT_RATE) ** year ) }
+  def project_consumption_discounted
+    if project_yearly_consumption
+      energy_discounted(project_yearly_consumption)
     end
   end
 
   def lcoe_min_cents
-    discounted_cost = 0
-    discounted_cost += power_system_discounted_cost_min_cents if power_system_discounted_cost_min_cents
-    discounted_cost += batteries_discounted_cost_min_cents if batteries_discounted_cost_min_cents
-    discounted_cost += solar_panels_discounted_cost_min_cents if solar_panels_discounted_cost_min_cents
-    discounted_cost += communication_discounted_cost_min_cents if communication_discounted_cost_min_cents
-    discounted_cost += distribution_discounted_cost_min_cents if distribution_discounted_cost_min_cents
-    discounted_cost += operation_discounted_cost_min_cents if operation_discounted_cost_min_cents
-    (discounted_cost / project_consumption_kWh_discounted)
+    totex_discounted = 0
+    totex_discounted += power_system_capex_discounted_min_cents if power_system_capex_discounted_min_cents
+    totex_discounted += batteries_capex_discounted_min_cents if batteries_capex_discounted_min_cents
+    totex_discounted += solar_panels_capex_discounted_min_cents if solar_panels_capex_discounted_min_cents
+    totex_discounted += communication_capex_discounted_min_cents if communication_capex_discounted_min_cents
+    totex_discounted += distribution_capex_discounted_min_cents if distribution_capex_discounted_min_cents
+    totex_discounted += opex_discounted_min_cents if opex_discounted_min_cents
+    (totex_discounted / project_consumption_discounted)
   end
 
   def lcoe_max_cents
-    discounted_cost = 0
-    discounted_cost += power_system_discounted_cost_max_cents if power_system_discounted_cost_max_cents
-    discounted_cost += batteries_discounted_cost_max_cents if batteries_discounted_cost_max_cents
-    discounted_cost += solar_panels_discounted_cost_max_cents if solar_panels_discounted_cost_max_cents
-    discounted_cost += communication_discounted_cost_max_cents if communication_discounted_cost_max_cents
-    discounted_cost += distribution_discounted_cost_max_cents if distribution_discounted_cost_max_cents
-    discounted_cost += operation_discounted_cost_max_cents if operation_discounted_cost_max_cents
-    (discounted_cost / project_consumption_kWh_discounted)
+    totex_discounted = 0
+    totex_discounted += power_system_capex_discounted_max_cents if power_system_capex_discounted_max_cents
+    totex_discounted += batteries_capex_discounted_max_cents if batteries_capex_discounted_max_cents
+    totex_discounted += solar_panels_capex_discounted_max_cents if solar_panels_capex_discounted_max_cents
+    totex_discounted += communication_capex_discounted_max_cents if communication_capex_discounted_max_cents
+    totex_discounted += distribution_capex_discounted_max_cents if distribution_capex_discounted_max_cents
+    totex_discounted += opex_discounted_max_cents if opex_discounted_max_cents
+    (totex_discounted / project_consumption_discounted)
   end
-
-  private
-
-  def discounted_cost(cost, lifetime)
-    discounted_cost = cost
-    replacement_year = lifetime
-    while replacement_year < YEARS
-      discounted_cost += cost.to_f / ((1 + DISCOUNT_RATE) ** replacement_year )
-      replacement_year += lifetime
-    end
-    salvage_cost = cost * (replacement_year - YEARS) / lifetime
-    discounted_cost -= salvage_cost.to_f / ((1 + DISCOUNT_RATE) ** YEARS )
-    discounted_cost
-  end
-
 end

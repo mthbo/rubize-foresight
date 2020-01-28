@@ -121,7 +121,12 @@ class ProjectsController < ApplicationController
       :current_dc,
       :voltage_min,
       :voltage_max,
-      :frequency
+      :frequency,
+      :grid_connection_charge,
+      :grid_subscription_charge,
+      :grid_consumption_charge,
+      :diesel_price,
+      :currency
     )
   end
 end

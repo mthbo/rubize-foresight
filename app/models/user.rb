@@ -215,7 +215,8 @@ class User < ApplicationRecord
       price_max_cents: 180000,
       currency: "eur",
       price_min_eur_cents: 127500,
-      price_max_eur_cents: 180000
+      price_max_eur_cents: 180000,
+      lifetime: 15
       )
     powerSystem1.save
     powerSystem2 = self.power_systems.new(
@@ -233,7 +234,8 @@ class User < ApplicationRecord
       price_max_cents: 150000,
       currency: "eur",
       price_min_eur_cents: 100000,
-      price_max_eur_cents: 150000
+      price_max_eur_cents: 150000,
+      lifetime: 15
       )
     powerSystem2.save
     solarPanel1 = self.solar_panels.new(
@@ -243,7 +245,8 @@ class User < ApplicationRecord
       price_max_cents: 18000,
       currency: "eur",
       price_min_eur_cents: 14000,
-      price_max_eur_cents: 18000
+      price_max_eur_cents: 18000,
+      lifetime: 15
       )
     solarPanel1.save
     battery1 = self.batteries.new(
@@ -256,7 +259,8 @@ class User < ApplicationRecord
       price_max_cents: 40000,
       currency: "eur",
       price_min_eur_cents: 25000,
-      price_max_eur_cents: 40000
+      price_max_eur_cents: 40000,
+      lifetime: 5
       )
     battery1.save
     battery2 = self.batteries.new(
@@ -269,7 +273,8 @@ class User < ApplicationRecord
       price_max_cents: 210000,
       currency: "eur",
       price_min_eur_cents: 130000,
-      price_max_eur_cents: 210000
+      price_max_eur_cents: 210000,
+      lifetime: 10
       )
     battery2.save
     communicationModule1 = self.communication_modules.new(
@@ -278,7 +283,8 @@ class User < ApplicationRecord
       price_max_cents: 50000,
       currency: "eur",
       price_min_eur_cents: 40000,
-      price_max_eur_cents: 50000
+      price_max_eur_cents: 50000,
+      lifetime: 15
       )
     communicationModule1.save
     distribution1 = self.distributions.new(
@@ -287,6 +293,7 @@ class User < ApplicationRecord
       currency: "eur",
       price_min_eur_cents: 5000,
       price_max_eur_cents: 10000,
+      lifetime: 15
       )
     distribution1.save
     project1 = self.projects.new(

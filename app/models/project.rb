@@ -6,8 +6,10 @@ class Project < ApplicationRecord
   has_many :solar_systems, dependent: :destroy
 
   scope :ordered, -> { order(updated_at: :desc) }
-
   before_save :generate_unique_token
+  before_save :set_prices_in_eur
+
+  include Discounting
 
   include PgSearch::Model
   pg_search_scope :search,
@@ -22,6 +24,13 @@ class Project < ApplicationRecord
     order_within_rank: "updated_at DESC"
 
   FREQUENCIES = ["50 Hz", "60 Hz"]
+  GENSET = {
+    price_per_kva_eur: 850,
+    o_and_m_cost_ratio: 0.1,
+    efficiency: 0.28,
+    lhv: 9.94,
+    lifetime: 10
+  }
 
   validates :name, presence: true
   validates :country_code, presence: true, inclusion: {in: ISO3166::Country.codes }
@@ -37,15 +46,21 @@ class Project < ApplicationRecord
   monetize :price_max_cents, allow_nil: true, with_currency: :eur
   monetize :price_total_min_cents, allow_nil: true, with_currency: :eur
   monetize :price_total_max_cents, allow_nil: true, with_currency: :eur
+  monetize :grid_connection_charge_cents, allow_nil: true, with_model_currency: :currency
+  monetize :grid_subscription_charge_cents, allow_nil: true, with_model_currency: :currency
+  monetize :grid_consumption_charge_cents, allow_nil: true, with_model_currency: :currency
+  monetize :grid_connection_charge_eur_cents, allow_nil: true, with_currency: :eur
+  monetize :grid_subscription_charge_eur_cents, allow_nil: true, with_currency: :eur
+  monetize :grid_consumption_charge_eur_cents, allow_nil: true, with_currency: :eur
+  monetize :diesel_price_cents, allow_nil: true, with_model_currency: :currency
+  monetize :diesel_price_eur_cents, allow_nil: true, with_currency: :eur
+  monetize :genset_lcoe_cents, allow_nil: true, with_currency: :eur
+  monetize :grid_lcoe_cents, allow_nil: true, with_currency: :eur
 
   def select_at_least_one_current_type
     unless current_ac? or current_dc?
       errors.add(:current_dc, "or ac must be selected")
     end
-  end
-
-  def generate_unique_token
-    self.token ||= SecureRandom.hex
   end
 
   def current_array
@@ -125,6 +140,10 @@ class Project < ApplicationRecord
       end
     end
     sum
+  end
+
+  def yearly_consumption
+    (daily_consumption * 365).to_f / 1000 if daily_consumption
   end
 
   def daytime_consumption
@@ -211,5 +230,76 @@ class Project < ApplicationRecord
       end
     end
     result
+  end
+
+  # LCOE Calculation
+
+  def consumption_discounted
+    if yearly_consumption
+      energy_discounted(yearly_consumption)
+    end
+  end
+
+  def genset_totex_discounted_cents
+    if peak_power and yearly_consumption and diesel_price_cents
+      capex = (peak_power / 1000) * GENSET[:price_per_kva_eur] * 100
+      totex_discounted = capex_discounted(capex, GENSET[:lifetime])
+      opex_o_and_m = capex * GENSET[:o_and_m_cost_ratio]
+      opex_fuel = (yearly_consumption * diesel_price_cents).to_f / (GENSET[:lhv] * GENSET[:efficiency])
+      totex_discounted += opex_discounted(opex_o_and_m + opex_fuel)
+      totex_discounted
+    end
+  end
+
+  def genset_lcoe_cents
+    if genset_totex_discounted_cents and consumption_discounted
+      genset_totex_discounted_cents / consumption_discounted
+    end
+  end
+
+  def grid_connection_charge_discounted_cents
+    if grid_connection_charge_eur_cents and peak_power
+      initial_cost = (peak_power / 1000) * grid_connection_charge_eur_cents
+      capex_discounted(initial_cost, Float::INFINITY)
+    end
+  end
+
+  def grid_subscription_charge_discounted_cents
+    if grid_subscription_charge_eur_cents and peak_power
+      yearly_cost = (peak_power / 1000) * grid_subscription_charge_eur_cents * 12
+      opex_discounted(yearly_cost)
+    end
+  end
+
+  def grid_consumption_charge_discounted_cents
+    if grid_consumption_charge_eur_cents and yearly_consumption
+      yearly_cost = yearly_consumption * grid_consumption_charge_eur_cents
+      opex_discounted(yearly_cost)
+    end
+  end
+
+  def grid_lcoe_cents
+    if consumption_discounted
+      charges_discounted = 0
+      charges_discounted += grid_connection_charge_discounted_cents if grid_connection_charge_discounted_cents
+      charges_discounted += grid_subscription_charge_discounted_cents if grid_subscription_charge_discounted_cents
+      charges_discounted += grid_consumption_charge_discounted_cents if grid_consumption_charge_discounted_cents
+      charges_discounted == 0 ? nil : charges_discounted / consumption_discounted
+    end
+  end
+
+  private
+
+  def generate_unique_token
+    self.token ||= SecureRandom.hex
+  end
+
+  def set_prices_in_eur
+    if currency and Money.default_bank.get_rate(currency, :EUR)
+      self.grid_connection_charge_eur_cents = grid_connection_charge.exchange_to(:EUR).fractional if grid_connection_charge
+      self.grid_subscription_charge_eur_cents = grid_subscription_charge.exchange_to(:EUR).fractional if grid_subscription_charge
+      self.grid_consumption_charge_eur_cents = grid_consumption_charge.exchange_to(:EUR).fractional if grid_consumption_charge
+      self.diesel_price_eur_cents = diesel_price.exchange_to(:EUR).fractional if diesel_price
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_28_103443) do
+ActiveRecord::Schema.define(version: 2020_01_28_160242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,15 @@ ActiveRecord::Schema.define(version: 2020_01_28_103443) do
     t.boolean "current_dc"
     t.string "token"
     t.bigint "user_id"
+    t.integer "diesel_price_cents"
+    t.string "currency", default: "eur"
+    t.integer "diesel_price_eur_cents"
+    t.integer "grid_connection_charge_cents"
+    t.integer "grid_subscription_charge_cents"
+    t.integer "grid_consumption_charge_cents"
+    t.integer "grid_connection_charge_eur_cents"
+    t.integer "grid_subscription_charge_eur_cents"
+    t.integer "grid_consumption_charge_eur_cents"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 

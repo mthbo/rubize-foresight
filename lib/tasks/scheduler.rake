@@ -44,5 +44,13 @@ namespace :open_exchange_rates do
         distribution.update(price_max_eur_cents: distribution.price_max.exchange_to(:EUR).fractional) if distribution.price_max
       end
     end
+    Project.find_each do |project|
+      if project.currency and Money.default_bank.get_rate(project.currency, :EUR)
+        project.update(diesel_price_eur_cents: project.diesel_price.exchange_to(:EUR).fractional) if project.diesel_price
+        project.update(grid_connection_charge_eur_cents: project.grid_connection_charge.exchange_to(:EUR).fractional) if project.grid_connection_charge
+        project.update(grid_subscription_charge_eur_cents: project.grid_subscription_charge.exchange_to(:EUR).fractional) if project.grid_subscription_charge
+        project.update(grid_consumption_charge_eur_cents: project.grid_consumption_charge.exchange_to(:EUR).fractional) if project.grid_consumption_charge
+      end
+    end
   end
 end
