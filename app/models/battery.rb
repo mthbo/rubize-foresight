@@ -18,6 +18,7 @@ class Battery < ApplicationRecord
   validates :efficiency, numericality: {greater_than: 0, less_than_or_equal_to: 100, allow_nil: true}, presence: true
   validates :voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true
   validates :capacity, numericality: {greater_than: 0, allow_nil: true}, presence: true
+  validates :lifetime, numericality: {greater_than: 0, allow_nil: true}, presence: true
 
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true

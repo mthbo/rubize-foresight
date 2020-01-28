@@ -7,7 +7,7 @@ class Appliance < ApplicationRecord
 
   scope :ordered, -> { order(updated_at: :desc) }
 
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search,
     against: [ :name ],
     associated_against: {

@@ -9,7 +9,7 @@ class Project < ApplicationRecord
 
   before_save :generate_unique_token
 
-  include PgSearch
+  include PgSearch::Model
   pg_search_scope :search,
     against: [ :name ],
     using: {

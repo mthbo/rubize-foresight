@@ -62,7 +62,8 @@ class BatteriesController < ApplicationController
       :efficiency,
       :price_min,
       :price_max,
-      :currency
+      :currency,
+      :lifetime
     )
   end
 end

@@ -4,6 +4,8 @@ class Distribution < ApplicationRecord
 
   scope :persisted, -> { where.not(id: nil) }
 
+  validates :lifetime, numericality: {greater_than: 0, allow_nil: true}, presence: true
+
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
   monetize :price_max_cents, with_model_currency: :currency

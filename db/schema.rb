@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_144643) do
+ActiveRecord::Schema.define(version: 2020_01_28_103443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_144643) do
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
     t.bigint "user_id"
+    t.integer "lifetime"
     t.index ["user_id"], name: "index_batteries_on_user_id"
   end
 
@@ -87,6 +88,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_144643) do
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
     t.bigint "user_id"
+    t.integer "lifetime"
     t.index ["user_id"], name: "index_communication_modules_on_user_id"
   end
 
@@ -99,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_144643) do
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
     t.bigint "user_id"
+    t.integer "lifetime"
     t.index ["user_id"], name: "index_distributions_on_user_id"
   end
 
@@ -129,6 +132,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_144643) do
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
     t.bigint "user_id"
+    t.integer "lifetime"
     t.index ["user_id"], name: "index_power_systems_on_user_id"
   end
 
@@ -196,6 +200,7 @@ ActiveRecord::Schema.define(version: 2020_01_21_144643) do
     t.integer "price_min_eur_cents"
     t.integer "price_max_eur_cents"
     t.bigint "user_id"
+    t.integer "lifetime"
     t.index ["user_id"], name: "index_solar_panels_on_user_id"
   end
 

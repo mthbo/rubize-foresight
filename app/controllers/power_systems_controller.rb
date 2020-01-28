@@ -70,7 +70,8 @@ class PowerSystemsController < ApplicationController
       :voltage_out_max,
       :price_min,
       :price_max,
-      :currency
+      :currency,
+      :lifetime
     )
   end
 end

@@ -38,6 +38,13 @@
         collection: Money::Currency.all
       %>
     </div>
+    <div class="col-12 col-sm-6">
+      <%= f.input :lifetime,
+        as: :numeric,
+        placeholder: "20",
+        label: "Lifetime (years)"
+      %>
+    </div>
   </div>
 
   <div class="d-flex justify-content-end mt-3">

@@ -51,7 +51,8 @@ class CommunicationModulesController < ApplicationController
       :price_min,
       :price_max,
       :currency,
-      :power
+      :power,
+      :lifetime
     )
   end
 end

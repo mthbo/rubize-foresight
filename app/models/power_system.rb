@@ -14,6 +14,7 @@ class PowerSystem < ApplicationRecord
   validates :power_out_max, numericality: {greater_than: 0, allow_nil: true}, presence: true
   validates :voltage_out_min, numericality: {greater_than_or_equal_to: 0, allow_nil: true}, presence: true
   validates :voltage_out_max, numericality: {greater_than: 0, allow_nil: true}, presence: true
+  validates :lifetime, numericality: {greater_than: 0, allow_nil: true}, presence: true
 
   monetize :price_min_cents, with_model_currency: :currency
   monetize :price_min_eur_cents, with_currency: :eur, allow_nil: true
