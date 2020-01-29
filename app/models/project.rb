@@ -54,6 +54,7 @@ class Project < ApplicationRecord
   monetize :grid_consumption_charge_eur_cents, allow_nil: true, with_currency: :eur
   monetize :diesel_price_cents, allow_nil: true, with_model_currency: :currency
   monetize :diesel_price_eur_cents, allow_nil: true, with_currency: :eur
+  monetize :genset_price_cents, allow_nil: true, with_currency: :eur
   monetize :genset_lcoe_cents, allow_nil: true, with_currency: :eur
   monetize :grid_lcoe_cents, allow_nil: true, with_currency: :eur
 
@@ -240,9 +241,15 @@ class Project < ApplicationRecord
     end
   end
 
+  def genset_price_cents
+    if peak_power
+      (peak_power / 1000) * GENSET[:price_per_kva_eur] * 100
+    end
+  end
+
   def genset_totex_discounted_cents
-    if peak_power and yearly_consumption and diesel_price_cents
-      capex = (peak_power / 1000) * GENSET[:price_per_kva_eur] * 100
+    if genset_price_cents and yearly_consumption and diesel_price_cents
+      capex = genset_price_cents
       totex_discounted = capex_discounted(capex, GENSET[:lifetime])
       opex_o_and_m = capex * GENSET[:o_and_m_cost_ratio]
       opex_fuel = (yearly_consumption * diesel_price_cents).to_f / (GENSET[:lhv] * GENSET[:efficiency])

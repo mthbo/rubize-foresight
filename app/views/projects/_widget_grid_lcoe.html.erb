@@ -1,19 +1,42 @@
-<div class="card text-md-center">
-  <div class="card-body d-flex d-md-block align-items-center">
+<div class="card text-lg-center">
+  <div class="card-body d-flex d-lg-block align-items-center">
     <div>
-      <h3 class="mb-0 mb-md-2 mx-3">
-        <i class="fas fa-plug fa-fw"></i>
+      <h3 class="mb-0 mx-3 text-primary">
+        <i class="fas fa-charging-station fa-fw"></i>
       </h3>
     </div>
     <div>
-      <div class="text-secondary small">
+      <div class="small text-secondary mb-lg-2">
         Grid supply
       </div>
       <div class="lead">
         <% if project.grid_lcoe %>
           <%= "#{project.grid_lcoe.format(symbol: false, thousands_separator: " ")} #{project.grid_lcoe.currency.symbol}/kWh" %>
+          <i class="fas fa-info-circle fa-fw text-secondary small"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            data-html="true"
+            title= "Assumptions"
+            data-content='<%="
+              Discount rate: #{(Project::FINANCE[:discount_rate] * 100).round}%<br>
+              Timeframe: #{Project::FINANCE[:years]} yr<br>
+              Connection fee: #{project.grid_connection_charge.to_i} €<br>
+              Subscription: #{project.grid_subscription_charge.to_i} €/mth<br>
+              Energy cost: #{project.grid_consumption_charge.to_f} €/kWh<br>
+              "%>'
+            >
+          </i>
         <% else %>
           n/a
+          <i class="fas fa-info-circle fa-fw text-secondary small"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            data-html="true"
+            data-content="Data is missing to estimate LCOE"
+            >
+          </i>
         <% end %>
       </div>
     </div>

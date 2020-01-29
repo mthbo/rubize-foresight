@@ -1,20 +1,45 @@
-<div class="card text-md-center">
-  <div class="card-body d-flex d-md-block align-items-center">
+<div class="card text-lg-center">
+  <div class="card-body d-flex d-lg-block align-items-center">
     <div>
-      <h3 class="mb-0 mb-md-2 mx-3">
+      <h3 class="mb-0 mx-3 text-warning">
         <i class="fas fa-solar-panel fa-fw"></i>
       </h3>
     </div>
     <div>
-      <div class="text-secondary small">
+      <div class="small text-secondary mb-lg-2">
         Standalone solar system
       </div>
       <div class="lead">
         <% if solar_system and solar_system.lcoe_max %>
           <%= "#{solar_system.lcoe_min.format(symbol: false, thousands_separator: " ")} -" if solar_system.lcoe_min != solar_system.lcoe_max %>
           <%= "#{solar_system.lcoe_max.format(symbol: false, thousands_separator: " ")} #{solar_system.lcoe_max.currency.symbol}/kWh" %>
+          <i class="fas fa-info-circle fa-fw text-secondary small"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            data-html="true"
+            title= "Assumptions"
+            data-content='<%="
+              Discount rate: #{(SolarSystem::FINANCE[:discount_rate] * 100).round}%<br>
+              Timeframe: #{SolarSystem::FINANCE[:years]} yr<br>
+              CAPEX: #{solar_system.price_min.to_i} - #{solar_system.price_max.to_i} €<br>
+              O&M: #{(SolarSystem::O_AND_M_COST_RATIO * 100).round(1)}% CAPEX/yr<br>
+              Power system lifetime: #{solar_system.power_system.lifetime} yr<br>
+              Panels lifetime: #{solar_system.solar_panel.lifetime} yr<br>
+              Batteries lifetime: #{solar_system.battery.lifetime} yr
+              "%>'
+            >
+          </i>
         <% else %>
           n/a
+          <i class="fas fa-info-circle fa-fw text-secondary small"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            data-html="true"
+            data-content="Data is missing to estimate LCOE"
+            >
+          </i>
         <% end %>
       </div>
     </div>

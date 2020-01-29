@@ -1,19 +1,45 @@
-<div class="card text-md-center">
-  <div class="card-body d-flex d-md-block align-items-center">
+<div class="card text-lg-center">
+  <div class="card-body d-flex d-lg-block align-items-center">
     <div>
-      <h3 class="mb-0 mb-md-2 mx-3">
+      <h3 class="mb-0 mx-3">
         <i class="fas fa-gas-pump fa-fw"></i>
       </h3>
     </div>
     <div>
-      <div class="text-secondary small">
+      <div class="small text-secondary mb-lg-2">
         Standalone diesel genset
       </div>
       <div class="lead">
         <% if project.genset_lcoe %>
           <%= "#{project.genset_lcoe.format(symbol: false, thousands_separator: " ")} #{project.genset_lcoe.currency.symbol}/kWh" %>
+          <i class="fas fa-info-circle fa-fw text-secondary small"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            data-html="true"
+            title= "Assumptions"
+            data-content='<%="
+              Discount rate: #{(Project::FINANCE[:discount_rate] * 100).round}%<br>
+              Timeframe: #{Project::FINANCE[:years]} yr<br>
+              CAPEX: #{project.genset_price.to_i} €<br>
+              O&M: #{(Project::GENSET[:o_and_m_cost_ratio] * 100).round(1)}% CAPEX/yr<br>
+              Fuel cost: #{project.diesel_price} €/L<br>
+              Genset Lifetime: #{Project::GENSET[:lifetime]} yr<br>
+              Genset Efficiency: #{(Project::GENSET[:efficiency] * 100).round}%<br>
+              LHV: #{Project::GENSET[:lhv]} kWh/L
+              "%>'
+            >
+          </i>
         <% else %>
           n/a
+          <i class="fas fa-info-circle fa-fw text-secondary small"
+            data-container="body"
+            data-toggle="popover"
+            data-placement="bottom"
+            data-html="true"
+            data-content="Data is missing to estimate LCOE"
+            >
+          </i>
         <% end %>
       </div>
     </div>

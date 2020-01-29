@@ -49,6 +49,24 @@ function updateSolarSystemBudget(budgetHTML) {
   solarSystemBudgetContainer.innerHTML = (budgetHTML);
 }
 
+function updateSolarSystemLCOE(widgetHTML) {
+  const solarSystemLcoeWidget = document.querySelector("#solar_system_lcoe__widget");
+  solarSystemLcoeWidget.innerHTML = (widgetHTML);
+  $('[data-toggle="popover"]').popover();
+}
+
+function updateGensetLCOE(widgetHTML) {
+  const gensetLcoeWidget = document.querySelector("#genset_lcoe__widget");
+  gensetLcoeWidget.innerHTML = (widgetHTML);
+  $('[data-toggle="popover"]').popover();
+}
+
+function updateGridLCOE(widgetHTML) {
+  const gridLcoeWidget = document.querySelector("#grid_lcoe__widget");
+  gridLcoeWidget.innerHTML = (widgetHTML);
+  $('[data-toggle="popover"]').popover();
+}
+
 hideProjectApplianceCard("<%= @project_appliance.id %>");
 updateUseBadges("<%= @use.id %>", "<%= j render 'projects/use_badges', use: @use, project: @project %>");
 <% unless @project.uses.include? @use %>
@@ -61,7 +79,10 @@ updateProjectApplianceQuantity("<%= 'Appliance'.pluralize(@project.appliance_qua
 updateLoadChart("<%= j render 'shared/load_chart', electrical_load: @project, title: 'Daily load profile', day: @project.day_time ? @project.day_time_hour : Appliance::DAY_TIME, night: @project.night_time ? @project.night_time_hour : Appliance::NIGHT_TIME %>");
 updateProjectFeatures("<%= j render 'projects/features', project: @project %>");
 updateProjectBudget("<%= j render 'projects/budget', project: @project %>");
+updateGensetLCOE("<%= j render 'projects/widget_genset_lcoe', project: @project %>");
+updateGridLCOE("<%= j render 'projects/widget_grid_lcoe', project: @project %>");
 <% if @project.solar_systems.present? %>
   updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_systems.first %>");
   updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @project.solar_systems.first %>");
+  updateSolarSystemLCOE("<%= j render 'solar_systems/widget_lcoe', solar_system: @project.solar_systems.first %>");
 <% end %>
