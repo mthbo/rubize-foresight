@@ -246,24 +246,28 @@ class SolarSystem < ApplicationRecord
   end
 
   def lcoe_min_cents
-    totex_discounted = 0
-    totex_discounted += power_system_capex_discounted_min_cents if power_system_capex_discounted_min_cents
-    totex_discounted += batteries_capex_discounted_min_cents if batteries_capex_discounted_min_cents
-    totex_discounted += solar_panels_capex_discounted_min_cents if solar_panels_capex_discounted_min_cents
-    totex_discounted += communication_capex_discounted_min_cents if communication_capex_discounted_min_cents
-    totex_discounted += distribution_capex_discounted_min_cents if distribution_capex_discounted_min_cents
-    totex_discounted += opex_discounted_min_cents if opex_discounted_min_cents
-    (totex_discounted / project_consumption_discounted)
+    unless project_consumption_discounted.blank? or project_consumption_discounted.zero?
+      totex_discounted = 0
+      totex_discounted += power_system_capex_discounted_min_cents if power_system_capex_discounted_min_cents
+      totex_discounted += batteries_capex_discounted_min_cents if batteries_capex_discounted_min_cents
+      totex_discounted += solar_panels_capex_discounted_min_cents if solar_panels_capex_discounted_min_cents
+      totex_discounted += communication_capex_discounted_min_cents if communication_capex_discounted_min_cents
+      # totex_discounted += distribution_capex_discounted_min_cents if distribution_capex_discounted_min_cents
+      totex_discounted += opex_discounted_min_cents if opex_discounted_min_cents
+      (totex_discounted / project_consumption_discounted)
+    end
   end
 
   def lcoe_max_cents
-    totex_discounted = 0
-    totex_discounted += power_system_capex_discounted_max_cents if power_system_capex_discounted_max_cents
-    totex_discounted += batteries_capex_discounted_max_cents if batteries_capex_discounted_max_cents
-    totex_discounted += solar_panels_capex_discounted_max_cents if solar_panels_capex_discounted_max_cents
-    totex_discounted += communication_capex_discounted_max_cents if communication_capex_discounted_max_cents
-    totex_discounted += distribution_capex_discounted_max_cents if distribution_capex_discounted_max_cents
-    totex_discounted += opex_discounted_max_cents if opex_discounted_max_cents
-    (totex_discounted / project_consumption_discounted)
+    unless project_consumption_discounted.blank? or project_consumption_discounted.zero?
+      totex_discounted = 0
+      totex_discounted += power_system_capex_discounted_max_cents if power_system_capex_discounted_max_cents
+      totex_discounted += batteries_capex_discounted_max_cents if batteries_capex_discounted_max_cents
+      totex_discounted += solar_panels_capex_discounted_max_cents if solar_panels_capex_discounted_max_cents
+      totex_discounted += communication_capex_discounted_max_cents if communication_capex_discounted_max_cents
+      # totex_discounted += distribution_capex_discounted_max_cents if distribution_capex_discounted_max_cents
+      totex_discounted += opex_discounted_max_cents if opex_discounted_max_cents
+      (totex_discounted / project_consumption_discounted)
+    end
   end
 end

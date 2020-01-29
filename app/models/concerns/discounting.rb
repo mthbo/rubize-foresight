@@ -10,7 +10,11 @@ module Discounting
 
   def capex_discounted(capex, lifetime)
     discounted_cost = capex
-    replacement_year = lifetime
+    unless lifetime == Float::INFINITY
+      replacement_year = lifetime
+    else
+      replacement_year = FINANCE[:years]
+    end
     while replacement_year < FINANCE[:years]
       discounted_cost += capex.to_f / ((1 + FINANCE[:discount_rate]) ** replacement_year )
       replacement_year += lifetime

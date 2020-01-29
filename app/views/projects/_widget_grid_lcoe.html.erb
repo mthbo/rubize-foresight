@@ -1,0 +1,21 @@
+<div class="card text-md-center">
+  <div class="card-body d-flex d-md-block align-items-center">
+    <div>
+      <h3 class="mb-0 mb-md-2 mx-3">
+        <i class="fas fa-plug fa-fw"></i>
+      </h3>
+    </div>
+    <div>
+      <div class="text-secondary small">
+        Grid supply
+      </div>
+      <div class="lead">
+        <% if project.grid_lcoe %>
+          <%= "#{project.grid_lcoe.format(symbol: false, thousands_separator: " ")} #{project.grid_lcoe.currency.symbol}/kWh" %>
+        <% else %>
+          n/a
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

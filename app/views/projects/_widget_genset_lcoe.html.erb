@@ -1,0 +1,21 @@
+<div class="card text-md-center">
+  <div class="card-body d-flex d-md-block align-items-center">
+    <div>
+      <h3 class="mb-0 mb-md-2 mx-3">
+        <i class="fas fa-gas-pump fa-fw"></i>
+      </h3>
+    </div>
+    <div>
+      <div class="text-secondary small">
+        Standalone diesel genset
+      </div>
+      <div class="lead">
+        <% if project.genset_lcoe %>
+          <%= "#{project.genset_lcoe.format(symbol: false, thousands_separator: " ")} #{project.genset_lcoe.currency.symbol}/kWh" %>
+        <% else %>
+          n/a
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

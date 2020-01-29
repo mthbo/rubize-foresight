@@ -308,7 +308,16 @@ class User < ApplicationRecord
       frequency: "50 Hz",
       current_ac: true,
       current_dc: false,
-      token: SecureRandom.hex
+      token: SecureRandom.hex,
+      grid_connection_charge_cents: 5000,
+      grid_subscription_charge_cents: 2000,
+      grid_consumption_charge_cents: 15,
+      diesel_price_cents: 100,
+      currency: "eur",
+      grid_connection_charge_eur_cents: 5000,
+      grid_subscription_charge_eur_cents: 2000,
+      grid_consumption_charge_eur_cents: 15,
+      diesel_price_eur_cents: 100
       )
     project1.save
     projectAppliance1 = project1.project_appliances.new(

@@ -252,7 +252,7 @@ class Project < ApplicationRecord
   end
 
   def genset_lcoe_cents
-    if genset_totex_discounted_cents and consumption_discounted
+    unless genset_totex_discounted_cents.blank? or consumption_discounted.blank? or consumption_discounted.zero?
       genset_totex_discounted_cents / consumption_discounted
     end
   end
@@ -279,7 +279,7 @@ class Project < ApplicationRecord
   end
 
   def grid_lcoe_cents
-    if consumption_discounted
+    unless consumption_discounted.blank? or consumption_discounted.zero?
       charges_discounted = 0
       charges_discounted += grid_connection_charge_discounted_cents if grid_connection_charge_discounted_cents
       charges_discounted += grid_subscription_charge_discounted_cents if grid_subscription_charge_discounted_cents

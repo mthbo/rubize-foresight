@@ -1,0 +1,22 @@
+<div class="card text-md-center">
+  <div class="card-body d-flex d-md-block align-items-center">
+    <div>
+      <h3 class="mb-0 mb-md-2 mx-3">
+        <i class="fas fa-solar-panel fa-fw"></i>
+      </h3>
+    </div>
+    <div>
+      <div class="text-secondary small">
+        Standalone solar system
+      </div>
+      <div class="lead">
+        <% if solar_system and solar_system.lcoe_max %>
+          <%= "#{solar_system.lcoe_min.format(symbol: false, thousands_separator: " ")} -" if solar_system.lcoe_min != solar_system.lcoe_max %>
+          <%= "#{solar_system.lcoe_max.format(symbol: false, thousands_separator: " ")} #{solar_system.lcoe_max.currency.symbol}/kWh" %>
+        <% else %>
+          n/a
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
