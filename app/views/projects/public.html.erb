@@ -38,25 +38,6 @@
   </div>
 </div>
 
-<% if @project.solar_systems.present? and @project.solar_systems.first.power_system.present? %>
-  <div class="border-bottom border-tertiary pt-4 pb-5">
-    <div class="mb-4">
-      <h4>
-        <i class="fas fa-solar-panel fa-fw mr-2"></i>
-        Solar system
-      </h4>
-    </div>
-    <div class="d-lg-flex justify-content-between">
-      <div class="mr-lg-5">
-        <%= render 'solar_systems/features', solar_system: @project.solar_systems.first %>
-      </div>
-      <div class="w-100">
-        <%= render 'solar_systems/power_components', solar_system: @project.solar_systems.first %>
-      </div>
-    </div>
-  </div>
-<% end %>
-
 <div class="border-bottom border-tertiary pt-4 pb-4">
   <h4 class="mb-3">
     <i class="fas fa-receipt fa-fw mr-2"></i>
@@ -76,6 +57,25 @@
     </div>
   </div>
 </div>
+
+<% if @project.solar_systems.present? and @project.solar_systems.first.power_system.present? %>
+  <div class="border-bottom border-tertiary pt-4 pb-5">
+    <div class="mb-4">
+      <h4>
+        <i class="fas fa-solar-panel fa-fw mr-2"></i>
+        Solar system
+      </h4>
+    </div>
+    <div class="d-lg-flex justify-content-between">
+      <div class="mr-lg-5">
+        <%= render 'solar_systems/features', solar_system: @project.solar_systems.first %>
+      </div>
+      <div class="w-100">
+        <%= render 'solar_systems/power_components', solar_system: @project.solar_systems.first %>
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <div class="py-4">
   <%= render 'project_appliances/title', project: @project %>
