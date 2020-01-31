@@ -18,6 +18,16 @@
         </td>
       </tr>
     <% end %>
+    <% if project.wiring? %>
+      <tr>
+        <th scope="row" class="font-weight-normal pl-sm-4">
+          Distribution wiring
+        </th>
+        <td class="text-right text-nowrap">
+          <%= render 'shared/price_range', price_min: project.wiring_price_min, price_max: project.wiring_price_max %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
 

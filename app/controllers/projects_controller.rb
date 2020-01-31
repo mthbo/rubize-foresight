@@ -122,6 +122,7 @@ class ProjectsController < ApplicationController
       :voltage_min,
       :voltage_max,
       :frequency,
+      :wiring,
       :grid_connection_charge,
       :grid_subscription_charge,
       :grid_consumption_charge,

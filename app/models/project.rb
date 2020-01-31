@@ -24,6 +24,10 @@ class Project < ApplicationRecord
     order_within_rank: "updated_at DESC"
 
   FREQUENCIES = ["50 Hz", "60 Hz"]
+  WIRING = {
+    price_min_per_appliance_eur: 50,
+    price_max_per_appliance_eur: 100,
+  }
   GENSET = {
     price_per_kva_eur: 850,
     o_and_m_cost_ratio: 0.1,
@@ -42,10 +46,10 @@ class Project < ApplicationRecord
   validates :frequency, inclusion: {in: FREQUENCIES, allow_blank: true}
   validate :select_at_least_one_current_type
 
+  monetize :wiring_price_min_cents, allow_nil: true, with_currency: :eur
+  monetize :wiring_price_max_cents, allow_nil: true, with_currency: :eur
   monetize :price_min_cents, allow_nil: true, with_currency: :eur
   monetize :price_max_cents, allow_nil: true, with_currency: :eur
-  monetize :price_total_min_cents, allow_nil: true, with_currency: :eur
-  monetize :price_total_max_cents, allow_nil: true, with_currency: :eur
   monetize :grid_connection_charge_cents, allow_nil: true, with_model_currency: :currency
   monetize :grid_subscription_charge_cents, allow_nil: true, with_model_currency: :currency
   monetize :grid_consumption_charge_cents, allow_nil: true, with_model_currency: :currency
@@ -179,6 +183,31 @@ class Project < ApplicationRecord
     end
   end
 
+  def all_consumptions?
+    result = true
+    appliances.each do |appliance|
+      if appliance.apparent_power.blank?
+        result = false
+        break
+      end
+    end
+    result
+  end
+
+  # Prices
+
+  def wiring_price_min_cents
+    if wiring? and project_appliances.present?
+      WIRING[:price_min_per_appliance_eur] * appliance_quantity * 100
+    end
+  end
+
+  def wiring_price_max_cents
+    if wiring? and project_appliances.present?
+      WIRING[:price_max_per_appliance_eur] * appliance_quantity * 100
+    end
+  end
+
   def price_min_cents
     sum = 0
     project_appliances.each do |project_appliance|
@@ -186,6 +215,7 @@ class Project < ApplicationRecord
         sum += project_appliance.appliance.price_min_cents * project_appliance.quantity
       end
     end
+    sum += wiring_price_min_cents if wiring_price_min_cents
     sum
   end
 
@@ -196,18 +226,7 @@ class Project < ApplicationRecord
         sum += project_appliance.appliance.price_max_cents * project_appliance.quantity
       end
     end
-    sum
-  end
-
-  def price_total_min_cents
-    sum = price_min_cents
-    sum += solar_systems.first.price_min_cents if (solar_systems.present? and solar_systems.first.price_min_cents)
-    sum
-  end
-
-  def price_total_max_cents
-    sum = price_max_cents
-    sum += solar_systems.first.price_max_cents if (solar_systems.present? and solar_systems.first.price_max_cents)
+    sum += wiring_price_max_cents if wiring_price_max_cents
     sum
   end
 
@@ -215,17 +234,6 @@ class Project < ApplicationRecord
     result = true
     appliances.each do |appliance|
       if appliance.price_min.blank?
-        result = false
-        break
-      end
-    end
-    result
-  end
-
-  def all_consumptions?
-    result = true
-    appliances.each do |appliance|
-      if appliance.apparent_power.blank?
         result = false
         break
       end
