@@ -3,7 +3,7 @@
    <div class="row">
     <div class="col-12 col-sm-6">
       <%= f.input :supplier,
-        placeholder: "Ramco",
+        placeholder: "My supplier name",
         label: "Supplier name"
       %>
     </div>
@@ -25,18 +25,18 @@
       <%= f.input :country_code, label: "Country" %>
     </div>
     <div class="col-12 col-sm-6">
-      <%= f.input :city %>
+      <%= f.input :city, placeholder: "Supplier location" %>
     </div>
   </div>
   <%= f.input :details,
-    placeholder: "Describe offer conditions",
+    placeholder: "Describe pricing conditions",
     input_html: { rows: "5" }
   %>
   <div class="row">
     <div class="col-12 col-sm-4">
       <%= f.input :price,
         as: :numeric,
-        placeholder: "42,50",
+        placeholder: "42",
         label: "Unit price (excl. tax)"
       %>
     </div>

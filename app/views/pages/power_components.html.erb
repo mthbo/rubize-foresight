@@ -20,10 +20,6 @@
       <i class="fas fa-wifi fa-fw mr-1"></i>
       Remote monitoring
     </a>
-    <a class="nav-item nav-link" id="nav-distributions-tab" data-toggle="tab" href="#nav-distributions" role="tab" aria-controls="nav-distributions" aria-selected="false">
-      <i class="fas fa-plug fa-fw mr-1"></i>
-      Distribution
-    </a>
   </div>
 </nav>
 
@@ -39,8 +35,5 @@
   </div>
   <div class="my-5 tab-pane fade" id="nav-communication-modules" role="tabpanel" aria-labelledby="nav-communication-modules-tab">
     <%= render 'communication_modules/index', communication_modules: @communication_modules %>
-  </div>
-  <div class="my-5 tab-pane fade" id="nav-distributions" role="tabpanel" aria-labelledby="nav-distributions-tab">
-    <%= render 'distributions/index', distributions: @distributions %>
   </div>
 </div>

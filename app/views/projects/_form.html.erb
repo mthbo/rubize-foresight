@@ -3,17 +3,17 @@
 
   <div class="border-bottom border-tertiary pb-2 mb-4" >
     <h5 class="mb-3">General information</h5>
-    <%= f.input :name, placeholder: "Kiosk Benoo Energies KM001" %>
+    <%= f.input :name, placeholder: "My project name" %>
     <div class="row">
       <div class="col-12 col-sm-6">
         <%= f.input :country_code, label: "Country" %>
       </div>
       <div class="col-12 col-sm-6">
-        <%= f.input :city, placeholder: "Bordeaux" %>
+        <%= f.input :city, placeholder: "Project location" %>
       </div>
     </div>
     <%= f.input :description,
-      placeholder: "Benoo Energies standard kiosk ...",
+      placeholder: "Describe the project...",
       input_html: { rows: "5" },
       include_blank: false
     %>
@@ -81,7 +81,7 @@
         %>
       </div>
     </div>
-    <h6>Include distribution wiring cost?</h6>
+    <h6>Include distribution wiring cost? (<%= "#{Project::WIRING[:price_min_per_appliance_eur]} - #{Project::WIRING[:price_max_per_appliance_eur]} € per appliance" %>)</h6>
     <%= f.input :wiring,
       as: :radio_buttons,
       wrapper: :horizontal_collection_inline,
@@ -111,7 +111,7 @@
       <div class="col-12 col-sm-6 col-xl-4">
         <%= f.input :grid_connection_charge,
           as: :numeric,
-          placeholder: "50",
+          placeholder: "100",
           label: "Connection fee"
         %>
       </div>

@@ -9,7 +9,6 @@ class PagesController < ApplicationController
     @solar_panels = policy_scope(SolarPanel).ordered
     @batteries = policy_scope(Battery).ordered
     @communication_modules = policy_scope(CommunicationModule).all
-    @distributions = policy_scope(Distribution).all
   end
 
   def request_registration

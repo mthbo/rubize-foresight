@@ -2,7 +2,7 @@
   <%= f.error_notification %>
 
   <div class="border-bottom border-tertiary pb-2 mb-4">
-    <%= f.input :name, placeholder: "Kit Benoo v1" %>
+    <%= f.input :name, placeholder: "Power system designation" %>
   </div>
 
   <div class="border-bottom border-tertiary pb-2 mb-4">
@@ -17,7 +17,7 @@
       </div>
       <div class="col-sm-8">
         <%= f.input :mppt,
-          placeholder: "Victron 150/70",
+          placeholder: "MPPT designation",
           label: "MPPT model"
         %>
       </div>
@@ -61,7 +61,7 @@
     </div>
     <div id="inverter-form-group" class="mb-4 <%= 'd-none' unless power_system.ac_out? %>">
       <%= f.input :inverter,
-        placeholder: "Victron Phoenix 24/3000",
+        placeholder: "Inverter designation",
         label: "Inverter model"
       %>
     </div>
@@ -90,14 +90,14 @@
     <div class="col-12 col-sm-4">
       <%= f.input :price_min,
         as: :numeric,
-        placeholder: "100",
+        placeholder: "1500",
         label: "Min"
       %>
     </div>
     <div class="col-12 col-sm-4">
       <%= f.input :price_max,
         as: :numeric,
-        placeholder: "150",
+        placeholder: "2000",
         label: "Max"
       %>
     </div>

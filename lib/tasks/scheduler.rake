@@ -38,12 +38,6 @@ namespace :open_exchange_rates do
         solar_panel.update(price_max_eur_cents: solar_panel.price_max.exchange_to(:EUR).fractional) if solar_panel.price_max
       end
     end
-    Distribution.find_each do |distribution|
-      if distribution.currency and Money.default_bank.get_rate(distribution.currency, :EUR)
-        distribution.update(price_min_eur_cents: distribution.price_min.exchange_to(:EUR).fractional) if distribution.price_min
-        distribution.update(price_max_eur_cents: distribution.price_max.exchange_to(:EUR).fractional) if distribution.price_max
-      end
-    end
     Project.find_each do |project|
       if project.currency and Money.default_bank.get_rate(project.currency, :EUR)
         project.update(diesel_price_eur_cents: project.diesel_price.exchange_to(:EUR).fractional) if project.diesel_price

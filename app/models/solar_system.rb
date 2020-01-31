@@ -3,7 +3,6 @@ class SolarSystem < ApplicationRecord
   belongs_to :solar_panel
   belongs_to :battery
   belongs_to :communication_module, optional: true
-  belongs_to :distribution, optional: true
   belongs_to :power_system, optional: true
 
   include Discounting
@@ -25,8 +24,6 @@ class SolarSystem < ApplicationRecord
   monetize :power_system_price_max_cents, allow_nil: true, with_currency: :eur
   monetize :communication_price_min_cents, allow_nil: true, with_currency: :eur
   monetize :communication_price_max_cents, allow_nil: true, with_currency: :eur
-  monetize :distribution_price_min_cents, allow_nil: true, with_currency: :eur
-  monetize :distribution_price_max_cents, allow_nil: true, with_currency: :eur
   monetize :price_min_cents, allow_nil: true, with_currency: :eur
   monetize :price_max_cents, allow_nil: true, with_currency: :eur
   monetize :lcoe_min_cents, allow_nil: true, with_currency: :eur
@@ -133,25 +130,12 @@ class SolarSystem < ApplicationRecord
     end
   end
 
-  def distribution_price_min_cents
-    if power_system.present? and wiring? and distribution.present? and distribution.price_min_eur_cents
-      distribution.price_min_eur_cents * project.appliance_quantity
-    end
-  end
-
-  def distribution_price_max_cents
-    if power_system.present? and wiring? and distribution.present? and distribution.price_max_eur_cents
-      distribution.price_max_eur_cents * project.appliance_quantity
-    end
-  end
-
   def price_min_cents
     price = 0
     price += batteries_price_min_cents if batteries_price_min_cents
     price += solar_panels_price_min_cents if solar_panels_price_min_cents
     price += power_system_price_min_cents if power_system_price_min_cents
     price += communication_price_min_cents if communication_price_min_cents
-    price += distribution_price_min_cents if distribution_price_min_cents
     price
   end
 
@@ -161,7 +145,6 @@ class SolarSystem < ApplicationRecord
     price += solar_panels_price_max_cents if solar_panels_price_max_cents
     price += power_system_price_max_cents if power_system_price_max_cents
     price += communication_price_max_cents if communication_price_max_cents
-    price += distribution_price_max_cents if distribution_price_max_cents
     price
   end
 
@@ -215,18 +198,6 @@ class SolarSystem < ApplicationRecord
     end
   end
 
-  def distribution_capex_discounted_min_cents
-    if distribution_price_min_cents and distribution.lifetime
-      capex_discounted(distribution_price_min_cents, distribution.lifetime)
-    end
-  end
-
-  def distribution_capex_discounted_max_cents
-    if distribution_price_max_cents and distribution.lifetime
-      capex_discounted(distribution_price_max_cents, distribution.lifetime)
-    end
-  end
-
   def opex_discounted_min_cents
     if price_min_cents
       opex_discounted(price_min_cents * O_AND_M_COST_RATIO)
@@ -252,7 +223,6 @@ class SolarSystem < ApplicationRecord
       totex_discounted += batteries_capex_discounted_min_cents if batteries_capex_discounted_min_cents
       totex_discounted += solar_panels_capex_discounted_min_cents if solar_panels_capex_discounted_min_cents
       totex_discounted += communication_capex_discounted_min_cents if communication_capex_discounted_min_cents
-      totex_discounted += distribution_capex_discounted_min_cents if distribution_capex_discounted_min_cents
       totex_discounted += opex_discounted_min_cents if opex_discounted_min_cents
       (totex_discounted / project_consumption_discounted)
     end
@@ -265,7 +235,6 @@ class SolarSystem < ApplicationRecord
       totex_discounted += batteries_capex_discounted_max_cents if batteries_capex_discounted_max_cents
       totex_discounted += solar_panels_capex_discounted_max_cents if solar_panels_capex_discounted_max_cents
       totex_discounted += communication_capex_discounted_max_cents if communication_capex_discounted_max_cents
-      totex_discounted += distribution_capex_discounted_max_cents if distribution_capex_discounted_max_cents
       totex_discounted += opex_discounted_max_cents if opex_discounted_max_cents
       (totex_discounted / project_consumption_discounted)
     end

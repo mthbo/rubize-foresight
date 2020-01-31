@@ -25,17 +25,11 @@
     label: "Battery model",
     collection: policy_scope(Battery).ordered
   %>
+  <h6>Remote monitoring module?</h6>
   <%= f.input :communication,
     as: :radio_buttons,
     wrapper: :horizontal_collection_inline,
-    label: "Remote monitoring?",
-    label_html: { class: "text-nowrap" }
-  %>
-  <%= f.input :wiring,
-    as: :radio_buttons,
-    wrapper: :horizontal_collection_inline,
-    label: "Distribution wiring?",
-    label_html: { class: "text-nowrap" }
+    label: false
   %>
 
   <div class="mt-4 d-flex justify-content-end">

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_31_141411) do
+ActiveRecord::Schema.define(version: 2020_01_31_153608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,19 +90,6 @@ ActiveRecord::Schema.define(version: 2020_01_31_141411) do
     t.bigint "user_id"
     t.integer "lifetime"
     t.index ["user_id"], name: "index_communication_modules_on_user_id"
-  end
-
-  create_table "distributions", force: :cascade do |t|
-    t.integer "price_min_cents"
-    t.integer "price_max_cents"
-    t.string "currency", default: "eur"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "price_min_eur_cents"
-    t.integer "price_max_eur_cents"
-    t.bigint "user_id"
-    t.integer "lifetime"
-    t.index ["user_id"], name: "index_distributions_on_user_id"
   end
 
   create_table "exchange_rates", force: :cascade do |t|
@@ -221,15 +208,12 @@ ActiveRecord::Schema.define(version: 2020_01_31_141411) do
     t.bigint "power_system_id"
     t.integer "system_voltage"
     t.boolean "communication"
-    t.boolean "wiring"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "autonomy", default: 1.0
     t.bigint "communication_module_id"
-    t.bigint "distribution_id"
     t.index ["battery_id"], name: "index_solar_systems_on_battery_id"
     t.index ["communication_module_id"], name: "index_solar_systems_on_communication_module_id"
-    t.index ["distribution_id"], name: "index_solar_systems_on_distribution_id"
     t.index ["power_system_id"], name: "index_solar_systems_on_power_system_id"
     t.index ["project_id"], name: "index_solar_systems_on_project_id"
     t.index ["solar_panel_id"], name: "index_solar_systems_on_solar_panel_id"
@@ -302,7 +286,6 @@ ActiveRecord::Schema.define(version: 2020_01_31_141411) do
   add_foreign_key "appliances", "uses"
   add_foreign_key "batteries", "users"
   add_foreign_key "communication_modules", "users"
-  add_foreign_key "distributions", "users"
   add_foreign_key "power_systems", "users"
   add_foreign_key "project_appliances", "appliances"
   add_foreign_key "project_appliances", "projects"
@@ -310,7 +293,6 @@ ActiveRecord::Schema.define(version: 2020_01_31_141411) do
   add_foreign_key "solar_panels", "users"
   add_foreign_key "solar_systems", "batteries"
   add_foreign_key "solar_systems", "communication_modules"
-  add_foreign_key "solar_systems", "distributions"
   add_foreign_key "solar_systems", "power_systems"
   add_foreign_key "solar_systems", "projects"
   add_foreign_key "solar_systems", "solar_panels"

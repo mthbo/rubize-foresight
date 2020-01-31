@@ -33,18 +33,9 @@
       </td>
     </tr>
     <tr>
-      <th scope="row" class="py-2 text-nowrap">Monitoring</th>
+      <th scope="row" class="py-2 text-nowrap">Remote monitoring</th>
       <td class="py-2 text-nowrap">
         <% if solar_system.communication? %>
-          <i class='fas fa-check text-primary'></i>
-        <% else %>
-          <i class='fas fa-times text-danger'></i>
-        <% end %>
-    </tr>
-    <tr>
-      <th scope="row" class="py-2 text-nowrap">Distribution</th>
-      <td class="py-2 text-nowrap">
-        <% if solar_system.wiring? %>
           <i class='fas fa-check text-primary'></i>
         <% else %>
           <i class='fas fa-times text-danger'></i>

@@ -3,7 +3,6 @@ class User < ApplicationRecord
   has_many :sources, through: :appliances
   has_many :batteries, dependent: :destroy
   has_many :communication_modules, dependent: :destroy
-  has_many :distributions, dependent: :destroy
   has_many :power_systems, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :project_appliances, through: :projects
@@ -287,15 +286,6 @@ class User < ApplicationRecord
       lifetime: 15
       )
     communicationModule1.save
-    distribution1 = self.distributions.new(
-      price_min_cents: 5000,
-      price_max_cents: 10000,
-      currency: "eur",
-      price_min_eur_cents: 5000,
-      price_max_eur_cents: 10000,
-      lifetime: 15
-      )
-    distribution1.save
     project1 = self.projects.new(
       name: "Freezing kiosk",
       description: "Small kiosk offering cold storage services.",
@@ -308,6 +298,7 @@ class User < ApplicationRecord
       frequency: "50 Hz",
       current_ac: true,
       current_dc: false,
+      wiring: true,
       token: SecureRandom.hex,
       grid_connection_charge_cents: 5000,
       grid_subscription_charge_cents: 2000,
@@ -383,10 +374,8 @@ class User < ApplicationRecord
       battery_id: battery1.id,
       power_system_id: powerSystem1.id,
       communication_module_id: communicationModule1.id,
-      distribution_id: distribution1.id,
       system_voltage: 24,
       communication: true,
-      wiring: true,
       autonomy: 1
       )
     solarSystem1.save
