@@ -1,5 +1,5 @@
 {
-  "name": "benoo-foresight",
+  "name": "rubize-foresight",
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^4.0.2",
