@@ -12,9 +12,12 @@ class PagesController < ApplicationController
   end
 
   def request_registration
-    User.where(admin: true).each do |user|
-      UserMailer.with(user: user, name: params[:inputName], email: params[:inputEmail], message: params[:inputMessage]).request_registration.deliver_now
-    end
+    message = "Hello Rubize team! 👋, you have received a request from *Rubize Foresight*.\n\n"\
+      "*Name of the organization*\n#{params[:inputName]}\n\n"\
+      "*Email*\n#{params[:inputEmail]}\n\n"\
+      "*Message*\n#{params[:inputMessage]}\n\n"\
+      "To manage user accounts, go to #{Rails.application.routes.url_helpers.admin_users_url}."
+    SlackNotifier::CLIENT.ping(message)
     flash[:notice] = "Your message have been sent to the Rubize Foresight team!"
     redirect_to root_path
   end
