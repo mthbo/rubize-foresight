@@ -13,7 +13,8 @@ class PagesController < ApplicationController
 
   def request_registration
     message = "Hello Rubize team! 👋, you have received a request from *Rubize Foresight*.\n\n"\
-      "*Name of the organization*\n#{params[:inputName]}\n\n"\
+      "*Name*\n#{params[:inputName]}\n\n"\
+      "*Organization*\n#{params[:inputOrganization]}\n\n"\
       "*Email*\n#{params[:inputEmail]}\n\n"\
       "*Message*\n#{params[:inputMessage]}\n\n"\
       "To manage user accounts, go to #{Rails.application.routes.url_helpers.admin_users_url}."

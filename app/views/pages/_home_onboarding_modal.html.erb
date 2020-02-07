@@ -2,28 +2,29 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Request beta test</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Request a demo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p class="text-secondary">
-          Please briefly describe your interest in Rubize Foresight. We will study your request to join as a beta tester.
-        </p>
         <form id="requestForm" action="/request_registration" method="post">
           <input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
           <div class="form-group">
-            <label for="inputName">Name</label>
-            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Your organization" required>
+            <label for="inputName">What is your name?</label>
+            <input type="text" class="form-control" id="inputName" name="inputName" placeholder="Your name" required>
           </div>
           <div class="form-group">
-            <label for="inputEmail">Email</label>
+            <label for="inputOrganization">What is the name of your organization?</label>
+            <input type="text" class="form-control" id="inputOrganization" name="inputOrganization" placeholder="Your organization">
+          </div>
+          <div class="form-group">
+            <label for="inputEmail">What is your email address?</label>
             <input type="email" class="form-control" id="inputEmail" name="inputEmail" aria-describedby="emailHelp" placeholder="your.email@domain.com" required>
           </div>
           <div class="form-group">
-            <label for="inputMessage">Message</label>
-            <textarea class="form-control" id="inputMessage" name="inputMessage" rows="5" placeholder="What is your interest in Rubize Foresight?" required></textarea>
+            <label for="inputMessage">What is your interest in Rubize Foresight?</label>
+            <textarea class="form-control" id="inputMessage" name="inputMessage" rows="5" placeholder="Your message" required></textarea>
           </div>
         </form>
       </div>
