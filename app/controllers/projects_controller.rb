@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   include PowerSystemAttribution
   before_action :find_project, only: [:show, :edit, :update, :destroy, :appliances]
+  before_action :find_project_by_token, only: [:load, :public]
   skip_before_action :authenticate_user!, only: [:public]
   layout 'form', only: [:new, :create, :edit, :update, :duplicate]
 
@@ -65,14 +66,6 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
-  def public
-    @project = Project.find_by(token: params[:token])
-    authorize @project
-    @project_appliances = @project.project_appliances.ordered
-    @uses = @project.uses.ordered
-    render layout: 'public'
-  end
-
   def appliances
     @query = params[:query]
     @page_number = params[:page]
@@ -83,10 +76,27 @@ class ProjectsController < ApplicationController
     @uses = policy_scope(Use).where(id: use_ids).ordered
   end
 
+  def public
+    @project_appliances = @project.project_appliances.ordered
+    @uses = @project.uses.ordered
+    render layout: 'public'
+  end
+
+  def load
+    respond_to do |format|
+      format.csv { send_data @project.year_hourly_consumption_csv, filename: "#{Date.today}-rubize_foresight-#{@project.name.underscore.tr(" ","_")}.csv" }
+    end
+  end
+
   private
 
   def find_project
     @project = Project.find(params[:id])
+    authorize @project
+  end
+
+  def find_project_by_token
+    @project = Project.find_by(token: params[:token])
     authorize @project
   end
 

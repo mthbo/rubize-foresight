@@ -24,6 +24,10 @@ class ProjectPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def load?
+    true
+  end
+
   def public?
     true
   end
