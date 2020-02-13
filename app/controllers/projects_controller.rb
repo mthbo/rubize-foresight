@@ -85,7 +85,12 @@ class ProjectsController < ApplicationController
   def load
     respond_to do |format|
       filename = "#{Date.today}-rubize_foresight-#{@project.name.underscore.tr(" ","_")}.csv"
-      format.csv { send_data @project.year_hourly_consumption_csv(2020, "hour", "kVA", true), filename: filename }
+      startDate = params[:startDate].to_datetime
+      endDate = params[:endDate].to_datetime
+      timeFormat = params[:timeFormat]
+      unit = params[:unit]
+      loadBreakdown = params[:loadBreakdown]
+      format.csv { send_data @project.load_to_csv(startDate, endDate, timeFormat, unit, loadBreakdown), filename: filename }
     end
   end
 

@@ -1,0 +1,80 @@
+<div class="modal fade" id="download-csv" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Download load time series</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="downloadForm" action="<%= project_load_path(token: project.token, format: 'csv') %>" method="post">
+          <input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="startDate">From</label>
+                <input type="date" class="form-control" id="startDate" name="startDate" value="<%= Date.today %>" required>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="endDate">To</label>
+                <input type="date" class="form-control" id="endDate" name="endDate" value="<%= Date.today + 1.year - 1.day %>" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="pb-2">Time format</div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="timeFormat" id="timeFormat1" value="hour" checked>
+              <label class="form-check-label" for="timeFormat1">
+                Hour
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="timeFormat" id="timeFormat2" value="time">
+              <label class="form-check-label" for="timeFormat2">
+                Date and time
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="pb-2">Power unit</div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="unit" id="unit1" value="VA" checked>
+              <label class="form-check-label" for="unit1">
+                VA
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="unit" id="unit2" value="kVA">
+              <label class="form-check-label" for="unit2">
+                kVA
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="pb-2">Load breakdown by use?</div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="loadBreakdown" id="loadBreakdown1" value="by_use" checked>
+              <label class="form-check-label" for="loadBreakdown1">
+                Yes
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="loadBreakdown" id="loadBreakdown2" value="total">
+              <label class="form-check-label" for="loadBreakdown2">
+                No
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" form="downloadForm" class="btn btn-primary">Download CSV</button>
+      </div>
+    </div>
+  </div>
+</div>

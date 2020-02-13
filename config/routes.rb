@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   end
 
   get 'projects/public/:token', to: 'projects#public', as: 'public_project'
-  get 'projects/public/:token/load', to: 'projects#load', as: 'project_load'
+  post 'projects/public/:token/load', to: 'projects#load', as: 'project_load'
 
   get 'appliance_refresh_load', to: 'appliances#refresh_load'
   get 'project_appliance_refresh_load', to: 'project_appliances#refresh_load'
