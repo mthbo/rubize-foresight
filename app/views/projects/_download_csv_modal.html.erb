@@ -11,13 +11,13 @@
         <form id="downloadForm" action="<%= project_load_path(token: project.token, format: 'csv') %>" method="post">
           <input type="hidden" value="<%= form_authenticity_token() %>" name="authenticity_token"/>
           <div class="row">
-            <div class="col">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="startDate">From</label>
                 <input type="date" class="form-control" id="startDate" name="startDate" value="<%= Date.today %>" required>
               </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label for="endDate">To</label>
                 <input type="date" class="form-control" id="endDate" name="endDate" value="<%= Date.today + 1.year - 1.day %>" required>
