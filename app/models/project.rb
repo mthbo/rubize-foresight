@@ -194,24 +194,31 @@ class Project < ApplicationRecord
     result
   end
 
-  def year_hourly_consumption_csv
+  def year_hourly_consumption_csv(year, time_format, unit, load_by_use)
     CSV.generate(headers: true) do |csv|
-      headers = ["Hour"]
-      self.uses.each { |use| headers << "#{use.name} (VA)" }
-      headers << "Total (VA)"
+      # CSV headers
+      headers = ["#{time_format.capitalize}"]
+      self.uses.each { |use| headers << "#{use.name} (#{unit})" } if load_by_use
+      headers << "Total load (#{unit})"
       csv << headers
+      # 24h pattern
       pattern =[]
+      coeff = (unit == "VA") ? 1 : 1000
       (0..23).each do |hour|
-        line =[hour]
-        self.uses.each { |use| line << use.method("hourly_consumption_#{hour}").call(self).round(1) }
-        line << method("hourly_consumption_#{hour}").call.round(1)
+        line = [hour]
+        self.uses.each { |use| line << use.method("hourly_consumption_#{hour}").call(self).to_f / coeff } if load_by_use
+        line << method("hourly_consumption_#{hour}").call.to_f / coeff
         pattern << line
-        csv << line
       end
-      364.times do
+      # CSV year extrapolation
+      start_time = DateTime.parse("#{year}-01-01")
+      end_time = start_time.end_of_year
+      (start_time.mjd..end_time.mjd).each do |day|
         pattern.each do |line|
-          line[0] += 24
-          csv << line
+          time = start_time + (day - start_time.mjd).day + line[0].hour
+          csv_line = line.dup
+          csv_line[0] = (time_format == "hour") ? (time.to_i - start_time.to_i)/3600 : time.strftime("%F %R")
+          csv << csv_line
         end
       end
       csv
