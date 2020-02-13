@@ -206,8 +206,8 @@ class Project < ApplicationRecord
       coeff = (unit == "VA") ? 1 : 1000
       (0..23).each do |hour|
         line = [hour]
-        self.uses.each { |use| line << use.method("hourly_consumption_#{hour}").call(self).to_f / coeff } if load_breakdown == "by_use"
-        line << method("hourly_consumption_#{hour}").call.to_f / coeff
+        self.uses.each { |use| line << use.method("hourly_consumption_#{hour}").call(self).round(2).to_f / coeff } if load_breakdown == "by_use"
+        line << method("hourly_consumption_#{hour}").call.round(2).to_f / coeff
         pattern << line
       end
       # CSV year extrapolation
