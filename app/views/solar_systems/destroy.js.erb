@@ -20,13 +20,7 @@ function updateSolarSystemLCOE(widgetHTML) {
 }
 
 hideSolarSystem("<%= @solar_system.id %>");
-<% if @project.solar_systems.present? %>
-  updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_systems.first %>");
-  updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @project.solar_systems.first %>");
-  updateSolarSystemLCOE("<%= j render 'solar_systems/widget_lcoe', solar_system: @project.solar_systems.first %>");
-<% else %>
-  updateSolarSystem("<%= j render 'solar_systems/no_solar_system', project: @project %>");
-  updateSolarSystemBudget("");
-  updateSolarSystemLCOE("<%= j render 'solar_systems/widget_lcoe', solar_system: @project.solar_systems.first %>");
-<% end %>
+updateSolarSystem("<%= j render 'solar_systems/no_solar_system', project: @project %>");
+updateSolarSystemBudget("");
+updateSolarSystemLCOE("<%= j render 'solar_systems/widget_lcoe', solar_system: nil %>");
 

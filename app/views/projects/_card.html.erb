@@ -3,7 +3,7 @@
   <div>
     <h6>
       <%= project.name %>
-      <%= render 'projects/badge_solar_system', solar_system: project.solar_systems.first %>
+      <%= render 'projects/badge_solar_system', solar_system: project.solar_system %>
     </h6>
     <div class="mb-1">
       <ul class="list-inline text-secondary small mb-2">
@@ -17,7 +17,7 @@
       <%= render 'projects/badge_power', project: project %>
       <%= render 'projects/badge_energy', project: project %>
       <%= render 'projects/badge_price', project: project %>
-      <%= render 'solar_systems/badge_price', solar_system: project.solar_systems.first %>
+      <%= render 'solar_systems/badge_price', solar_system: project.solar_system %>
     </div>
   </div>
 

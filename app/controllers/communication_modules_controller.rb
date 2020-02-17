@@ -35,9 +35,7 @@ class CommunicationModulesController < ApplicationController
 
   def update_solar_systems
     policy_scope(Project).each do |project|
-      project.solar_systems.each do |solar_system|
-        solar_system.update(communication_module_id: @communication_module.id)
-      end
+      project.solar_system.update(communication_module_id: @communication_module.id)
     end
   end
 

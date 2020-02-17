@@ -5,12 +5,14 @@ class SolarSystemsController < ApplicationController
   layout 'form', only: [:new, :create, :edit, :update]
 
   def new
-    @solar_system = @project.solar_systems.new
+    @solar_system = SolarSystem.new()
+    @solar_system.project = @project
     authorize @solar_system
   end
 
   def create
-    @solar_system = @project.solar_systems.new(solar_system_params)
+    @solar_system = SolarSystem.new(solar_system_params)
+    @solar_system.project = @project
     @solar_system.communication_module = policy_scope(CommunicationModule).first
     authorize @solar_system
     if @solar_system.save
@@ -37,8 +39,9 @@ class SolarSystemsController < ApplicationController
   end
 
   def destroy
-    @solar_system.destroy
     @project = @solar_system.project
+    @project.solar_system = nil
+    @solar_system.destroy
     # flash[:notice] = "The solar system has been removed from the project."
   end
 

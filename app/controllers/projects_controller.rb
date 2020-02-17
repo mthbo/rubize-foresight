@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     @project.token = SecureRandom.hex
     authorize @project
     duplicate_project_appliances
-    duplicate_solar_systems
+    duplicate_solar_system
     @project.save
   end
 
@@ -107,10 +107,8 @@ class ProjectsController < ApplicationController
   end
 
   def update_solar_systems
-    @project.solar_systems.each do |solar_system|
-      @solar_system = solar_system
-      attribute_power_system_to_solar_system
-    end
+    @solar_system = @project.solar_system
+    attribute_power_system_to_solar_system
   end
 
   def duplicate_project_appliances
@@ -119,10 +117,8 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def duplicate_solar_systems
-    @parent_project.solar_systems.each do |parent_solar_system|
-      @project.solar_systems.new(parent_solar_system.dup.attributes)
-    end
+  def duplicate_solar_system
+    @project.solar_system = SolarSystem.new(@parent_project.solar_system.dup.attributes)
   end
 
   def project_params

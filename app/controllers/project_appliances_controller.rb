@@ -69,10 +69,8 @@ class ProjectAppliancesController < ApplicationController
   end
 
   def update_project_solar_systems
-    @project.solar_systems.each do |solar_system|
-      @solar_system = solar_system
-      attribute_power_system_to_solar_system
-    end
+    @solar_system = @project.solar_system
+    attribute_power_system_to_solar_system
   end
 
   def project_appliance_params

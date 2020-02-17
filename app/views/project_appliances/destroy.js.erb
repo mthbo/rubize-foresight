@@ -81,8 +81,8 @@ updateProjectFeatures("<%= j render 'projects/features', project: @project %>");
 updateProjectBudget("<%= j render 'projects/budget', project: @project %>");
 updateGensetLCOE("<%= j render 'projects/widget_genset_lcoe', project: @project %>");
 updateGridLCOE("<%= j render 'projects/widget_grid_lcoe', project: @project %>");
-<% if @project.solar_systems.present? %>
-  updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_systems.first %>");
-  updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @project.solar_systems.first %>");
-  updateSolarSystemLCOE("<%= j render 'solar_systems/widget_lcoe', solar_system: @project.solar_systems.first %>");
+<% if @project.solar_system.present? %>
+  updateSolarSystem("<%= j render 'solar_systems/show', solar_system: @project.solar_system %>");
+  updateSolarSystemBudget("<%= j render 'solar_systems/budget', solar_system: @project.solar_system %>");
+  updateSolarSystemLCOE("<%= j render 'solar_systems/widget_lcoe', solar_system: @project.solar_system %>");
 <% end %>

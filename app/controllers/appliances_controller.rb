@@ -80,10 +80,8 @@ class AppliancesController < ApplicationController
   def update_appliance_solar_systems
     @appliance.projects.each do |project|
       @project = project
-      @project.solar_systems.each do |solar_system|
-        @solar_system = solar_system
-        attribute_power_system_to_solar_system
-      end
+      @solar_system = @project.solar_system
+      attribute_power_system_to_solar_system
     end
   end
 

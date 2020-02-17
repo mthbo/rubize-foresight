@@ -369,7 +369,8 @@ class User < ApplicationRecord
       hourly_rate_23: "8"
       )
     projectAppliance2.save
-    solarSystem1 = project1.solar_systems.new(
+    solarSystem1 = SolarSystem.new(
+      project_id: project1.id,
       solar_panel_id: solarPanel1.id,
       battery_id: battery1.id,
       power_system_id: powerSystem1.id,
