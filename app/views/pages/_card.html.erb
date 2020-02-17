@@ -1,8 +1,14 @@
 <div class="card h-100">
-  <%= image_tag image, alt: title, class: "card-img-top d-none d-sm-block" %>
-  <div class="card-body">
-    <h4 class="card-title"><%= title %></h4>
-    <p class="card-text text-secondary"><%= description %></p>
-    <%= link_to action, path, class: "btn btn-primary" %>
+  <div class="row no-gutters">
+    <div class="col-sm-5 col-md-4 col-lg-12 d-none d-sm-flex justify-content-center bg-gray">
+      <%= image_tag image, alt: title, class: "card-img h-100" %>
+    </div>
+    <div class="col-12 col-sm-7 col-md-8 col-lg-12">
+      <div class="card-body">
+        <h4 class="card-title"><%= title %></h4>
+        <p class="card-text text-secondary"><%= description %></p>
+        <%= link_to action, path, class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
 </div>
