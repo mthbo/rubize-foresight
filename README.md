@@ -1,1 +1,6 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+Requirements
+To be able to develop the project, ensure your machine fulfill the following:
+* Linux or OS X
+* Ruby, version 2.5.3 or later
+* Rails, version 5.2.3
+* Bundler
