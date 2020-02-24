@@ -1,7 +1,8 @@
-# Presentation
-Rubize Foresight is a web application to design productive uses of energy, made by Benoo Energies.
+## Presentation
+Rubize Foresight is a web application made by Benoo Energies to design productive uses of energy.
+It uses the Ruby on Rails framework.
 
-# Requirements
+## Requirements
 To be able to develop the project, ensure your machine fulfill the following:
 * Linux or OS X
 * Ruby, version 2.5.3 or later
