@@ -1,3 +1,5 @@
+# Rubize Foresight
+
 ## Overview
 [Rubize Foresight](https://foresight.rubize.io/) is a web application made by [Benoo Energies](https://www.benoo-energies.com/) to design productive uses of energy.
 
