@@ -4,7 +4,7 @@ class PowerSystem < ApplicationRecord
 
   scope :ordered, -> { order(:ac_out, :system_voltage, :power_in_min) }
 
-  VOLTAGES = [24, 48]
+  VOLTAGES = [12, 24, 48]
 
   validates :name, presence: true
   validates :system_voltage, inclusion: {in: VOLTAGES, allow_blank: true}, presence: true

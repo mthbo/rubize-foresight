@@ -7,7 +7,7 @@ class SolarSystem < ApplicationRecord
 
   include Discounting
 
-  VOLTAGES = [24, 48]
+  VOLTAGES = [12, 24, 48]
   PV_COEFF = 5.5
   O_AND_M_COST_RATIO = 0.015
 
